@@ -14,7 +14,11 @@ class DeviceInfo;
 class DeviceHandler : public Bluetooth
 {
     Q_OBJECT
+<<<<<<< HEAD
 /*
+=======
+
+>>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
     Q_PROPERTY(AddressType addressType READ addressType WRITE setAddressType)
 
     // properties from device
@@ -92,7 +96,11 @@ private:
 
     QVector<int> m_measurements;
     QLowEnergyController::RemoteAddressType m_addressType = QLowEnergyController::PublicAddress;
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
 };
 
 #endif // DEVICEHANDLER_H
