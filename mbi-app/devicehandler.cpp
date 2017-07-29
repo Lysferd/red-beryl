@@ -2,11 +2,8 @@
 #include "deviceinfo.h"
 
 #include <QtEndian>
-<<<<<<< HEAD
-/*
-=======
 
->>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
+/*
 DeviceHandler::DeviceHandler(QObject *parent) :
     Bluetooth(parent),
     m_control(0),
@@ -41,10 +38,6 @@ void DeviceHandler::setDevice(DeviceInfo *device) {
     clearMessages();
     m_currentDevice = device;
 
-<<<<<<< HEAD
-    /*
-=======
->>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
     if (m_control) {
         m_control->disconnectFromDevice();
         delete m_control;
@@ -79,18 +72,14 @@ void DeviceHandler::setDevice(DeviceInfo *device) {
 
         m_control->connectToDevice();
     }
-<<<<<<< HEAD
-
 }
 
 
 void DeviceHandler::startMeasurement() {
-    /*
-=======
+
 }
 
 void DeviceHandler::startMeasurement() {
->>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
     if (alive()) {
         m_start = QDateTime::currentDateTime();
         m_min = 0;
@@ -102,18 +91,11 @@ void DeviceHandler::startMeasurement() {
         m_measurements.clear();
         emit measuringChanged();
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
 }
 
 void DeviceHandler::stopMeasurement() {
     m_measuring = false;
     emit measuringChanged();
 }
-<<<<<<< HEAD
 */
-=======
->>>>>>> c2a8a16df58f9a0376f849063f31e2f8d0626922
 
