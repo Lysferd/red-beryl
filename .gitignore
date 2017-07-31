@@ -2,3 +2,4 @@
 *.swp
 build*/
 *.pro.user
+Makefile
