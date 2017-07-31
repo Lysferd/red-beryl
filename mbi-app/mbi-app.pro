@@ -1,15 +1,11 @@
-QT += qml quick bluetooth
+QT += qml quick
 
 CONFIG += c++11
 
-SOURCES += main.cpp \
-    bluetooth.cpp \
-    devicefinder.cpp \
-    deviceinfo.cpp \
-    devicehandler.cpp \
-    connectionhandler.cpp
+SOURCES += main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    img.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -33,9 +29,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    bluetooth.h \
-    devicefinder.h \
-    deviceinfo.h \
-    devicehandler.h \
-    connectionhandler.h
+HEADERS +=
