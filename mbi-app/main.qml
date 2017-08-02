@@ -8,10 +8,6 @@ ApplicationWindow {
     height: 600
     title: qsTr("Red Beryl - Preview")
 
-    /* maybe this line can make the background be blurry */
-    //color: dwm.compositionEnabled ? "transparent" : dwm.realColorizationColor
-
-
     Page1 {
         visible: true
         width: 800
@@ -22,6 +18,7 @@ ApplicationWindow {
         visible: false
         width: 600
         height: 480
+
     }
 
 }
