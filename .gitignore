@@ -3,3 +3,6 @@
 build*/
 *.pro.user
 Makefile
+*.plist
+*plugin_import.cpp
+*.xcodeproj
