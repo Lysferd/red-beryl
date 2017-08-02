@@ -14,7 +14,7 @@ class DeviceInfo;
 class DeviceHandler : public Bluetooth
 {
     Q_OBJECT
-/*
+
     Q_PROPERTY(AddressType addressType READ addressType WRITE setAddressType)
 
     // properties from device
@@ -92,8 +92,6 @@ private:
 
     QVector<int> m_measurements;
     QLowEnergyController::RemoteAddressType m_addressType = QLowEnergyController::PublicAddress;
-
-*/
 
 };
 
