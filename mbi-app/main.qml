@@ -4,34 +4,29 @@ import QtQuick.Layouts 1.3
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Red Beryl")
+    width: 400
+    height: 400
+    title: qsTr("Red Beryl 1.0_preview")
 
-    SwipeView {
-        id: swipeView
+    /*
+    background: Rectangle {
+        width: parent.width
+        height: parent.height
+        color: "#ff0000"
+    }
+    */
+
+    footer: Footer { }
+
+    StackView {
         anchors.fill: parent
-        currentIndex: tabBar.currentIndex
 
-        Page1 {
-        }
+        initialItem: Content {
+            //anchors.fill: parent
 
-        Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
-            }
+            //width: parent.width
+            //height: parent.height
         }
     }
 
-    footer: TabBar {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-        TabButton {
-            text: qsTr("First")
-        }
-        TabButton {
-            text: qsTr("Second")
-        }
-    }
 }
