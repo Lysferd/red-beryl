@@ -4,37 +4,42 @@ import QtQuick.Layouts 1.3
 
 Item {
     id: item1
-    property alias columnLayout: columnLayout
-    property alias rowLayout: rowLayout
-    property alias rowLayout1: rowLayout1
-    anchors.topMargin: -1
+    property alias gridLayout: gridLayout
+    property alias flow1: flow1
+    anchors.fill: parent
     transformOrigin: Item.Center
     opacity: 1
     clip: false
 
-    ColumnLayout {
-        id: columnLayout
-        width: 320
-        height: 280
-        rotation: 0
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        antialiasing: false
-        transformOrigin: Item.Center
-        spacing: 1
+    GridLayout {
+        id: gridLayout
+        anchors.rightMargin: 32
+        anchors.leftMargin: 32
+        anchors.bottomMargin: 32
+        anchors.topMargin: 32
 
-        RowLayout {
-            id: rowLayout
-            width: 100
-            height: 100
+        anchors.fill: parent
+
+        clip: false
+        columnSpacing: 1
+        rowSpacing: 1
+        flow: GridLayout.LeftToRight
+        layoutDirection: Qt.LeftToRight
+        rows: 1
+        columns: 1
+
+        Flow {
+            id: flow1
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.fillHeight: false
-            Layout.fillWidth: false
-            transformOrigin: Item.Center
-            spacing: 50
+            spacing: 25
+            anchors.fill: parent
 
+            //anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.verticalCenter: parent.verticalCenter
             Button {
                 id: button
+                width: 96
+                height: 96
                 Layout.maximumHeight: 150
                 Layout.maximumWidth: 150
                 Layout.minimumHeight: 100
@@ -61,9 +66,10 @@ Item {
                     source: "images/pacients.png"
                 }
             }
-
             Button {
                 id: button1
+                width: 96
+                height: 96
                 Layout.maximumHeight: 150
                 Layout.maximumWidth: 150
                 Layout.minimumHeight: 100
@@ -90,17 +96,6 @@ Item {
                     source: "images/update.png"
                 }
             }
-        }
-
-        RowLayout {
-            id: rowLayout1
-            width: 100
-            height: 100
-            Layout.fillHeight: false
-            Layout.fillWidth: false
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            spacing: 50
-
             Button {
                 id: button2
                 width: 96
@@ -137,7 +132,6 @@ Item {
                     source: "images/cloud_upload.png"
                 }
             }
-
             Button {
                 id: button3
                 width: 96

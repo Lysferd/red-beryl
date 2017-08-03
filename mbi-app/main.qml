@@ -8,14 +8,31 @@ ApplicationWindow {
     height: 400
     title: qsTr("Red Beryl 1.0_preview")
 
-    /*
-    background: Rectangle {
-        width: parent.width
-        height: parent.height
-        color: "#ff0000"
-    }
-    */
 
+    StackView {
+        anchors.fill: parent
+        //anchors.topMargin: 8
+        //anchors.leftMargin: 8
+        anchors.margins: 8
+
+        initialItem: Page {
+            //anchors.centerIn: parent
+            width: parent.width * 0.1
+            height: parent.height * 0.1
+            background: Rectangle {
+                color: "#00ff00"
+            }
+
+            Rectangle {
+                anchors.centerIn: parent
+                width: parent.width * 0.5
+                height: parent.height * 0.5
+                color: "#ff0000"
+            }
+        }
+    }
+
+/*
     footer: Footer { }
 
     StackView {
@@ -28,5 +45,5 @@ ApplicationWindow {
             //height: parent.height
         }
     }
-
+*/
 }
