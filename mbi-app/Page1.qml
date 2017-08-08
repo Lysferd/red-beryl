@@ -1,4 +1,4 @@
 import QtQuick 2.7
 
-ContentForm {
+Page1Form {
 }
