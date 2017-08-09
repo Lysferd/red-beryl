@@ -1,8 +1,14 @@
 .DS_Store
 *.swp
-build*/
+*build*/
+android*
+debug/
+qrc*.cpp
 *.pro.user
-Makefile
+Makefile*
 *.plist
 *plugin_import.cpp
 *.xcodeproj
+*.stash
+*.so
+*.obj
