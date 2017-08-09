@@ -5,29 +5,37 @@ import QtQuick.Layouts 1.3
 Item {
     property alias textField1: textField1
     property alias button1: button1
-    property alias button2: button2
+    property alias textArea: textArea
 
     ColumnLayout {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
+        //anchors.fill: parent
+        width: parent.width
+        spacing: 1
 
         RowLayout {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
 
             TextField {
                 id: textField1
-                placeholderText: qsTr("Text Field")
+                placeholderText: qsTr("query")
             }
 
             Button {
                 id: button1
-                text: qsTr("Press Me")
+                text: qsTr("Query")
             }
         }
 
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            id: button2
-            text: qsTr("Version")
+        TextArea {
+            id: textArea
+            text: qsTr("Text Area")
+            rightPadding: 8
+            leftPadding: 8
+            horizontalAlignment: Text.AlignHCenter
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
     }
 }
