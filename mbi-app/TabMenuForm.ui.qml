@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 
 Item {
     id: tabmenu
@@ -29,7 +30,7 @@ Item {
                 height: 48
 
                 Image {
-                    id: image1
+                    id: pacientes_img
                     width: 32
                     height: 32
                     anchors.top: parent.top
@@ -37,7 +38,13 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     sourceSize.width: 0
                     fillMode: Image.Stretch
-                    source: "images/pacients.png"
+                    source: "images/ic_people_white_48px.svg"
+                }
+                ColorOverlay {
+                    id: pacients_overlay
+                    anchors.fill: pacientes_img
+                    source: pacientes_img
+                    color: parent.activeFocus ? "#037BFB" : "#929292"
                 }
 
                 Text {
@@ -58,7 +65,7 @@ Item {
 
                 Text {
                     id: text2
-                    text: qsTr("Atualizar")
+                    text: qsTr("Medidor")
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 4
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -67,13 +74,19 @@ Item {
                 }
 
                 Image {
-                    id: image2
+                    id: medidor_img
                     width: 32
                     height: 32
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    source: "images/update.png"
+                    source: "images/ic_devices_white_48px.svg"
+                }
+                ColorOverlay {
+                    id: medidor_overlay
+                    anchors.fill: medidor_img
+                    source: medidor_img
+                    color: parent.activeFocus ? "#037BFB" : "#929292"
                 }
             }
 
@@ -82,18 +95,24 @@ Item {
                 height: 48
 
                 Image {
-                    id: image3
+                    id: nuvem_img
                     width: 32
                     height: 32
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    source: "images/cloud_upload.png"
+                    source: "images/ic_cloud_white_48px.svg"
+                }
+                ColorOverlay {
+                    id: nuvem_overlay
+                    anchors.fill: nuvem_img
+                    source: nuvem_img
+                    color: parent.activeFocus ? "#037BFB" : "#929292"
                 }
 
                 Text {
                     id: text3
-                    text: qsTr("Sincronizar")
+                    text: qsTr("Nuvem")
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 4
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -107,18 +126,24 @@ Item {
                 height: 48
 
                 Image {
-                    id: image4
+                    id: configs_img
                     width: 32
                     height: 32
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    source: "images/support.png"
+                    source: "images/ic_settings_white_48px.svg"
+                }
+                ColorOverlay {
+                    id: configs_overlay
+                    anchors.fill: configs_img
+                    source: configs_img
+                    color: parent.activeFocus ? "#037BFB" : "#929292"
                 }
 
                 Text {
                     id: text4
-                    text: qsTr("Suporte")
+                    text: qsTr("Configurações")
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 4
                     anchors.horizontalCenter: parent.horizontalCenter

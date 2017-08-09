@@ -21,9 +21,6 @@ ApplicationWindow {
         Item { Page4 {} }
     }
 
-    header: TopMenu {
-    }
-
     footer: TabMenu {
         id: repolho
     }

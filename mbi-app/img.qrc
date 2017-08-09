@@ -1,8 +1,43 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/cloud_upload.png</file>
-        <file>images/pacients.png</file>
-        <file>images/support.png</file>
-        <file>images/update.png</file>
+        <file>images/ic_search_white_48px.svg</file>
+        <file>images/ic_add_white_48px.svg</file>
+        <file>images/ic_airline_seat_flat_angled_white_48px.svg</file>
+        <file>images/ic_airline_seat_flat_white_48px.svg</file>
+        <file>images/ic_battery_alert_white_48px.svg</file>
+        <file>images/ic_battery_full_white_48px.svg</file>
+        <file>images/ic_battery_unknown_white_48px.svg</file>
+        <file>images/ic_bluetooth_connected_white_48px.svg</file>
+        <file>images/ic_bluetooth_disabled_white_48px.svg</file>
+        <file>images/ic_bluetooth_searching_white_48px.svg</file>
+        <file>images/ic_bluetooth_white_48px.svg</file>
+        <file>images/ic_bug_report_white_48px.svg</file>
+        <file>images/ic_build_white_48px.svg</file>
+        <file>images/ic_cached_white_48px.svg</file>
+        <file>images/ic_cancel_white_48px.svg</file>
+        <file>images/ic_check_circle_white_48px.svg</file>
+        <file>images/ic_cloud_done_white_48px.svg</file>
+        <file>images/ic_cloud_off_white_48px.svg</file>
+        <file>images/ic_cloud_upload_white_48px.svg</file>
+        <file>images/ic_create_white_48px.svg</file>
+        <file>images/ic_delete_white_48px.svg</file>
+        <file>images/ic_devices_white_48px.svg</file>
+        <file>images/ic_export_apple_white_48px.svg</file>
+        <file>images/ic_extension_white_48px.svg</file>
+        <file>images/ic_menu_white_48px.svg</file>
+        <file>images/ic_mode_comment_white_48px.svg</file>
+        <file>images/ic_multiline_chart_white_48px.svg</file>
+        <file>images/ic_people_white_48px.svg</file>
+        <file>images/ic_person_add_white_48px.svg</file>
+        <file>images/ic_sentiment_dissatisfied_white_48px.svg</file>
+        <file>images/ic_sentiment_neutral_white_48px.svg</file>
+        <file>images/ic_sentiment_satisfied_white_48px.svg</file>
+        <file>images/ic_sentiment_very_dissatisfied_white_48px.svg</file>
+        <file>images/ic_sentiment_very_satisfied_white_48px.svg</file>
+        <file>images/ic_settings_bluetooth_white_48px.svg</file>
+        <file>images/ic_settings_white_48px.svg</file>
+        <file>images/ic_share_white_48px.svg</file>
+        <file>images/ic_sort_white_48px.svg</file>
+        <file>images/ic_cloud_white_48px.svg</file>
     </qresource>
 </RCC>
