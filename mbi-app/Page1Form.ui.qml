@@ -20,12 +20,62 @@ Item {
             width: parent.width
             height: parent.height * 0.9
             highlightRangeMode: ListView.NoHighlightRange
-            spacing: 3
+            spacing: 1
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: parent.height * 0.1 + 4
             model: ListModel {
+                ListElement {
+                    name: "Grey"
+                    capital: "G"
+                }
+
+                ListElement {
+                    name: "Fulano"
+                    capital: "F"
+                }
+
+                ListElement {
+                    name: "Siclano"
+                    capital: "S"
+                }
+
+                ListElement {
+                    name: "Beltrano"
+                    capital: "B"
+                }
+
+                ListElement {
+                    name: "Lorem"
+                    capital: "L"
+                }
+
+                ListElement {
+                    name: "Ipsum"
+                    capital: "I"
+                }
+
+                ListElement {
+                    name: "Sibilis"
+                    capital: "S"
+                }
+
+                ListElement {
+                    name: "Red"
+                    capital: "R"
+                }
+
+                ListElement {
+                    name: "Blue"
+                    capital: "B"
+                }
+
+                ListElement {
+                    name: "Green"
+                    capital: "G"
+                }
+
                 ListElement {
                     name: "Grey"
                     capital: "G"
@@ -87,44 +137,60 @@ Item {
                     id: column1
                     spacing: 0
                     width: parent.width
+                    height: parent.height
 
-                    Row {
-                        id: row1
-                        spacing: 10
-                        height: 42
 
-                        Rectangle {
-                            width: parent.height -4
-                            height: width
-                            radius: width * 0.5
-                            color: "#D3D3D3"
+                    Button {
+                        id: button1
+                        //text: qsTr("Button")
+                        width: parent.width
+                        anchors.margins:  0
+                        flat: true
+
+
+
+                        Row {
+                            id: row1
+                            spacing: 10
+                            height: 42
+
+                            Rectangle {
+                                width: parent.height -6
+                                height: width
+                                radius: width * 0.5
+                                color: "#D3D3D3"
+                                y: 6
+
+                                Text {
+                                    text: capital
+                                    font.pointSize: 14
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    font.bold: true
+                                }
+                            }
 
                             Text {
-                                text: capital
-                                font.pointSize: 14
+                                text: name
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
                                 font.bold: true
                             }
                         }
 
-                        Text {
-                            text: name
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
+                        Rectangle {
+                            width: parent.width * 0.85
+                            height: 1
+                            color: "#D3D3D3"
+                            anchors.horizontalCenter: parent.horizontalCenter
                         }
-                    }
 
-                    Rectangle {
-                        width: parent.width * 0.85
-                        height: 1
-                        color: "#D3D3D3"
-                        anchors.horizontalCenter: parent.horizontalCenter
                     }
 
                 }
             }
+
         }
+
     }
 
     Rectangle {
