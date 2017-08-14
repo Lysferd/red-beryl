@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     devicefinder.cpp \
     deviceinfo.cpp \
     devicehandler.cpp \
-    connectionhandler.cpp
+    connectionhandler.cpp \
+    patientmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -38,4 +39,5 @@ HEADERS += \
     devicefinder.h \
     deviceinfo.h \
     devicehandler.h \
-    connectionhandler.h
+    connectionhandler.h \
+    patientmodel.h

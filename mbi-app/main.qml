@@ -11,8 +11,8 @@ ApplicationWindow {
     SwipeView {
         id: swipeView
         anchors.fill: parent
-        currentIndex: tabBar.currentIndex
-
-        Page1 { }
+        Page1 {
+            id: page1
+        }
     }
 }
