@@ -46,18 +46,19 @@ Item {
             anchors.rightMargin: parent.width * 0.03
 
             Image {
-                id: search_icon
+                id: settings_icon
                 width: parent.height * 0.7
                 height: parent.height * 0.7
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/ic_export_apple_white_48px.svg"
+                source: "images/settings_white.png"
+                mipmap: true
             }
 
             ColorOverlay {
-                id: search_icon_overlay
-                anchors.fill: search_icon
-                source: search_icon
+                id: settings_overlay
+                anchors.fill: settings_icon
+                source: settings_icon
                 color: "#037BFB"
             }
         }

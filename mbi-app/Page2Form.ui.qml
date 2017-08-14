@@ -46,18 +46,19 @@ Item {
             anchors.rightMargin: parent.width * 0.03
 
             Image {
-                id: search_icon
+                id: devices_icon
                 width: parent.height * 0.7
                 height: parent.height * 0.7
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/ic_bluetooth_white_48px.svg"
+                source: "images/bluetooth_white.png"
+                mipmap: true
             }
 
             ColorOverlay {
-                id: search_icon_overlay
-                anchors.fill: search_icon
-                source: search_icon
+                id: devices_icon_overlay
+                anchors.fill: devices_icon
+                source: devices_icon
                 color: "#037BFB"
             }
         }

@@ -38,8 +38,10 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     sourceSize.width: 0
                     fillMode: Image.Stretch
-                    source: "images/ic_people_white_48px.svg"
+                    source: "images/people_white.png"
+                    mipmap: true
                 }
+
                 ColorOverlay {
                     id: pacients_overlay
                     anchors.fill: pacientes_img
@@ -80,7 +82,8 @@ Item {
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    source: "images/ic_devices_white_48px.svg"
+                    source: "images/devices_white.png"
+                    mipmap: true
                 }
                 ColorOverlay {
                     id: medidor_overlay
@@ -101,7 +104,8 @@ Item {
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    source: "images/ic_cloud_white_48px.svg"
+                    source: "images/cloud_white.png"
+                    mipmap: true
                 }
                 ColorOverlay {
                     id: nuvem_overlay
@@ -132,7 +136,8 @@ Item {
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    source: "images/ic_settings_white_48px.svg"
+                    source: "images/settings_white.png"
+                    mipmap: true
                 }
                 ColorOverlay {
                     id: configs_overlay
