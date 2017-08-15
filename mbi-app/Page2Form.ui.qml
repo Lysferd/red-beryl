@@ -18,57 +18,62 @@ Item {
             id: rectangle
             y: parent.height * 0.2
             width: parent.width * 0.8
-            height: parent.height * 0.4
+            height: parent.height * 0.3
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "#ff0000"
+            color: "#037BFB"
 
             ListView {
                 id: listView
                 width: parent.width * 0.8
                 height: parent.height * 0.9
-                anchors.top: parent.top
-                anchors.topMargin: parent.height * 0.1
+                anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 delegate: Item {
                     x: 5
-                    width: 80
-                    height: 40
+                    width: parent.width
+                    height: 20
                     Row {
                         id: row1
-                        spacing: 10
-                        Rectangle {
-                            width: 40
-                            height: 40
-                            color: colorCode
+                        spacing: 50
+
+                        Text {
+                            text: prop
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: "#FFFFFF"
                         }
 
                         Text {
-                            text: name
-                            font.bold: true
+                            text: value
                             anchors.verticalCenter: parent.verticalCenter
+                            color: "#FFFFFF"
                         }
                     }
                 }
                 model: ListModel {
                     ListElement {
-                        name: "Grey"
-                        colorCode: "grey"
+                        prop: "STATUS:"
+                        value: "On-Line"
                     }
 
                     ListElement {
-                        name: "Red"
-                        colorCode: "red"
+                        prop: "BATERIA:"
+                        value: "67% (3h em stand by; 1h de medição"
                     }
 
                     ListElement {
-                        name: "Blue"
-                        colorCode: "blue"
+                        prop: "CACHE:"
+                        value: "4 medições não sincronizadas"
                     }
 
                     ListElement {
-                        name: "Green"
-                        colorCode: "green"
+                        prop: "MODELO:"
+                        value: "BX512"
+                    }
+
+                    ListElement {
+                        prop: "SERIAL:"
+                        value: "AETW649781154/2017"
                     }
                 }
             }
