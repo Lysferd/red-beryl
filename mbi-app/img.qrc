@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/bluetooth_white.png</file>
+        <file>images/cloud_done_white.png</file>
+        <file>images/cloud_white.png</file>
+        <file>images/devices_white.png</file>
+        <file>images/export_apple_white.png</file>
+        <file>images/people_white.png</file>
+        <file>images/search_white.png</file>
+        <file>images/settings_white.png</file>
+        <file>images/add_white.png</file>
+    </qresource>
+</RCC>
