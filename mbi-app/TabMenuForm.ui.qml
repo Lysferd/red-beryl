@@ -46,7 +46,7 @@ Item {
                     id: pacients_overlay
                     anchors.fill: pacientes_img
                     source: pacientes_img
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 0 ? "#037BFB" : "#929292"
                 }
 
                 Text {
@@ -57,7 +57,7 @@ Item {
                     anchors.bottomMargin: 4
                     horizontalAlignment: Text.AlignLeft
                     font.pixelSize: 12
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 0 ? "#037BFB" : "#929292"
                 }
             }
 
@@ -72,7 +72,7 @@ Item {
                     anchors.bottomMargin: 4
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 1 ? "#037BFB" : "#929292"
                 }
 
                 Image {
@@ -89,7 +89,7 @@ Item {
                     id: medidor_overlay
                     anchors.fill: medidor_img
                     source: medidor_img
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 1 ? "#037BFB" : "#929292"
                 }
             }
 
@@ -111,7 +111,7 @@ Item {
                     id: nuvem_overlay
                     anchors.fill: nuvem_img
                     source: nuvem_img
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 2 ? "#037BFB" : "#929292"
                 }
 
                 Text {
@@ -121,7 +121,7 @@ Item {
                     anchors.bottomMargin: 4
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 2 ? "#037BFB" : "#929292"
                 }
             }
 
@@ -143,7 +143,7 @@ Item {
                     id: configs_overlay
                     anchors.fill: configs_img
                     source: configs_img
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 3 ? "#037BFB" : "#929292"
                 }
 
                 Text {
@@ -153,7 +153,7 @@ Item {
                     anchors.bottomMargin: 4
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12
-                    color: parent.activeFocus ? "#037BFB" : "#929292"
+                    color: tabBar.currentIndex == 3 ? "#037BFB" : "#929292"
                 }
             }
         }
