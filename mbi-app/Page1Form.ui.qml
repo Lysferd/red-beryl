@@ -139,43 +139,43 @@ Item {
                     width: parent.width
                     height: parent.height
 
+                    Row {
+                        id: row1
+                        spacing: 10
+                        height: 42
+                        width: parent.width
 
                     Button {
                         id: button1
-                        //text: qsTr("Button")
                         width: parent.width
                         anchors.margins:  0
                         flat: true
+                        x: 18
 
-
-
-                        Row {
-                            id: row1
-                            spacing: 10
-                            height: 42
-
-                            Rectangle {
-                                width: parent.height -6
-                                height: width
-                                radius: width * 0.5
-                                color: "#D3D3D3"
-                                y: 6
-
-                                Text {
-                                    text: capital
-                                    font.pointSize: 14
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    anchors.horizontalCenter: parent.horizontalCenter
-                                    font.bold: true
-                                }
-                            }
-
-                            Text {
-                                text: name
-                                anchors.verticalCenter: parent.verticalCenter
-                                font.bold: true
-                            }
+                        Text {
+                            x: 26
+                            text: name
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.bold: true
                         }
+
+                   }
+
+                    Rectangle {
+                        width: parent.height -6
+                        height: width
+                        radius: width * 0.5
+                        color: "#D3D3D3"
+                        y: 6
+
+                        Text {
+                            text: capital
+                            font.pointSize: 14
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                        }
+                    }
 
                         Rectangle {
                             width: parent.width * 0.85
@@ -208,20 +208,20 @@ Item {
             text: qsTr("Pacientes")
             font.pixelSize: parent.height * 0.5
             anchors.top: parent.top
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.2
             anchors.left: parent.left
             anchors.leftMargin: parent.width * 0.03
         }
 
         Button {
-            id: button
+            id: button_search
             flat: true
             width: parent.height * 0.7
             height: parent.height * 0.9
             anchors.top: parent.top
             anchors.topMargin: parent.height * 0.1
             anchors.right: parent.right
-            anchors.rightMargin: parent.width * 0.03
+            anchors.rightMargin: parent.width * 0.15
 
             Image {
                 id: search_icon
@@ -240,5 +240,34 @@ Item {
                 color: "#037BFB"
             }
         }
+
+        Button {
+            id: button_add
+            flat: true
+            width: parent.height * 0.7
+            height: parent.height * 0.9
+            anchors.top: parent.top
+            anchors.topMargin: parent.height * 0.1
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width * 0.03
+
+            Image {
+                id: add_icon
+                width: parent.height * 0.7
+                height: parent.height * 0.7
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                source: "images/add_white.png"
+                mipmap: true
+            }
+
+            ColorOverlay {
+                id: add_icon_overlay
+                anchors.fill: add_icon
+                source: add_icon
+                color: "#037BFB"
+            }
+        }
+
     }
 }

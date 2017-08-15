@@ -10,9 +10,69 @@ Item {
     anchors.fill: parent
 
     Rectangle {
-        id: background
+        id: bg
         anchors.fill: parent
         color: "#ffffff"
+
+        Rectangle {
+            id: rectangle
+            y: parent.height * 0.2
+            width: parent.width * 0.8
+            height: parent.height * 0.4
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "#ff0000"
+
+            ListView {
+                id: listView
+                width: parent.width * 0.8
+                height: parent.height * 0.9
+                anchors.top: parent.top
+                anchors.topMargin: parent.height * 0.1
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                delegate: Item {
+                    x: 5
+                    width: 80
+                    height: 40
+                    Row {
+                        id: row1
+                        spacing: 10
+                        Rectangle {
+                            width: 40
+                            height: 40
+                            color: colorCode
+                        }
+
+                        Text {
+                            text: name
+                            font.bold: true
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+                }
+                model: ListModel {
+                    ListElement {
+                        name: "Grey"
+                        colorCode: "grey"
+                    }
+
+                    ListElement {
+                        name: "Red"
+                        colorCode: "red"
+                    }
+
+                    ListElement {
+                        name: "Blue"
+                        colorCode: "blue"
+                    }
+
+                    ListElement {
+                        name: "Green"
+                        colorCode: "green"
+                    }
+                }
+            }
+        }
     }
 
     Rectangle {
@@ -30,7 +90,7 @@ Item {
             text: qsTr("Medidor")
             font.pixelSize: parent.height * 0.5
             anchors.top: parent.top
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.2
             anchors.left: parent.left
             anchors.leftMargin: parent.width * 0.03
         }

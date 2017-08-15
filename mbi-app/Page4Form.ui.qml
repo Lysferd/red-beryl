@@ -30,7 +30,7 @@ Item {
             text: qsTr("Configurações")
             font.pixelSize: parent.height * 0.5
             anchors.top: parent.top
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.2
             anchors.left: parent.left
             anchors.leftMargin: parent.width * 0.03
         }

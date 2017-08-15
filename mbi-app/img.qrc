@@ -8,5 +8,6 @@
         <file>images/people_white.png</file>
         <file>images/search_white.png</file>
         <file>images/settings_white.png</file>
+        <file>images/add_white.png</file>
     </qresource>
 </RCC>
