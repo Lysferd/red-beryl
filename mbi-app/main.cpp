@@ -19,12 +19,15 @@ int main(int argc, char *argv[]) {
     ConnectionHandler connectionHandler;
     DeviceHandler deviceHandler;
     DeviceFinder deviceFinder(&deviceHandler);
-    qmlRegisterUncreatableType<DeviceHandler>("Shared", 1, 0, "AddressType", "Enum is not a type");
+    qmlRegisterUncreatableType<DeviceHandler>("Shared", 1, 0, "AddressType",
+                                              "Enum is not a type");
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("connectionHandler", &connectionHandler);
+    engine.rootContext()->setContextProperty("connectionHandler",
+                                             &connectionHandler);
     engine.rootContext()->setContextProperty("deviceFinder", &deviceFinder);
     engine.rootContext()->setContextProperty("deviceHandler", &deviceHandler);
+
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

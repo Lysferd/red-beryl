@@ -4,29 +4,6 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 Item {
-    property alias textField1: textField1
-    property alias button1: button1
-    property alias textArea: textArea
-
-    ColumnLayout {
-        //anchors.fill: parent
-        width: parent.width
-        spacing: 1
-
-        RowLayout {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-
-            TextField {
-                id: textField1
-                placeholderText: qsTr("query")
-            }
-
-            Button {
-                id: button1
-                text: qsTr("Query")
-
-Item {
     id: page1
     property alias rectangleHeight: header.height
     property alias rectangleWidth: header.width

@@ -3,11 +3,14 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
+import Shared 1.0
+
 Item {
-    id: page2
-    property alias rectangleHeight: header.height
-    property alias rectangleWidth: header.width
+    property alias bluetooth_button: bluetooth_button
     anchors.fill: parent
+
+    property string errorMessage: deviceFinder.error
+    property string infoMessage: deviceFinder.info
 
     Rectangle {
         id: bg
@@ -20,7 +23,7 @@ Item {
             width: parent.width * 0.8
             height: parent.height * 0.4
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "#ff0000"
+            color: "#F7F7F7"
 
             ListView {
                 id: listView
@@ -29,46 +32,24 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: parent.height * 0.1
                 anchors.horizontalCenter: parent.horizontalCenter
+                model: deviceFinder.devices
 
-                delegate: Item {
-                    x: 5
-                    width: 80
+                delegate: Rectangle {
+                    id: box
                     height: 40
                     Row {
-                        id: row1
+                        id: row
                         spacing: 10
-                        Rectangle {
-                            width: 40
-                            height: 40
-                            color: colorCode
+
+                        Text {
+                            id: device
+                            text: modelData.deviceName
                         }
 
                         Text {
-                            text: name
-                            font.bold: true
-                            anchors.verticalCenter: parent.verticalCenter
+                            id: deviceAddress
+                            text: modelData.deviceAddress
                         }
-                    }
-                }
-                model: ListModel {
-                    ListElement {
-                        name: "Grey"
-                        colorCode: "grey"
-                    }
-
-                    ListElement {
-                        name: "Red"
-                        colorCode: "red"
-                    }
-
-                    ListElement {
-                        name: "Blue"
-                        colorCode: "blue"
-                    }
-
-                    ListElement {
-                        name: "Green"
-                        colorCode: "green"
                     }
                 }
             }
@@ -96,7 +77,7 @@ Item {
         }
 
         Button {
-            id: button
+            id: bluetooth_button
             flat: true
             width: parent.height * 0.7
             height: parent.height * 0.9
@@ -104,6 +85,8 @@ Item {
             anchors.topMargin: parent.height * 0.1
             anchors.right: parent.right
             anchors.rightMargin: parent.width * 0.03
+
+            enabled: !deviceFinder.scanning
 
             Image {
                 id: devices_icon
@@ -119,7 +102,7 @@ Item {
                 id: devices_icon_overlay
                 anchors.fill: devices_icon
                 source: devices_icon
-                color: "#037BFB"
+                color: bluetooth_button.enabled ? "#037BFB" : "#929292"
             }
         }
     }

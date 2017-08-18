@@ -15,7 +15,7 @@ Item {
         TabBar {
             id: tabBar
             spacing: 0
-            currentIndex: 0
+            currentIndex: 1
             background: Rectangle {
                 x: -1
                 width: parent.width + 2

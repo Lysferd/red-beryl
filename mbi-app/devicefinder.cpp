@@ -78,8 +78,7 @@ void DeviceFinder::scanFinished()
     emit devicesChanged();
 }
 
-void DeviceFinder::connectToService(const QString &address)
-{
+void DeviceFinder::connectToService(const QString &address) {
     m_deviceDiscoveryAgent->stop();
 
     DeviceInfo *currentDevice = 0;
