@@ -1,8 +1,13 @@
-QT += qml quick
+QT += qml quick bluetooth sql
 
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    bluetooth.cpp \
+    devicefinder.cpp \
+    deviceinfo.cpp \
+    devicehandler.cpp \
+    connectionhandler.cpp
 
 RESOURCES += qml.qrc \
     img.qrc
@@ -29,4 +34,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS +=
+HEADERS += bluetooth.h \
+    devicefinder.h \
+    deviceinfo.h \
+    devicehandler.h \
+    connectionhandler.h

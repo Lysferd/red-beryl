@@ -27,6 +27,6 @@ QString ConnectionHandler::address() const {
     return m_localDevice.address().toString();
 }
 
-void ConnectionHandler::hostModeChanged(QBluetoothLocalDevice::HostMode mode) {
+void ConnectionHandler::hostModeChanged(QBluetoothLocalDevice::HostMode) {
     emit deviceChanged();
 }

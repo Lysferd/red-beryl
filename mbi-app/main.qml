@@ -24,4 +24,8 @@ ApplicationWindow {
     footer: TabMenu {
         id: repolho
     }
+
+    PatientMenu {
+        id: beterraba
+    }
 }

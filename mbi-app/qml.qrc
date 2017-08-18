@@ -14,5 +14,7 @@
         <file>Page4Form.ui.qml</file>
         <file>TopMenu.qml</file>
         <file>TopMenuForm.ui.qml</file>
+        <file>PatientMenu.qml</file>
+        <file>PatientMenuForm.ui.qml</file>
     </qresource>
 </RCC>

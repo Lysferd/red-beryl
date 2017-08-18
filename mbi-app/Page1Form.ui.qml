@@ -1,10 +1,13 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 Item {
     id: page1
+
+    signal pressAndHold(int index)
+
     property alias rectangleHeight: header.height
     property alias rectangleWidth: header.width
     anchors.fill: parent
@@ -16,7 +19,8 @@ Item {
 
         ListView {
             id: listView
-            ScrollBar.vertical: ScrollBar { } //turn visible automatically the scrollbar
+            ScrollBar.vertical: ScrollBar {
+            } //turn visible automatically the scrollbar
             width: parent.width
             height: parent.height * 0.9
             highlightRangeMode: ListView.NoHighlightRange
@@ -125,7 +129,6 @@ Item {
                     name: "Green"
                     capital: "G"
                 }
-
             }
 
             delegate: Item {
@@ -133,7 +136,7 @@ Item {
                 width: parent.width
                 height: 46 //needs to fit an entire item (element1 size + element 2 size + etc)
 
-                Column{
+                Column {
                     id: column1
                     spacing: 0
                     width: parent.width
@@ -145,37 +148,40 @@ Item {
                         height: 42
                         width: parent.width
 
-                    Button {
-                        id: button1
-                        width: parent.width
-                        anchors.margins:  0
-                        flat: true
-                        x: 18
+                        Button {
+                            id: button1
+                            width: parent.width
+                            anchors.margins: 0
+                            flat: true
+                            x: 18
+                            onClicked: {
+                                currentPatient = index
+                                beterraba.open() //why the heck this error?
+                            }
 
-                        Text {
-                            x: 26
-                            text: name
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
+                            Text {
+                                x: 26
+                                text: name
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.bold: true
+                            }
                         }
 
-                   }
+                        Rectangle {
+                            width: parent.height - 6
+                            height: width
+                            radius: width * 0.5
+                            color: "#D3D3D3"
+                            y: 6
 
-                    Rectangle {
-                        width: parent.height -6
-                        height: width
-                        radius: width * 0.5
-                        color: "#D3D3D3"
-                        y: 6
-
-                        Text {
-                            text: capital
-                            font.pointSize: 14
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
+                            Text {
+                                text: capital
+                                font.pointSize: 14
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.bold: true
+                            }
                         }
-                    }
 
                         Rectangle {
                             width: parent.width * 0.85
@@ -183,14 +189,10 @@ Item {
                             color: "#D3D3D3"
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
-
                     }
-
                 }
             }
-
         }
-
     }
 
     Rectangle {
@@ -268,6 +270,5 @@ Item {
                 color: "#037BFB"
             }
         }
-
     }
 }

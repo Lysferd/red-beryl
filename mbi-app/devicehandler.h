@@ -59,7 +59,7 @@ signals:
 public slots:
     void startMeasurement();
     void stopMeasurement();
-    void disconectedService();
+    void disconnectService();
 
 private:
     // QLowEnergyController
@@ -67,7 +67,7 @@ private:
     void serviceScanDone();
 
     // QLowEnergyService
-    void serviceStateChange(QLowEnergyService::ServiceState s);
+    void serviceStateChanged(QLowEnergyService::ServiceState s);
     void updateHeartRateValue(const QLowEnergyCharacteristic &c,
                               const QByteArray &value);
     void confirmedDescriptorWrite(const QLowEnergyDescriptor &d,

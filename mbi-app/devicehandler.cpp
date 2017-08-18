@@ -94,7 +94,7 @@ void DeviceHandler::stopMeasurement() {
 
 void DeviceHandler::serviceDiscovered(const QBluetoothUuid &gatt) {
     if (gatt == QBluetoothUuid(QBluetoothUuid::HeartRate)) {
-        setiopolicy_np("Heart Rate service discovered. Waiting for service scan to be done...");
+        setInfo("Heart Rate service discovered. Waiting for service scan to be done...");
         m_foundHeartRateService = true;
     }
 }
@@ -102,13 +102,16 @@ void DeviceHandler::serviceDiscovered(const QBluetoothUuid &gatt) {
 void DeviceHandler::serviceScanDone() {
     setInfo("Service scan done.");
 
+    // Delete old service if available
     if (m_service) {
         delete m_service;
         m_service = 0;
     }
 
+//! [Filter HeartRate service 2]
+    // If heartRateService found, create new service
     if (m_foundHeartRateService)
-        m_service = m_control>createServiceObject(QBluetoothUuid(QBluetoothUuid::HeartRate), this);
+        m_service = m_control->createServiceObject(QBluetoothUuid(QBluetoothUuid::HeartRate), this);
 
     if (m_service) {
         connect(m_service, &QLowEnergyService::stateChanged, this, &DeviceHandler::serviceStateChanged);
@@ -118,6 +121,7 @@ void DeviceHandler::serviceScanDone() {
     } else {
         setError("Heart Rate Service not found.");
     }
+//! [Filter HeartRate service 2]
 }
 
 void DeviceHandler::serviceStateChanged(QLowEnergyService::ServiceState s)

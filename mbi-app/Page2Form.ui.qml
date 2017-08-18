@@ -3,11 +3,14 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
+import Shared 1.0
+
 Item {
     id: page2
-    property alias rectangleHeight: header.height
-    property alias rectangleWidth: header.width
     anchors.fill: parent
+    property alias bluetooth_button: bluetooth_button
+    property string errorMessage: deviceFinder.error
+    property string infoMessage: deviceFinder.info
 
     Rectangle {
         id: bg
@@ -20,7 +23,7 @@ Item {
             width: parent.width * 0.8
             height: parent.height * 0.3
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "#037BFB"
+            color: "#FFFFFF" //"#037BFB"
 
             ListView {
                 id: listView
@@ -28,52 +31,31 @@ Item {
                 height: parent.height * 0.9
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
+                model: deviceFinder.devices
 
-                delegate: Item {
+
+                delegate: Rectangle {
+                    id: box
                     x: 5
                     width: parent.width
                     height: 20
                     Row {
-                        id: row1
+                        id: row
                         spacing: 50
 
                         Text {
-                            text: prop
+                            id: device
+                            text: modelData.deviceName
                             anchors.verticalCenter: parent.verticalCenter
-                            color: "#FFFFFF"
+                            color: "#000000" //"#FFFFFF"
                         }
 
                         Text {
-                            text: value
+                            id: deviceAddress
+                            text: modelData.deviceAddress
                             anchors.verticalCenter: parent.verticalCenter
-                            color: "#FFFFFF"
+                            color: "#000000" //"#FFFFFF"
                         }
-                    }
-                }
-                model: ListModel {
-                    ListElement {
-                        prop: "STATUS:"
-                        value: "On-Line"
-                    }
-
-                    ListElement {
-                        prop: "BATERIA:"
-                        value: "67% (3h em stand by; 1h de medição"
-                    }
-
-                    ListElement {
-                        prop: "CACHE:"
-                        value: "4 medições não sincronizadas"
-                    }
-
-                    ListElement {
-                        prop: "MODELO:"
-                        value: "BX512"
-                    }
-
-                    ListElement {
-                        prop: "SERIAL:"
-                        value: "AETW649781154/2017"
                     }
                 }
             }
@@ -101,7 +83,7 @@ Item {
         }
 
         Button {
-            id: button
+            id: bluetooth_button
             flat: true
             width: parent.height * 0.7
             height: parent.height * 0.9
@@ -109,6 +91,8 @@ Item {
             anchors.topMargin: parent.height * 0.1
             anchors.right: parent.right
             anchors.rightMargin: parent.width * 0.03
+
+            enabled: !deviceFinder.scanning
 
             Image {
                 id: devices_icon
@@ -124,7 +108,7 @@ Item {
                 id: devices_icon_overlay
                 anchors.fill: devices_icon
                 source: devices_icon
-                color: "#037BFB"
+                color: bluetooth_button.enabled ? "#037BFB" : "#929292"
             }
         }
     }
