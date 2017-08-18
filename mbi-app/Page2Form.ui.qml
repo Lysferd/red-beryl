@@ -100,7 +100,7 @@ Item {
                 height: parent.height * 0.7
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/bluetooth_white.png"
+                source: connectionHandler.alive ? "images/bluetooth_white.png" : "images/bluetooth_disabled.png"
                 mipmap: true
             }
 

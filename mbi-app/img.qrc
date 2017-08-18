@@ -9,5 +9,9 @@
         <file>images/search_white.png</file>
         <file>images/settings_white.png</file>
         <file>images/add_white.png</file>
+        <file>images/bluetooth_ani_search_3.png</file>
+        <file>images/bluetooth_ani_search_2.png</file>
+        <file>images/bluetooth_disabled.png</file>
+        <file>images/bluetooth_connected.png</file>
     </qresource>
 </RCC>

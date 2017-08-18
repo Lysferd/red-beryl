@@ -137,19 +137,17 @@ Item {
                 height: 46 //needs to fit an entire item (element1 size + element 2 size + etc)
 
                 Column {
-                    id: column1
                     spacing: 0
                     width: parent.width
                     height: parent.height
 
                     Row {
-                        id: row1
                         spacing: 10
                         height: 42
                         width: parent.width
+                        anchors.margins: 0
 
                         Button {
-                            id: button1
                             width: parent.width
                             anchors.margins: 0
                             flat: true
