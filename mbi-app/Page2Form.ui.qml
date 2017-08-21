@@ -8,6 +8,7 @@ import Shared 1.0
 Item {
     id: page2
     anchors.fill: parent
+    property alias page2: page2
     property alias bluetooth_button: bluetooth_button
     property string errorMessage: deviceFinder.error
     property string infoMessage: deviceFinder.info
@@ -17,44 +18,127 @@ Item {
         anchors.fill: parent
         color: "#ffffff"
 
-        Rectangle {
-            id: rectangle
-            y: parent.height * 0.2
-            width: parent.width * 0.8
-            height: parent.height * 0.3
+        ListView {
+            id: listView
+            width: parent.width * 0.9
+            height: parent.height * 0.9
+            anchors.top: parent.top
+            anchors.topMargin: 70
+            anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "#FFFFFF" //"#037BFB"
 
-            ListView {
-                id: listView
-                width: parent.width * 0.8
-                height: parent.height * 0.9
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                model: deviceFinder.devices
+            //model: deviceFinder.devices
+            model: ListModel {
+                ListElement {
+                    name: "Device1"
+                    baudRate: "9600"
+                    macAddress: "sl.af.ak.fd.kf.ad"
+                    version: "1.4"
+                    password: "12345"
+                }
+                ListElement {
+                    name: "Brey"
+                    baudRate: "9600"
+                    macAddress: "iu.yw.go.ih.oi.u5"
+                    version: "1.2"
+                    password: "12345"
+                }
+                ListElement {
+                    name: "Crey"
+                    baudRate: "9600"
+                    macAddress: "iu.yw.go.ih.oi.u5"
+                    version: "1.2"
+                    password: "12345"
+                }
+                ListElement {
+                    name: "Drey"
+                    baudRate: "9600"
+                    macAddress: "iu.yw.go.ih.oi.u5"
+                    version: "1.2"
+                    password: "12345"
+                }
+            }
 
+            delegate: Item {
+                id: box
+                width: parent.width
+                height: 100
 
-                delegate: Rectangle {
-                    id: box
-                    x: 5
+                Rectangle {
                     width: parent.width
-                    height: 20
-                    Row {
-                        id: row
-                        spacing: 50
+                    height: 90
+                    radius: 6
+                    color: "#037BFB"
 
-                        Text {
-                            id: device
-                            text: modelData.deviceName
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: "#000000" //"#FFFFFF"
+                    Column{
+                        width: parent.width
+                        height: parent.height
+                        anchors.left: parent.left
+                        anchors.leftMargin: 10
+                        anchors.top: parent.top
+                        anchors.topMargin: 3
+                        spacing: 3
+
+                        Row {
+                            id: row
+                            spacing: 15
+                            //width: parent.width
+                            //height: parent.height * 0.5
+
+                            Text {
+                                text: "Nome:" //modelData.deviceName
+                                //anchors.verticalCenter: parent.verticalCenter
+                                color: "#FFFFFF"
+                            }
+
+                            Text {
+                                text: name //modelData.deviceName
+                                //anchors.verticalCenter: parent.verticalCenter
+                                color: "#FFFFFF"
+                            }
+
+                            Text {
+                                text: macAddress //modelData.deviceAddress
+                                //anchors.verticalCenter: parent.verticalCenter
+                                color: "#FFFFFF"
+                            }
                         }
 
-                        Text {
-                            id: deviceAddress
-                            text: modelData.deviceAddress
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: "#000000" //"#FFFFFF"
+                        Row {
+                            spacing: 15
+                            Text {
+                                text: "Versão:"
+                                color: "#FFFFFF"
+                            }
+                            Text {
+                                text: version //modelData.deviceAddress
+                                //anchors.verticalCenter: parent.verticalCenter
+                                color: "#FFFFFF"
+                            }
+                        }
+                        Row {
+                            spacing: 15
+                            Text {
+                                text: "BaudRate:"
+                                color: "#FFFFFF"
+                            }
+                            Text {
+                                text: baudRate //modelData.deviceAddress
+                                //anchors.verticalCenter: parent.verticalCenter
+                                color: "#FFFFFF"
+                            }
+                        }
+                        Row {
+                            spacing: 15
+                            Text {
+                                text: "Password:"
+                                color: "#FFFFFF"
+                            }
+                            Text {
+                                text: password //modelData.deviceAddress
+                                //anchors.verticalCenter: parent.verticalCenter
+                                color: "#FFFFFF"
+                            }
                         }
                     }
                 }

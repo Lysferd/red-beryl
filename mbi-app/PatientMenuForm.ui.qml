@@ -11,6 +11,13 @@ Menu {
         horizontalAlignment: Qt.AlignHCenter
         text: "derp" //currentContact >= 0 ? contactView.model.get(currentContact).fullName : ""
     }
+    Label {
+        padding: 10
+        font.bold: true
+        width: parent.width
+        horizontalAlignment: Qt.AlignHCenter
+        text: index
+    }
     MenuItem {
         text: fullname
         //onTriggered: contactDialog.editContact(contactView.model.get(currentContact))

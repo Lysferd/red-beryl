@@ -1,4 +1,4 @@
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
@@ -6,8 +6,11 @@ import QtGraphicalEffects 1.0
 Item {
     id: page1
 
-    signal pressAndHold(int index)
+    //signal pressAndHold(int index)
 
+
+    //property alias patient_item: patient_item
+    //property alias patient_button: patient_button
     property alias rectangleHeight: header.height
     property alias rectangleWidth: header.width
     anchors.fill: parent
@@ -132,6 +135,7 @@ Item {
             }
 
             delegate: Item {
+                id: patient_item
                 x: 4 //creates a left-margin
                 width: parent.width
                 height: 46 //needs to fit an entire item (element1 size + element 2 size + etc)
@@ -148,14 +152,12 @@ Item {
                         anchors.margins: 0
 
                         Button {
+                            id: patient_button
                             width: parent.width
                             anchors.margins: 0
                             flat: true
                             x: 18
-                            onClicked: {
-                                currentPatient = index
-                                beterraba.open() //why the heck this error?
-                            }
+                            onClicked: beterraba.open(index)
 
                             Text {
                                 x: 26
