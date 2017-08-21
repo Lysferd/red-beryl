@@ -11,6 +11,7 @@ Menu {
         horizontalAlignment: Qt.AlignHCenter
         text: "derp" //currentContact >= 0 ? contactView.model.get(currentContact).fullName : ""
     }
+
     Label {
         padding: 10
         font.bold: true
@@ -18,14 +19,17 @@ Menu {
         horizontalAlignment: Qt.AlignHCenter
         text: index
     }
+
     MenuItem {
-        text: fullname
+        text: currentClient
         //onTriggered: contactDialog.editContact(contactView.model.get(currentContact))
     }
+
     MenuItem {
         text: qsTr("derpinoso")
         //onTriggered: contactView.model.remove(currentContact)
     }
+
     MenuItem {
         text: qsTr("Vá embora!!!1")
         onTriggered: Qt.quit()
