@@ -1,17 +1,17 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Page1.qml</file>
-        <file>Page1Form.ui.qml</file>
+        <file>ClientPage.qml</file>
+        <file>ClientPageForm.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>TabMenu.qml</file>
         <file>TabMenuForm.ui.qml</file>
-        <file>Page2.qml</file>
-        <file>Page2Form.ui.qml</file>
-        <file>Page3.qml</file>
-        <file>Page3Form.ui.qml</file>
-        <file>Page4.qml</file>
-        <file>Page4Form.ui.qml</file>
+        <file>DevicePage.qml</file>
+        <file>DevicePageForm.ui.qml</file>
+        <file>CloudPage.qml</file>
+        <file>CloudPageForm.ui.qml</file>
+        <file>SettingsPage.qml</file>
+        <file>SettingsPageForm.ui.qml</file>
         <file>TopMenu.qml</file>
         <file>TopMenuForm.ui.qml</file>
         <file>PatientMenu.qml</file>

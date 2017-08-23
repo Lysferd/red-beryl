@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import Shared 1.0
 
-Page2Form {
+DevicePageForm {
     bluetooth_button.onClicked: {
         deviceFinder.startSearch()
     }

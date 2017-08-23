@@ -19,8 +19,8 @@ ApplicationWindow {
 
         Item {
 
-            Page1 {
-                id: page1
+            ClientPage {
+                id: client_page
 
                 Pane {
                     id: client_page_pane
@@ -40,9 +40,9 @@ ApplicationWindow {
             }
         }
 
-        Item { Page2 {} }
-        Item { Page3 {} }
-        Item { Page4 {} }
+        Item { DevicePage {} }
+        Item { CloudPage {} }
+        Item { SettingsPage {} }
     }
 
     footer: TabMenu {
