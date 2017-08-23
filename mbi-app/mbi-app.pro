@@ -13,8 +13,11 @@ RESOURCES += qml.qrc \
     img.qrc
 
 RC_FILE = iconing.rc
-ICON = pack-icon-mbi.icns
-#QMAKE_INFO_PLIST = Info.plist
+
+ios {
+  ICON = pack-icon-mbi.icns
+  QMAKE_INFO_PLIST = Info.plist
+}
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

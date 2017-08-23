@@ -1,7 +1,5 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-import QtQuick.Layouts 1.3
 
 ApplicationWindow {
     visible: true
@@ -13,78 +11,47 @@ ApplicationWindow {
 
     property int currentClient: -1
 
-    StackLayout {
+    Loader {
+        id: splash_loader
+
         anchors.fill: parent
-        currentIndex: repolho.tabBar.currentIndex
+        source: "SplashScreen.qml"
+        asynchronous: false
+        visible: true
 
-        Item {
-
-            ClientPage {
-                id: client_page
-
-                Pane {
-                    id: client_page_pane
-
-                    anchors.fill: parent
-                    background: Rectangle { color: "white" }
-
-                    ClientView {
-                        id: client_view
-
-                        onPressAndHold: {
-                            currentClient = index
-                            beterraba.open()
-                        }
-                    }
-                }
+        onStatusChanged: {
+            if (status == Loader.Ready) {
+                console.log("[done]")
+                application_loader.setSource("Application.qml")
             }
         }
-
-        Item { DevicePage {} }
-        Item { CloudPage {} }
-        Item { SettingsPage {} }
     }
 
-    footer: TabMenu {
-        id: repolho
+    Loader {
+        id: application_loader
+        anchors.fill: parent
+        visible: false
+        asynchronous: true
+
+        onStatusChanged: {
+            if (status === Loader.Ready)
+                splash_loader.item.appReady()
+            if (status === Loader.Error)
+                splash_loader.item.errorInLoadingApp()
+        }
     }
 
-    Menu {
-        id: beterraba
-        modal: true
-        x: parent.width / 2 - width / 2
-        y: parent.height / 2 - height / 2
+    Connections {
+        target: splash_loader.item
 
-        Label {
-            padding: 10
-            font.bold: true
-            width: parent.width
-            horizontalAlignment: Qt.AlignHCenter
-            text: currentClient >= 0 ? client_view.model.get(currentClient).name : ""
+        onReadyToGo: {
+            application_loader.visible = true
+            application_loader.item.init()
+
+            splash_loader.hide()
+            splash_loader.setSource("")
+
+            application_loader.item.forceActiveFocus()
         }
-
-        Label {
-            padding: 10
-            font.bold: true
-            width: parent.width
-            horizontalAlignment: Qt.AlignHCenter
-            text: index
-        }
-
-        MenuItem {
-            text: qsTr("Edit")
-            //onTriggered: contactDialog.editContact(contactView.model.get(currentContact))
-        }
-
-        MenuItem {
-            text: qsTr("Remove")
-            //onTriggered: contactView.model.remove(currentContact)
-        }
-
-        MenuItem {
-            text: qsTr("Quit")
-            onTriggered: Qt.quit()
-        }
-
     }
 }

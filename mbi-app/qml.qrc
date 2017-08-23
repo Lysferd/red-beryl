@@ -19,5 +19,9 @@
         <file>ClientModel.qml</file>
         <file>ClientDelegate.ui.qml</file>
         <file>ClientView.qml</file>
+        <file>SplashScreen.qml</file>
+        <file>Application.qml</file>
+        <file>ClientDetailPage.qml</file>
+        <file>ClientDetailPageForm.ui.qml</file>
     </qresource>
 </RCC>

@@ -13,5 +13,7 @@
         <file>images/bluetooth_ani_search_2.png</file>
         <file>images/bluetooth_disabled.png</file>
         <file>images/bluetooth_connected.png</file>
+        <file>images/edit_white.png</file>
+        <file>images/splash.png</file>
     </qresource>
 </RCC>
