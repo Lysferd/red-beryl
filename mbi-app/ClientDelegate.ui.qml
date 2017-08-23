@@ -7,7 +7,7 @@ ItemDelegate {
 
     contentItem: ColumnLayout {
         Label {
-            leftPadding: circle_image.width + 8
+            //leftPadding: circle_image.width + 8
             anchors.verticalCenter: parent.verticalCenter
 
             text: name
