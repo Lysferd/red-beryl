@@ -16,6 +16,7 @@ ApplicationWindow {
     StackLayout {
         anchors.fill: parent
         currentIndex: repolho.tabBar.currentIndex
+
         Item {
 
             Page1 {
@@ -38,6 +39,7 @@ ApplicationWindow {
                 }
             }
         }
+
         Item { Page2 {} }
         Item { Page3 {} }
         Item { Page4 {} }
