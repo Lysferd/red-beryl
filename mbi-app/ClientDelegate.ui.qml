@@ -5,13 +5,33 @@ import QtQuick.Controls 2.2
 ItemDelegate {
     checkable: true
 
-    contentItem: ColumnLayout {
-        Label {
-            //leftPadding: circle_image.width + 8
+    contentItem: Column {
+
+        Row {
+            spacing: 8
             anchors.verticalCenter: parent.verticalCenter
 
-            text: name
-            font.bold: true
+            Rectangle {
+                id: circle_image
+
+                width: 28
+                height: width
+                radius: width * 0.5
+                color: "light gray"
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    text: capital
+                    font.bold: true
+                }
+            }
+
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: name
+            }
         }
     }
 }

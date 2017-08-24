@@ -1,6 +1,5 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 /*******************************************************************************
@@ -14,6 +13,9 @@ Page {
     id: client_page
     anchors.fill: parent
 
+    property alias client_page: client_page
+    property alias client_page_pane_clientview: client_page_pane_clientview
+
     /***************************************************************************
         Client Page :: Header
     ***************************************************************************/
@@ -21,17 +23,11 @@ Page {
         id: client_page_header
 
         // Positioning & Sizes//
-        // x:
-        // y:
         width: parent.width
         height: parent.height * 0.1
 
         // Background Color //
         color: "#F7F7F7"
-
-        // Border //
-        border.width: 1
-        border.color: "red" //"#b2b2b2"
 
         Text {
             id: client_page_header_title
@@ -121,17 +117,34 @@ Page {
                 color: "#037BFB"
             }
         }
+
+        /***********************************************************************
+            Client Details Page :: Header :: Bottom Border
+        ***********************************************************************/
+        Rectangle {
+            width: parent.width
+            height: 1
+            color: "#b2b2b2"
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+        }
     }
 
 
     /***************************************************************************
         Client Page :: Pane
     ***************************************************************************/
+    Pane {
+        id: client_page_pane
 
+        anchors.fill: parent
+        background: Rectangle { color: "white" }
 
         /***********************************************************************
             Client Page :: Pane :: List View
         ***********************************************************************/
-
-
+        ClientView {
+            id: client_page_pane_clientview
+        }
+    }
 }

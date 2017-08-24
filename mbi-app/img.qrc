@@ -15,5 +15,6 @@
         <file>images/bluetooth_connected.png</file>
         <file>images/edit_white.png</file>
         <file>images/splash.png</file>
+        <file>ios/LaunchImage-iOS7-568h@2x.png.png</file>
     </qresource>
 </RCC>

@@ -1,56 +1,70 @@
-import QtQuick 2.4
+import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 
 /*******************************************************************************
-  Client Details Page
+  Client Detail Page
 
     This UI object is mimicking a model that will be made in the next steps.
 
 *******************************************************************************/
 Page {
     id: client_detail_page
-    spacing: 0
+
+    //spacing: 0
+
     font.capitalization: Font.AllLowercase
     font.weight: Font.ExtraLight
+
     anchors.fill: parent
 
+    property alias back_button: client_detail_page_header_back_button
+    property alias header_title: client_detail_page_header_title
+
     /***************************************************************************
-        Client Page :: Header
+        Client Detail Page :: Header
     ***************************************************************************/
     header: Rectangle {
         id: client_detail_page_header
 
         // Positioning & Sizes//
-        // x:
-        // y:
         width: parent.width
         height: parent.height * 0.1
 
         // Background Color //
         color: "#F7F7F7"
 
-        // Border //
-        //border.width: 1
-        //border.color: "red" //"#b2b2b2"
+        /***********************************************************************
+            Client Details Page :: Header :: Back Button
+        ***********************************************************************/
+        Button {
+            id: client_detail_page_header_back_button
+
+            text: "Voltar"
+            flat: true
+        }
+
+        /***********************************************************************
+            Client Details Page :: Header :: Header Title
+        ***********************************************************************/
         Text {
             id: client_detail_page_header_title
-            text: "$NOME$"
+            text: "<dummy>"
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.topMargin: parent.height * 0.2
-            anchors.leftMargin: parent.width * 0.03
+            anchors.leftMargin: parent.width * 0.3
 
             // Title //
             font.pixelSize: parent.height * 0.5
         }
 
         /***********************************************************************
-            Client Page :: Header :: Add Button
+            Client Details Page :: Header :: Edit Button
         ***********************************************************************/
         Button {
             id: client_detail_page_header_add_button
@@ -84,7 +98,10 @@ Page {
                 color: "#037BFB"
             }
         }
-        //bottom border//
+
+        /***********************************************************************
+            Client Details Page :: Header :: Bottom Border
+        ***********************************************************************/
         Rectangle {
             width: parent.width
             height: 1
@@ -386,12 +403,4 @@ Page {
             }
         }
     }
-
-    /***************************************************************************
-        Client Page :: Pane
-    ***************************************************************************/
-
-    /***********************************************************************
-            Client Page :: Pane :: List View
-        ***********************************************************************/
 }

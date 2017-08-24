@@ -7,23 +7,18 @@ ApplicationWindow {
     // Width and height proportional to iPhone screen.
     width: 750 / 2
     height: 1334 / 2
-    title: qsTr("Red Beryl [GUI Preview]")
-
-    property int currentClient: -1
+    title: qsTr("Red Beryl [" + Qt.platform.os + "]")
 
     Loader {
         id: splash_loader
-
         anchors.fill: parent
         source: "SplashScreen.qml"
         asynchronous: false
         visible: true
 
         onStatusChanged: {
-            if (status == Loader.Ready) {
-                console.log("[done]")
+            if (status == Loader.Ready)
                 application_loader.setSource("Application.qml")
-            }
         }
     }
 
@@ -31,7 +26,7 @@ ApplicationWindow {
         id: application_loader
         anchors.fill: parent
         visible: false
-        asynchronous: true
+        asynchronous: false
 
         onStatusChanged: {
             if (status === Loader.Ready)
@@ -48,7 +43,7 @@ ApplicationWindow {
             application_loader.visible = true
             application_loader.item.init()
 
-            splash_loader.hide()
+            splash_loader.item.hide()
             splash_loader.setSource("")
 
             application_loader.item.forceActiveFocus()

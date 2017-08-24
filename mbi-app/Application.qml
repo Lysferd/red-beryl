@@ -1,10 +1,12 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 
 Page {
     anchors.fill: parent
+
+    property int currentClient: -1
 
     opacity: 0.0
     Behavior on opacity { NumberAnimation { duration: 500 } }
@@ -16,72 +18,50 @@ Page {
         currentIndex: tabmenu.tabBar.currentIndex
 
         Item {
+            Component {
+                id: comp1
 
-            ClientPage {
-                id: client_page
+                ClientPage {
+                    id: client_page
 
-                Pane {
-                    id: client_page_pane
-
-                    anchors.fill: parent
-                    background: Rectangle { color: "white" }
-
-                    ClientView {
-                        id: client_view
-
-                        onPressAndHold: {
-                            currentClient = index
-                            beterraba.open()
-                        }
+                    client_page_pane_clientview.onClicked: {
+                        loader1.active = false
+                        loader2.active = true
+                        loader2.item.updateModel(client_page_pane_clientview.model.get(index))
                     }
                 }
             }
-        }
 
+            Component {
+                id: comp2
+
+                ClientDetailPage {
+                    back_button.onClicked: {
+                        loader1.active = true
+                        loader2.active = false
+                    }
+                }
+            }
+
+            Loader {
+                id: loader1
+                active: true
+                anchors.fill: parent
+                sourceComponent: comp1
+            }
+
+            Loader {
+                id: loader2
+                active: false
+                anchors.fill: parent
+                sourceComponent: comp2
+            }
+
+        }
         Item { DevicePage {} }
         Item { CloudPage {} }
         Item { SettingsPage {} }
     }
 
     footer: TabMenu { id: tabmenu }
-
-    /*
-    Menu {
-        id: beterraba
-        modal: true
-        x: parent.width / 2 - width / 2
-        y: parent.height / 2 - height / 2
-
-        Label {
-            padding: 10
-            font.bold: true
-            width: parent.width
-            horizontalAlignment: Qt.AlignHCenter
-            text: currentClient >= 0 ? client_view.model.get(currentClient).name : ""
-        }
-
-        Label {
-            padding: 10
-            font.bold: true
-            width: parent.width
-            horizontalAlignment: Qt.AlignHCenter
-            text: index
-        }
-
-        MenuItem {
-            text: qsTr("Edit")
-            //onTriggered: contactDialog.editContact(contactView.model.get(currentContact))
-        }
-
-        MenuItem {
-            text: qsTr("Remove")
-            //onTriggered: contactView.model.remove(currentContact)
-        }
-
-        MenuItem {
-            text: qsTr("Quit")
-            onTriggered: Qt.quit()
-        }
-
-    }*/
 }

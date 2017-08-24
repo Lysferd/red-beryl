@@ -12,11 +12,14 @@ SOURCES += main.cpp \
 RESOURCES += qml.qrc \
     img.qrc
 
-RC_FILE = iconing.rc
+#RC_FILE = iconing.rc
 
 ios {
-  ICON = pack-icon-mbi.icns
-  QMAKE_INFO_PLIST = Info.plist
+  app_launch_images.files = $$PWD/ios/Splash.xib $$files($$PWD/ios/LaunchImage*.png)
+
+  #ICON = pack-icon-mbi.icns
+  QMAKE_BUNDLE_DATA += app_launch_images
+  QMAKE_INFO_PLIST = ios/Info.plist
 }
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
