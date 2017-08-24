@@ -4,6 +4,7 @@ ListModel {
     ListElement {
         name: "Grey"
         capital: "G"
+        bloodtype: "O+"
     }
 
     ListElement {
