@@ -16,5 +16,6 @@
         <file>images/edit_white.png</file>
         <file>images/splash.png</file>
         <file>ios/LaunchImage-iOS7-568h@2x.png.png</file>
+        <file>images/left_arrow_white.png</file>
     </qresource>
 </RCC>

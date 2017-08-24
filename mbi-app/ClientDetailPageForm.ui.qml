@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
@@ -41,9 +41,35 @@ Page {
         ***********************************************************************/
         Button {
             id: client_detail_page_header_back_button
+            width: parent.height * 0.7
+            height: parent.height * 0.9
 
-            text: "Voltar"
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.topMargin: parent.height * 0.1
+            anchors.leftMargin: parent.width * 0.03
+
+            //text: "Voltar"
             flat: true
+
+            Image {
+                id: client_detail_page_header_back_button_image
+
+                width: parent.height * 0.7
+                height: parent.height * 0.7
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                source: "images/left_arrow_white.png"
+                mipmap: true
+            }
+
+            ColorOverlay {
+                anchors.fill: client_detail_page_header_back_button_image
+                source: client_detail_page_header_back_button_image
+
+                color: "#037BFB"
+            }
         }
 
         /***********************************************************************
