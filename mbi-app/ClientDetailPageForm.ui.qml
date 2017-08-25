@@ -173,6 +173,7 @@ Page {
         ScrollView {
             id: scrollView
             anchors.fill: parent
+            ScrollIndicator.vertical: ScrollIndicator
 
             ColumnLayout {
                 id: columnLayout
