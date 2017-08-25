@@ -13,8 +13,8 @@ import QtGraphicalEffects 1.0
 Page {
     id: client_detail_page
 
-    //spacing: 0
 
+    //spacing: 0
     font.capitalization: Font.AllLowercase
     font.weight: Font.ExtraLight
 
@@ -22,6 +22,33 @@ Page {
 
     property alias back_button: client_detail_page_header_back_button
     property alias header_title: client_detail_page_header_title
+    property alias code: client_detail_page_code
+    property alias dateReg: client_detail_page_dateReg
+    property alias birthday: client_detail_page_birthday
+    property alias idDoc: client_detail_page_idDoc
+    property alias lastConsultation: client_detail_page_lastConsultation
+    property alias bloodtype: client_detail_page_bloodtype
+    property alias age: client_detail_page_age
+    property alias pHeight: client_detail_page_height
+    property alias weight: client_detail_page_weight
+    property alias imc: client_detail_page_imc
+    property alias riskGroups: client_detail_page_riskGroups
+    property alias regularlyMedicines: client_detail_page_regularlyMedicines
+    property alias analysis1_bodyLocation: client_detail_page_analysis1_bodyLocation
+    property alias analysis1_date: client_detail_page_analysis1_date
+    property alias analysis1_values: client_detail_page_analysis1_values
+    property alias analysis2_bodyLocation: client_detail_page_analysis2_bodyLocation
+    property alias analysis2_date: client_detail_page_analysis2_date
+    property alias analysis2_values: client_detail_page_analysis2_values
+    property alias analysis3_bodyLocation: client_detail_page_analysis3_bodyLocation
+    property alias analysis3_date: client_detail_page_analysis3_date
+    property alias analysis3_values: client_detail_page_analysis3_values
+    property alias analysis4_bodyLocation: client_detail_page_analysis4_bodyLocation
+    property alias analysis4_date: client_detail_page_analysis4_date
+    property alias analysis4_values: client_detail_page_analysis4_values
+    property alias analysis5_bodyLocation: client_detail_page_analysis5_bodyLocation
+    property alias analysis5_date: client_detail_page_analysis5_date
+    property alias analysis5_values: client_detail_page_analysis5_values
 
     /***************************************************************************
         Client Detail Page :: Header
@@ -181,8 +208,8 @@ Page {
                     }
 
                     Text {
-                        id: text1
-                        text: qsTr("233164925")
+                        id: client_detail_page_code
+                        text: "<dummy>"
                         font.pixelSize: 12
                         height: 15
                     }
@@ -195,32 +222,57 @@ Page {
                     }
 
                     Text {
-                        id: text2
-                        text: qsTr("22 ABR 2011")
+                        id: client_detail_page_dateReg
+                        text: "<dummy>"
+                        font.pixelSize: 12
+                        height: 15
+                    }
+                    Label {
+                        id: label2
+                        text: qsTr("Data de Nascimento")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
+
+                    Text {
+                        id: client_detail_page_birthday
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
 
                     Label {
-                        id: label2
+                        id: label8
                         text: qsTr("RG")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
 
                     Text {
-                        id: text3
-                        text: qsTr("3.754.181-9")
+                        id: client_detail_page_idDoc
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
+                    Label {
+                        id: label19
+                        text: qsTr("Última Consulta")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
 
+                    Text {
+                        id: client_detail_page_lastConsultation
+                        text: qsTr("<dummy>")
+                        font.pixelSize: 12
+                        height: 15
+                    }
                 }
 
                 //bottom line//
                 Rectangle {
                     id: rectangleble
-                    width: scrollView.width-16
+                    width: scrollView.width - 16
                     height: 1
                     color: "lightgray"
                 }
@@ -231,7 +283,7 @@ Page {
                     height: 100
                     Label {
                         id: label3
-                        text: qsTr("BIOTIPO")
+                        text: qsTr("Ficha Clínica")
                         font.pointSize: 12
                         font.bold: true
                         font.capitalization: Font.AllUppercase
@@ -246,8 +298,8 @@ Page {
                     }
 
                     Text {
-                        id: text4
-                        text: "A+"
+                        id: client_detail_page_bloodtype
+                        text: "<dummy>"
                         font.pixelSize: 12
                         height: 15
                     }
@@ -260,8 +312,8 @@ Page {
                     }
 
                     Text {
-                        id: text5
-                        text: qsTr("44 A 7 M 12 D")
+                        id: client_detail_page_age
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
@@ -274,8 +326,8 @@ Page {
                     }
 
                     Text {
-                        id: text6
-                        text: qsTr("1,64 M")
+                        id: client_detail_page_height
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
@@ -288,8 +340,8 @@ Page {
                     }
 
                     Text {
-                        id: text7
-                        text: qsTr("60 Kg")
+                        id: client_detail_page_weight
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
@@ -301,21 +353,21 @@ Page {
                     }
 
                     Text {
-                        id: text8
-                        text: qsTr("22,31 (IDEAL)")
+                        id: client_detail_page_imc
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
                     Label {
-                        id: label8
-                        text: qsTr("GRAU DE RISCO")
+                        id: label18
+                        text: qsTr("GRUPOS DE RISCO")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
 
                     Text {
-                        id: text9
-                        text: qsTr("CARDÍACO, PRESSÃO ALTA")
+                        id: client_detail_page_riskGroups
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
@@ -327,8 +379,8 @@ Page {
                     }
 
                     Text {
-                        id: text13
-                        text: qsTr("FUROSEMIDA, DALTEPARINA SÓDICA")
+                        id: client_detail_page_regularlyMedicines
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
@@ -339,7 +391,7 @@ Page {
                 //bottom line//
                 Rectangle {
                     id: rectangleble2
-                    width: scrollView.width-16
+                    width: scrollView.width - 16
                     height: 1
                     color: "lightgray"
                 }
@@ -357,69 +409,94 @@ Page {
                         height: 15
                     }
                     Label {
-                        id: label10
-                        text: qsTr("antebraço direito")
+                        id: client_detail_page_analysis1_bodyLocation
+                        text: qsTr("<dummy>")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
-
+                    Label {
+                        id: client_detail_page_analysis1_date
+                        text: qsTr("<dummy>")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
                     Text {
-                        id: text10
-                        text: qsTr("12 U.M. | 15 U.M. | 12 U.M.")
+                        id: client_detail_page_analysis1_values
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
 
                     Label {
-                        id: label11
-                        text: qsTr("braço direito")
+                        id: client_detail_page_analysis2_bodyLocation
+                        text: qsTr("<dummy>")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
-
+                    Label {
+                        id: client_detail_page_analysis2_date
+                        text: qsTr("<dummy>")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
                     Text {
-                        id: text11
-                        text: qsTr("12 U.M. | 15 U.M. | 12 U.M.")
+                        id: client_detail_page_analysis2_values
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
 
                     Label {
-                        id: label12
-                        text: qsTr("antebraço esquerdo")
+                        id: client_detail_page_analysis3_bodyLocation
+                        text: qsTr("<dummy>")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
-
+                    Label {
+                        id: client_detail_page_analysis3_date
+                        text: qsTr("<dummy>")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
                     Text {
-                        id: text12
-                        text: qsTr("13 U.M. | 14 U.M. | 13 U.M.")
+                        id: client_detail_page_analysis3_values
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
                     Label {
-                        id: label15
-                        text: qsTr("braço esquerdo")
+                        id: client_detail_page_analysis4_bodyLocation
+                        text: qsTr("<dummy>")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
-
+                    Label {
+                        id: client_detail_page_analysis4_date
+                        text: qsTr("<dummy>")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
                     Text {
-                        id: text14
-                        text: qsTr("11 U.M. | 11 U.M. | 13 U.M.")
+                        id: client_detail_page_analysis4_values
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
                     Label {
-                        id: label16
-                        text: qsTr("caixa torácica")
+                        id: client_detail_page_analysis5_bodyLocation
+                        text: qsTr("<dummy>")
                         font.capitalization: Font.AllUppercase
                         height: 15
                     }
-
+                    Label {
+                        id: client_detail_page_analysis5_date
+                        text: qsTr("<dummy>")
+                        font.capitalization: Font.AllUppercase
+                        height: 15
+                    }
                     Text {
-                        id: text15
-                        text: qsTr("23 U.M. | 28 U.M. | 24 U.M.")
+                        id: client_detail_page_analysis5_values
+                        text: qsTr("<dummy>")
                         font.pixelSize: 12
                         height: 15
                     }
