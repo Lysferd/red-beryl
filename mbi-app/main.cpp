@@ -7,7 +7,7 @@
 #include "connectionhandler.h"
 #include "devicefinder.h"
 #include "devicehandler.h"
-#include "patientmodel.h"
+#include "clientmodel.h"
 
 int main(int argc, char *argv[]) {
     QLoggingCategory::setFilterRules(QStringLiteral("qt.bluetooth* = true"));

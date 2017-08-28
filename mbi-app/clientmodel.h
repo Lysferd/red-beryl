@@ -1,22 +1,22 @@
-#ifndef PATIENTMODEL_H
-#define PATIENTMODEL_H
+#ifndef CLIENTMODEL_H
+#define CLIENTMODEL_H
 
 #include <QAbstractItemModel>
 
-class PatientModel : public QAbstractListModel
+class ClientModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    enum PatientRole {
+    enum ClientRole {
         FullNameRole = Qt::DisplayRole,
         AddressRole = Qt::UserRole,
         CityRole,
         NumberRole
     };
-    Q_ENUM(PatientRole)
+    Q_ENUM(ClientRole)
 
-    PatientModel(QObject *parent = nullptr);
+    ClientModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex & = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -28,14 +28,14 @@ public:
     Q_INVOKABLE void remove(int row);
 
 private:
-    struct Patient {
+    struct Client {
         QString fullName;
         QString address;
         QString city;
         QString number;
     };
 
-    QList<Patient> m_patients;
+    QList<Client> m_clients;
 };
 
-#endif // PATIENTMODEL_H
+#endif // CLIENTMODEL_H
