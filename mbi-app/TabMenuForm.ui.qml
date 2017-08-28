@@ -16,17 +16,6 @@ Item {
         currentIndex: 0
         spacing: 0
 
-        /*
-        background: Rectangle {
-            x: -1
-            width: parent.width + 2
-            height: parent.height + 1
-            border.width: 1
-            border.color: "#b2b2b2"
-            color: "#F7F7F7"
-        }
-        */
-
         TabButton {
             height: 48
 
@@ -140,6 +129,7 @@ Item {
                 source: "images/settings_white.png"
                 mipmap: true
             }
+
             ColorOverlay {
                 id: configs_overlay
                 anchors.fill: configs_img
@@ -149,7 +139,7 @@ Item {
 
             Text {
                 id: text4
-                text: qsTr("Configurações")
+                text: qsTr("Opções")
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 4
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -157,5 +147,17 @@ Item {
                 color: tabBar.currentIndex == 3 ? "#037BFB" : "#929292"
             }
         }
+    }
+
+
+    /***********************************************************************
+        Client Details Page :: Header :: Bottom Border
+    ***********************************************************************/
+    Rectangle {
+        width: parent.width
+        height: 1
+        color: "#b2b2b2"
+        anchors.top: parent.top
+        anchors.topMargin: 0
     }
 }

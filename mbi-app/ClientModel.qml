@@ -3,7 +3,7 @@ import QtQuick 2.6
 ListModel {
     ListElement {
         //Registration
-            name: "Grey"
+            name: "Grey Vilkerness"
             capital: "G"
 
             code: "123456"

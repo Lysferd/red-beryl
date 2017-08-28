@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 ItemDelegate {
     checkable: true
 
-    contentItem: Column {
+    contentItem: ColumnLayout {
 
         Row {
             spacing: 8
@@ -14,10 +14,12 @@ ItemDelegate {
             Rectangle {
                 id: circle_image
 
-                width: 28
+                width: 29
                 height: width
                 radius: width * 0.5
-                color: "light gray"
+                color: ["lightblue", "lightgray", "lightgreen", "lightpink",
+                    "lightcyan", "lightsteelblue", "lightcoral", "lightcyan",
+                    "lightgoldenrodyellow", "lightsalmon", "lightseagreen"][Math.floor(Math.random() * 10)]
 
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
