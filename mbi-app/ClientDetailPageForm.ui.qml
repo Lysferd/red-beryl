@@ -13,7 +13,6 @@ import QtGraphicalEffects 1.0
 Page {
     id: client_detail_page
 
-
     //spacing: 0
     font.capitalization: Font.AllLowercase
     font.weight: Font.ExtraLight
@@ -173,228 +172,295 @@ Page {
         ScrollView {
             id: scrollView
             anchors.fill: parent
+            height: parent.height - 10
             ScrollIndicator.vertical: ScrollIndicator
 
             ColumnLayout {
                 id: columnLayout
-                x: 8
+                //x: 8
                 //y: -40
                 spacing: 15
                 anchors.rightMargin: 8
                 anchors.leftMargin: 8
-                anchors.bottomMargin: 8
+                anchors.bottomMargin: 28
                 anchors.topMargin: 8
                 anchors.fill: parent
 
-                ColumnLayout {
-                    id: columnLayout1
+                RowLayout {
+                    id: rowLayout
+                    width: 100
                     height: 100
-                    spacing: 5
-                    width: parent.width
+                    spacing: 10
 
-                    Label {
-                        id: label17
-                        text: qsTr("sobre o paciente")
-                        font.bold: true
-                        font.pointSize: 12
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                    Rectangle {
+                        id: rectangle
+                        width: 80
+                        height: parent.height
+                        color: "#037BFB"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
 
-                    Label {
-                        id: label
-                        text: qsTr("PRONTUÁRIO")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-
-                    Text {
-                        id: client_detail_page_code
-                        text: "<dummy>"
-                        font.pixelSize: 12
-                        height: 15
+                        Image {
+                            id: client_detail_page_groupImage_clients
+                            width: 80
+                            height: 80
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            sourceSize.height: 42
+                            sourceSize.width: 42
+                            source: "images/people_white.png"
+                            mipmap: true
+                        }
                     }
 
-                    Label {
-                        id: label1
-                        text: qsTr("DATA DO CADASTRAMENTO")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                    ColumnLayout {
+                        id: columnLayout1
+                        height: 100
+                        spacing: 9
+                        width: parent.width
 
-                    Text {
-                        id: client_detail_page_dateReg
-                        text: "<dummy>"
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: label2
-                        text: qsTr("Data de Nascimento")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        ColumnLayout {
+                            id: columnLayout4
+                            width: 100
+                            height: 100
+                            spacing: 0
 
-                    Text {
-                        id: client_detail_page_birthday
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
+                            Label {
+                                id: label
+                                text: qsTr("PRONTUÁRIO")
+                                font.capitalization: Font.AllUppercase
+                                height: 15
+                            }
 
-                    Label {
-                        id: label8
-                        text: qsTr("RG")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                            Text {
+                                id: client_detail_page_code
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                            }
+                        }
 
-                    Text {
-                        id: client_detail_page_idDoc
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: label19
-                        text: qsTr("Última Consulta")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        ColumnLayout {
+                            id: columnLayout5
+                            width: 100
+                            height: 100
+                            spacing: 0
 
-                    Text {
-                        id: client_detail_page_lastConsultation
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
+                            Label {
+                                id: label1
+                                text: qsTr("DATA DO CADASTRAMENTO")
+                                font.capitalization: Font.AllUppercase
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_dateReg
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                            }
+                        }
+                        ColumnLayout {
+                            id: columnLayout6
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label2
+                                text: qsTr("Data de Nascimento")
+                                font.capitalization: Font.AllUppercase
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_birthday
+                                text: qsTr("<dummy>")
+                                font.pixelSize: 12
+                                height: 15
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout7
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label8
+                                text: qsTr("RG")
+                                font.capitalization: Font.AllUppercase
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_idDoc
+                                text: qsTr("<dummy>")
+                                font.pixelSize: 12
+                                height: 15
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout8
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label19
+                                text: qsTr("Última Consulta")
+                                font.capitalization: Font.AllUppercase
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_lastConsultation
+                                text: qsTr("<dummy>")
+                                font.pixelSize: 12
+                                height: 15
+                            }
+                        }
                     }
                 }
 
-                //bottom line//
-                Rectangle {
-                    id: rectangleble
-                    width: scrollView.width - 16
-                    height: 1
-                    color: "lightgray"
-                }
-
-                ColumnLayout {
-                    id: columnLayout2
-                    width: parent.width
+                RowLayout {
+                    id: rowLayout1
+                    width: 100
                     height: 100
-                    Label {
-                        id: label3
-                        text: qsTr("Ficha Clínica")
-                        font.pointSize: 12
-                        font.bold: true
-                        font.capitalization: Font.AllUppercase
-                        height: 15
+                    spacing: 10
+
+                    Rectangle {
+                        id: rectangle2
+                        width: 80
+                        height: parent.height
+                        color: "#037BFB"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        Image {
+                            id: client_detail_page_groupImage_clinicalRecords
+                            width: 80
+                            height: 80
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            sourceSize.height: 42
+                            sourceSize.width: 42
+                            source: "images/people_white.png"
+                            mipmap: true
+                        }
                     }
 
-                    Label {
-                        id: label9
-                        text: qsTr("TIPO SANGUÍNEO")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                    ColumnLayout {
+                        id: columnLayout2
+                        width: parent.width
+                        height: 100
 
-                    Text {
-                        id: client_detail_page_bloodtype
-                        text: "<dummy>"
-                        font.pixelSize: 12
-                        height: 15
-                    }
+                        ColumnLayout {
+                            id: columnLayout9
+                            width: 100
+                            height: 100
+                            spacing: 0
 
-                    Label {
-                        id: label4
-                        text: qsTr("IDADE")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                            Label {
+                                id: label9
+                                text: qsTr("TIPO SANGUÍNEO")
+                                font.capitalization: Font.AllUppercase
+                                height: 15
+                            }
 
-                    Text {
-                        id: client_detail_page_age
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
+                            Text {
+                                id: client_detail_page_bloodtype
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                            }
+                        }
 
-                    Label {
-                        id: label5
-                        text: qsTr("altura")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        Label {
+                            id: label4
+                            text: qsTr("IDADE")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
 
-                    Text {
-                        id: client_detail_page_height
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
+                        Text {
+                            id: client_detail_page_age
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
 
-                    Label {
-                        id: label6
-                        text: qsTr("peso")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        Label {
+                            id: label5
+                            text: qsTr("altura")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
 
-                    Text {
-                        id: client_detail_page_weight
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: label7
-                        text: qsTr("imc")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        Text {
+                            id: client_detail_page_height
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
 
-                    Text {
-                        id: client_detail_page_imc
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: label18
-                        text: qsTr("GRUPOS DE RISCO")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        Label {
+                            id: label6
+                            text: qsTr("peso")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
 
-                    Text {
-                        id: client_detail_page_riskGroups
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: label13
-                        text: qsTr("medicações constantes")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
+                        Text {
+                            id: client_detail_page_weight
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+                        Label {
+                            id: label7
+                            text: qsTr("imc")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
 
-                    Text {
-                        id: client_detail_page_regularlyMedicines
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
+                        Text {
+                            id: client_detail_page_imc
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+                        Label {
+                            id: label18
+                            text: qsTr("GRUPOS DE RISCO")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+
+                        Text {
+                            id: client_detail_page_riskGroups
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+                        Label {
+                            id: label13
+                            text: qsTr("medicações constantes")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+
+                        Text {
+                            id: client_detail_page_regularlyMedicines
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+
+                        spacing: 5
                     }
-
-                    spacing: 5
-                }
-
-                //bottom line//
-                Rectangle {
-                    id: rectangleble2
-                    width: scrollView.width - 16
-                    height: 1
-                    color: "lightgray"
                 }
 
                 ColumnLayout {
