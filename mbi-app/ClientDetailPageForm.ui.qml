@@ -20,6 +20,7 @@ Page {
     anchors.fill: parent
 
     property alias back_button: client_detail_page_header_back_button
+
     property alias header_title: client_detail_page_header_title
     property alias code: client_detail_page_code
     property alias dateReg: client_detail_page_dateReg
@@ -163,28 +164,32 @@ Page {
         }
     }
 
-    Rectangle {
-        x: 0
-        y: 0
-        color: "white"
-        anchors.fill: parent
+    /***************************************************************************
+        Client Detail Page :: Pane
+    ***************************************************************************/
+    Pane {
+        id: client_detail_page_pane
 
-        ScrollView {
-            id: scrollView
+        anchors.fill: parent
+        background: Rectangle { color: "white" }
+
+        Flickable {
+            id: client_detail_page_pane_flickable
+
             anchors.fill: parent
             height: parent.height - 10
-            ScrollIndicator.vertical: ScrollIndicator
+            flickableDirection: Flickable.VerticalFlick
+            contentHeight: columnLayout.height
+
+            ScrollIndicator.vertical: ScrollIndicator { }
 
             ColumnLayout {
                 id: columnLayout
-                //x: 8
-                //y: -40
+                anchors.right: parent.right
+                anchors.left: parent.left
                 spacing: 15
                 anchors.rightMargin: 8
                 anchors.leftMargin: 8
-                anchors.bottomMargin: 28
-                anchors.topMargin: 8
-                anchors.fill: parent
 
                 RowLayout {
                     id: rowLayout

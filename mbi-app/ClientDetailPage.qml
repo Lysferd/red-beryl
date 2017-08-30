@@ -1,7 +1,6 @@
 import QtQuick 2.4
 
 ClientDetailPageForm {
-
     function updateModel(data) {
         header_title.text = data.name
         code.text = data.code
@@ -11,7 +10,8 @@ ClientDetailPageForm {
         lastConsultation.text = data.lastConsultation
         bloodtype.text = data.bloodtype
         age.text = data.age
-        height.text = data.height
+
+        pHeight.text = data.pHeight
         weight.text = data.weight
         imc.text = data.imc
         riskGroups.text = data.riskGroups
@@ -31,7 +31,5 @@ ClientDetailPageForm {
         analysis5_bodyLocation.text = data.analysis5_bodyLocation
         analysis5_date.text = data.analysis5_date
         analysis5_values.text = data.analysis5_values
-
     }
-
 }

@@ -5,7 +5,6 @@ ListView {
     id: client_page_pane_listview
 
     anchors.fill: parent
-    //signal pressAndHold(int index)
     signal clicked(int index)
 
     ScrollIndicator.vertical: ScrollIndicator { }
@@ -14,9 +13,6 @@ ListView {
         id: client_page_pane_listview_clientdelegate
         width: parent.width
         height: 36
-
-        //onClicked: console.log("DERP1")
-        //onPressed:
 
         Rectangle {
             y: parent.height
@@ -27,8 +23,6 @@ ListView {
 
         Connections {
             target: client_page_pane_listview_clientdelegate
-            //onPressAndHold: client_page_pane_listview.pressAndHold(index)
-
             onClicked: client_page_pane_listview.clicked(index)
         }
     }

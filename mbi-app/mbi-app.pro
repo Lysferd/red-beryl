@@ -49,3 +49,6 @@ HEADERS += bluetooth.h \
     deviceinfo.h \
     devicehandler.h \
     connectionhandler.h
+
+DISTFILES += \
+    DetailDelegate.ui.qml

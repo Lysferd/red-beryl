@@ -23,5 +23,6 @@
         <file>Application.qml</file>
         <file>ClientDetailPage.qml</file>
         <file>ClientDetailPageForm.ui.qml</file>
+        <file>DetailView.qml</file>
     </qresource>
 </RCC>
