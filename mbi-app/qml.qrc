@@ -24,5 +24,7 @@
         <file>ClientDetailPage.qml</file>
         <file>ClientDetailPageForm.ui.qml</file>
         <file>DetailView.qml</file>
+        <file>ClientEdit.qml</file>
+        <file>ClientEditForm.ui.qml</file>
     </qresource>
 </RCC>

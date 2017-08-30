@@ -35,7 +35,8 @@ Page {
             Component {
                 id: comp2
 
-                ClientDetailPage {
+                //ClientDetailPage {
+                ClientEdit {
                     back_button.onClicked: {
                         loader1.active = true
                         loader2.active = false
