@@ -105,12 +105,12 @@ Page {
         Text {
             id: client_detail_page_header_title
             text: "<dummy>"
+            anchors.topMargin: 16
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.topMargin: parent.height * 0.2
-            anchors.leftMargin: parent.width * 0.3
+            anchors.leftMargin: parent.width * 0.16
 
             // Title //
             font.pixelSize: parent.height * 0.5
@@ -200,10 +200,13 @@ Page {
                     Rectangle {
                         id: rectangle
                         width: 80
-                        height: parent.height
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 0
+                        anchors.bottomMargin: 0
+
                         color: "#037BFB"
                         radius: 8
-                        anchors.verticalCenter: parent.verticalCenter
 
                         Image {
                             id: client_detail_page_groupImage_clients
@@ -339,10 +342,12 @@ Page {
                     Rectangle {
                         id: rectangle2
                         width: 80
-                        height: parent.height
                         color: "#037BFB"
                         radius: 8
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 0
+                        anchors.bottomMargin: 0
 
                         Image {
                             id: client_detail_page_groupImage_clinicalRecords
@@ -468,112 +473,143 @@ Page {
                     }
                 }
 
-                ColumnLayout {
-                    id: columnLayout3
-                    width: parent.width
-                    height: 100
-                    Label {
-                        id: label14
-                        text: qsTr("últimas medições")
-                        font.bold: true
-                        font.pointSize: 12
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis1_bodyLocation
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis1_date
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Text {
-                        id: client_detail_page_analysis1_values
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
+                RowLayout {
+                        id: rowLayout3
+                        width: 100
+                        height: 100
+                        spacing: 10
+
+                    Rectangle {
+                        id: rectangle3
+                        width: 80
+                        color: "#037BFB"
+                        radius: 8
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 0
+                        anchors.bottomMargin: 0
+
+                        Image {
+                            id: client_detail_page_groupImage_analyses
+                            width: 80
+                            height: 80
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            sourceSize.height: 42
+                            sourceSize.width: 42
+                            source: "images/people_white.png"
+                            mipmap: true
+                        }
                     }
 
-                    Label {
-                        id: client_detail_page_analysis2_bodyLocation
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis2_date
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Text {
-                        id: client_detail_page_analysis2_values
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
+                    ColumnLayout {
+                        id: columnLayout3
+                        width: parent.width
+                        height: 100
 
-                    Label {
-                        id: client_detail_page_analysis3_bodyLocation
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis3_date
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Text {
-                        id: client_detail_page_analysis3_values
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis4_bodyLocation
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis4_date
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Text {
-                        id: client_detail_page_analysis4_values
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis5_bodyLocation
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Label {
-                        id: client_detail_page_analysis5_date
-                        text: qsTr("<dummy>")
-                        font.capitalization: Font.AllUppercase
-                        height: 15
-                    }
-                    Text {
-                        id: client_detail_page_analysis5_values
-                        text: qsTr("<dummy>")
-                        font.pixelSize: 12
-                        height: 15
-                    }
+                        Label {
+                            id: label14
+                            text: qsTr("últimas medições")
+                            font.bold: true
+                            font.pointSize: 12
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis1_bodyLocation
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis1_date
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Text {
+                            id: client_detail_page_analysis1_values
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
 
-                    spacing: 5
+                        Label {
+                            id: client_detail_page_analysis2_bodyLocation
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis2_date
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Text {
+                            id: client_detail_page_analysis2_values
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+
+                        Label {
+                            id: client_detail_page_analysis3_bodyLocation
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis3_date
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Text {
+                            id: client_detail_page_analysis3_values
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis4_bodyLocation
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis4_date
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Text {
+                            id: client_detail_page_analysis4_values
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis5_bodyLocation
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Label {
+                            id: client_detail_page_analysis5_date
+                            text: qsTr("<dummy>")
+                            font.capitalization: Font.AllUppercase
+                            height: 15
+                        }
+                        Text {
+                            id: client_detail_page_analysis5_values
+                            text: qsTr("<dummy>")
+                            font.pixelSize: 12
+                            height: 15
+                        }
+
+                        spacing: 5
+                    }
                 }
             }
         }
