@@ -171,7 +171,9 @@ Page {
         id: client_detail_page_pane
 
         anchors.fill: parent
-        background: Rectangle { color: "white" }
+        background: Rectangle {
+            color: "white"
+        }
 
         Flickable {
             id: client_detail_page_pane_flickable
@@ -181,7 +183,8 @@ Page {
             flickableDirection: Flickable.VerticalFlick
             contentHeight: columnLayout.height
 
-            ScrollIndicator.vertical: ScrollIndicator { }
+            ScrollIndicator.vertical: ScrollIndicator {
+            }
 
             ColumnLayout {
                 id: columnLayout
@@ -235,8 +238,10 @@ Page {
 
                             Label {
                                 id: label
-                                text: qsTr("PRONTUÁRIO")
-                                font.capitalization: Font.AllUppercase
+                                text: "Prontuário"
+                                font.capitalization: Font.SmallCaps
+                                fontSizeMode: Text.HorizontalFit
+                                font.bold: true
                                 height: 15
                             }
 
@@ -245,6 +250,7 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
+                                x: x + 10
                             }
                         }
 
@@ -256,8 +262,9 @@ Page {
 
                             Label {
                                 id: label1
-                                text: qsTr("DATA DO CADASTRAMENTO")
-                                font.capitalization: Font.AllUppercase
+                                text: "Data do Cadastramento"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
                                 height: 15
                             }
 
@@ -266,6 +273,7 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
+                                x: x + 10
                             }
                         }
                         ColumnLayout {
@@ -276,16 +284,18 @@ Page {
 
                             Label {
                                 id: label2
-                                text: qsTr("Data de Nascimento")
-                                font.capitalization: Font.AllUppercase
+                                text: "Data de Nascimento"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
                                 height: 15
                             }
 
                             Text {
                                 id: client_detail_page_birthday
-                                text: qsTr("<dummy>")
+                                text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
+                                x: x + 10
                             }
                         }
 
@@ -297,16 +307,18 @@ Page {
 
                             Label {
                                 id: label8
-                                text: qsTr("RG")
-                                font.capitalization: Font.AllUppercase
+                                text: "Documento RG"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
                                 height: 15
                             }
 
                             Text {
                                 id: client_detail_page_idDoc
-                                text: qsTr("<dummy>")
+                                text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
+                                x: x + 10
                             }
                         }
 
@@ -318,16 +330,18 @@ Page {
 
                             Label {
                                 id: label19
-                                text: qsTr("Última Consulta")
-                                font.capitalization: Font.AllUppercase
+                                text: "Última Consulta"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
                                 height: 15
                             }
 
                             Text {
                                 id: client_detail_page_lastConsultation
-                                text: qsTr("<dummy>")
+                                text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
+                                x: x + 10
                             }
                         }
                     }
@@ -375,8 +389,9 @@ Page {
 
                             Label {
                                 id: label9
-                                text: qsTr("TIPO SANGUÍNEO")
-                                font.capitalization: Font.AllUppercase
+                                text: "Tipo Sanguíneo"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
                                 height: 15
                             }
 
@@ -385,88 +400,155 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
+                                x: x + 10
                             }
                         }
 
-                        Label {
-                            id: label4
-                            text: qsTr("IDADE")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
+                        ColumnLayout {
+                            id: columnLayout10
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label4
+                                text: "Idade"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_age
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
+
                         }
 
-                        Text {
-                            id: client_detail_page_age
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
+                        ColumnLayout {
+                            id: columnLayout11
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label5
+                                text: "Altura"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_height
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
+
+                        }
+                        ColumnLayout {
+                            id: columnLayout12
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label6
+                                text: "Peso"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_weight
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
+
                         }
 
-                        Label {
-                            id: label5
-                            text: qsTr("altura")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
+                        ColumnLayout {
+                            id: columnLayout13
+                            width: 100
+                            height: 100
+                            spacing: 0
 
-                        Text {
-                            id: client_detail_page_height
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
-                        }
+                            Label {
+                                id: label7
+                                text: "IMC"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
 
-                        Label {
-                            id: label6
-                            text: qsTr("peso")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
+                            Text {
+                                id: client_detail_page_imc
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
 
-                        Text {
-                            id: client_detail_page_weight
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
-                        }
-                        Label {
-                            id: label7
-                            text: qsTr("imc")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
 
-                        Text {
-                            id: client_detail_page_imc
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
                         }
-                        Label {
-                            id: label18
-                            text: qsTr("GRUPOS DE RISCO")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
+                        ColumnLayout {
+                            id: columnLayout14
+                            width: 100
+                            height: 100
+                            spacing: 0
 
-                        Text {
-                            id: client_detail_page_riskGroups
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
-                        }
-                        Label {
-                            id: label13
-                            text: qsTr("medicações constantes")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
+                            Label {
+                                id: label18
+                                text: "Grupos de Risco"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
 
-                        Text {
-                            id: client_detail_page_regularlyMedicines
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
+                            Text {
+                                id: client_detail_page_riskGroups
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
+
+                        }
+                        ColumnLayout {
+                            id: columnLayout15
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label13
+                                text: "Medicamentos Constantes"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_detail_page_regularlyMedicines
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
+
                         }
 
                         spacing: 5
@@ -474,10 +556,10 @@ Page {
                 }
 
                 RowLayout {
-                        id: rowLayout3
-                        width: 100
-                        height: 100
-                        spacing: 10
+                    id: rowLayout3
+                    width: 100
+                    height: 100
+                    spacing: 10
 
                     Rectangle {
                         id: rectangle3
@@ -509,103 +591,171 @@ Page {
 
                         Label {
                             id: label14
-                            text: qsTr("últimas medições")
+                            text: "Últimas Medições"
+                            font.capitalization: Font.SmallCaps
                             font.bold: true
                             font.pointSize: 12
-                            font.capitalization: Font.AllUppercase
                             height: 15
                         }
-                        Label {
-                            id: client_detail_page_analysis1_bodyLocation
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Label {
-                            id: client_detail_page_analysis1_date
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Text {
-                            id: client_detail_page_analysis1_values
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
+                        ColumnLayout {
+                            id: columnLayout16
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: client_detail_page_analysis1_date
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                            }
+
+                            Label {
+                                id: client_detail_page_analysis1_bodyLocation
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                                x: x + 10
+                            }
+
+
+                            Text {
+                                id: client_detail_page_analysis1_values
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
                         }
 
-                        Label {
-                            id: client_detail_page_analysis2_bodyLocation
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Label {
-                            id: client_detail_page_analysis2_date
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Text {
-                            id: client_detail_page_analysis2_values
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
+                        ColumnLayout {
+                            id: columnLayout17
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: client_detail_page_analysis2_date
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                            }
+
+                            Label {
+                                id: client_detail_page_analysis2_bodyLocation
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                                x: x + 10
+                            }
+
+
+                            Text {
+                                id: client_detail_page_analysis2_values
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
                         }
 
-                        Label {
-                            id: client_detail_page_analysis3_bodyLocation
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
+                        ColumnLayout {
+                            id: columnLayout18
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: client_detail_page_analysis3_date
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                            }
+
+                            Label {
+                                id: client_detail_page_analysis3_bodyLocation
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                                x: x + 10
+                            }
+
+                            Text {
+                                id: client_detail_page_analysis3_values
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
                         }
-                        Label {
-                            id: client_detail_page_analysis3_date
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
+
+                        ColumnLayout {
+                            id: columnLayout19
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+
+                            Label {
+                                id: client_detail_page_analysis4_date
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                            }
+
+                            Label {
+                                id: client_detail_page_analysis4_bodyLocation
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                                x: x + 10
+                            }
+
+                            Text {
+                                id: client_detail_page_analysis4_values
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+
                         }
-                        Text {
-                            id: client_detail_page_analysis3_values
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
-                        }
-                        Label {
-                            id: client_detail_page_analysis4_bodyLocation
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Label {
-                            id: client_detail_page_analysis4_date
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Text {
-                            id: client_detail_page_analysis4_values
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
-                        }
-                        Label {
-                            id: client_detail_page_analysis5_bodyLocation
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Label {
-                            id: client_detail_page_analysis5_date
-                            text: qsTr("<dummy>")
-                            font.capitalization: Font.AllUppercase
-                            height: 15
-                        }
-                        Text {
-                            id: client_detail_page_analysis5_values
-                            text: qsTr("<dummy>")
-                            font.pixelSize: 12
-                            height: 15
+
+                        ColumnLayout {
+                            id: columnLayout20
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: client_detail_page_analysis5_date
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                            }
+
+                            Label {
+                                id: client_detail_page_analysis5_bodyLocation
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                height: 15
+                                x: x + 10
+                            }
+
+                            Text {
+                                id: client_detail_page_analysis5_values
+                                text: "<dummy>"
+                                font.capitalization: Font.SmallCaps
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
                         }
 
                         spacing: 5
