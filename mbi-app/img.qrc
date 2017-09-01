@@ -17,5 +17,8 @@
         <file>images/splash.png</file>
         <file>ios/LaunchImage-iOS7-568h@2x.png.png</file>
         <file>images/left_arrow_white.png</file>
+        <file>images/clinical_data_white_big.png</file>
+        <file>images/personal_data_white_big.png</file>
+        <file>images/measurement_data_white_big.png</file>
     </qresource>
 </RCC>

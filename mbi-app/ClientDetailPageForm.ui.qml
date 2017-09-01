@@ -208,7 +208,11 @@ Page {
                         anchors.topMargin: 0
                         anchors.bottomMargin: 0
 
-                        color: "#037BFB"
+                        //color: "#037BFB"
+                        gradient: Gradient {
+                                GradientStop { position: 0.0; color: "#4fa3fc" }
+                                GradientStop { position: 1.0; color: "#0356b0" }
+                        }
                         radius: 8
 
                         Image {
@@ -217,9 +221,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            sourceSize.height: 42
-                            sourceSize.width: 42
-                            source: "images/people_white.png"
+                            source: "images/personal_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -356,7 +358,11 @@ Page {
                     Rectangle {
                         id: rectangle2
                         width: 80
-                        color: "#037BFB"
+                        //color: "#037BFB"
+                        gradient: Gradient {
+                                GradientStop { position: 0.0; color: "#4fa3fc" }
+                                GradientStop { position: 1.0; color: "#0356b0" }
+                        }
                         radius: 8
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
@@ -369,9 +375,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            sourceSize.height: 42
-                            sourceSize.width: 42
-                            source: "images/people_white.png"
+                            source: "images/clinical_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -564,7 +568,11 @@ Page {
                     Rectangle {
                         id: rectangle3
                         width: 80
-                        color: "#037BFB"
+                        //color: "#037BFB"
+                        gradient: Gradient {
+                                GradientStop { position: 0.0; color: "#4fa3fc" }
+                                GradientStop { position: 1.0; color: "#0356b0" }
+                        }
                         radius: 8
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
@@ -577,9 +585,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            sourceSize.height: 42
-                            sourceSize.width: 42
-                            source: "images/people_white.png"
+                            source: "images/measurement_data_white_big.png"
                             mipmap: true
                         }
                     }

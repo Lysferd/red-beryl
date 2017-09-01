@@ -86,7 +86,7 @@ Page {
         ***********************************************************************/
         Text {
             id: client_edit_page_header_title
-            text: "<dummy>"
+            text: "<dummy_edit>"
             anchors.topMargin: 16
 
             // Positioning //
