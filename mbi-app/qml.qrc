@@ -17,7 +17,7 @@
         <file>PatientMenu.qml</file>
         <file>PatientMenuForm.ui.qml</file>
         <file>ClientModel.qml</file>
-        <file>ClientDelegate.ui.qml</file>
+        <file>ClientDelegate.qml</file>
         <file>ClientView.qml</file>
         <file>SplashScreen.qml</file>
         <file>Application.qml</file>
