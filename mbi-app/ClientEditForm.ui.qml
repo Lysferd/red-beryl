@@ -236,60 +236,45 @@ Page {
                                 width: client_edit_page_pane.width / 2
                             }
 
-                            Rectangle {
-                                width: client_edit_page_code.width
-                                height: client_edit_page_code.height + 6
-                                border.width: 1
-                                border.color: "gray"
 
-                                TextInput {
-                                    anchors.verticalCenter: parent.verticalCenter
+                                TextField {
                                     id: client_edit_page_code
-                                    text: "<dummy>"
+                                    selectionColor: "#00801c"
                                     font.pixelSize: 12
-                                    height: 15
                                     selectByMouse: true
-                                    width: client_edit_page_code.contentWidth + 6 < 20 ? 20 : client_edit_page_code.contentWidth + 6
-                                    x: 3
+                                    width: client_edit_page_code.contentWidth < 120 ? 120 : client_edit_page_code.contentWidth + 6
+                                    placeholderText: "Prontuário"
                                 }
-                            }
 
 
                         }
 
                         ColumnLayout {
-                            id: columnLayout5
+                            id: columnLayout7
                             width: 100
                             height: 100
                             spacing: 0
 
                             Label {
-                                id: label1
-                                text: "Data do Cadastramento"
+                                id: label8
+                                text: "CPF"
                                 font.capitalization: Font.SmallCaps
                                 font.bold: true
                                 height: 15
                             }
 
-                            Rectangle {
-                                width: client_edit_page_dateReg.width
-                                height: client_edit_page_dateReg.height + 6
-                                border.width: 1
-                                border.color: "gray"
 
-                                TextInput {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    id: client_edit_page_dateReg
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    selectByMouse: true
-                                    width: client_edit_page_dateReg.contentWidth + 6 < 20 ? 20 : client_edit_page_dateReg.contentWidth + 6
-                                    x: 3
-                                }
+                            TextField {
+                                id: client_edit_page_idDoc
+                                text: "<dummy>"
+                                inputMask: "999.999.999-99"
+                                font.pixelSize: 12
+                                height: 15
+                                selectByMouse: true
+                                width: client_edit_page_idDoc.contentWidth < 120 ? 120 : client_edit_page_idDoc.contentWidth
                             }
-
                         }
+
                         ColumnLayout {
                             id: columnLayout6
                             width: 100
@@ -304,57 +289,44 @@ Page {
                                 height: 15
                             }
 
-                            Rectangle {
-                                width: client_edit_page_birthday.width
-                                height: client_edit_page_birthday.height + 6
-                                border.width: 1
-                                border.color: "gray"
-
-                                TextInput {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    id: client_edit_page_birthday
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    selectByMouse: true
-                                    width: client_edit_page_birthday.contentWidth + 6 < 20 ? 20 : client_edit_page_birthday.contentWidth + 6
-                                    x: 3
-                                }
+                            TextField {
+                                id: client_edit_page_birthday
+                                inputMask: "99/99/9999"
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                selectByMouse: true
+                                width: client_edit_page_birthday.contentWidth < 120 ? 120 : client_edit_page_birthday.contentWidth + 6
                             }
+
                         }
 
                         ColumnLayout {
-                            id: columnLayout7
+                            id: columnLayout5
                             width: 100
                             height: 100
                             spacing: 0
 
                             Label {
-                                id: label8
-                                text: "Documento RG"
+                                id: label1
+                                text: "Data do Cadastro"
                                 font.capitalization: Font.SmallCaps
                                 font.bold: true
                                 height: 15
                             }
 
-                            Rectangle {
-                                width: client_edit_page_idDoc.width
-                                height: client_edit_page_idDoc.height + 6
-                                border.width: 1
-                                border.color: "gray"
-
-                                TextInput {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    id: client_edit_page_idDoc
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    selectByMouse: true
-                                    width: client_edit_page_idDoc.contentWidth + 6 < 20 ? 20 : client_edit_page_idDoc.contentWidth + 6
-                                    x: 3
-                                }
+                            TextField {
+                                inputMask: "99/99/9999"
+                                id: client_edit_page_dateReg
+                                font.pixelSize: 12
+                                height: 15
+                                selectByMouse: true
+                                width: client_edit_page_dateReg.contentWidth < 120 ? 120 : client_edit_page_dateReg.contentWidth + 6
                             }
+
+
                         }
+
                     }
                 }
 
@@ -414,12 +386,12 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_bloodtype
-                                text: "<dummy>"
+                                selectByMouse: true
+                                inputMask: "AX"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
                             }
                         }
 
@@ -437,12 +409,12 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_age
-                                text: "<dummy>"
+                                selectByMouse: true
+                                inputMask: "D00"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
                             }
                         }
 
@@ -460,12 +432,12 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_height
-                                text: "<dummy>"
+                                selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                inputMask: "9,99 m"
                             }
                         }
                         ColumnLayout {
@@ -482,12 +454,12 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_weight
-                                text: "<dummy>"
+                                selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                inputMask: "D00 Kg"
                             }
                         }
 
@@ -505,12 +477,12 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_imc
-                                text: "<dummy>"
+                                selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                inputMask: "99,99"
                             }
                         }
                         ColumnLayout {
@@ -527,12 +499,11 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_riskGroups
-                                text: "<dummy>"
+                                selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
                             }
                         }
                         ColumnLayout {
@@ -549,18 +520,25 @@ Page {
                                 height: 15
                             }
 
-                            Text {
+                            TextField {
                                 id: client_edit_page_regularlyMedicines
-                                text: "<dummy>"
+                                selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+
                             }
                         }
 
                         spacing: 5
                     }
                 }
+            }
+
+            Tumbler {
+                id: tumbler
+                x: 427
+                y: 192
+                model: ["O+","O-","A+","A-","B+","B-","AB+","AB-"]
             }
         }
     }
