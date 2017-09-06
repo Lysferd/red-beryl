@@ -19,7 +19,7 @@ Page {
 
     property alias back_button: client_edit_page_header_back_button
 
-    property alias header_title: client_edit_page_header_title /*
+    property alias header_title: client_edit_page_header_title
     property alias code: client_edit_page_code
     property alias dateReg: client_edit_page_dateReg
     property alias birthday: client_edit_page_birthday
@@ -190,20 +190,375 @@ Page {
                         anchors.topMargin: 0
                         anchors.bottomMargin: 0
 
-                        color: "#037BFB"
+                        //color: "#037BFB"
+                        gradient: Gradient {
+                            GradientStop {
+                                position: 0.0
+                                color: "#4fa3fc"
+                            }
+                            GradientStop {
+                                position: 1.0
+                                color: "#0356b0"
+                            }
+                        }
                         radius: 8
 
                         Image {
-                            id: client_edit_page_groupImage_clients
+                            id: client_detail_page_groupImage_clients
                             width: 80
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            sourceSize.height: 42
-                            sourceSize.width: 42
-                            source: "images/people_white.png"
+                            source: "images/personal_data_white_big.png"
                             mipmap: true
                         }
+                    }
+
+                    ColumnLayout {
+                        id: columnLayout1
+                        height: 100
+                        spacing: 9
+                        width: parent.width
+
+                        ColumnLayout {
+                            id: columnLayout4
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label
+                                text: "Prontuário"
+                                font.capitalization: Font.SmallCaps
+                                fontSizeMode: Text.HorizontalFit
+                                font.bold: true
+                                height: 15
+                                width: client_edit_page_pane.width / 2
+                            }
+
+                            Rectangle {
+                                width: client_edit_page_code.width
+                                height: client_edit_page_code.height + 6
+                                border.width: 1
+                                border.color: "gray"
+
+                                TextInput {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    id: client_edit_page_code
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    selectByMouse: true
+                                    width: client_edit_page_code.contentWidth + 6 < 20 ? 20 : client_edit_page_code.contentWidth + 6
+                                    x: 3
+                                }
+                            }
+
+
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout5
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label1
+                                text: "Data do Cadastramento"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Rectangle {
+                                width: client_edit_page_dateReg.width
+                                height: client_edit_page_dateReg.height + 6
+                                border.width: 1
+                                border.color: "gray"
+
+                                TextInput {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    id: client_edit_page_dateReg
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    selectByMouse: true
+                                    width: client_edit_page_dateReg.contentWidth + 6 < 20 ? 20 : client_edit_page_dateReg.contentWidth + 6
+                                    x: 3
+                                }
+                            }
+
+                        }
+                        ColumnLayout {
+                            id: columnLayout6
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label2
+                                text: "Data de Nascimento"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Rectangle {
+                                width: client_edit_page_birthday.width
+                                height: client_edit_page_birthday.height + 6
+                                border.width: 1
+                                border.color: "gray"
+
+                                TextInput {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    id: client_edit_page_birthday
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    selectByMouse: true
+                                    width: client_edit_page_birthday.contentWidth + 6 < 20 ? 20 : client_edit_page_birthday.contentWidth + 6
+                                    x: 3
+                                }
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout7
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label8
+                                text: "Documento RG"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Rectangle {
+                                width: client_edit_page_idDoc.width
+                                height: client_edit_page_idDoc.height + 6
+                                border.width: 1
+                                border.color: "gray"
+
+                                TextInput {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    id: client_edit_page_idDoc
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    selectByMouse: true
+                                    width: client_edit_page_idDoc.contentWidth + 6 < 20 ? 20 : client_edit_page_idDoc.contentWidth + 6
+                                    x: 3
+                                }
+                            }
+                        }
+                    }
+                }
+
+                RowLayout {
+                    id: rowLayout1
+                    width: 100
+                    height: 100
+                    spacing: 10
+
+                    Rectangle {
+                        id: rectangle2
+                        width: 80
+                        //color: "#037BFB"
+                        gradient: Gradient {
+                            GradientStop {
+                                position: 0.0
+                                color: "#4fa3fc"
+                            }
+                            GradientStop {
+                                position: 1.0
+                                color: "#0356b0"
+                            }
+                        }
+                        radius: 8
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 0
+                        anchors.bottomMargin: 0
+
+                        Image {
+                            id: client_edit_page_groupImage_clinicalRecords
+                            width: 80
+                            height: 80
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            source: "images/clinical_data_white_big.png"
+                            mipmap: true
+                        }
+                    }
+
+                    ColumnLayout {
+                        id: columnLayout2
+                        width: parent.width
+                        height: 100
+
+                        ColumnLayout {
+                            id: columnLayout9
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label9
+                                text: "Tipo Sanguíneo"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_bloodtype
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout10
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label4
+                                text: "Idade"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_age
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout11
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label5
+                                text: "Altura"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_height
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+                        ColumnLayout {
+                            id: columnLayout12
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label6
+                                text: "Peso"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_weight
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout13
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label7
+                                text: "IMC"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_imc
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+                        ColumnLayout {
+                            id: columnLayout14
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label18
+                                text: "Grupos de Risco"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_riskGroups
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+                        ColumnLayout {
+                            id: columnLayout15
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label13
+                                text: "Medicamentos Constantes"
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                                height: 15
+                            }
+
+                            Text {
+                                id: client_edit_page_regularlyMedicines
+                                text: "<dummy>"
+                                font.pixelSize: 12
+                                height: 15
+                                x: x + 10
+                            }
+                        }
+
+                        spacing: 5
                     }
                 }
             }

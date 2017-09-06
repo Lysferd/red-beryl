@@ -2,12 +2,11 @@ import QtQuick 2.4
 
 ClientEditForm {
     function updateModel(data) {
-        header_title.text = data.name /*
+        header_title.text = data.name
         code.text = data.code
         dateReg.text = data.dateReg
         birthday.text = data.birthday
         idDoc.text = data.idDoc
-        lastConsultation.text = data.lastConsultation
         bloodtype.text = data.bloodtype
         age.text = data.age
 
@@ -15,7 +14,7 @@ ClientEditForm {
         weight.text = data.weight
         imc.text = data.imc
         riskGroups.text = data.riskGroups
-        regularlyMedicines.text = data.regularlyMedicines */
+        regularlyMedicines.text = data.regularlyMedicines
     }
 
 }
