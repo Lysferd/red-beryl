@@ -19,16 +19,16 @@ Page {
 
     property alias back_button: client_edit_page_header_back_button
 
-    property alias header_title: client_edit_page_header_title
+    property alias client_name: client_edit_page_client_name
     property alias code: client_edit_page_code
     property alias dateReg: client_edit_page_dateReg
     property alias birthday: client_edit_page_birthday
     property alias idDoc: client_edit_page_idDoc
     property alias bloodtype: client_edit_page_bloodtype
-    property alias age: client_edit_page_age
+    //property alias age: client_edit_page_age
     property alias pHeight: client_edit_page_height
     property alias weight: client_edit_page_weight
-    property alias imc: client_edit_page_imc
+    //property alias imc: client_edit_page_imc
     property alias riskGroups: client_edit_page_riskGroups
     property alias regularlyMedicines: client_edit_page_regularlyMedicines
 
@@ -86,7 +86,7 @@ Page {
         ***********************************************************************/
         Text {
             id: client_edit_page_header_title
-            text: "<dummy_edit>"
+            text: "Editar Paciente"
             anchors.topMargin: 16
 
             // Positioning //
@@ -99,10 +99,10 @@ Page {
         }
 
         /***********************************************************************
-            Client Edit Page :: Header :: Edit Button
+            Client Edit Page :: Header :: Cancel Button
         ***********************************************************************/
         Button {
-            id: client_edit_page_header_add_button
+            id: client_edit_page_header_cancel_button
 
             width: parent.height * 0.7
             height: parent.height * 0.9
@@ -115,20 +115,56 @@ Page {
             flat: true
 
             Image {
-                id: client_edit_page_header_add_button_image
+                id: client_edit_page_header_cancel_button_image
 
                 width: parent.height * 0.7
                 height: parent.height * 0.7
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/people_white.png"
+                source: "images/clear_white.png"
                 mipmap: true
             }
 
             ColorOverlay {
-                anchors.fill: client_edit_page_header_add_button_image
-                source: client_edit_page_header_add_button_image
+                anchors.fill: client_edit_page_header_cancel_button_image
+                source: client_edit_page_header_cancel_button_image
+
+                color: "#037BFB"
+            }
+        }
+
+        /***********************************************************************
+            Client Edit Page :: Header :: Done Button
+        ***********************************************************************/
+        Button {
+            id: client_edit_page_header_done_button
+
+            width: parent.height * 0.7
+            height: parent.height * 0.9
+
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.topMargin: parent.height * 0.1
+            anchors.rightMargin: parent.width * 0.16
+
+            flat: true
+
+            Image {
+                id: client_edit_page_header_done_button_image
+
+                width: parent.height * 0.7
+                height: parent.height * 0.7
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                source: "images/done_white.png"
+                mipmap: true
+            }
+
+            ColorOverlay {
+                anchors.fill: client_edit_page_header_done_button_image
+                source: client_edit_page_header_done_button_image
 
                 color: "#037BFB"
             }
@@ -221,6 +257,33 @@ Page {
                         width: parent.width
 
                         ColumnLayout {
+                            id: columnLayout16
+                            width: 100
+                            height: 100
+                            spacing: 0
+
+                            Label {
+                                id: label_name
+                                text: "Nome Completo"
+                                font.capitalization: Font.SmallCaps
+                                fontSizeMode: Text.HorizontalFit
+                                font.bold: true
+                                height: 15
+                                width: client_edit_page_pane.width / 2
+                            }
+
+                            TextField {
+                                id: client_edit_page_client_name
+                                selectionColor: "#00801c"
+                                font.pixelSize: 12
+                                selectByMouse: true
+                                width: client_edit_page_client_name.contentWidth
+                                       < 120 ? 120 : client_edit_page_client_name.contentWidth + 6
+                                placeholderText: "Prontuário"
+                            }
+                        }
+
+                        ColumnLayout {
                             id: columnLayout4
                             width: 100
                             height: 100
@@ -236,17 +299,15 @@ Page {
                                 width: client_edit_page_pane.width / 2
                             }
 
-
-                                TextField {
-                                    id: client_edit_page_code
-                                    selectionColor: "#00801c"
-                                    font.pixelSize: 12
-                                    selectByMouse: true
-                                    width: client_edit_page_code.contentWidth < 120 ? 120 : client_edit_page_code.contentWidth + 6
-                                    placeholderText: "Prontuário"
-                                }
-
-
+                            TextField {
+                                id: client_edit_page_code
+                                selectionColor: "#00801c"
+                                font.pixelSize: 12
+                                selectByMouse: true
+                                width: client_edit_page_code.contentWidth
+                                       < 120 ? 120 : client_edit_page_code.contentWidth + 6
+                                placeholderText: "Prontuário"
+                            }
                         }
 
                         ColumnLayout {
@@ -263,7 +324,6 @@ Page {
                                 height: 15
                             }
 
-
                             TextField {
                                 id: client_edit_page_idDoc
                                 text: "<dummy>"
@@ -271,7 +331,8 @@ Page {
                                 font.pixelSize: 12
                                 height: 15
                                 selectByMouse: true
-                                width: client_edit_page_idDoc.contentWidth < 120 ? 120 : client_edit_page_idDoc.contentWidth
+                                width: client_edit_page_idDoc.contentWidth
+                                       < 120 ? 120 : client_edit_page_idDoc.contentWidth
                             }
                         }
 
@@ -296,9 +357,9 @@ Page {
                                 font.pixelSize: 12
                                 height: 15
                                 selectByMouse: true
-                                width: client_edit_page_birthday.contentWidth < 120 ? 120 : client_edit_page_birthday.contentWidth + 6
+                                width: client_edit_page_birthday.contentWidth
+                                       < 120 ? 120 : client_edit_page_birthday.contentWidth + 6
                             }
-
                         }
 
                         ColumnLayout {
@@ -321,12 +382,10 @@ Page {
                                 font.pixelSize: 12
                                 height: 15
                                 selectByMouse: true
-                                width: client_edit_page_dateReg.contentWidth < 120 ? 120 : client_edit_page_dateReg.contentWidth + 6
+                                width: client_edit_page_dateReg.contentWidth
+                                       < 120 ? 120 : client_edit_page_dateReg.contentWidth + 6
                             }
-
-
                         }
-
                     }
                 }
 
@@ -395,7 +454,7 @@ Page {
                             }
                         }
 
-                        ColumnLayout {
+                        /*ColumnLayout {
                             id: columnLayout10
                             width: 100
                             height: 100
@@ -416,8 +475,7 @@ Page {
                                 font.pixelSize: 12
                                 height: 15
                             }
-                        }
-
+                        }*/
                         ColumnLayout {
                             id: columnLayout11
                             width: 100
@@ -463,7 +521,7 @@ Page {
                             }
                         }
 
-                        ColumnLayout {
+                        /*ColumnLayout {
                             id: columnLayout13
                             width: 100
                             height: 100
@@ -484,7 +542,7 @@ Page {
                                 height: 15
                                 inputMask: "99,99"
                             }
-                        }
+                        }*/
                         ColumnLayout {
                             id: columnLayout14
                             width: 100
@@ -525,12 +583,73 @@ Page {
                                 selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-
                             }
                         }
 
                         spacing: 5
                     }
+                }
+
+                RowLayout {
+                    id: rowLayout2
+                    width: 100
+                    height: 100
+                    Rectangle {
+                        id: rectangle3
+                        width: 80
+                        radius: 8
+                        gradient: Gradient {
+                            GradientStop {
+                                position: 0
+                                color: "#fc4f5b"
+                            }
+
+                            GradientStop {
+                                position: 1
+                                color: "#b0030c"
+                            }
+                        }
+                        anchors.topMargin: 0
+                        anchors.top: parent.top
+                        anchors.bottomMargin: 0
+                        Image {
+                            id: client_edit_page_groupImage_clinicalRecords1
+                            width: 80
+                            height: 80
+                            anchors.verticalCenter: parent.verticalCenter
+                            source: "images/delete_white.png"
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            mipmap: true
+                        }
+                        anchors.bottom: parent.bottom
+                    }
+
+                    ColumnLayout {
+                        id: columnLayout3
+                        width: parent.width
+                        height: 100
+                        ColumnLayout {
+                            id: columnLayout10
+                            width: 100
+                            height: 100
+
+                            Button {
+                                id: delete_button
+                                text: "Excluir paciente"
+                                flat: true
+
+                                contentItem: Text {
+                                    text: delete_button.text
+                                    font: delete_button.font
+                                    color: "#FC0310"
+                                    font.capitalization: Font.Capitalize
+                                }
+                            }
+                            spacing: 0
+                        }
+                        spacing: 5
+                    }
+                    spacing: 10
                 }
             }
 
@@ -538,7 +657,7 @@ Page {
                 id: tumbler
                 x: 427
                 y: 192
-                model: ["O+","O-","A+","A-","B+","B-","AB+","AB-"]
+                model: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
             }
         }
     }

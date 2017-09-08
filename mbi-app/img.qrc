@@ -20,5 +20,8 @@
         <file>images/clinical_data_white_big.png</file>
         <file>images/personal_data_white_big.png</file>
         <file>images/measurement_data_white_big.png</file>
+        <file>images/done_white.png</file>
+        <file>images/delete_white.png</file>
+        <file>images/clear_white.png</file>
     </qresource>
 </RCC>
