@@ -13,14 +13,18 @@ import QtGraphicalEffects 1.0
 Page {
     id: client_detail_page
 
-    //spacing: 0
     font.capitalization: Font.AllLowercase
     font.weight: Font.ExtraLight
 
     anchors.fill: parent
 
+    //
+    // Button Aliases
     property alias back_button: client_detail_page_header_back_button
+    property alias edit_button: client_detail_page_header_edit_button
 
+    //
+    // Client Detail Aliases
     property alias header_title: client_detail_page_header_title
     property alias code: client_detail_page_code
     property alias dateReg: client_detail_page_dateReg
@@ -120,7 +124,7 @@ Page {
             Client Details Page :: Header :: Edit Button
         ***********************************************************************/
         Button {
-            id: client_detail_page_header_add_button
+            id: client_detail_page_header_edit_button
 
             width: parent.height * 0.7
             height: parent.height * 0.9
@@ -133,7 +137,7 @@ Page {
             flat: true
 
             Image {
-                id: client_detail_page_header_add_button_image
+                id: client_detail_page_header_edit_button_image
 
                 width: parent.height * 0.7
                 height: parent.height * 0.7
@@ -145,8 +149,8 @@ Page {
             }
 
             ColorOverlay {
-                anchors.fill: client_detail_page_header_add_button_image
-                source: client_detail_page_header_add_button_image
+                anchors.fill: client_detail_page_header_edit_button_image
+                source: client_detail_page_header_edit_button_image
 
                 color: "#037BFB"
             }

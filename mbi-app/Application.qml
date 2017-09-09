@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 
+import Database 1.0
+
 Page {
     anchors.fill: parent
 
@@ -18,47 +20,57 @@ Page {
         currentIndex: tabmenu.tabBar.currentIndex
 
         Item {
-            Component {
-                id: comp1
 
-                ClientPage {
+            StackView {
+                id: client_stack
+
+                anchors.fill: parent
+
+                focus: true
+
+                initialItem: ClientPage {
                     id: client_page
 
-                    client_page_pane_clientview.onClicked: {
-                        loader1.active = false
-                        loader2.active = true
-                        loader2.item.updateModel(client_page_pane_clientview.model.get(index))
+                    client_list.onClicked: {
+                        var data = client_list.model.get(index)
+
+                        client_detail_page.updateModel(data)
+                        client_stack.push(client_detail_page)
+                    }
+
+                    new_button.onClicked: {
+                        client_stack.push(client_edit_page)
                     }
                 }
-            }
 
-            Component {
-                id: comp2
+                ClientDetailPage {
+                    id: client_detail_page
 
-                //ClientDetailPage {
+                    visible: false
+
+                    edit_button.onClicked: {
+                        client_edit_page.updateModel(client_list.model.get(index))
+                        client_stack.push(client_edit_page)
+                    }
+
+                    back_button.onClicked: client_stack.pop()
+                }
+
                 ClientEdit {
-                    back_button.onClicked: {
-                        loader1.active = true
-                        loader2.active = false
-                    }
+                    id: client_edit_page
+
+                    visible: false
+
+                    cancel_button.onClicked: client_stack.pop()
                 }
-            }
 
-            Loader {
-                id: loader1
-                active: true
-                anchors.fill: parent
-                sourceComponent: comp1
+                Keys.onReleased: if (event.key === Qt.Key_Back && client_stack.depth > 1) {
+                                     client_stack.pop();
+                                     event.accepted = true;
+                                 }
             }
-
-            Loader {
-                id: loader2
-                active: false
-                anchors.fill: parent
-                sourceComponent: comp2
-            }
-
         }
+
         Item { DevicePage {} }
         Item { CloudPage {} }
         Item { SettingsPage {} }

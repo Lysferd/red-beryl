@@ -6,9 +6,6 @@ import QtQuick.Controls.Material 2.2
 SwipeDelegate {
     checkable: true
 
-
-
-
     contentItem: ColumnLayout {
 
         Row {
@@ -29,14 +26,14 @@ SwipeDelegate {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
 
-                    text: capital
+                    text: "A"
                     font.bold: true
                 }
             }
 
             Label {
                 anchors.verticalCenter: parent.verticalCenter
-                text: name
+                text: fullName
             }
         }
     }

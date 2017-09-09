@@ -4,9 +4,6 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 Item {
-    id: page3
-    property alias rectangleHeight: header.height
-    property alias rectangleWidth: header.width
     anchors.fill: parent
 
     Rectangle {

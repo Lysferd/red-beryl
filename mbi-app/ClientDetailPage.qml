@@ -2,20 +2,23 @@ import QtQuick 2.4
 
 ClientDetailPageForm {
     function updateModel(data) {
-        header_title.text = data.name
-        code.text = data.code
-        dateReg.text = data.dateReg
-        birthday.text = data.birthday
-        idDoc.text = data.idDoc
+        header_title.text = data.fullName
+        code.text = data.record
+        dateReg.text = data.registerDate
+        birthday.text = data.birthDate
+        idDoc.text = data.personalId
         lastConsultation.text = data.lastConsultation
-        bloodtype.text = data.bloodtype
-        age.text = data.age
+        bloodtype.text = data.bloodType
+        //age.text = data.age
 
-        pHeight.text = data.pHeight
-        weight.text = data.weight
-        imc.text = data.imc
+        //pHeight.text = data.pHeight
+        //weight.text = data.weight
+        //imc.text = data.imc
+
         riskGroups.text = data.riskGroups
-        regularlyMedicines.text = data.regularlyMedicines
+        regularlyMedicines.text = data.regularMedicines
+
+        /*
         analysis1_bodyLocation.text = data.analysis1_bodyLocation
         analysis1_date.text = data.analysis1_date
         analysis1_values.text = data.analysis1_values
@@ -31,5 +34,6 @@ ClientDetailPageForm {
         analysis5_bodyLocation.text = data.analysis5_bodyLocation
         analysis5_date.text = data.analysis5_date
         analysis5_values.text = data.analysis5_values
+        */
     }
 }

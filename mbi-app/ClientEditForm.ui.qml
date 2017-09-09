@@ -12,23 +12,31 @@ import QtGraphicalEffects 1.0
 Page {
     id: client_edit_page
 
-    //spacing: 0
     font.weight: Font.ExtraLight
 
     anchors.fill: parent
 
-    property alias back_button: client_edit_page_header_back_button
+    //
+    // Button Aliases
+    property alias cancel_button: client_edit_page_header_cancel_button
 
+
+    //
+    // Client Detail Aliases
     property alias client_name: client_edit_page_client_name
     property alias code: client_edit_page_code
     property alias dateReg: client_edit_page_dateReg
     property alias birthday: client_edit_page_birthday
     property alias idDoc: client_edit_page_idDoc
     property alias bloodtype: client_edit_page_bloodtype
+
     //property alias age: client_edit_page_age
+
     property alias pHeight: client_edit_page_height
     property alias weight: client_edit_page_weight
+
     //property alias imc: client_edit_page_imc
+
     property alias riskGroups: client_edit_page_riskGroups
     property alias regularlyMedicines: client_edit_page_regularlyMedicines
 
@@ -46,42 +54,6 @@ Page {
         color: "#F7F7F7"
 
         /***********************************************************************
-            Client Edit Page :: Header :: Back Button
-        ***********************************************************************/
-        Button {
-            id: client_edit_page_header_back_button
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.topMargin: parent.height * 0.1
-            anchors.leftMargin: parent.width * 0.03
-
-            //text: "Voltar"
-            flat: true
-
-            Image {
-                id: client_edit_page_header_back_button_image
-
-                width: parent.height * 0.7
-                height: parent.height * 0.7
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                source: "images/left_arrow_white.png"
-                mipmap: true
-            }
-
-            ColorOverlay {
-                anchors.fill: client_edit_page_header_back_button_image
-                source: client_edit_page_header_back_button_image
-
-                color: "#037BFB"
-            }
-        }
-
-        /***********************************************************************
             Client Edit Page :: Header :: Header Title
         ***********************************************************************/
         Text {
@@ -92,7 +64,7 @@ Page {
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.leftMargin: parent.width * 0.16
+            //anchors.leftMargin: parent.width * 0.16
 
             // Title //
             font.pixelSize: parent.height * 0.5
@@ -592,12 +564,17 @@ Page {
 
                 RowLayout {
                     id: rowLayout2
-                    width: 100
-                    height: 100
+
                     Rectangle {
                         id: rectangle3
+
                         width: 80
                         radius: 8
+
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                        anchors.bottomMargin: 0
+
                         gradient: Gradient {
                             GradientStop {
                                 position: 0
@@ -609,13 +586,11 @@ Page {
                                 color: "#b0030c"
                             }
                         }
-                        anchors.topMargin: 0
-                        anchors.top: parent.top
-                        anchors.bottomMargin: 0
+
                         Image {
                             id: client_edit_page_groupImage_clinicalRecords1
-                            width: 80
-                            height: 80
+                            width: 40
+                            height: 40
                             anchors.verticalCenter: parent.verticalCenter
                             source: "images/delete_white.png"
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -628,24 +603,22 @@ Page {
                         id: columnLayout3
                         width: parent.width
                         height: 100
-                        ColumnLayout {
-                            id: columnLayout10
-                            width: 100
-                            height: 100
 
-                            Button {
-                                id: delete_button
-                                text: "Excluir paciente"
-                                flat: true
+                        Button {
+                            id: delete_button
 
-                                contentItem: Text {
-                                    text: delete_button.text
-                                    font: delete_button.font
-                                    color: "#FC0310"
-                                    font.capitalization: Font.Capitalize
-                                }
+                            text: "Excluir paciente"
+                            font.capitalization: Font.Capitalize
+                            flat: true
+
+                            contentItem: Text {
+                                text: delete_button.text
+                                font: delete_button.font
+                                color: "#FC0310"
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                elide: Text.ElideRight
                             }
-                            spacing: 0
                         }
                         spacing: 5
                     }

@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import Database 1.0
 
 ListView {
     id: client_page_pane_listview
@@ -8,9 +9,9 @@ ListView {
     signal clicked(int index)
 
     ScrollIndicator.vertical: ScrollIndicator { }
-    model: ClientModel { }
+    model: DataModel { }
     delegate: ClientDelegate {
-        id: client_page_pane_listview_clientdelegate
+        id: delegate
         width: parent.width
         height: 36
 
@@ -21,7 +22,7 @@ ListView {
             color: SwipeDelegate.pressed ? "#555" : "#666"
             Label {
                    font.family: "Fontello"
-                   text: client_page_pane_listview_clientdelegate.swipe.complete ? "\ue805" // icon-cw-circled
+                   text: delegate.swipe.complete ? "\ue805" // icon-cw-circled
                                                  : "\ue801" // icon-cancel-circled-1
 
                    padding: 20
@@ -29,9 +30,9 @@ ListView {
                    horizontalAlignment: Qt.AlignRight
                    verticalAlignment: Qt.AlignVCenter
 
-                   opacity: 2 * -client_page_pane_listview_clientdelegate.swipe.position
+                   opacity: 2 * -delegate.swipe.position
 
-                   color: Material.color(client_page_pane_listview_clientdelegate.swipe.complete ? Material.Green : Material.Red, Material.Shade200)
+                   color: Material.color(delegate.swipe.complete ? Material.Green : Material.Red, Material.Shade200)
                    Behavior on color { ColorAnimation { } }
                }
 
@@ -44,11 +45,11 @@ ListView {
                    horizontalAlignment: Qt.AlignLeft
                    verticalAlignment: Qt.AlignVCenter
 
-                   opacity: client_page_pane_listview_clientdelegate.swipe.complete ? 1 : 0
+                   opacity: delegate.swipe.complete ? 1 : 0
                    Behavior on opacity { NumberAnimation { } }
                }
 
-               SwipeDelegate.onClicked: client_page_pane_listview_clientdelegate.swipe.close()
+               SwipeDelegate.onClicked: delegate.swipe.close()
                SwipeDelegate.onPressedChanged: undoTimer.stop()
         }
 
@@ -69,7 +70,7 @@ ListView {
         }
 
         Connections {
-            target: client_page_pane_listview_clientdelegate
+            target: delegate
             onClicked: client_page_pane_listview.clicked(index)
         }
     }

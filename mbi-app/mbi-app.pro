@@ -1,4 +1,4 @@
-QT += qml quick bluetooth sql
+QT += charts qml quick widgets bluetooth sql
 
 CONFIG += c++11
 
@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     devicefinder.cpp \
     deviceinfo.cpp \
     devicehandler.cpp \
-    connectionhandler.cpp
+    connectionhandler.cpp \
+    clientmodel.cpp
 
 RESOURCES += qml.qrc \
     img.qrc
@@ -48,7 +49,7 @@ HEADERS += bluetooth.h \
     devicefinder.h \
     deviceinfo.h \
     devicehandler.h \
-    connectionhandler.h
+    connectionhandler.h \
+    clientmodel.h
 
-DISTFILES += \
-    DetailDelegate.ui.qml
+DISTFILES +=
