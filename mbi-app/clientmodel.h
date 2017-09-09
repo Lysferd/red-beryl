@@ -5,8 +5,6 @@
 #include <QtSql>
 #include <QSqlQueryModel>
 
-# define a
-
 class ClientModel : public QAbstractListModel
 {
     Q_OBJECT
