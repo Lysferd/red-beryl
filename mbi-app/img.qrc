@@ -23,5 +23,6 @@
         <file>images/done_white.png</file>
         <file>images/delete_white.png</file>
         <file>images/clear_white.png</file>
+        <file>images/chip_white.png</file>
     </qresource>
 </RCC>

@@ -18,132 +18,405 @@ Item {
         anchors.fill: parent
         color: "#ffffff"
 
-        ListView {
-            id: listView
-            width: parent.width * 0.9
-            height: parent.height * 0.9
-            anchors.top: parent.top
-            anchors.topMargin: 70
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+        Pane {
+            id: client_detail_page_pane
+            x: 32
+            y: 70
 
-            //model: deviceFinder.devices
-            model: ListModel {
-                ListElement {
-                    name: "Device1"
-                    baudRate: "9600"
-                    macAddress: "sl.af.ak.fd.kf.ad"
-                    version: "1.4"
-                    password: "12345"
-                }
-                ListElement {
-                    name: "Brey"
-                    baudRate: "9600"
-                    macAddress: "iu.yw.go.ih.oi.u5"
-                    version: "1.2"
-                    password: "12345"
-                }
-                ListElement {
-                    name: "Crey"
-                    baudRate: "9600"
-                    macAddress: "iu.yw.go.ih.oi.u5"
-                    version: "1.2"
-                    password: "12345"
-                }
-                ListElement {
-                    name: "Drey"
-                    baudRate: "9600"
-                    macAddress: "iu.yw.go.ih.oi.u5"
-                    version: "1.2"
-                    password: "12345"
-                }
+            anchors.fill: parent
+            anchors.top: parent.top
+            anchors.topMargin: parent.height * 0.1
+            background: Rectangle {
+                color: "white"
             }
 
-            delegate: Item {
-                id: box
-                width: parent.width
-                height: 100
+            Flickable {
+                id: client_detail_page_pane_flickable
 
-                Rectangle {
-                    width: parent.width
-                    height: 90
-                    radius: 6
-                    color: "#037BFB"
+                anchors.fill: parent
+                height: parent.height - 10
+                flickableDirection: Flickable.VerticalFlick
+                contentHeight: columnLayout.height
 
-                    Column{
-                        width: parent.width
-                        height: parent.height
-                        anchors.left: parent.left
-                        anchors.leftMargin: 10
-                        anchors.top: parent.top
-                        anchors.topMargin: 3
-                        spacing: 3
+                ScrollIndicator.vertical: ScrollIndicator {
+                }
 
-                        Row {
-                            id: row
-                            spacing: 15
-                            //width: parent.width
-                            //height: parent.height * 0.5
+                ColumnLayout {
+                    id: columnLayout
+                    anchors.right: parent.right
+                    anchors.left: parent.left
+                    spacing: 15
+                    anchors.rightMargin: 8
+                    anchors.leftMargin: 8
 
-                            Text {
-                                text: "Nome:" //modelData.deviceName
-                                //anchors.verticalCenter: parent.verticalCenter
-                                color: "#FFFFFF"
+                    RowLayout {
+                        id: rowLayout
+                        width: 100
+                        height: 100
+                        spacing: 10
+
+                        Rectangle {
+                            id: rectangle
+                            width: 80
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.topMargin: 0
+                            anchors.bottomMargin: 0
+
+                            //color: "#037BFB"
+                            gradient: Gradient {
+                                GradientStop { position: 0.0; color: "#4fa3fc" }
+                                GradientStop { position: 1.0; color: "#0356b0" }
                             }
+                            radius: 8
 
-                            Text {
-                                text: name //modelData.deviceName
-                                //anchors.verticalCenter: parent.verticalCenter
-                                color: "#FFFFFF"
-                            }
-
-                            Text {
-                                text: macAddress //modelData.deviceAddress
-                                //anchors.verticalCenter: parent.verticalCenter
-                                color: "#FFFFFF"
+                            Image {
+                                id: client_detail_page_groupImage_clients
+                                width: 80
+                                height: 80
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                source: "images/chip_white.png"
+                                mipmap: true
                             }
                         }
 
-                        Row {
-                            spacing: 15
-                            Text {
-                                text: "Versão:"
-                                color: "#FFFFFF"
+                        ColumnLayout {
+                            id: columnLayout1
+                            height: 100
+                            spacing: 9
+                            width: parent.width
+
+                            ColumnLayout {
+                                id: columnLayout4
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label
+                                    text: "Nome do Dispositivo:"
+                                    font.capitalization: Font.SmallCaps
+                                    fontSizeMode: Text.HorizontalFit
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_code
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
                             }
-                            Text {
-                                text: version //modelData.deviceAddress
-                                //anchors.verticalCenter: parent.verticalCenter
-                                color: "#FFFFFF"
+
+                            ColumnLayout {
+                                id: columnLayout5
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label1
+                                    text: "Versão do software:"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_dateReg
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+                            }
+                            ColumnLayout {
+                                id: columnLayout6
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label2
+                                    text: "Versão do hardware:"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_birthday
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+                            }
+
+                            ColumnLayout {
+                                id: columnLayout7
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label8
+                                    text: "Baudrate:"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_idDoc
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+                            }
+
+                            ColumnLayout {
+                                id: columnLayout8
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label19
+                                    text: "Password:"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_lastConsultation
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
                             }
                         }
-                        Row {
-                            spacing: 15
-                            Text {
-                                text: "BaudRate:"
-                                color: "#FFFFFF"
+                    }
+
+                    RowLayout {
+                        id: rowLayout1
+                        width: 100
+                        height: 100
+                        spacing: 10
+
+                        Rectangle {
+                            id: rectangle2
+                            width: 80
+                            //color: "#037BFB"
+                            gradient: Gradient {
+                                GradientStop { position: 0.0; color: "#4fa3fc" }
+                                GradientStop { position: 1.0; color: "#0356b0" }
                             }
-                            Text {
-                                text: baudRate //modelData.deviceAddress
-                                //anchors.verticalCenter: parent.verticalCenter
-                                color: "#FFFFFF"
+                            radius: 8
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.topMargin: 0
+                            anchors.bottomMargin: 0
+
+                            Image {
+                                id: client_detail_page_groupImage_clinicalRecords
+                                width: 80
+                                height: 80
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                source: "images/clinical_data_white_big.png"
+                                mipmap: true
                             }
                         }
-                        Row {
-                            spacing: 15
-                            Text {
-                                text: "Password:"
-                                color: "#FFFFFF"
+
+                        ColumnLayout {
+                            id: columnLayout2
+                            width: parent.width
+                            height: 100
+
+                            ColumnLayout {
+                                id: columnLayout9
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label9
+                                    text: "Tipo Sanguíneo"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_bloodtype
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
                             }
-                            Text {
-                                text: password //modelData.deviceAddress
-                                //anchors.verticalCenter: parent.verticalCenter
-                                color: "#FFFFFF"
+
+                            ColumnLayout {
+                                id: columnLayout10
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label4
+                                    text: "Idade"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_age
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+
+
                             }
+
+                            ColumnLayout {
+                                id: columnLayout11
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label5
+                                    text: "Altura"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_height
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+
+
+                            }
+                            ColumnLayout {
+                                id: columnLayout12
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label6
+                                    text: "Peso"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_weight
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+
+
+                            }
+
+                            ColumnLayout {
+                                id: columnLayout13
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label7
+                                    text: "IMC"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_imc
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+
+
+                            }
+                            ColumnLayout {
+                                id: columnLayout14
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label18
+                                    text: "Grupos de Risco"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_riskGroups
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+
+
+                            }
+                            ColumnLayout {
+                                id: columnLayout15
+                                width: 100
+                                height: 100
+                                spacing: 0
+
+                                Label {
+                                    id: label13
+                                    text: "Medicamentos Constantes"
+                                    font.capitalization: Font.SmallCaps
+                                    font.bold: true
+                                    height: 15
+                                }
+
+                                Text {
+                                    id: client_detail_page_regularlyMedicines
+                                    text: "<dummy>"
+                                    font.pixelSize: 12
+                                    height: 15
+                                    x: x + 10
+                                }
+
+
+                            }
+
+                            spacing: 5
                         }
                     }
                 }
             }
         }
+
     }
 
     Rectangle {

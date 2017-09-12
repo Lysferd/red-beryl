@@ -15,13 +15,8 @@ Page {
     font.weight: Font.ExtraLight
 
     anchors.fill: parent
-
-    //
     // Button Aliases
     property alias cancel_button: client_edit_page_header_cancel_button
-
-
-    //
     // Client Detail Aliases
     property alias client_name: client_edit_page_client_name
     property alias code: client_edit_page_code
@@ -31,12 +26,10 @@ Page {
     property alias bloodtype: client_edit_page_bloodtype
 
     //property alias age: client_edit_page_age
-
     property alias pHeight: client_edit_page_height
     property alias weight: client_edit_page_weight
 
     //property alias imc: client_edit_page_imc
-
     property alias riskGroups: client_edit_page_riskGroups
     property alias regularlyMedicines: client_edit_page_regularlyMedicines
 
@@ -251,7 +244,7 @@ Page {
                                 selectByMouse: true
                                 width: client_edit_page_client_name.contentWidth
                                        < 120 ? 120 : client_edit_page_client_name.contentWidth + 6
-                                placeholderText: "Prontuário"
+                                placeholderText: "Nome Completo"
                             }
                         }
 
@@ -417,12 +410,12 @@ Page {
                                 height: 15
                             }
 
-                            TextField {
+                            ComboBox {
                                 id: client_edit_page_bloodtype
-                                selectByMouse: true
-                                inputMask: "AX"
-                                font.pixelSize: 12
-                                height: 15
+                                width: 120
+                                height: 37
+
+                                model: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
                             }
                         }
 
@@ -624,13 +617,6 @@ Page {
                     }
                     spacing: 10
                 }
-            }
-
-            Tumbler {
-                id: tumbler
-                x: 427
-                y: 192
-                model: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
             }
         }
     }
