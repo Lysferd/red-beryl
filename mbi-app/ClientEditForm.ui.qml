@@ -291,7 +291,7 @@ Page {
 
                             TextField {
                                 id: client_edit_page_idDoc
-                                text: "<dummy>"
+                                text: ""
                                 inputMask: "999.999.999-99"
                                 font.pixelSize: 12
                                 height: 15
@@ -318,7 +318,7 @@ Page {
                             TextField {
                                 id: client_edit_page_birthday
                                 inputMask: "99/99/9999"
-                                text: "<dummy>"
+                                text: ""
                                 font.pixelSize: 12
                                 height: 15
                                 selectByMouse: true
@@ -346,6 +346,7 @@ Page {
                                 id: client_edit_page_dateReg
                                 font.pixelSize: 12
                                 height: 15
+                                text: ""
                                 selectByMouse: true
                                 width: client_edit_page_dateReg.contentWidth
                                        < 120 ? 120 : client_edit_page_dateReg.contentWidth + 6
@@ -460,6 +461,7 @@ Page {
                                 selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
+                                text: ""
                                 inputMask: "9,99 m"
                             }
                         }
@@ -482,6 +484,7 @@ Page {
                                 selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
+                                text: ""
                                 inputMask: "D00 Kg"
                             }
                         }

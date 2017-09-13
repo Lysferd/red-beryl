@@ -65,8 +65,14 @@ Item {
 
                             //color: "#037BFB"
                             gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#4fa3fc" }
-                                GradientStop { position: 1.0; color: "#0356b0" }
+                                GradientStop {
+                                    position: 0.0
+                                    color: "#4fa3fc"
+                                }
+                                GradientStop {
+                                    position: 1.0
+                                    color: "#0356b0"
+                                }
                             }
                             radius: 8
 
@@ -201,222 +207,62 @@ Item {
                                     x: x + 10
                                 }
                             }
-                        }
-                    }
 
-                    RowLayout {
-                        id: rowLayout1
-                        width: 100
-                        height: 100
-                        spacing: 10
-
-                        Rectangle {
-                            id: rectangle2
-                            width: 80
-                            //color: "#037BFB"
-                            gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#4fa3fc" }
-                                GradientStop { position: 1.0; color: "#0356b0" }
-                            }
-                            radius: 8
-                            anchors.top: parent.top
-                            anchors.bottom: parent.bottom
-                            anchors.topMargin: 0
-                            anchors.bottomMargin: 0
-
-                            Image {
-                                id: client_detail_page_groupImage_clinicalRecords
-                                width: 80
-                                height: 80
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                source: "images/clinical_data_white_big.png"
-                                mipmap: true
-                            }
-                        }
-
-                        ColumnLayout {
-                            id: columnLayout2
-                            width: parent.width
-                            height: 100
-
-                            ColumnLayout {
-                                id: columnLayout9
-                                width: 100
+                            RowLayout {
+                                id: rowLayout2
+                                width: parent.width
                                 height: 100
-                                spacing: 0
 
-                                Label {
-                                    id: label9
-                                    text: "Tipo Sanguíneo"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
+                                Button {
+                                    id: device_page_form_button1
+                                    flat: true
+                                    text: "Sincronizar"
+
+                                    contentItem: Text {
+                                        text: device_page_form_button1.text
+                                        font: device_page_form_button1.font
+                                        //color: "#FC0310"
+                                        horizontalAlignment: Text.AlignHCenter
+                                        verticalAlignment: Text.AlignVCenter
+                                        elide: Text.ElideRight
+                                    }
                                 }
 
-                                Text {
-                                    id: client_detail_page_bloodtype
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
+                                Button {
+                                    id: device_page_form_button2
+                                    flat: true
+                                    text: "Detalhes"
+
+                                    contentItem: Text {
+                                        text: device_page_form_button2.text
+                                        font: device_page_form_button2.font
+                                        //color: "#FC0310"
+                                        horizontalAlignment: Text.AlignHCenter
+                                        verticalAlignment: Text.AlignVCenter
+                                        elide: Text.ElideRight
+                                    }
+                                }
+
+                                Button {
+                                    id: device_page_form_button3
+                                    flat: true
+                                    text: "Desparear"
+
+                                    contentItem: Text {
+                                        text: device_page_form_button3.text
+                                        font: device_page_form_button3.font
+                                        color: "#FC0310"
+                                        horizontalAlignment: Text.AlignHCenter
+                                        verticalAlignment: Text.AlignVCenter
+                                        elide: Text.ElideRight
+                                    }
                                 }
                             }
-
-                            ColumnLayout {
-                                id: columnLayout10
-                                width: 100
-                                height: 100
-                                spacing: 0
-
-                                Label {
-                                    id: label4
-                                    text: "Idade"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
-                                }
-
-                                Text {
-                                    id: client_detail_page_age
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
-                                }
-
-
-                            }
-
-                            ColumnLayout {
-                                id: columnLayout11
-                                width: 100
-                                height: 100
-                                spacing: 0
-
-                                Label {
-                                    id: label5
-                                    text: "Altura"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
-                                }
-
-                                Text {
-                                    id: client_detail_page_height
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
-                                }
-
-
-                            }
-                            ColumnLayout {
-                                id: columnLayout12
-                                width: 100
-                                height: 100
-                                spacing: 0
-
-                                Label {
-                                    id: label6
-                                    text: "Peso"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
-                                }
-
-                                Text {
-                                    id: client_detail_page_weight
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
-                                }
-
-
-                            }
-
-                            ColumnLayout {
-                                id: columnLayout13
-                                width: 100
-                                height: 100
-                                spacing: 0
-
-                                Label {
-                                    id: label7
-                                    text: "IMC"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
-                                }
-
-                                Text {
-                                    id: client_detail_page_imc
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
-                                }
-
-
-                            }
-                            ColumnLayout {
-                                id: columnLayout14
-                                width: 100
-                                height: 100
-                                spacing: 0
-
-                                Label {
-                                    id: label18
-                                    text: "Grupos de Risco"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
-                                }
-
-                                Text {
-                                    id: client_detail_page_riskGroups
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
-                                }
-
-
-                            }
-                            ColumnLayout {
-                                id: columnLayout15
-                                width: 100
-                                height: 100
-                                spacing: 0
-
-                                Label {
-                                    id: label13
-                                    text: "Medicamentos Constantes"
-                                    font.capitalization: Font.SmallCaps
-                                    font.bold: true
-                                    height: 15
-                                }
-
-                                Text {
-                                    id: client_detail_page_regularlyMedicines
-                                    text: "<dummy>"
-                                    font.pixelSize: 12
-                                    height: 15
-                                    x: x + 10
-                                }
-
-
-                            }
-
-                            spacing: 5
                         }
                     }
                 }
             }
         }
-
     }
 
     Rectangle {
