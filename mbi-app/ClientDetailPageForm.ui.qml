@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
-
 /*******************************************************************************
   Client Detail Page
 
@@ -15,8 +14,9 @@ Page {
 
     font.capitalization: Font.AllLowercase
     font.weight: Font.ExtraLight
-
     anchors.fill: parent
+
+    property int index
 
     //
     // Button Aliases
@@ -38,6 +38,7 @@ Page {
     property alias imc: client_detail_page_imc
     property alias riskGroups: client_detail_page_riskGroups
     property alias regularlyMedicines: client_detail_page_regularlyMedicines
+
     property alias analysis1_bodyLocation: client_detail_page_analysis1_bodyLocation
     property alias analysis1_date: client_detail_page_analysis1_date
     property alias analysis1_values: client_detail_page_analysis1_values
@@ -79,8 +80,6 @@ Page {
             anchors.left: parent.left
             anchors.topMargin: parent.height * 0.1
             anchors.leftMargin: parent.width * 0.03
-
-            //text: "Voltar"
             flat: true
 
             Image {

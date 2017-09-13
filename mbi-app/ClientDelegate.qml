@@ -25,7 +25,6 @@ SwipeDelegate {
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
-
                     text: "A"
                     font.bold: true
                 }

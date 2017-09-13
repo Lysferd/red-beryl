@@ -51,5 +51,3 @@ HEADERS += bluetooth.h \
     devicehandler.h \
     connectionhandler.h \
     clientmodel.h
-
-DISTFILES +=

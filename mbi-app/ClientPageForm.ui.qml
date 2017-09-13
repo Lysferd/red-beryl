@@ -13,10 +13,9 @@ Page {
     id: client_page
     anchors.fill: parent
 
-    property alias client_page: client_page
+    property alias new_button: client_page_header_add_button
     property alias client_list: client_page_pane_clientview
 
-    property alias new_button: client_page_header_add_button
 
     /***************************************************************************
         Client Page :: Header
@@ -141,9 +140,6 @@ Page {
         anchors.fill: parent
         background: Rectangle { color: "white" }
 
-        /***********************************************************************
-            Client Page :: Pane :: List View
-        ***********************************************************************/
         ClientView {
             id: client_page_pane_clientview
         }

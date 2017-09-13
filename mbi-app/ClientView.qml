@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import Database 1.0
+import "."
 
 ListView {
     id: client_page_pane_listview
@@ -9,7 +9,7 @@ ListView {
     signal clicked(int index)
 
     ScrollIndicator.vertical: ScrollIndicator { }
-    model: DataModel { }
+    model: DataModel
     delegate: ClientDelegate {
         id: delegate
         width: parent.width

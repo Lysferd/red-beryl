@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 
-import Database 1.0
+import "."
 
 Page {
     anchors.fill: parent
@@ -15,6 +15,8 @@ Page {
 
     function init() { opacity = 1.0 }
 
+    //
+    // LAYOUT IS BELOW
     StackLayout {
         anchors.fill: parent
         currentIndex: tabmenu.tabBar.currentIndex
@@ -25,49 +27,39 @@ Page {
                 id: client_stack
 
                 anchors.fill: parent
-
                 focus: true
 
                 initialItem: ClientPage {
                     id: client_page
 
                     client_list.onClicked: {
-                        var data = client_list.model.get(index)
-
-                        client_detail_page.updateModel(data)
+                        client_detail_page.updateModel(DataModel, index)
                         client_stack.push(client_detail_page)
                     }
 
                     new_button.onClicked: {
+                        client_edit_page.clean()
                         client_stack.push(client_edit_page)
                     }
                 }
 
                 ClientDetailPage {
                     id: client_detail_page
-
                     visible: false
 
                     edit_button.onClicked: {
-                        client_edit_page.updateModel(client_list.model.get(index))
+                        client_edit_page.updateModel(DataModel, index)
                         client_stack.push(client_edit_page)
                     }
 
                     back_button.onClicked: client_stack.pop()
                 }
 
-                ClientEdit {
+                ClientEditPage {
                     id: client_edit_page
-
                     visible: false
-
                     cancel_button.onClicked: client_stack.pop()
                 }
-
-                Keys.onReleased: if (event.key === Qt.Key_Back && client_stack.depth > 1) {
-                                     client_stack.pop();
-                                     event.accepted = true;
-                                 }
             }
         }
 

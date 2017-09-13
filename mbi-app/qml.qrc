@@ -22,8 +22,9 @@
         <file>Application.qml</file>
         <file>ClientDetailPage.qml</file>
         <file>ClientDetailPageForm.ui.qml</file>
-        <file>DetailView.qml</file>
-        <file>ClientEdit.qml</file>
-        <file>ClientEditForm.ui.qml</file>
+        <file>ClientEditPage.qml</file>
+        <file>ClientEditPageForm.ui.qml</file>
+        <file>Database.qml</file>
+        <file>qmldir</file>
     </qresource>
 </RCC>

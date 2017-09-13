@@ -1,7 +1,10 @@
 import QtQuick 2.4
 
 ClientDetailPageForm {
-    function updateModel(data) {
+    function updateModel(model, i) {
+        index = i
+        var data = model.get(i)
+
         header_title.text = data.fullName
         code.text = data.record
         dateReg.text = data.registerDate
