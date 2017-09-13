@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
+
 /*******************************************************************************
 
   Client Edit Page
@@ -13,12 +14,8 @@ Page {
 
     font.weight: Font.ExtraLight
     anchors.fill: parent
-
-    //
     // Button Aliases
     property alias cancel_button: client_edit_page_header_cancel_button
-
-    //
     // Client Detail Aliases
     property alias client_name: client_edit_page_client_name
     property alias code: client_edit_page_code
@@ -27,13 +24,13 @@ Page {
     property alias idDoc: client_edit_page_idDoc
     property alias bloodtype: client_edit_page_bloodtype
 
-    //property alias age: client_edit_page_age
 
+    //property alias age: client_edit_page_age
     property alias pHeight: client_edit_page_height
     property alias weight: client_edit_page_weight
 
-    //property alias imc: client_edit_page_imc
 
+    //property alias imc: client_edit_page_imc
     property alias riskGroups: client_edit_page_riskGroups
     property alias regularlyMedicines: client_edit_page_regularlyMedicines
 
@@ -170,7 +167,8 @@ Page {
             flickableDirection: Flickable.VerticalFlick
             contentHeight: columnLayout.height
 
-            ScrollIndicator.vertical: ScrollIndicator { }
+            ScrollIndicator.vertical: ScrollIndicator {
+            }
 
             ColumnLayout {
                 id: columnLayout
@@ -238,7 +236,7 @@ Page {
 
                             Label {
                                 id: label_name
-                                text: "Nome Completo"
+                                text: "Primeiro Nome"
                                 font.capitalization: Font.SmallCaps
                                 fontSizeMode: Text.HorizontalFit
                                 font.bold: true
@@ -249,14 +247,64 @@ Page {
                             TextField {
                                 id: client_edit_page_client_name
 
-                                text: "derp"
-
                                 selectionColor: "#00801c"
                                 font.pixelSize: 12
                                 selectByMouse: true
                                 width: client_edit_page_client_name.contentWidth
                                        < 120 ? 120 : client_edit_page_client_name.contentWidth + 6
-                                placeholderText: "Prontuário"
+                                placeholderText: "Primeiro nome"
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout17
+                            width: 100
+                            height: 100
+                            spacing: 0
+                            Label {
+                                id: label_name1
+                                width: client_edit_page_pane.width / 2
+                                height: 15
+                                text: "Nome do Meio"
+                                font.bold: true
+                                fontSizeMode: Text.HorizontalFit
+                                font.capitalization: Font.SmallCaps
+                            }
+
+                            TextField {
+                                id: client_edit_page_client_name1
+                                width: client_edit_page_client_name1.contentWidth
+                                       < 120 ? 120 : client_edit_page_client_name1.contentWidth + 6
+                                placeholderText: "Nome do meio"
+                                selectionColor: "#00801c"
+                                selectByMouse: true
+                                font.pixelSize: 12
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout18
+                            width: 100
+                            height: 100
+                            spacing: 0
+                            Label {
+                                id: label_name2
+                                width: client_edit_page_pane.width / 2
+                                height: 15
+                                text: "Sobrenome"
+                                font.bold: true
+                                fontSizeMode: Text.HorizontalFit
+                                font.capitalization: Font.SmallCaps
+                            }
+
+                            TextField {
+                                id: client_edit_page_client_name2
+                                width: client_edit_page_client_name2.contentWidth
+                                       < 120 ? 120 : client_edit_page_client_name2.contentWidth + 6
+                                placeholderText: "Sobrenome"
+                                selectionColor: "#00801c"
+                                selectByMouse: true
+                                font.pixelSize: 12
                             }
                         }
 
