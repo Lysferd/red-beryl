@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
+
 /*******************************************************************************
   Client Page
 
@@ -16,7 +17,6 @@ Page {
     property alias new_button: client_page_header_add_button
     property alias client_list: client_page_pane_clientview
 
-
     /***************************************************************************
         Client Page :: Header
     ***************************************************************************/
@@ -30,18 +30,27 @@ Page {
         // Background Color //
         color: "#F7F7F7"
 
+
+        //Ruler - Red horizontal Line
+        /*Rectangle {
+            width: parent.width
+            height: 1
+            color: "red"
+            anchors.verticalCenter: parent.verticalCenter
+            z: 1
+        }*/
         Text {
             id: client_page_header_title
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.topMargin: parent.height * 0.2
-            anchors.leftMargin: parent.width * 0.03
+            anchors.topMargin: 10
+            anchors.leftMargin: 20
 
             // Title //
-            text: qsTr("Pacientes")
-            font.pixelSize: parent.height * 0.5
+            text: "Pacientes"
+            font.pixelSize: 30
         }
 
         /***********************************************************************
@@ -52,13 +61,13 @@ Page {
 
             // Positioning //
             anchors.top: parent.top
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.rightMargin: parent.width * 0.15
+            anchors.rightMargin: 20 + 28 + 25
 
             // Sizes //
-            width: parent.height * 0.7
-            height: parent.height * 0.9
+            width: 44
+            height: 56
 
             // Flat button //
             flat: true
@@ -66,8 +75,8 @@ Page {
             Image {
                 id: client_page_header_search_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -89,21 +98,24 @@ Page {
         Button {
             id: client_page_header_add_button
 
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.topMargin: parent.height * 0.1
-            anchors.rightMargin: parent.width * 0.03
+            anchors.rightMargin: 20
 
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_page_header_add_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -138,7 +150,9 @@ Page {
         id: client_page_pane
 
         anchors.fill: parent
-        background: Rectangle { color: "white" }
+        background: Rectangle {
+            color: "white"
+        }
 
         ClientView {
             id: client_page_pane_clientview

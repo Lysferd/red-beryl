@@ -24,11 +24,9 @@ Page {
     property alias idDoc: client_edit_page_idDoc
     property alias bloodtype: client_edit_page_bloodtype
 
-
     //property alias age: client_edit_page_age
     property alias pHeight: client_edit_page_height
     property alias weight: client_edit_page_weight
-
 
     //property alias imc: client_edit_page_imc
     property alias riskGroups: client_edit_page_riskGroups
@@ -47,21 +45,30 @@ Page {
         // Background Color //
         color: "#F7F7F7"
 
+        //Ruler - Red horizontal Line
+        /*Rectangle {
+            width: parent.width
+            height: 1
+            color: "red"
+            anchors.verticalCenter: parent.verticalCenter
+            z: 1
+        }*/
+
         /***********************************************************************
             Client Edit Page :: Header :: Header Title
         ***********************************************************************/
         Text {
             id: client_edit_page_header_title
-            text: "Editar Paciente"
-            anchors.topMargin: 16
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            //anchors.leftMargin: parent.width * 0.16
+            anchors.topMargin: 10
+            anchors.leftMargin: 20
 
             // Title //
-            font.pixelSize: parent.height * 0.5
+            text: "<edit>"
+            font.pixelSize: 30
         }
 
         /***********************************************************************
@@ -70,21 +77,24 @@ Page {
         Button {
             id: client_edit_page_header_cancel_button
 
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.topMargin: parent.height * 0.1
-            anchors.rightMargin: parent.width * 0.03
+            anchors.rightMargin: 20
 
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_edit_page_header_cancel_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -106,21 +116,24 @@ Page {
         Button {
             id: client_edit_page_header_done_button
 
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.topMargin: parent.height * 0.1
-            anchors.rightMargin: parent.width * 0.16
+            anchors.rightMargin: 20 + 28 + 25
 
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_edit_page_header_done_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 

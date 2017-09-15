@@ -111,7 +111,7 @@ Page {
             anchors.fill: parent
             height: parent.height - 10
             flickableDirection: Flickable.VerticalFlick
-            contentHeight: columnLayout.height
+            contentHeight: parent.height
 
             ScrollIndicator.vertical: ScrollIndicator {
             }
@@ -511,11 +511,261 @@ Page {
                 }
 
                 Rectangle {
-                    id: rectangle_line6
+                    id: rectangle_row7
                     width: parent.width
-                    height: 2
-                    color: "lightgray"
+                    height: 40
+                    color: "#00000000"
                     Layout.fillWidth: true
+                    Rectangle {
+                        id: rectangle7
+                        width: 30
+                        height: 30
+                        color: "#00000000"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 30
+                        Image {
+                            id: option6_image1
+                            anchors.fill: parent
+                            Layout.fillHeight: true
+                            source: "images/chip_white.png"
+                        }
+
+                        ColorOverlay {
+                            x: 205
+                            y: -50
+                            color: "#037bfb"
+                            anchors.fill: option6_image1
+                            Layout.fillHeight: false
+                            source: option6_image1
+                        }
+                        anchors.left: parent.left
+                    }
+
+                    Button {
+                        id: button3
+                        width: 160
+                        height: 40
+                        text: "Opção 7"
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: -2
+                        anchors.horizontalCenterOffset: 30
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Rectangle {
+                    id: rectangle_row8
+                    width: parent.width
+                    height: 40
+                    color: "#00000000"
+                    Layout.fillWidth: true
+                    Rectangle {
+                        id: rectangle8
+                        width: 30
+                        height: 30
+                        color: "#00000000"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 30
+                        Image {
+                            id: option6_image2
+                            anchors.fill: parent
+                            Layout.fillHeight: true
+                            source: "images/chip_white.png"
+                        }
+
+                        ColorOverlay {
+                            x: 205
+                            y: -50
+                            color: "#037bfb"
+                            anchors.fill: option6_image2
+                            Layout.fillHeight: false
+                            source: option6_image2
+                        }
+                        anchors.left: parent.left
+                    }
+
+                    Button {
+                        id: button4
+                        width: 160
+                        height: 40
+                        text: "Opção 8"
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: -2
+                        anchors.horizontalCenterOffset: 30
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Rectangle {
+                    id: rectangle_row9
+                    width: parent.width
+                    height: 40
+                    color: "#00000000"
+                    Layout.fillWidth: true
+                    Rectangle {
+                        id: rectangle9
+                        width: 30
+                        height: 30
+                        color: "#00000000"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 30
+                        Image {
+                            id: option6_image3
+                            anchors.fill: parent
+                            Layout.fillHeight: true
+                            source: "images/chip_white.png"
+                        }
+
+                        ColorOverlay {
+                            x: 205
+                            y: -50
+                            color: "#037bfb"
+                            anchors.fill: option6_image3
+                            Layout.fillHeight: false
+                            source: option6_image3
+                        }
+                        anchors.left: parent.left
+                    }
+
+                    Button {
+                        id: button5
+                        width: 160
+                        height: 40
+                        text: "Opção 9"
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: -2
+                        anchors.horizontalCenterOffset: 30
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Rectangle {
+                    id: rectangle_row10
+                    width: parent.width
+                    height: 40
+                    color: "#00000000"
+                    Layout.fillWidth: true
+                    Rectangle {
+                        id: rectangle10
+                        width: 30
+                        height: 30
+                        color: "#00000000"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 30
+                        Image {
+                            id: option6_image4
+                            anchors.fill: parent
+                            Layout.fillHeight: true
+                            source: "images/chip_white.png"
+                        }
+
+                        ColorOverlay {
+                            x: 205
+                            y: -50
+                            color: "#037bfb"
+                            anchors.fill: option6_image4
+                            Layout.fillHeight: false
+                            source: option6_image4
+                        }
+                        anchors.left: parent.left
+                    }
+
+                    Button {
+                        id: button6
+                        width: 160
+                        height: 40
+                        text: "Opção 10"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenterOffset: 30
+                        spacing: -3
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Rectangle {
+                    id: rectangle_row11
+                    width: parent.width
+                    height: 40
+                    color: "#00000000"
+                    Layout.fillWidth: true
+                    Rectangle {
+                        id: rectangle11
+                        width: 30
+                        height: 30
+                        color: "#00000000"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 30
+                        Image {
+                            id: option6_image5
+                            anchors.fill: parent
+                            Layout.fillHeight: true
+                            source: "images/chip_white.png"
+                        }
+
+                        ColorOverlay {
+                            x: 205
+                            y: -50
+                            color: "#037bfb"
+                            anchors.fill: option6_image5
+                            Layout.fillHeight: false
+                            source: option6_image5
+                        }
+                        anchors.left: parent.left
+                    }
+
+                    Button {
+                        id: button7
+                        width: 160
+                        height: 40
+                        text: "Opção 11"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenterOffset: 30
+                        spacing: -2
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Rectangle {
+                    id: rectangle_row12
+                    width: parent.width
+                    height: 40
+                    color: "#00000000"
+                    Layout.fillWidth: true
+                    Rectangle {
+                        id: rectangle12
+                        width: 30
+                        height: 30
+                        color: "#00000000"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 30
+                        Image {
+                            id: option6_image6
+                            anchors.fill: parent
+                            Layout.fillHeight: true
+                            source: "images/chip_white.png"
+                        }
+
+                        ColorOverlay {
+                            x: 205
+                            y: -50
+                            color: "#037bfb"
+                            anchors.fill: option6_image6
+                            Layout.fillHeight: false
+                            source: option6_image6
+                        }
+                        anchors.left: parent.left
+                    }
+
+                    Button {
+                        id: button8
+                        width: 160
+                        height: 40
+                        text: "Opção 12"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenterOffset: 30
+                        spacing: -2
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
                 }
             }
             //End of Rectangle Row6

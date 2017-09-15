@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
+
 /*******************************************************************************
   Client Detail Page
 
@@ -17,16 +18,13 @@ Page {
     anchors.fill: parent
 
     property int index
-
-    //
     // Button Aliases
     property alias back_button: client_detail_page_header_back_button
     property alias edit_button: client_detail_page_header_edit_button
-
-    //
     // Client Detail Aliases
     property alias header_title: client_detail_page_header_title
     property alias code: client_detail_page_code
+    property alias fullName: client_detail_page_fullName
     property alias dateReg: client_detail_page_dateReg
     property alias birthday: client_detail_page_birthday
     property alias idDoc: client_detail_page_idDoc
@@ -68,25 +66,39 @@ Page {
         // Background Color //
         color: "#F7F7F7"
 
+        //Ruler - Red horizontal Line
+        /*Rectangle {
+            width: parent.width
+            height: 1
+            color: "red"
+            anchors.verticalCenter: parent.verticalCenter
+            z: 1
+        }*/
+
         /***********************************************************************
             Client Details Page :: Header :: Back Button
         ***********************************************************************/
         Button {
             id: client_detail_page_header_back_button
-            width: parent.height * 0.7
-            height: parent.height * 0.9
 
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.left: parent.left
-            anchors.topMargin: parent.height * 0.1
-            anchors.leftMargin: parent.width * 0.03
+            anchors.leftMargin: 8
+
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_detail_page_header_back_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -108,15 +120,15 @@ Page {
         Text {
             id: client_detail_page_header_title
             text: "<dummy>"
-            anchors.topMargin: 16
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.leftMargin: parent.width * 0.16
+            anchors.topMargin: 10
+            anchors.leftMargin: 20 + 28 + 20
 
             // Title //
-            font.pixelSize: parent.height * 0.5
+            font.pixelSize: 30
         }
 
         /***********************************************************************
@@ -125,21 +137,24 @@ Page {
         Button {
             id: client_detail_page_header_edit_button
 
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.topMargin: parent.height * 0.1
-            anchors.rightMargin: parent.width * 0.03
+            anchors.rightMargin: 20
 
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_detail_page_header_edit_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -213,8 +228,14 @@ Page {
 
                         //color: "#037BFB"
                         gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#4fa3fc" }
-                                GradientStop { position: 1.0; color: "#0356b0" }
+                            GradientStop {
+                                position: 0.0
+                                color: "#4fa3fc"
+                            }
+                            GradientStop {
+                                position: 1.0
+                                color: "#0356b0"
+                            }
                         }
                         radius: 8
 
@@ -255,7 +276,32 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout21
+                            width: 100
+                            height: 100
+                            spacing: 0
+                            Label {
+                                id: label3
+                                height: 15
+                                text: "Nome Completo"
+                                fontSizeMode: Text.HorizontalFit
+                                font.capitalization: Font.SmallCaps
+                                font.bold: true
+                            }
+
+                            Text {
+                                id: client_detail_page_fullName
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
+                                height: 15
+                                text: "<dummy>"
+                                font.pixelSize: 12
                             }
                         }
 
@@ -278,9 +324,11 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
+
                         ColumnLayout {
                             id: columnLayout6
                             width: 100
@@ -300,7 +348,8 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
 
@@ -323,7 +372,8 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
 
@@ -346,7 +396,8 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
                     }
@@ -363,8 +414,14 @@ Page {
                         width: 80
                         //color: "#037BFB"
                         gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#4fa3fc" }
-                                GradientStop { position: 1.0; color: "#0356b0" }
+                            GradientStop {
+                                position: 0.0
+                                color: "#4fa3fc"
+                            }
+                            GradientStop {
+                                position: 1.0
+                                color: "#0356b0"
+                            }
                         }
                         radius: 8
                         anchors.top: parent.top
@@ -407,7 +464,8 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
 
@@ -430,10 +488,9 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
-
                         }
 
                         ColumnLayout {
@@ -455,10 +512,9 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
-
                         }
                         ColumnLayout {
                             id: columnLayout12
@@ -479,10 +535,9 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
-
                         }
 
                         ColumnLayout {
@@ -504,10 +559,9 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
-
                         }
                         ColumnLayout {
                             id: columnLayout14
@@ -528,10 +582,9 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
-
                         }
                         ColumnLayout {
                             id: columnLayout15
@@ -552,10 +605,9 @@ Page {
                                 text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
-
                         }
 
                         spacing: 5
@@ -573,8 +625,14 @@ Page {
                         width: 80
                         //color: "#037BFB"
                         gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#4fa3fc" }
-                                GradientStop { position: 1.0; color: "#0356b0" }
+                            GradientStop {
+                                position: 0.0
+                                color: "#4fa3fc"
+                            }
+                            GradientStop {
+                                position: 1.0
+                                color: "#0356b0"
+                            }
                         }
                         radius: 8
                         anchors.top: parent.top
@@ -624,9 +682,9 @@ Page {
                                 text: "<dummy>"
                                 font.capitalization: Font.SmallCaps
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
 
                             Text {
                                 id: client_detail_page_analysis1_values
@@ -634,9 +692,9 @@ Page {
                                 font.capitalization: Font.SmallCaps
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
                         }
 
                         ColumnLayout {
@@ -657,9 +715,9 @@ Page {
                                 text: "<dummy>"
                                 font.capitalization: Font.SmallCaps
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
 
                             Text {
                                 id: client_detail_page_analysis2_values
@@ -667,9 +725,9 @@ Page {
                                 font.capitalization: Font.SmallCaps
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
                         }
 
                         ColumnLayout {
@@ -690,7 +748,8 @@ Page {
                                 text: "<dummy>"
                                 font.capitalization: Font.SmallCaps
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
 
                             Text {
@@ -699,7 +758,8 @@ Page {
                                 font.capitalization: Font.SmallCaps
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
 
@@ -708,7 +768,6 @@ Page {
                             width: 100
                             height: 100
                             spacing: 0
-
 
                             Label {
                                 id: client_detail_page_analysis4_date
@@ -722,7 +781,8 @@ Page {
                                 text: "<dummy>"
                                 font.capitalization: Font.SmallCaps
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
 
                             Text {
@@ -731,9 +791,9 @@ Page {
                                 font.capitalization: Font.SmallCaps
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
-
                         }
 
                         ColumnLayout {
@@ -754,7 +814,8 @@ Page {
                                 text: "<dummy>"
                                 font.capitalization: Font.SmallCaps
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
 
                             Text {
@@ -763,7 +824,8 @@ Page {
                                 font.capitalization: Font.SmallCaps
                                 font.pixelSize: 12
                                 height: 15
-                                x: x + 10
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
                             }
                         }
 

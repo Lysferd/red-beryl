@@ -113,7 +113,8 @@ Item {
                                     text: "<dummy>"
                                     font.pixelSize: 12
                                     height: 15
-                                    x: x + 10
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 10
                                 }
                             }
 
@@ -136,7 +137,8 @@ Item {
                                     text: "<dummy>"
                                     font.pixelSize: 12
                                     height: 15
-                                    x: x + 10
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 10
                                 }
                             }
                             ColumnLayout {
@@ -158,7 +160,8 @@ Item {
                                     text: "<dummy>"
                                     font.pixelSize: 12
                                     height: 15
-                                    x: x + 10
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 10
                                 }
                             }
 
@@ -181,7 +184,8 @@ Item {
                                     text: "<dummy>"
                                     font.pixelSize: 12
                                     height: 15
-                                    x: x + 10
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 10
                                 }
                             }
 
@@ -204,7 +208,8 @@ Item {
                                     text: "<dummy>"
                                     font.pixelSize: 12
                                     height: 15
-                                    x: x + 10
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 10
                                 }
                             }
 

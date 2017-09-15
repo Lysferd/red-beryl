@@ -5,7 +5,9 @@ ClientDetailPageForm {
         index = i
         var data = model.get(i)
 
-        header_title.text = data.fullName
+        console.log("[WARNING] ClientDetailPage: replace full name for display name")
+        header_title.text = data.fullName //data.displayName
+        fullName.text = data.fullName
         code.text = data.record
         dateReg.text = data.registerDate
         birthday.text = data.birthDate
