@@ -213,54 +213,138 @@ Item {
                                 }
                             }
 
-                            RowLayout {
-                                id: rowLayout2
+                            Rectangle {
+                                id: rectangle_row6
                                 width: parent.width
-                                height: 100
+                                height: 40
+                                color: "#00000000"
+                                Layout.fillWidth: true
+
+                                Rectangle {
+                                    id: rectangle6
+                                    width: 30
+                                    height: 30
+                                    color: "#00000000"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+
+                                    Image {
+                                        id: option6_image
+                                        anchors.fill: parent
+                                        Layout.fillHeight: true
+                                        source: "images/chip_white.png"
+                                    }
+
+                                    ColorOverlay {
+                                        x: 205
+                                        y: -50
+                                        anchors.fill: option6_image
+                                        source: option6_image
+
+                                        color: "#037BFB"
+                                        Layout.fillHeight: false
+                                    }
+                                }
 
                                 Button {
-                                    id: device_page_form_button1
-                                    flat: true
+                                    id: button2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: 160
+                                    height: 40
                                     text: "Sincronizar"
+                                    spacing: -2
+                                    //flat: true
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 50
 
-                                    contentItem: Text {
-                                        text: device_page_form_button1.text
-                                        font: device_page_form_button1.font
-                                        //color: "#FC0310"
-                                        horizontalAlignment: Text.AlignHCenter
-                                        verticalAlignment: Text.AlignVCenter
-                                        elide: Text.ElideRight
+                                }
+
+                            }
+
+                            Rectangle {
+                                id: rectangle_row7
+                                width: parent.width
+                                height: 40
+                                color: "#00000000"
+                                Layout.fillWidth: true
+                                Rectangle {
+                                    id: rectangle7
+                                    width: 30
+                                    height: 30
+                                    color: "#00000000"
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    Image {
+                                        id: option6_image1
+                                        source: "images/chip_white.png"
+                                        anchors.fill: parent
+                                        Layout.fillHeight: true
                                     }
+
+                                    ColorOverlay {
+                                        x: 205
+                                        y: -50
+                                        color: "#037bfb"
+                                        source: option6_image1
+                                        anchors.fill: option6_image1
+                                        Layout.fillHeight: false
+                                    }
+                                    anchors.leftMargin: 5
                                 }
 
                                 Button {
-                                    id: device_page_form_button2
-                                    flat: true
+                                    id: button3
+                                    width: 160
+                                    height: 40
                                     text: "Detalhes"
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    spacing: -2
+                                    anchors.leftMargin: 50
+                                }
+                            }
 
-                                    contentItem: Text {
-                                        text: device_page_form_button2.text
-                                        font: device_page_form_button2.font
-                                        //color: "#FC0310"
-                                        horizontalAlignment: Text.AlignHCenter
-                                        verticalAlignment: Text.AlignVCenter
-                                        elide: Text.ElideRight
+                            Rectangle {
+                                id: rectangle_row8
+                                width: parent.width
+                                height: 40
+                                color: "#00000000"
+                                Layout.fillWidth: true
+                                Rectangle {
+                                    id: rectangle8
+                                    width: 30
+                                    height: 30
+                                    color: "#00000000"
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    Image {
+                                        id: option6_image2
+                                        source: "images/chip_white.png"
+                                        anchors.fill: parent
+                                        Layout.fillHeight: true
                                     }
+
+                                    ColorOverlay {
+                                        x: 205
+                                        y: -50
+                                        color: "red"
+                                        source: option6_image2
+                                        anchors.fill: option6_image2
+                                        Layout.fillHeight: false
+                                    }
+                                    anchors.leftMargin: 5
                                 }
 
                                 Button {
-                                    id: device_page_form_button3
-                                    flat: true
+                                    id: button4
+                                    width: 160
+                                    height: 40
                                     text: "Desparear"
-
-                                    contentItem: Text {
-                                        text: device_page_form_button3.text
-                                        font: device_page_form_button3.font
-                                        color: "#FC0310"
-                                        horizontalAlignment: Text.AlignHCenter
-                                        verticalAlignment: Text.AlignVCenter
-                                        elide: Text.ElideRight
-                                    }
+                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    spacing: -2
+                                    anchors.leftMargin: 50
                                 }
                             }
                         }
