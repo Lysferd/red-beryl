@@ -12,6 +12,7 @@ class ClientModel : public QAbstractListModel
 public:
     enum ClientRole {
         FullNameRole = Qt::DisplayRole,
+        FirstLetter,
         RecordRole = Qt::UserRole,
         FirstNameRole,
         MiddleNameRole,

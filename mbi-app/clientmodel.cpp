@@ -18,9 +18,15 @@ ClientModel::ClientModel(QObject *parent) : QAbstractListModel(parent) {
     */
 
     // append fake data for kicks
-    m_clients.append({ "123456", "Grey", "Derpy", "Vilkerness", "77777777777", "01/01/1980", "1234567890", "mail@mail.com", "Rua 1, 512, GG Izy", "Peasy City", "Squeazy State", "Lemonade", "O+", "CardÃ­aco, HipertensÃ£o", "Furosemida, Dalteparina SÃ³dica", "01/01/2001", "15/15/2015", "15/05/2017" });
+    m_clients.append({ "123456", "Antonio", "José", "Vilkerness", "77777777777", "01/01/1980", "1234567890", "mail@mail.com", "Rua 1, 512, GG Izy", "Peasy City", "Squeazy State", "Lemonade", "O+", "Cardi­aco, Hipertensao", "Furosemida, Dalteparina Sodica", "01/01/2001", "15/15/2015", "15/05/2017" });
 
-    m_clients.append({ "443456", "Meleca", "de", "Narizes", "93977777777", "01/01/1990", "41997755443", "baleia@fedor.com", "Rua abacate, 512, GG Izy", "verde City", "orelha estadual", "Lemonade", "AB+", "Gordocaralho, Febre, Filhadaputisse", "Frescurol, Cebola em Pow", "01/01/2001", "15/15/2015", "15/05/2017" });
+    m_clients.append({ "443456", "Bruno", "de", "Souza", "93977777777", "01/01/1990", "41997755443", "mail@mail.com", "Rua KK, 512, GG Izy", "verde City", "Estrada estadual", "Lemonade", "AB+", "Obesidade, Febre, Bipolar", "Diasepan, Dipirona", "01/01/2001", "15/15/2015", "15/05/2017" });
+
+    m_clients.append({ "992313", "Carlos", "", "Mendes", "32817257777", "05/03/1975", "31227755443", "mail@mail.com", "Rua abacate, 512, Nadd", "verde City", "orelha estadual", "Lemonade", "AB-", "", "Metileno", "01/01/2001", "15/15/2015", "15/05/2017" });
+
+    m_clients.append({ "522313", "Daniele", "Silva", "Oliveira", "32817257777", "05/03/1975", "31227755443", "mail@mail.com", "Rua José Wool, 45, 512, Cais", "Calhoça", "Parque estadual", "Lemonade", "B-", "Sopro Cardiaco, Diabetes", "Etileno, Insulina", "01/01/2001", "15/15/2015", "15/05/2017" });
+
+    m_clients.append({ "772313", "Eduardo", "Andrew", "Monsanto", "32817257777", "05/03/1975", "31227755443", "mail@mail.com", "Rua Árvore de Natal, 25, Dezz", "Panolo City", "Colabb", "Lemonade", "O-", "Esquizofrenia", "Ritalina, Tiroxina", "01/01/2001", "15/15/2015", "15/05/2017" });
 }
 
 int ClientModel::rowCount(const QModelIndex &) const {
@@ -33,6 +39,7 @@ QVariant ClientModel::data(const QModelIndex &index, int role) const {
 
         switch (role) {
             case FullNameRole: return c.firstName + " " + c.lastName;
+            case FirstLetter: return c.firstName.at(0);
             case RecordRole: return c.record;
             case FirstNameRole: return c.firstName;
             case MiddleNameRole: return c.middleName;
@@ -61,6 +68,7 @@ QVariant ClientModel::data(const QModelIndex &index, int role) const {
 QHash<int, QByteArray> ClientModel::roleNames() const {
     static const QHash<int, QByteArray> roles {
         { FullNameRole, "fullName" },
+        { FirstLetter, "firstLetter"},
         { RecordRole, "record" },
         { FirstNameRole, "firstName" },
         { MiddleNameRole, "middleName" },
@@ -88,6 +96,7 @@ QVariantMap ClientModel::get(int row) const {
 
     return {
              {"fullName", client.firstName + " " + client.lastName },
+             {"firstLetter", client.firstName.at(0)},
              {"record", client.record},
              {"firstName", client.firstName},
              {"middleName", client.middleName},
@@ -129,6 +138,7 @@ void ClientModel::set(int row, const QString &record, const QString &firstName, 
                              country, bloodType, riskGroups, regularMedicines,
                              registerDate, updateDate, lastConsultation });
     dataChanged(index(row, 0), index(row, 0), { FullNameRole,
+                                                FirstLetter,
                                                 RecordRole,
                                                 FirstNameRole,
                                                 MiddleNameRole,
