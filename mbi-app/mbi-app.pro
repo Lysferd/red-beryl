@@ -1,4 +1,4 @@
-QT += charts qml quick widgets bluetooth sql
+QT += qml quick widgets bluetooth sql
 
 CONFIG += c++11
 
