@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mbi.iOS", "iOS\mbi.iOS.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mbi.Droid", "Droid\mbi.Droid.csproj", "{8B155B1A-B1A9-435A-874F-8CB87B3490DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "macOS", "macOS\macOS.csproj", "{DEC30045-34F0-47AF-BB50-C68F1BB328FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -41,5 +43,17 @@ Global
 		{8B155B1A-B1A9-435A-874F-8CB87B3490DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B155B1A-B1A9-435A-874F-8CB87B3490DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B155B1A-B1A9-435A-874F-8CB87B3490DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Release|iPhone.ActiveCfg = Release|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Release|iPhone.Build.0 = Release|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Debug|iPhone.ActiveCfg = Debug|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Debug|iPhone.Build.0 = Debug|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{DEC30045-34F0-47AF-BB50-C68F1BB328FB}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 EndGlobal
