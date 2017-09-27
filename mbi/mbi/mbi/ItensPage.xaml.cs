@@ -21,8 +21,10 @@ namespace mbi
             //BindingContext = viewModel = new ItemsViewModel();
         }
 
-        /*async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
+            return;
+            /*
             var item = args.SelectedItem as Item;
             if (item == null)
                 return;
@@ -31,19 +33,24 @@ namespace mbi
 
             // Manually deselect item
             ItemsListView.SelectedItem = null;
+            */
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewItemPage());
+            return;
+
+            //await Navigation.PushAsync(new NewItemPage());
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
+            /*
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
-        }*/
+                */
+        }
     }
 }
