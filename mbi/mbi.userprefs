@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{19EB2355-31F9-4697-8536-7F3950108B97}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="mbi/macOS/AppDelegate.cs">
+    <Files>
+      <File FileName="mbi/macOS/AppDelegate.cs" Line="11" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.mbi.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.8902952E-6606-4F77-B410-860320D2BC7C" />
+  <MonoDevelop.Ide.ItemProperties.mbi.Android PreferredExecutionTarget="Android.Android_Accelerated_Nougat" />
+  <MultiItemStartupConfigurations />
+</Properties>
