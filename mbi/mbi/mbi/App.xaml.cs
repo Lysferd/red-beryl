@@ -13,7 +13,10 @@ namespace mbi
 		{
 			InitializeComponent();
 
-			MainPage = new mbi.MainPage();
+            if (Device.RuntimePlatform == Device.iOS)
+                MainPage = new MainPage();
+            else
+                MainPage = new NavigationPage(new mbi.MainPage());
 		}
 
 		protected override void OnStart ()
