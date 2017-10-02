@@ -26,5 +26,7 @@
         <file>ClientEditPageForm.ui.qml</file>
         <file>Database.qml</file>
         <file>qmldir</file>
+        <file>ExamStartPage.qml</file>
+        <file>ExamStartPageForm.ui.qml</file>
     </qresource>
 </RCC>

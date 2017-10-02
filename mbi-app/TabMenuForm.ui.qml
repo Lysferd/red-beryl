@@ -57,7 +57,7 @@ Item {
 
             Text {
                 id: text2
-                text: qsTr("Medidor")
+                text: "Exames"
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 4
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -66,57 +66,25 @@ Item {
             }
 
             Image {
-                id: medidor_img
+                id: exames_img
                 width: 32
                 height: 32
                 anchors.top: parent.top
                 anchors.topMargin: 0
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/devices_white.png"
+                source: "images/stethoscope_white.png"
                 mipmap: true
             }
             ColorOverlay {
-                id: medidor_overlay
-                anchors.fill: medidor_img
-                source: medidor_img
+                id: exames_overlay
+                anchors.fill: exames_img
+                source: exames_img
                 color: tabBar.currentIndex == 1 ? "#037BFB" : "#929292"
             }
         }
 
         TabButton {
             id: tabButton3
-            height: 48
-
-            Image {
-                id: nuvem_img
-                width: 32
-                height: 32
-                anchors.top: parent.top
-                anchors.topMargin: 0
-                anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/cloud_white.png"
-                mipmap: true
-            }
-            ColorOverlay {
-                id: nuvem_overlay
-                anchors.fill: nuvem_img
-                source: nuvem_img
-                color: tabBar.currentIndex == 2 ? "#037BFB" : "#929292"
-            }
-
-            Text {
-                id: text3
-                text: qsTr("Nuvem")
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 4
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 12
-                color: tabBar.currentIndex == 2 ? "#037BFB" : "#929292"
-            }
-        }
-
-        TabButton {
-            id: tabButton4
             height: 48
 
             Image {
@@ -148,7 +116,6 @@ Item {
             }
         }
     }
-
 
     /***********************************************************************
         Client Details Page :: Header :: Bottom Border

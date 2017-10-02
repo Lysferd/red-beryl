@@ -34,7 +34,7 @@ Page {
         ***********************************************************************/
         Text {
             id: settings_page_header_title
-            text: "Configurações"
+            text: "Opções"
             anchors.topMargin: 16
 
             // Positioning //
@@ -116,7 +116,6 @@ Page {
             ScrollIndicator.vertical: ScrollIndicator {
             }
 
-
             ColumnLayout {
                 id: columnLayout1
                 //anchors.bottom: parent.bottom
@@ -163,7 +162,7 @@ Page {
 
                     Label {
                         id: label_name
-                        text: "Opção 1"
+                        text: "Configurar MBI"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 90
@@ -172,14 +171,6 @@ Page {
                         font.bold: true
                         height: 15
                         width: settings_page_pane.width / 2
-                    }
-
-                    Switch {
-                        id: switch1
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: 30
-                        //text: qsTr("Switch")
                     }
                 }
                 //End of Rectangle Row1
@@ -231,7 +222,7 @@ Page {
 
                     Label {
                         id: label_name2
-                        text: "Opção 2"
+                        text: "Configurar Nuvem"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 90
@@ -240,14 +231,6 @@ Page {
                         font.bold: true
                         height: 15
                         width: settings_page_pane.width / 2
-                    }
-
-                    Switch {
-                        id: switch2
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: 30
-                        //text: qsTr("Switch")
                     }
                 }
                 //End of Rectangle Row2
@@ -299,7 +282,7 @@ Page {
 
                     Label {
                         id: label_name3
-                        text: "Opção 3"
+                        text: "Configurar Cores"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 90
@@ -308,17 +291,6 @@ Page {
                         font.bold: true
                         height: 15
                         width: settings_page_pane.width / 2
-                    }
-
-                    Slider {
-                        id: slider1
-                        width: 100
-                        height: 32
-                        font.pointSize: 10
-                        value: 0.1
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: 30
                     }
                 }
                 //End of Rectangle Row3
@@ -370,7 +342,7 @@ Page {
 
                     Label {
                         id: label_name4
-                        text: "Opção 4"
+                        text: "Personalizar Relatórios"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 90
@@ -379,16 +351,6 @@ Page {
                         font.bold: true
                         height: 15
                         width: settings_page_pane.width / 2
-                    }
-
-                    ComboBox {
-                        id: comboBox1
-                        height: 32
-                        font.pointSize: 9
-                        model: ["Opção A", "Opção B", "Opção C", "Opção D"]
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: 30
                     }
                 }
                 //End of Rectangle Row4
@@ -404,128 +366,17 @@ Page {
                 //End of Rectangle Line4
 
                 //Begin of Rectangle Row5
-                Rectangle {
-                    id: rectangle_row5
-                    width: parent.width
-                    height: 40
-                    color: "#00000000"
-                    Layout.fillWidth: true
-
-                    Rectangle {
-                        id: rectangle5
-                        width: 30
-                        height: 30
-                        color: "#00000000"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: 30
-
-                        Image {
-                            id: option5_image
-                            anchors.fill: parent
-                            Layout.fillHeight: true
-                            source: "images/chip_white.png"
-                        }
-
-                        ColorOverlay {
-                            x: 205
-                            y: -50
-                            anchors.fill: option5_image
-                            source: option5_image
-
-                            color: "#037BFB"
-                            Layout.fillHeight: false
-                        }
-                    }
-
-                    Button {
-                        id: button1
-                        anchors.verticalCenter: parent.verticalCenter
-                        width: 160
-                        height: 40
-                        text: "Opção 5"
-                        anchors.horizontalCenterOffset: 30
-                        anchors.horizontalCenter: parent.horizontalCenter
-
-                    }
-                }
                 //End of Rectangle Row5
 
                 //Begin of Rectangle Line5
-                Rectangle {
-                    id: rectangle_line5
-                    width: parent.width
-                    height: 2
-                    color: "lightgray"
-                    Layout.fillWidth: true
-                }
                 //End of Rectangle Line5
 
-
                 //Begin of Rectangle Row6
-                Rectangle {
-                    id: rectangle_row6
-                    width: parent.width
-                    height: 40
-                    color: "#00000000"
-                    Layout.fillWidth: true
-
-                    Rectangle {
-                        id: rectangle6
-                        width: 30
-                        height: 30
-                        color: "#00000000"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: 30
-
-                        Image {
-                            id: option6_image
-                            anchors.fill: parent
-                            Layout.fillHeight: true
-                            source: "images/chip_white.png"
-                        }
-
-                        ColorOverlay {
-                            x: 205
-                            y: -50
-                            anchors.fill: option6_image
-                            source: option6_image
-
-                            color: "#037BFB"
-                            Layout.fillHeight: false
-                        }
-                    }
-
-                    Button {
-                        id: button2
-                        anchors.verticalCenter: parent.verticalCenter
-                        width: 160
-                        height: 40
-                        text: "Opção 6"
-                        spacing: -2
-                        //flat: true
-                        anchors.horizontalCenterOffset: 30
-                        anchors.horizontalCenter: parent.horizontalCenter
-
-                    }
-
-                }
-
-                Rectangle {
-                    id: rectangle_line6
-                    width: parent.width
-                    height: 2
-                    color: "#d3d3d3"
-                    Layout.fillWidth: true
-                }
             }
             //End of Rectangle Row6
 
             //Begin of Rectangle Line6
             //End of Rectangle Line6
-
-
         }
     }
 }

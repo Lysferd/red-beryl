@@ -63,8 +63,7 @@ Page {
             }
         }
 
-        Item { DevicePage {} }
-        Item { CloudPage {} }
+        Item { ExamStartPage {} }
         Item { SettingsPage {} }
     }
 
