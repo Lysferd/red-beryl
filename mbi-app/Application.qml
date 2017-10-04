@@ -63,7 +63,7 @@ Page {
             }
         }
 
-        Item { ExamStartPage {} }
+        Item { ExamSetupPage {} }
         Item { SettingsPage {} }
     }
 

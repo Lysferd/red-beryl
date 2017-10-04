@@ -30,7 +30,6 @@ Page {
         // Background Color //
         color: "#F7F7F7"
 
-
         //Ruler - Red horizontal Line
         /*Rectangle {
             width: parent.width

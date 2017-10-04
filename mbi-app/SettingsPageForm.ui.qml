@@ -34,16 +34,16 @@ Page {
         ***********************************************************************/
         Text {
             id: settings_page_header_title
-            text: "Opções"
-            anchors.topMargin: 16
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            //anchors.leftMargin: parent.width * 0.16
+            anchors.topMargin: 10
+            anchors.leftMargin: 20
 
             // Title //
-            font.pixelSize: parent.height * 0.5
+            text: "Opções"
+            font.pixelSize: 30
         }
 
         /***********************************************************************

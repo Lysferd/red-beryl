@@ -675,6 +675,7 @@ Page {
                             id: delete_button
 
                             text: "Excluir paciente"
+                            Layout.fillWidth: true
                             font.capitalization: Font.Capitalize
                             flat: true
 

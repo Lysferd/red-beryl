@@ -23,6 +23,8 @@ ClientDetailPageForm {
         riskGroups.text = data.riskGroups
         regularlyMedicines.text = data.regularMedicines
 
+
+
         /*
         analysis1_bodyLocation.text = data.analysis1_bodyLocation
         analysis1_date.text = data.analysis1_date

@@ -83,7 +83,7 @@ Page {
 
             // Positioning //
             anchors.top: parent.top
-            anchors.topMargin: 3
+            anchors.topMargin: 1
             anchors.left: parent.left
             anchors.leftMargin: 8
 
@@ -120,15 +120,22 @@ Page {
         Text {
             id: client_detail_page_header_title
             text: "<dummy>"
+            fontSizeMode: Text.HorizontalFit
+            verticalAlignment: Text.AlignVCenter
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.topMargin: 10
-            anchors.leftMargin: 20 + 28 + 20
+            anchors.leftMargin: 20 + 28 + 5
 
             // Title //
             font.pixelSize: 30
+
+            // Field Size //
+            width: 200
+            height: 36
+            //clip: true
         }
 
         /***********************************************************************
@@ -139,7 +146,7 @@ Page {
 
             // Positioning //
             anchors.top: parent.top
-            anchors.topMargin: 3
+            anchors.topMargin: 1
             anchors.right: parent.right
             anchors.rightMargin: 20
 
@@ -404,6 +411,50 @@ Page {
                 }
 
                 RowLayout {
+                    id: rowLayout2
+                    width: 100
+                    height: 60
+                    Rectangle {
+                        id: rectangle1
+                        width: 80
+                        radius: 8
+                        gradient: Gradient {
+                            GradientStop {
+                                position: 0
+                                color: "#4fa3fc"
+                            }
+
+                            GradientStop {
+                                position: 1
+                                color: "#0356b0"
+                            }
+                        }
+                        Image {
+                            id: client_detail_page_groupImage_clients1
+                            width: 50
+                            height: 50
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            mipmap: true
+                            anchors.verticalCenter: parent.verticalCenter
+                            source: "images/stethoscope_white.png"
+                        }
+                        anchors.top: parent.top
+                        anchors.topMargin: 2
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 2
+                    }
+
+                    Button {
+                        id: button
+                        height: 30
+                        width: 30
+                        text: "Novo Exame"
+                        Layout.fillWidth: true
+                    }
+                    spacing: 10
+                }
+
+                RowLayout {
                     id: rowLayout1
                     width: 100
                     height: 100
@@ -658,7 +709,7 @@ Page {
 
                         Label {
                             id: label14
-                            text: "Últimas Medições"
+                            text: "Últimos Exames"
                             font.capitalization: Font.SmallCaps
                             font.bold: true
                             font.pointSize: 12
