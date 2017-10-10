@@ -14,6 +14,9 @@ Page {
 
     font.weight: Font.ExtraLight
     anchors.fill: parent
+
+    property alias client_edit_page_header_title: client_edit_page_header_title
+
     // Button Aliases
     property alias cancel_button: client_edit_page_header_cancel_button
     // Client Detail Aliases

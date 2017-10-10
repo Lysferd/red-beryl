@@ -12,6 +12,14 @@ Page {
     id: exam_setup_page
     anchors.fill: parent
 
+    property alias segmentSelection: segmentSelection
+    property alias cbItems: cbItems
+    property alias body_half_left: body_half_left
+    property alias body_half_right: body_half_right
+    property alias body_left_arm: body_left_arm
+    property alias body_right_arm: body_right_arm
+    property alias body_torax: body_torax
+
     /***************************************************************************
         Exam Setup Page :: Header
     ***************************************************************************/
@@ -128,12 +136,30 @@ Page {
                 anchors.leftMargin: 0
                 spacing: 15
 
-                Button {
-                    id: button
-                    width: 200
-                    text: qsTr("Multifrequencial")
-                    spacing: -4
+                ComboBox {
+                    id: segmentSelection
+                    currentIndex: 1
+                    width: 300
+                    font.pointSize: 11
                     anchors.horizontalCenter: parent.horizontalCenter
+                    model: ListModel {
+                        id: cbItems
+                        ListElement {
+                            text: "Braço direito total"
+                        }
+                        ListElement {
+                            text: "Braço esquerdo total"
+                        }
+                        ListElement {
+                            text: "Corpo todo, lado direito"
+                        }
+                        ListElement {
+                            text: "Corpo todo, lado esquerdo"
+                        }
+                        ListElement {
+                            text: "Tórax"
+                        }
+                    }
                 }
 
                 Rectangle {
@@ -147,94 +173,74 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/humanbody_white.png"
+                        source: "images/body_full_white.png"
                         mipmap: true
+                        z: 1
                     }
 
                     ColorOverlay {
                         anchors.fill: body_image
                         source: body_image
-
+                        z: 1
                         color: "#037BFB"
                     }
-                }
-                /*
-                Button {
-                    id: button1
-                    width: 200
-                    text: qsTr("2 canais, 8 pontos")
-                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    Image {
+                        id: body_half_left
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                        source: "images/body_half_left_red.png"
+                        mipmap: true
+                        z: 0
+                    }
+
+                    Image {
+                        id: body_half_right
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                        source: "images/body_half_right_red.png"
+                        mipmap: true
+                        z: 0
+                    }
+
+                    Image {
+                        id: body_left_arm
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                        source: "images/body_left_arm_red.png"
+                        mipmap: true
+                        z: 0
+                    }
+
+                    Image {
+                        id: body_right_arm
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                        source: "images/body_right_arm_red.png"
+                        mipmap: true
+                        z: 0
+                    }
+
+                    Image {
+                        id: body_torax
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                        source: "images/body_torax_red.png"
+                        mipmap: true
+                        z: 0
+                    }
                 }
 
                 Button {
-                    id: button2
-                    width: 200
-                    text: qsTr("Multiponto Segmentar")
+                    id: button
+                    text: qsTr("Iniciar Exame")
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
-
-                Button {
-                    id: button3
-                    width: 200
-                    text: qsTr("Multiponto Configurável")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button4
-                    width: 200
-                    text: qsTr("Corpo todo, um lado")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button5
-                    width: 200
-                    text: qsTr("Corpo todo, dois lados")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button6
-                    width: 200
-                    text: qsTr("Tórax")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button7
-                    width: 200
-                    text: qsTr("Tronco")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button8
-                    width: 200
-                    text: qsTr("dummy")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button9
-                    width: 200
-                    text: qsTr("dummy")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button10
-                    width: 200
-                    text: qsTr("dummy")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Button {
-                    id: button11
-                    width: 200
-                    text: qsTr("dummy")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }*/
             }
         }
     }

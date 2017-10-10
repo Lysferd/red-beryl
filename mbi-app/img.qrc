@@ -25,6 +25,11 @@
         <file>images/clear_white.png</file>
         <file>images/chip_white.png</file>
         <file>images/stethoscope_white.png</file>
-        <file>images/humanbody_white.png</file>
+        <file>images/body_full_white.png</file>
+        <file>images/body_torax_red.png</file>
+        <file>images/body_half_left_red.png</file>
+        <file>images/body_left_arm_red.png</file>
+        <file>images/body_half_right_red.png</file>
+        <file>images/body_right_arm_red.png</file>
     </qresource>
 </RCC>

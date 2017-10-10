@@ -13,9 +13,11 @@ ClientEditPageForm {
         bloodtype.text = data.bloodType
         riskGroups.text = data.riskGroups
         regularlyMedicines.text = data.regularMedicines
+        client_edit_page_header_title.text = "Editar Paciente"
     }
 
     function clean() {
+        client_edit_page_header_title.text = "Novo Paciente"
         client_name.text = ""
         code.text = ""
         dateReg.text = ""
