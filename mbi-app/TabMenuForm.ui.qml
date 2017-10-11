@@ -102,7 +102,7 @@ Item {
                 id: configs_overlay
                 anchors.fill: configs_img
                 source: configs_img
-                color: tabBar.currentIndex == 3 ? "#037BFB" : "#929292"
+                color: tabBar.currentIndex == 2 ? "#037BFB" : "#929292"
             }
 
             Text {
@@ -112,7 +112,7 @@ Item {
                 anchors.bottomMargin: 4
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 12
-                color: tabBar.currentIndex == 3 ? "#037BFB" : "#929292"
+                color: tabBar.currentIndex == 2 ? "#037BFB" : "#929292"
             }
         }
     }

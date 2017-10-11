@@ -31,5 +31,6 @@
         <file>images/body_left_arm_red.png</file>
         <file>images/body_half_right_red.png</file>
         <file>images/body_right_arm_red.png</file>
+        <file>images/body_transp.png</file>
     </qresource>
 </RCC>

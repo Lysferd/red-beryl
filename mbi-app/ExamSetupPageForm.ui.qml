@@ -14,11 +14,18 @@ Page {
 
     property alias segmentSelection: segmentSelection
     property alias cbItems: cbItems
-    property alias body_half_left: body_half_left
-    property alias body_half_right: body_half_right
-    property alias body_left_arm: body_left_arm
-    property alias body_right_arm: body_right_arm
-    property alias body_torax: body_torax
+    property alias codExam: codExam
+    property alias codExamButton: codExamButton
+    property alias codExamArea: codExamArea
+    property alias exam_setup_page: exam_setup_page
+    property alias body_area: body_area
+    property alias body_highlight: body_highlight
+
+    //property alias body_half_left: body_half_left
+    //property alias body_half_right: body_half_right
+    //property alias body_left_arm: body_left_arm
+    //property alias body_right_arm: body_right_arm
+    //property alias body_torax: body_torax
 
     /***************************************************************************
         Exam Setup Page :: Header
@@ -134,16 +141,19 @@ Page {
                 anchors.rightMargin: 0
                 anchors.left: parent.left
                 anchors.leftMargin: 0
-                spacing: 15
+                spacing: 8
 
                 ComboBox {
                     id: segmentSelection
-                    currentIndex: 1
+                    currentIndex: 0
                     width: 300
                     font.pointSize: 11
                     anchors.horizontalCenter: parent.horizontalCenter
                     model: ListModel {
                         id: cbItems
+                        ListElement {
+                            text: "Personalizado"
+                        }
                         ListElement {
                             text: "Braço direito total"
                         }
@@ -162,10 +172,34 @@ Page {
                     }
                 }
 
+                Row {
+                    id: codExamArea
+                    width: segmentSelection.width
+                    height: 40
+                    spacing: segmentSelection.width * 0.02
+                    anchors.horizontalCenter: segmentSelection.horizontalCenter
+
+                    TextField {
+                        id: codExam
+                        width: parent.width * 0.77
+                        height: 40
+                        placeholderText: "Digite um código"
+                        font.letterSpacing: 3
+                        font.capitalization: Font.AllUppercase
+                    }
+
+                    Button {
+                        id: codExamButton
+                        text: "ok"
+                        width: parent.width * 0.20
+                        height: 40
+                    }
+                }
+
                 Rectangle {
-                    id: rectangle
+                    id: body_area
                     width: parent.width
-                    height: 400
+                    height: exam_setup_page.height * 0.55
                     color: "#FFFFFF"
 
                     Image {
@@ -185,6 +219,17 @@ Page {
                         color: "#037BFB"
                     }
 
+                    Image {
+                        id: body_highlight
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                        source: "images/body_transp.png"
+                        mipmap: true
+                        z: 2
+                    }
+
+                    /*
                     Image {
                         id: body_half_left
                         width: parent.width
@@ -234,6 +279,7 @@ Page {
                         mipmap: true
                         z: 0
                     }
+                    */
                 }
 
                 Button {
