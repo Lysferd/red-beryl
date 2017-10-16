@@ -1,11 +1,12 @@
 #ifndef CLIENTMODEL_H
 #define CLIENTMODEL_H
 
-#include <QAbstractItemModel>
+#define COLUMNS const QString &record, const QString &firstName, const QString &middleName, const QString &lastName, const QString &personalId, const QString &birthDate, const QString &phoneNumber, const QString &email, const QString &address, const QString &city, const QString &state, const QString &country, const QString &bloodType, const QString &riskGroups, const QString &regularMedicines, const QString &registerDate, const QString &updateDate, const QString &lastConsultation
+
 #include <QtSql>
 #include <QSqlQueryModel>
 
-class ClientModel : public QAbstractListModel
+class ClientModel : public QSqlQueryModel
 {
     Q_OBJECT
 
@@ -35,39 +36,26 @@ public:
     Q_ENUM(ClientRole)
 
     ClientModel(QObject *parent = nullptr);
-
-    int rowCount(const QModelIndex & = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    QHash<int, QByteArray> roleNames() const;
-
+    int rowCount(const QModelIndex & = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
     Q_INVOKABLE QVariantMap get(int row) const;
-    Q_INVOKABLE void append(const QString &record, const QString &firstName, const QString &middleName, const QString &lastName, const QString &personalId, const QString &birthDate, const QString &phoneNumber, const QString &email, const QString &address, const QString &city, const QString &state, const QString &country, const QString &bloodType, const QString &riskGroups, const QString &regularMedicines, const QString &registerDate, const QString &updateDate, const QString &lastConsultation);
-    Q_INVOKABLE void set(int row, const QString &record, const QString &firstName, const QString &middleName, const QString &lastName, const QString &personalId, const QString &birthDate, const QString &phoneNumber, const QString &email, const QString &address, const QString &city, const QString &state, const QString &country, const QString &bloodType, const QString &riskGroups, const QString &regularMedicines, const QString &registerDate, const QString &updateDate, const QString &lastConsultation);
+
+    /*
+    Q_INVOKABLE void append(COLUMNS);
+
+    Q_INVOKABLE void set(COLUMNS);
+
     Q_INVOKABLE void remove(int row);
+    */
 
 private:
-    struct Client {
-        QString record;
-        QString firstName;
-        QString middleName;
-        QString lastName;
-        QString personalId;
-        QString birthDate;
-        QString phoneNumber;
-        QString email;
-        QString address;
-        QString city;
-        QString state;
-        QString country;
-        QString bloodType;
-        QString riskGroups;
-        QString regularMedicines;
-        QString registerDate;
-        QString updateDate;
-        QString lastConsultation;
-    };
+    QSqlDatabase m_db;
 
-    QList<Client> m_clients;
+    QString create_table = QLatin1String("create table clients(record varchar, firstName varchar, middleName varchar, lastName varchar, personalId varchar, birthData varchar, phoneNumber varchar, email varchar, address varchar, city varchar, state varchar, country varchar, bloodType varchar, riskGroups varchar, regularMedicines varchar, registerDate varchar, updateDate varchar, lastConsultation varchar)");
+    QString insert = QLatin1String("insert into clients(record, firstName, middleName, lastName, personalId, birthData, phoneNumber, email, address, city, state, country, bloodType, riskGroups, regularMedicines, registerDate, updateDate, lastConsultation) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    QString count_query = QLatin1String("SELECT COUNT(*) FROM clients");
+    QString select_query = QLatin1String("SELECT record, firstName, middleName, lastName, personalId, birthData, phoneNumber, email, address, city, state, country, bloodType, riskGroups, regularMedicines, registerDate, updateDate, lastConsultation FROM clients WHERE rowid = (:row)");
 };
 
 #endif // CLIENTMODEL_H

@@ -32,7 +32,7 @@ SwipeDelegate {
 
             Label {
                 anchors.verticalCenter: parent.verticalCenter
-                text: fullName
+                text: "origin" //fullName
             }
         }
     }
