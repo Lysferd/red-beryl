@@ -10,8 +10,10 @@ SOURCES += main.cpp \
     connectionhandler.cpp \
     clientmodel.cpp
 
-RESOURCES += qml.qrc \
-    img.qrc
+RESOURCES += \
+    img.qrc \
+    qml_tablet.qrc \
+    qml_phone.qrc
 
 #RC_FILE = iconing.rc
 

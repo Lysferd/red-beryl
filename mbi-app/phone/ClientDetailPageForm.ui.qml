@@ -102,7 +102,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/left_arrow_white.png"
+                source: "../images/left_arrow_white.png"
                 mipmap: true
             }
 
@@ -165,7 +165,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/edit_white.png"
+                source: "../images/edit_white.png"
                 mipmap: true
             }
 
@@ -252,7 +252,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/personal_data_white_big.png"
+                            source: "../images/personal_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -436,7 +436,7 @@ Page {
                             anchors.horizontalCenter: parent.horizontalCenter
                             mipmap: true
                             anchors.verticalCenter: parent.verticalCenter
-                            source: "images/stethoscope_white.png"
+                            source: "../images/stethoscope_white.png"
                         }
                         anchors.top: parent.top
                         anchors.topMargin: 2
@@ -486,7 +486,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/clinical_data_white_big.png"
+                            source: "../images/clinical_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -697,7 +697,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/measurement_data_white_big.png"
+                            source: "../images/measurement_data_white_big.png"
                             mipmap: true
                         }
                     }

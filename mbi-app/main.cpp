@@ -27,7 +27,12 @@ int main(int argc, char *argv[]) {
     engine.rootContext()->setContextProperty("deviceFinder", &deviceFinder);
     engine.rootContext()->setContextProperty("deviceHandler", &deviceHandler);
 
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+    //Tablet
+    engine.load(QUrl(QLatin1String("qrc:/tablet/main.qml")));
+
+    //Phone
+    //engine.load(QUrl(QLatin1String("qrc:/phone/main.qml")));
+
     if (engine.rootObjects().isEmpty())
         return -1;
 

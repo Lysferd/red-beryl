@@ -25,7 +25,7 @@ Page {
         width: parent.width
         height: parent.height
 
-        source: "images/splash.png"
+        source: "../images/splash.png"
     }
 
     Timer {

@@ -71,23 +71,23 @@ ExamSetupPageForm {
 
     function updateBody(arg){
         if(arg == 0){
-            body_highlight.source = "images/body_transp.png"
+            body_highlight.source = "../images/body_transp.png"
             console.debug("UpdateBody Arg 0");
 
         } else if(arg == 1){
-            body_highlight.source = "images/body_right_arm_red.png"
+            body_highlight.source = "../images/body_right_arm_red.png"
             console.debug("UpdateBody Arg 1");
         } else if(arg == 2){
-            body_highlight.source = "images/body_left_arm_red.png"
+            body_highlight.source = "../images/body_left_arm_red.png"
             console.debug("UpdateBody Arg 2");
         } else if(arg == 3) {
-            body_highlight.source = "images/body_half_right_red.png"
+            body_highlight.source = "../images/body_half_right_red.png"
             console.debug("UpdateBody Arg 3");
         } else if(arg == 4) {
-            body_highlight.source = "images/body_half_left_red.png"
+            body_highlight.source = "../images/body_half_left_red.png"
             console.debug("UpdateBody Arg 4");
         } else if(arg == 5) {
-            body_highlight.source = "images/body_torax_red.png"
+            body_highlight.source = "../images/body_torax_red.png"
             console.debug("UpdateBody Arg 5");
         }
     }

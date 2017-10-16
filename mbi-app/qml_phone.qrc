@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>phone/Application.qml</file>
+        <file>phone/ClientDelegate.qml</file>
+        <file>phone/ClientDetailPage.qml</file>
+        <file>phone/ClientDetailPageForm.ui.qml</file>
+        <file>phone/ClientEditForm.ui.qml</file>
+        <file>phone/ClientEditPage.qml</file>
+        <file>phone/ClientEditPageForm.ui.qml</file>
+        <file>phone/ClientPage.qml</file>
+        <file>phone/ClientPageForm.ui.qml</file>
+        <file>phone/ClientView.qml</file>
+        <file>phone/CloudPage.qml</file>
+        <file>phone/CloudPageForm.ui.qml</file>
+        <file>phone/Database.qml</file>
+        <file>phone/DevicePage.qml</file>
+        <file>phone/DevicePageForm.ui.qml</file>
+        <file>phone/ExamSetupPage.qml</file>
+        <file>phone/ExamSetupPageForm.ui.qml</file>
+        <file>phone/ExamStartPage.qml</file>
+        <file>phone/ExamStartPageForm.ui.qml</file>
+        <file>phone/main.qml</file>
+        <file>phone/PatientMenu.qml</file>
+        <file>phone/PatientMenuForm.ui.qml</file>
+        <file>phone/SettingsPage.qml</file>
+        <file>phone/SettingsPageForm.ui.qml</file>
+        <file>phone/SplashScreen.qml</file>
+        <file>phone/TabMenu.qml</file>
+        <file>phone/TabMenuForm.ui.qml</file>
+        <file>phone/TopMenu.qml</file>
+        <file>phone/TopMenuForm.ui.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tablet/Application.qml</file>
+        <file>tablet/ClientDelegate.qml</file>
+        <file>tablet/ClientDetailPage.qml</file>
+        <file>tablet/ClientDetailPageForm.ui.qml</file>
+        <file>tablet/ClientEditForm.ui.qml</file>
+        <file>tablet/ClientEditPage.qml</file>
+        <file>tablet/ClientEditPageForm.ui.qml</file>
+        <file>tablet/ClientPage.qml</file>
+        <file>tablet/ClientPageForm.ui.qml</file>
+        <file>tablet/ClientView.qml</file>
+        <file>tablet/CloudPage.qml</file>
+        <file>tablet/CloudPageForm.ui.qml</file>
+        <file>tablet/Database.qml</file>
+        <file>tablet/DevicePage.qml</file>
+        <file>tablet/DevicePageForm.ui.qml</file>
+        <file>tablet/ExamSetupPage.qml</file>
+        <file>tablet/ExamSetupPageForm.ui.qml</file>
+        <file>tablet/ExamStartPage.qml</file>
+        <file>tablet/ExamStartPageForm.ui.qml</file>
+        <file>tablet/main.qml</file>
+        <file>tablet/PatientMenu.qml</file>
+        <file>tablet/PatientMenuForm.ui.qml</file>
+        <file>tablet/SettingsPage.qml</file>
+        <file>tablet/SettingsPageForm.ui.qml</file>
+        <file>tablet/SplashScreen.qml</file>
+        <file>tablet/TabMenu.qml</file>
+        <file>tablet/TabMenuForm.ui.qml</file>
+        <file>tablet/TopMenu.qml</file>
+        <file>tablet/TopMenuForm.ui.qml</file>
+    </qresource>
+</RCC>
