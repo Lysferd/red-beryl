@@ -82,7 +82,7 @@ Item {
                                 height: 80
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                source: "images/chip_white.png"
+                                source: "../images/chip_white.png"
                                 mipmap: true
                             }
                         }
@@ -233,7 +233,7 @@ Item {
                                         id: option6_image
                                         anchors.fill: parent
                                         Layout.fillHeight: true
-                                        source: "images/chip_white.png"
+                                        source: "../images/chip_white.png"
                                     }
 
                                     ColorOverlay {
@@ -277,7 +277,7 @@ Item {
                                     anchors.verticalCenter: parent.verticalCenter
                                     Image {
                                         id: option6_image1
-                                        source: "images/chip_white.png"
+                                        source: "../images/chip_white.png"
                                         anchors.fill: parent
                                         Layout.fillHeight: true
                                     }
@@ -320,7 +320,7 @@ Item {
                                     anchors.verticalCenter: parent.verticalCenter
                                     Image {
                                         id: option6_image2
-                                        source: "images/chip_white.png"
+                                        source: "../images/chip_white.png"
                                         anchors.fill: parent
                                         Layout.fillHeight: true
                                     }
@@ -392,7 +392,7 @@ Item {
                 height: parent.height * 0.7
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: connectionHandler.alive ? "images/bluetooth_white.png" : "images/bluetooth_disabled.png"
+                source: connectionHandler.alive ? "../images/bluetooth_white.png" : "../images/bluetooth_disabled.png"
                 mipmap: true
             }
 

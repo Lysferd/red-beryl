@@ -28,7 +28,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 sourceSize.width: 0
                 fillMode: Image.Stretch
-                source: "images/people_white.png"
+                source: "../images/people_white.png"
                 mipmap: true
             }
 
@@ -72,7 +72,7 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: 0
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/stethoscope_white.png"
+                source: "../images/stethoscope_white.png"
                 mipmap: true
             }
             ColorOverlay {
@@ -94,7 +94,7 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: 0
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/settings_white.png"
+                source: "../images/settings_white.png"
                 mipmap: true
             }
 

@@ -101,7 +101,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/clear_white.png"
+                source: "../images/clear_white.png"
                 mipmap: true
             }
 
@@ -140,7 +140,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/done_white.png"
+                source: "../images/done_white.png"
                 mipmap: true
             }
 
@@ -232,7 +232,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/personal_data_white_big.png"
+                            source: "../images/personal_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -463,7 +463,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/clinical_data_white_big.png"
+                            source: "../images/clinical_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -662,7 +662,7 @@ Page {
                             width: 40
                             height: 40
                             anchors.verticalCenter: parent.verticalCenter
-                            source: "images/delete_white.png"
+                            source: "../images/delete_white.png"
                             anchors.horizontalCenter: parent.horizontalCenter
                             mipmap: true
                         }

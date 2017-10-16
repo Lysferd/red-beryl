@@ -70,7 +70,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/settings_white.png"
+                source: "../images/settings_white.png"
                 mipmap: true
             }
 
@@ -146,7 +146,7 @@ Page {
                             id: option1_image
                             anchors.fill: parent
                             Layout.fillHeight: true
-                            source: "images/chip_white.png"
+                            source: "../images/chip_white.png"
                         }
 
                         ColorOverlay {
@@ -206,7 +206,7 @@ Page {
                             id: option2_image
                             anchors.fill: parent
                             Layout.fillHeight: true
-                            source: "images/chip_white.png"
+                            source: "../images/chip_white.png"
                         }
 
                         ColorOverlay {
@@ -266,7 +266,7 @@ Page {
                             id: option3_image
                             anchors.fill: parent
                             Layout.fillHeight: true
-                            source: "images/chip_white.png"
+                            source: "../images/chip_white.png"
                         }
 
                         ColorOverlay {
@@ -326,7 +326,7 @@ Page {
                             id: option4_image
                             anchors.fill: parent
                             Layout.fillHeight: true
-                            source: "images/chip_white.png"
+                            source: "../images/chip_white.png"
                         }
 
                         ColorOverlay {

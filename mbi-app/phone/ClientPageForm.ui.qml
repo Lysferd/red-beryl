@@ -79,7 +79,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/search_white.png"
+                source: "../images/search_white.png"
                 mipmap: true
             }
 
@@ -118,7 +118,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/add_white.png"
+                source: "../images/add_white.png"
                 mipmap: true
             }
 

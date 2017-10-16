@@ -13,8 +13,10 @@ Page {
     id: client_edit_page
 
     font.weight: Font.ExtraLight
-
     anchors.fill: parent
+
+    property alias client_edit_page_header_title: client_edit_page_header_title
+
     // Button Aliases
     property alias cancel_button: client_edit_page_header_cancel_button
     // Client Detail Aliases
@@ -46,21 +48,30 @@ Page {
         // Background Color //
         color: "#F7F7F7"
 
+        //Ruler - Red horizontal Line
+        /*Rectangle {
+            width: parent.width
+            height: 1
+            color: "red"
+            anchors.verticalCenter: parent.verticalCenter
+            z: 1
+        }*/
+
         /***********************************************************************
             Client Edit Page :: Header :: Header Title
         ***********************************************************************/
         Text {
             id: client_edit_page_header_title
-            text: "Editar Paciente"
-            anchors.topMargin: 16
 
             // Positioning //
             anchors.top: parent.top
             anchors.left: parent.left
-            //anchors.leftMargin: parent.width * 0.16
+            anchors.topMargin: 10
+            anchors.leftMargin: 20
 
             // Title //
-            font.pixelSize: parent.height * 0.5
+            text: "<edit>"
+            font.pixelSize: 30
         }
 
         /***********************************************************************
@@ -69,25 +80,28 @@ Page {
         Button {
             id: client_edit_page_header_cancel_button
 
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.topMargin: parent.height * 0.1
-            anchors.rightMargin: parent.width * 0.03
+            anchors.rightMargin: 20
 
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_edit_page_header_cancel_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/clear_white.png"
+                source: "../images/clear_white.png"
                 mipmap: true
             }
 
@@ -105,25 +119,28 @@ Page {
         Button {
             id: client_edit_page_header_done_button
 
-            width: parent.height * 0.7
-            height: parent.height * 0.9
-
+            // Positioning //
             anchors.top: parent.top
+            anchors.topMargin: 3
             anchors.right: parent.right
-            anchors.topMargin: parent.height * 0.1
-            anchors.rightMargin: parent.width * 0.16
+            anchors.rightMargin: 20 + 28 + 25
 
+            // Sizes //
+            width: 44
+            height: 56
+
+            // Flat button //
             flat: true
 
             Image {
                 id: client_edit_page_header_done_button_image
 
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.width - 6
+                height: parent.width - 6
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/done_white.png"
+                source: "../images/done_white.png"
                 mipmap: true
             }
 
@@ -171,6 +188,7 @@ Page {
 
             ColumnLayout {
                 id: columnLayout
+
                 anchors.right: parent.right
                 anchors.left: parent.left
                 spacing: 15
@@ -179,44 +197,49 @@ Page {
 
                 RowLayout {
                     id: rowLayout
+
                     width: 100
                     height: 100
                     spacing: 10
 
                     Rectangle {
                         id: rectangle
+
                         width: 80
+                        radius: 8
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         anchors.topMargin: 0
                         anchors.bottomMargin: 0
 
-                        //color: "#037BFB"
                         gradient: Gradient {
+
                             GradientStop {
-                                position: 0.0
                                 color: "#4fa3fc"
+                                position: 0.0
                             }
+
                             GradientStop {
-                                position: 1.0
                                 color: "#0356b0"
+                                position: 1.0
                             }
                         }
-                        radius: 8
 
                         Image {
                             id: client_detail_page_groupImage_clients
+
                             width: 80
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/personal_data_white_big.png"
+                            source: "../images/personal_data_white_big.png"
                             mipmap: true
                         }
                     }
 
                     ColumnLayout {
                         id: columnLayout1
+
                         height: 100
                         spacing: 9
                         width: parent.width
@@ -229,7 +252,7 @@ Page {
 
                             Label {
                                 id: label_name
-                                text: "Nome Completo"
+                                text: "Primeiro Nome"
                                 font.capitalization: Font.SmallCaps
                                 fontSizeMode: Text.HorizontalFit
                                 font.bold: true
@@ -239,17 +262,71 @@ Page {
 
                             TextField {
                                 id: client_edit_page_client_name
+
                                 selectionColor: "#00801c"
                                 font.pixelSize: 12
                                 selectByMouse: true
                                 width: client_edit_page_client_name.contentWidth
                                        < 120 ? 120 : client_edit_page_client_name.contentWidth + 6
-                                placeholderText: "Nome Completo"
+                                placeholderText: "Primeiro nome"
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout17
+                            width: 100
+                            height: 100
+                            spacing: 0
+                            Label {
+                                id: label_name1
+                                width: client_edit_page_pane.width / 2
+                                height: 15
+                                text: "Nome do Meio"
+                                font.bold: true
+                                fontSizeMode: Text.HorizontalFit
+                                font.capitalization: Font.SmallCaps
+                            }
+
+                            TextField {
+                                id: client_edit_page_client_name1
+                                width: client_edit_page_client_name1.contentWidth
+                                       < 120 ? 120 : client_edit_page_client_name1.contentWidth + 6
+                                placeholderText: "Nome do meio"
+                                selectionColor: "#00801c"
+                                selectByMouse: true
+                                font.pixelSize: 12
+                            }
+                        }
+
+                        ColumnLayout {
+                            id: columnLayout18
+                            width: 100
+                            height: 100
+                            spacing: 0
+                            Label {
+                                id: label_name2
+                                width: client_edit_page_pane.width / 2
+                                height: 15
+                                text: "Sobrenome"
+                                font.bold: true
+                                fontSizeMode: Text.HorizontalFit
+                                font.capitalization: Font.SmallCaps
+                            }
+
+                            TextField {
+                                id: client_edit_page_client_name2
+                                width: client_edit_page_client_name2.contentWidth
+                                       < 120 ? 120 : client_edit_page_client_name2.contentWidth + 6
+                                placeholderText: "Sobrenome"
+                                selectionColor: "#00801c"
+                                selectByMouse: true
+                                font.pixelSize: 12
                             }
                         }
 
                         ColumnLayout {
                             id: columnLayout4
+
                             width: 100
                             height: 100
                             spacing: 0
@@ -291,7 +368,7 @@ Page {
 
                             TextField {
                                 id: client_edit_page_idDoc
-                                text: ""
+                                text: "<dummy>"
                                 inputMask: "999.999.999-99"
                                 font.pixelSize: 12
                                 height: 15
@@ -318,7 +395,7 @@ Page {
                             TextField {
                                 id: client_edit_page_birthday
                                 inputMask: "99/99/9999"
-                                text: ""
+                                text: "<dummy>"
                                 font.pixelSize: 12
                                 height: 15
                                 selectByMouse: true
@@ -346,7 +423,6 @@ Page {
                                 id: client_edit_page_dateReg
                                 font.pixelSize: 12
                                 height: 15
-                                text: ""
                                 selectByMouse: true
                                 width: client_edit_page_dateReg.contentWidth
                                        < 120 ? 120 : client_edit_page_dateReg.contentWidth + 6
@@ -387,7 +463,7 @@ Page {
                             height: 80
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            source: "images/clinical_data_white_big.png"
+                            source: "../images/clinical_data_white_big.png"
                             mipmap: true
                         }
                     }
@@ -411,12 +487,12 @@ Page {
                                 height: 15
                             }
 
-                            ComboBox {
+                            TextField {
                                 id: client_edit_page_bloodtype
-                                width: 120
-                                height: 37
-
-                                model: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
+                                selectByMouse: true
+                                inputMask: "AX"
+                                font.pixelSize: 12
+                                height: 15
                             }
                         }
 
@@ -461,7 +537,6 @@ Page {
                                 selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                text: ""
                                 inputMask: "9,99 m"
                             }
                         }
@@ -484,7 +559,6 @@ Page {
                                 selectByMouse: true
                                 font.pixelSize: 12
                                 height: 15
-                                text: ""
                                 inputMask: "D00 Kg"
                             }
                         }
@@ -588,7 +662,7 @@ Page {
                             width: 40
                             height: 40
                             anchors.verticalCenter: parent.verticalCenter
-                            source: "images/delete_white.png"
+                            source: "../images/delete_white.png"
                             anchors.horizontalCenter: parent.horizontalCenter
                             mipmap: true
                         }
@@ -604,6 +678,7 @@ Page {
                             id: delete_button
 
                             text: "Excluir paciente"
+                            Layout.fillWidth: true
                             font.capitalization: Font.Capitalize
                             flat: true
 
@@ -620,6 +695,13 @@ Page {
                     }
                     spacing: 10
                 }
+            }
+
+            Tumbler {
+                id: tumbler
+                x: 427
+                y: 192
+                model: ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
             }
         }
     }

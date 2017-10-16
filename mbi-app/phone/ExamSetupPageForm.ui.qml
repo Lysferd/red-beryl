@@ -89,7 +89,7 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                source: "images/left_arrow_white.png"
+                source: "../images/left_arrow_white.png"
                 mipmap: true
             }
 
@@ -207,7 +207,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_full_white.png"
+                        source: "../images/body_full_white.png"
                         mipmap: true
                         z: 1
                     }
@@ -224,7 +224,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_transp.png"
+                        source: "../images/body_transp.png"
                         mipmap: true
                         z: 2
                     }
@@ -235,7 +235,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_half_left_red.png"
+                        source: "../images/body_half_left_red.png"
                         mipmap: true
                         z: 0
                     }
@@ -245,7 +245,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_half_right_red.png"
+                        source: "../images/body_half_right_red.png"
                         mipmap: true
                         z: 0
                     }
@@ -255,7 +255,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_left_arm_red.png"
+                        source: "../images/body_left_arm_red.png"
                         mipmap: true
                         z: 0
                     }
@@ -265,7 +265,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_right_arm_red.png"
+                        source: "../images/body_right_arm_red.png"
                         mipmap: true
                         z: 0
                     }
@@ -275,7 +275,7 @@ Page {
                         width: parent.width
                         height: parent.height
                         fillMode: Image.PreserveAspectFit
-                        source: "images/body_torax_red.png"
+                        source: "../images/body_torax_red.png"
                         mipmap: true
                         z: 0
                     }

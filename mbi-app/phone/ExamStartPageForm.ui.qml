@@ -143,7 +143,7 @@ Page {
                                 height: 50
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                source: "images/personal_data_white_big.png"
+                                source: "../images/personal_data_white_big.png"
                                 mipmap: true
                             }
                         }
@@ -185,7 +185,7 @@ Page {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 mipmap: true
                                 anchors.verticalCenter: parent.verticalCenter
-                                source: "images/personal_data_white_big.png"
+                                source: "../images/personal_data_white_big.png"
                             }
                             //anchors.top: parent.top
                             //anchors.topMargin: 0
