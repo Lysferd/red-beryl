@@ -22,7 +22,7 @@ local tSettings = {
 	--Notes | (1) This is usually case-sensitive on non-Windows machines. (2) This MUST be an absolute (not relative) path.
 	--		 The application MUST have write permission to the folder.
 	--<<<< DO NOT EDIT BELOW THIS LINE >>>>
-	SQLite3PathSubDir = "plugins/sqlite3",
+	SQLite3PathSubDir = "../plugins/sqlite3",
 	SystemType = "Not Configured",
 	SystemBits = "32",
 	SystemPaths = {

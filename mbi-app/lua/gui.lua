@@ -1,11 +1,11 @@
 
-UI = {}
-UI.__index = UI
+require('lua.gui.button')
 
-function UI.new()
-  local obj = setmetatable( {}, UI )
+GUI = {}
+GUI.__index = GUI
 
-  TITLE_FONT = love.graphics.newFont('fonts/Arial.ttf', 30)
+function GUI.new()
+  local obj = setmetatable( {}, GUI )
 
   -- HEADER
   local w = WINDOW_WIDTH
@@ -13,6 +13,7 @@ function UI.new()
   local _w = 52
   local _h = 52
   local x = w - _w / 2 - 16
+  TITLE_FONT = love.graphics.newFont('fonts/Arial.ttf', 30)
 
   obj.title_canvas = love.graphics.newCanvas(w, h)
   obj.add_button = Button.new(x, h / 2, _w, _h, 'icons/add_white.png')
@@ -29,12 +30,12 @@ function UI.new()
   return obj
 end
 
-function UI:update()
+function GUI:update()
   self.add_button:update()
   self.search_button:update()
 end
 
-function UI:draw()
+function GUI:draw()
   love.graphics.setColor(255, 255, 255, 255)
   love.graphics.draw(self.title_canvas)
   self.add_button:draw()
@@ -43,7 +44,7 @@ function UI:draw()
   love.graphics.draw(self.content_canvas, self.content_x, self.content_y)
 end
 
-function UI:refresh()
+function GUI:refresh()
   love.graphics.setCanvas(self.title_canvas)
 
   love.graphics.clear()

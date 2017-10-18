@@ -1,11 +1,10 @@
 
 require('lua.sqlite3')
-
-require('lua.ui')
-require('lua.assets.button')
+require('lua.gui')
+--require('lua.pagemanager')
 
 function love.load()
-  --
+  -- SQLITE3
   PATIENT_LIST = {}
   local hDB = sqlite3.open("data/db");
   if hDB then
@@ -35,9 +34,12 @@ function love.load()
   -- STARTUP
   love.window.setTitle(love.window.getTitle() .. love.system.getOS())
   love.graphics.setBackgroundColor(Colors.white)
+  Class = require('lua.plugins.middleclass')
+  page_manager = require('lua.pagemanager')
 
-  -- CANVASES
-  ui = UI.new()
+  -- LOAD LOGIC/GUI
+  --page_manager = PageManager.new()
+  gui = GUI.new()
 end
 
 function showrow(udata,cols,values,names)
@@ -50,14 +52,13 @@ function showrow(udata,cols,values,names)
   return 0
 end
 
-
 function love.update()
-  ui:update()
+  gui:update()
 end
 
 function love.draw()
-  -- Draw UI
-  ui:draw()
+  -- Draw GUI
+  gui:draw()
 
   -- Draw Debug
   love.graphics.setFont(SMALL_FONT)
