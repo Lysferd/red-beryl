@@ -15,6 +15,8 @@
 		E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */; };
 		E597676C1F97E5B800083C11 /* mbi_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E597676B1F97E5B800083C11 /* mbi_appTests.swift */; };
 		E59767771F97E5B800083C11 /* mbi_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767761F97E5B800083C11 /* mbi_appUITests.swift */; };
+		E59767851F97F44B00083C11 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767841F97F44B00083C11 /* Patient.swift */; };
+		E59767871F98078D00083C11 /* PatientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767861F98078D00083C11 /* PatientTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		E59767721F97E5B800083C11 /* mbi-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mbi-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767761F97E5B800083C11 /* mbi_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mbi_appUITests.swift; sourceTree = "<group>"; };
 		E59767781F97E5B800083C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E59767841F97F44B00083C11 /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		E59767861F98078D00083C11 /* PatientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,7 @@
 		E59767531F97E5B800083C11 /* mbi-app */ = {
 			isa = PBXGroup;
 			children = (
-				E59767541F97E5B800083C11 /* AppDelegate.swift */,
-				E59767561F97E5B800083C11 /* FirstViewController.swift */,
-				E59767581F97E5B800083C11 /* SecondViewController.swift */,
+				E59767881F9807A600083C11 /* sources */,
 				E597675A1F97E5B800083C11 /* Main.storyboard */,
 				E597675D1F97E5B800083C11 /* Assets.xcassets */,
 				E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */,
@@ -126,6 +128,18 @@
 				E59767781F97E5B800083C11 /* Info.plist */,
 			);
 			path = "mbi-appUITests";
+			sourceTree = "<group>";
+		};
+		E59767881F9807A600083C11 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				E59767861F98078D00083C11 /* PatientTableViewCell.swift */,
+				E59767841F97F44B00083C11 /* Patient.swift */,
+				E59767541F97E5B800083C11 /* AppDelegate.swift */,
+				E59767561F97E5B800083C11 /* FirstViewController.swift */,
+				E59767581F97E5B800083C11 /* SecondViewController.swift */,
+			);
+			path = sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E59767591F97E5B800083C11 /* SecondViewController.swift in Sources */,
+				E59767851F97F44B00083C11 /* Patient.swift in Sources */,
+				E59767871F98078D00083C11 /* PatientTableViewCell.swift in Sources */,
 				E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */,
 				E59767571F97E5B800083C11 /* FirstViewController.swift in Sources */,
 			);
