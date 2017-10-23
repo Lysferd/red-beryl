@@ -1,0 +1,1 @@
+monitorar e salvar a temperatura do ambiente durante o exame

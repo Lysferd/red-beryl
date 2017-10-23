@@ -1,0 +1,10 @@
+Mas em modulos, por exemplo:
+
+- Modulo Simples:
+% de gordura, Agua, massa muscular, TMB, IMC
+
+- Modulo Intermediario:
+Os mesmos itens, mas com a agua intra e extra celular, peso seco, densidade corporal, Glicogenio muscular.
+
+- Modulo avançado:
+Todos os anteriores, mais o restante de resultados.
