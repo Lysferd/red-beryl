@@ -1,6 +1,8 @@
 //#include <SoftwareSerial.h>
 //#include <BLESerial.h>
 
+
+
 // ADICITONAR UM COPYRIGHT NO SPLASHSCREEN. substituir Red Beryl por mbi (medidor de bio impedancia).
 // Encontrar de alguma forma um modo de fazer os acentos aparecerem.
 
@@ -11,6 +13,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <Math.h>
 
 
 
@@ -86,9 +89,12 @@ void setup() {
   Serial.println("starting");
   
   //display.setRotation(2); // mudando a rotação da tela
-
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // inicializando o OLED.
   Wire.begin();
+  
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // inicializando o OLED.
+  Serial.println("Wire");
+  
+  Serial.println("Done");
 
   pinMode(buttonLeft, INPUT);
   pinMode(buttonRight, INPUT);
@@ -128,7 +134,20 @@ void setup() {
   delay(250);
   */
   selector = 1;
+
   
+  /*Wire.requestFrom(0x0D, 7);
+  delay(1);
+      byte d = Wire.available();
+    Serial.print(d);
+  while(Wire.available())
+  {
+
+    char c = Wire.read();
+    Serial.print(c);
+  }
+  */
+  delay(500);
   
 }
 
@@ -430,19 +449,141 @@ void clock()
 }
 void clockAdjust()
 {
-  static bool doing = false, minute = false, blinker = true;
+  static bool doing = false, blinker = true, century;
+  static int track = 0;
   static String adtime = "00:00";
-  static int tempH, tempM;
+  static int tempH, tempM, tempD, tempMn, tempY;
   if( doing == false )
   {
     //adtime = temptime;
     tempH = time.getHour( h12, PM );
     tempM = time.getMinute();
+    tempD = time.getDate();
+    tempMn = time.getMonth(century);
+    tempY = time.getYear();
+    
+    //time.getTime(tempY, tempMn, tempD, int d, tempH, tempM, int s);
     doing = true;
   }
+
+  switch(track)
+  {
+    case 0: //minuto
+    {
+      if(up)
+      {
+        up=false;
+      }
+      if(down)
+      {
+        down=false;
+      }
+      if(yes)
+      {
+        yes=false;
+      }
+      if(no)
+      {
+        no=false;
+      }
+
+      break;
+    }
+    
+    case 1: //hora
+    {
+      
+      if(up)
+      {
+        up=false;
+      }
+      if(down)
+      {
+        down=false;
+      }
+      if(yes)
+      {
+        yes=false;
+      }
+      if(no)
+      {
+        no=false;
+      }
+
+      break;
+    }
+    case 2: //dia
+    {
+      
+      if(up)
+      {
+        up=false;
+      }
+      if(down)
+      {
+        down=false;
+      }
+      if(yes)
+      {
+        yes=false;
+      }
+      if(no)
+      {
+        no=false;
+      }
+
+      break;
+    }
+    case 3: //mes
+    {
+      
+      if(up)
+      {
+        up=false;
+      }
+      if(down)
+      {
+        down=false;
+      }
+      if(yes)
+      {
+        yes=false;
+      }
+      if(no)
+      {
+        no=false;
+      }
+
+      break;
+    }
+    case 4: //ano
+    {
+      
+      if(up)
+      {
+        up=false;
+      }
+      if(down)
+      {
+        down=false;
+      }
+      if(yes)
+      {
+        yes=false;
+      }
+      if(no)
+      {
+        no=false;
+      }
+
+      break;
+    }
+  }
+
+  
   if(up)
   {
-    if(minute)
+    if(track == 1)
     {
       if(tempM<59)
       {
@@ -453,7 +594,7 @@ void clockAdjust()
         tempM = 0;
       }
     }
-    else
+    else if(track == 0)
     {
       if(tempH<23)
       {
@@ -464,11 +605,89 @@ void clockAdjust()
         tempH = 0;
       }
     }
+    else if(track==2)
+    {
+      switch(tempMn)
+      {
+        case 2:
+        {
+          if(tempD<28)
+          {
+            tempD++;
+          }
+          else
+          {
+            tempD=1;
+          }
+          break;
+        }
+        case 4:
+        {
+          if(tempD<30)
+          {
+            tempD++;
+          }
+          else
+          {
+            tempD=1;
+          }
+          break;
+        }
+        case 6:
+        {
+          if(tempD<30)
+          {
+            tempD++;
+          }
+          else
+          {
+            tempD=1;
+          }
+          break;
+        }
+        case 9:
+        {
+          if(tempD<30)
+          {
+            tempD++;
+          }
+          else
+          {
+            tempD=1;
+          }
+          break;
+        }
+        case 11:
+        {
+          if(tempD<30)
+          {
+            tempD++;
+          }
+          else
+          {
+            tempD=1;
+          }
+          break;
+        }
+        default:
+        {
+          if(tempD<31)
+          {
+            tempD++;
+          }
+          else
+          {
+            tempD=1;
+          }
+          break;
+        }
+      }
+    }
     up = false;
   }
   if(down)
   {
-    if(minute)
+    if(track == 1)
     {
       if(tempM>0)
       {
@@ -479,7 +698,7 @@ void clockAdjust()
         tempM = 59;
       }
     }
-    else
+    else if(track == 0)
     {
       if(tempH>0)
       {
@@ -494,26 +713,25 @@ void clockAdjust()
   }
   if(yes)
   {
-    if(minute)
+    if(track==1)
     {
-      Serial.println("-to be done-");
       time.setMinute(tempM);
-      time.setHour(tempH);
-      no = true;
+      //no = true;
     }
-    else
+    else if(track==0);
     {
-      minute = true;
+      time.setHour(tempH);
     }
+    track++;
     yes = false;
   }
   if(no)
   {
-    if(minute)
+    if(track==1)
     {
-      minute = false;
+      track--;
     }
-    else
+    else if(track==0)
     {
       screen = 2;
     }
@@ -521,7 +739,7 @@ void clockAdjust()
   }
   adtime = tempH; adtime += ":" ; adtime += tempM;
 
-  if(minute)
+  if(track==1)
   {
     display.setCursor(display.width()/2-24, barSize);
     if(tempH>9)
@@ -553,7 +771,7 @@ void clockAdjust()
       blinker = true;;
     }
   }
-  else
+  else if(track==0)
   {
     if(blinker)
     {
@@ -596,6 +814,10 @@ void clockAdjust()
       display.print("0");
     }
     display.print(tempM);
+  }
+  else if(track==2)
+  {
+    //display.setCursor((8*   //continuar isso
   }
   //display.print(adtime);
 }
