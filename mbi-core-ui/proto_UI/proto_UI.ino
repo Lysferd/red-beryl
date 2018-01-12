@@ -16,6 +16,14 @@
 #include <Math.h>
 
 
+#include <AD/AD5933.h> //incluir a library da AD.
+#define START_FREQ  (50000) // frequencia inicial padrão.
+#define FREQ_INCR   (1000) // incremento de frequencia padrão.
+#define NUM_INCR    (10)  // numero padrão de incrementos.
+#define REF_RESIST  (10000) // valor de referencia de resistor.
+double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
+int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
+
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
@@ -89,8 +97,31 @@ void setup() {
   Serial.println("starting");
   
   //display.setRotation(2); // mudando a rotação da tela
-  Wire.begin();
-  
+  Wire.begin(); //Inicializar o Wire
+  Wire.setClock(400000);  //Definir a velocidade de clock do Wire para conversar com a AD.
+
+    //fazer o setup inicial da AD e avisar de algo falhar PS:POR ALGUMA RAZÃO TIVER PROBLEMAS COM O RESET, SE CONTINUAR A TER PROBLEMAS, COMENTAR POR ENQUANTO PARA
+    //DEPOIS VER SE ALGO ESTA ERRADO NA BIBLIOTECA.
+  if (!(AD5933::reset() &&  //resetar
+        AD5933::setInternalClock(true) && //usar clock interno
+        AD5933::setStartFrequency(START_FREQ) &&  //frequencia inicial
+        AD5933::setIncrementFrequency(FREQ_INCR) && //incremento de frequencia
+        AD5933::setNumberIncrements(NUM_INCR) &&  //numero de incrementos
+        AD5933::setPGAGain(PGA_GAIN_X1))) //ganho PGA
+        {
+            Serial.println("FAILED in initialization!");
+            while (true) ;
+        }
+        //calibrar.
+    if (AD5933::calibrate(gain, phase, REF_RESIST, NUM_INCR+1))
+    {
+      Serial.println("Calibrated!");
+    }
+    else
+    {
+      Serial.println("Calibration failed...");
+    }
+
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // inicializando o OLED.
   Serial.println("Wire");
   
