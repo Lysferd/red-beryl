@@ -16,9 +16,9 @@
 #include <Math.h>
 
 
-#include <AD/AD5933.h> //incluir a library da AD.
+#include <AD5933.h> //incluir a library da AD.
 #define START_FREQ  (50000) // frequencia inicial padrão.
-#define FREQ_INCR   (1000) // incremento de frequencia padrão.
+#define FREQ_INCR   (START_FREQ/100) // incremento de frequencia padrão.
 #define NUM_INCR    (10)  // numero padrão de incrementos.
 #define REF_RESIST  (10000) // valor de referencia de resistor.
 double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
@@ -28,6 +28,7 @@ int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
 DS3231 time;
+AD5933 AD;
 
 #define BAT8_HEIGHT 8 
 #define BAT8_WIDTH 16
@@ -100,20 +101,10 @@ void setup() {
   Wire.begin(); //Inicializar o Wire
   Wire.setClock(400000);  //Definir a velocidade de clock do Wire para conversar com a AD.
 
-    //fazer o setup inicial da AD e avisar de algo falhar PS:POR ALGUMA RAZÃO TIVER PROBLEMAS COM O RESET, SE CONTINUAR A TER PROBLEMAS, COMENTAR POR ENQUANTO PARA
-    //DEPOIS VER SE ALGO ESTA ERRADO NA BIBLIOTECA.
-  if (!(AD5933::reset() &&  //resetar
-        AD5933::setInternalClock(true) && //usar clock interno
-        AD5933::setStartFrequency(START_FREQ) &&  //frequencia inicial
-        AD5933::setIncrementFrequency(FREQ_INCR) && //incremento de frequencia
-        AD5933::setNumberIncrements(NUM_INCR) &&  //numero de incrementos
-        AD5933::setPGAGain(PGA_GAIN_X1))) //ganho PGA
-        {
-            Serial.println("FAILED in initialization!");
-            while (true) ;
-        }
-        //calibrar.
-    if (AD5933::calibrate(gain, phase, REF_RESIST, NUM_INCR+1))
+  while(!defaultConfig());
+
+    //calibrar.
+    if (AD5933::calibrate(gain, phase, REF_RESIST, (NUM_INCR+1)))
     {
       Serial.println("Calibrated!");
     }
@@ -121,11 +112,8 @@ void setup() {
     {
       Serial.println("Calibration failed...");
     }
-
+  frequencySweepEasy();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // inicializando o OLED.
-  Serial.println("Wire");
-  
-  Serial.println("Done");
 
   pinMode(buttonLeft, INPUT);
   pinMode(buttonRight, INPUT);
@@ -1336,6 +1324,73 @@ void menu()
     }
     */
   }
+}
+void frequencySweepEasy() {
+    // Create arrays to hold the data
+    int real[NUM_INCR+1], imag[NUM_INCR+1];
+
+    // Perform the frequency sweep
+    if (AD5933::frequencySweep(real, imag, NUM_INCR+1)) {
+      // Print the frequency data
+      double cfreq = (START_FREQ*0.95);
+      for (int i = 0; i < NUM_INCR+1; i++, cfreq += FREQ_INCR) {
+        // Print raw frequency data
+        Serial.print(cfreq/1000);
+        Serial.print(": R=");
+        Serial.print(real[i]);
+        Serial.print("/I=");
+        Serial.print(imag[i]);
+
+        // Compute impedance
+        double magnitude = sqrt(pow(real[i], 2) + pow(imag[i], 2));
+        double impedance = 1/(magnitude*gain[i]);
+        Serial.print("  |Z|=");
+        Serial.println(impedance);
+      }
+      Serial.println("Frequency sweep complete!");
+    } else {
+      Serial.println("Frequency sweep failed...");
+    }
+}
+
+bool defaultConfig()
+{
+       Serial.print("Resetar AD:");
+  if(AD5933::reset()) {    Serial.println("Sucesso");  }
+  else{ Serial.println("Falhou");
+        return false;            }
+  delay(1);
+  
+       Serial.print("Configurar Relogio interno:");
+  if(AD5933::setInternalClock(true))  {     Serial.println("Sucesso");  }
+  else{ Serial.println("Falhou");
+        return false;            }
+  delay(1);
+
+    Serial.print("Iniciar frequencia(");Serial.print(START_FREQ*(0.95));Serial.print("):");
+  if(AD5933::setStartFrequency(START_FREQ*(0.95)))  {    Serial.println("Sucesso");  }
+  else{ Serial.println("Falhou");
+        return false;            }
+  delay(1);
+
+      Serial.print("Configurar Incremento de Frequencia(");Serial.print(FREQ_INCR);Serial.print("):");
+  if(AD5933::setIncrementFrequency(FREQ_INCR))  {    Serial.println("Sucesso"); }
+  else{ Serial.println("Falhou");
+        return false;            }
+  delay(1);
+
+      Serial.print("Configurar Numero de Incrementos(");Serial.print(NUM_INCR);Serial.print(");");
+  if(AD5933::setNumberIncrements(NUM_INCR))  {    Serial.println("Sucesso");  }
+  else{ Serial.println("Falhou");
+        return false;            }
+  delay(1);
+
+      Serial.print("Configurar ganho PGA X1:");
+  if(AD5933::setPGAGain(PGA_GAIN_X1))  {    Serial.println("Sucesso");  }
+  else{ Serial.println("Falhou");
+        return false;            }
+  delay(1);
+  return true;
 }
 
 
