@@ -24,6 +24,7 @@
 double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
 int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
 
+int real[NUM_INCR+1], imag[NUM_INCR+1]; // vetores do tipo int para conter os valores reais e imaginarios da impedancia.
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
@@ -87,6 +88,7 @@ int screen = 0;
 int barSize = 8;
 bool up=false,down=false,yes=false,no=false, BLE;
 static String temptime = "0:0";
+
 //Inicialização.
 
 void setup() {
@@ -106,11 +108,11 @@ void setup() {
     //calibrar.
     if (AD5933::calibrate(gain, phase, REF_RESIST, (NUM_INCR+1)))
     {
-      Serial.println("Calibrated!");
+      Serial.println("Calibrado!");
     }
     else
     {
-      Serial.println("Calibration failed...");
+      Serial.println("Calibrar falhou...");
     }
   frequencySweepEasy();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // inicializando o OLED.
@@ -229,6 +231,26 @@ void upperBar() // barra superior.
   {
     display.drawBitmap(0, 0, BT2_bmp, BT2_WIDTH, BT2_HEIGHT, WHITE);
   }
+  display.setCursor(BT2_WIDTH+5,0);
+
+  static unsigned long mill = 0;
+  static unsigned long tempMill = 0;
+  static double temperature = AD5933::getTemperature();
+
+  mill = millis();
+  if( (mill - tempMill) > 1000){
+    temperature = AD5933::getTemperature();
+    tempMill = mill;
+    //Serial.println("Temperatura atualizada");
+  }
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.print((int) temperature);
+  display.print("C");
+  //uint8_t i=247;
+  display.write((uint8_t) 247);
+  
+  
   scrollBar();
 
 
@@ -487,59 +509,145 @@ void clockAdjust()
 
   switch(track)
   {
-    case 0: //minuto
+    case 0: //hora: de 0 a 23 horas.
     {
-      if(up)
+      if(up)  //se o botão UP tiver valor true.
       {
-        up=false;
+        if(tempH<23){ //se a hora for menor que 23 horas
+          tempH++;  //adiciona uma hora a mais.
+        }
+        else{ //se a hora for 23 horas.
+          tempH = 0;  //volta a hora 0(equivalente as 24 horas)
+        }
+        up=false; //reseta o valor do botão UP para false.
       }
-      if(down)
+      if(down)  //se o botão DOWN tiver valor true.
       {
-        down=false;
+        if(tempH>0){  //se a hora for maior que 0 horas.
+          tempH--;  //diminui uma hora.
+        }
+        else{ //se a hora tiver valor 0.
+          tempH = 23; //volta a hora 23.
+        }
+        down=false; //reseta o valor do botão DOWN para false.
       }
-      if(yes)
+      if(yes) //se o botão YES tiver valor true.
       {
-        yes=false;
-      }
-      if(no)
+        time.setHour(tempH);  //setta o minuto do rtc com o valor de tempH;
+        yes=false;  //reseta o valor do botão YES para false. Melhor fazer isso antes de avançar a track.
+        track++;  //track avança para a proxima.
+        }
+      if(no)  //se o botão NO tiver valor true.
       {
-        no=false;
+        tempH = time.getHour( h12, PM );  //recupera o valor valor de hora salvo no rtc.
+        no=false; //reseta o valor do botão NO para false.
+        screen = 2; //retornar para a screen anterior.
       }
-
-      break;
+      break;  //fim da logica da track 0 representando as horas.
     }
     
-    case 1: //hora
+    case 1: //minuto
     {
       
-      if(up)
+      if(up)  //se o botão UP tiver valor true.
       {
-        up=false;
+        if(tempM<59)  //se o minuto for menor que 59.
+       {
+         tempM++; //adiciona um minuto a mais.
+        }
+        else  //se o minuto for 59.
+        {
+          tempM = 0;  //retornar ao minuto 0.
+        }
+        up=false; //reseta o valor do botão UP para false.
       }
-      if(down)
+      if(down)  //se o botão DOWN tiver valor true.
       {
-        down=false;
+        if(tempM>0){  //se o minuto for maior que 0.
+          tempM--;  //minuto diminui por um.
+        }
+        else{ //se o minuto for 0.
+          tempM=59; //minuto retornar ao valor 59.
+        }
+        down=false; //reseta o valor do botão DOWN para false.
       }
-      if(yes)
+      if(yes) //se o botão YES tiver valor true.
       {
-        yes=false;
+        time.setMinute(tempM);  //setta o minuto do rtc com o valor de tempM;
+        yes=false;  //reseta o valor do botão YES para false.
+        track++;  //avança para a proxima track.
       }
-      if(no)
+      if(no)  //se o botão NO tiver valor true.
       {
-        no=false;
+        tempM = time.getMinute(); //recupera o valor de minuto salvo no rtc.
+        no=false; //reseta o valor do botão NO para false.
+        track--;  //retorna a track anterior.
       }
-
-      break;
+      break;  //fim da logica da track 1 representando os minutos.
     }
     case 2: //dia
-    {
-      
-      if(up)
+    { 
+      if(up)  //se o botão UP tiver valor true.
       {
-        up=false;
+        if(tempMn==2){  //se o mes for fevereiro
+          if(tempD<28){ //se o dia for menor que 28
+            tempD++;  //adiciona um dias a mais.
+          }
+          else{ //se o dia for 28(ou mais).
+            tempD = 1;  //volta ao primeiro dia do mes.
+          }
+        }
+        else if(tempMn<8){  //se o mes for antes de agosto
+          if(tempMn % 2 != 0){  //se o mes for impar(meses impares antes de agosto tem 31 dias)
+            if(tempD<31){ //se o dia for menor que 31.
+              tempD++;  //adiciona um dia a mais.
+            }
+            else{ //se o dia for 31.
+              tempD = 1;  //volta ao primeiro dia do mes.
+            }
+          }
+          else{ //se o mes for par(meses pares antes de agosto tem 30 dias exceto por fevereiro.)
+            if(tempD<30){ //se o dia for menor que 30.
+              tempD++;  //adiciona um dia a mais.
+            }
+            else{ //se o dia for 30.
+              tempD = 1;  //volta ao primeiro dia do mes.
+            }
+          }
+        }
+        else{ //se o mes for pelo menos agosto.
+          if(tempMn % 2 == 0){ //se o mes for par(mese pares a partir de agosto tem 31 dias)
+            if(tempD<31){ //se o dia for menor que 31.
+              tempD++;  //adiciona um dia a mais.
+            }
+            else{ //se o dia for 31.
+              tempD = 1;  //volta ao primeiro dia do mes.
+            }
+          }
+          else{ //se o mes for impar(mese impares a partir de agosto tem 30 dias.
+            if(tempD<30){ //se o dia for menor que 30.
+              tempD++;  //adiciona um dias a mais.
+            }
+            else{ //se o dia for 30.
+              tempD = 1;  //volta ao primeiro dias do mes.
+            }
+          }
+        }
+        up=false; //reseta o valor do botão UP para false.
       }
-      if(down)
+      if(down)  //se o valor do botão DOWN for true.
       {
+        if(tempMn==2){  //se o mes for fevereiro.
+          if(tempD>1){  //se o dia for maior que 1;
+            tempD--;  //diminuit um dia.
+          }
+          else{ //se o dia for 1.
+            tempD = 28; //retorna ao dia 28;
+          }
+        }
+        else if(tempMn<8){  //se o mes for antes de agosto.
+          
+        }
         down=false;
       }
       if(yes)
@@ -1327,7 +1435,7 @@ void menu()
 }
 void frequencySweepEasy() {
     // Create arrays to hold the data
-    int real[NUM_INCR+1], imag[NUM_INCR+1];
+    //int real[NUM_INCR+1], imag[NUM_INCR+1];
 
     // Perform the frequency sweep
     if (AD5933::frequencySweep(real, imag, NUM_INCR+1)) {
