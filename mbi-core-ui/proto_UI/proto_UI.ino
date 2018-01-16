@@ -587,8 +587,7 @@ void clockAdjust()
     }
     case 2: //dia
     { 
-      if(up)  //se o botão UP tiver valor true.
-      {
+      if(up){  //se o botão UP tiver valor true.     
         if(tempMn==2){  //se o mes for fevereiro
           if(tempD<28){ //se o dia for menor que 28
             tempD++;  //adiciona um dias a mais.
@@ -635,50 +634,85 @@ void clockAdjust()
         }
         up=false; //reseta o valor do botão UP para false.
       }
-      if(down)  //se o valor do botão DOWN for true.
-      {
-        if(tempMn==2){  //se o mes for fevereiro.
-          if(tempD>1){  //se o dia for maior que 1;
-            tempD--;  //diminuit um dia.
+      
+      if(down){  //se o valor do botão DOWN for true.
+        if(tempD>1){  //se o dia for maior que 1.
+          tempD--;
+        }
+        else{ //se o dia for 1.
+          if(tempMn==2){  //se o mes for fevereiro.
+            tempD = 28; //dia retornar a 28.
           }
-          else{ //se o dia for 1.
-            tempD = 28; //retorna ao dia 28;
+          else if(tempMn<8){  //se o mes não for fevereiro e for antes de agosto.
+            if(tempMn % 2 == 0){  //se o numero do mes for par.(meses pares antes de agosto tem 30 dias exceto por fevereiro)
+              tempD = 30; //dia retorna a 30.
+            }
+            else{ //se o numero do mes for impar(31 dias).
+              tempD = 31; //dia retorna a 31.
+            }
+          }
+          else{ //se o mes não for vereiro e for pelo menos agosto.
+            if(tempMn % 2 == 0){  //se o numero do mes for par.(meses pares a partir de agosto tem 31 dias)
+              tempD = 31; //dia retorna a 31.
+            }
+            else{ //se o numero do mes for impar.(30 dias)
+              tempD = 30; //dia retorna a 30.
+            }
           }
         }
-        else if(tempMn<8){  //se o mes for antes de agosto.
-          
-        }
-        down=false;
+        down=false; //reseta o valor do botão DOWN para false.
       }
-      if(yes)
+      
+      if(yes) //se o valor do botão YES for true.
       {
-        yes=false;
+        yes=false;  //reseta o valor do botão YES para false.
+        time.setDate(tempD);  //setta o valor de dia no rtc com o valor do tempD.
+        track++;  //avança ao proximo track.
       }
-      if(no)
+      if(no)  //se o valor do botão NO for true.
       {
-        no=false;
+        no=false; //reseta o valor do botão NO para false.
+        tempD = time.getDate(); //recupera o valor da data salvo no rtc.
+        track--;  //retorna a track anterior.
       }
-
-      break;
+      break;  //final da track 2 do dia.
     }
     case 3: //mes
     {
+      if(up)  //se o valor do botão UP for true.
+      {
+        if(tempMn <12){ //se o mes for antes de dezembro.
+          tempMn++; //adiciona um mes.
+        }
+        else{ //se o mes for dezembro.
+          tempMn = 1; //retorna ao mes 1
+        }
+        up=false; //reseta o valor do botão UP para false.
+      }
       
-      if(up)
+      if(down)  //se o valor do botão DOWN for true.
       {
-        up=false;
+        if(tempMn>1){ //se o mes for maior que 1.
+          tempMn--; //diminuit um mes.
+        }
+        else{ //se o mes for 1;
+          tempMn = 12;  //retorna ao mes 12.
+        }
+        down=false; //reseta o valor do botão DOWN para false.
       }
-      if(down)
+      
+      if(yes) //se o valor do botão YES for true.
       {
-        down=false;
+        yes=false;  //reseta o valor do botão YES para false.
+        time.setMonth(tempMn);  //setta o valor do mes no rtc com o valor do tempMn
+        track++;  //avança para a proxima track.
       }
-      if(yes)
+      
+      if(no)  //se o valor do botão NO for true.
       {
-        yes=false;
-      }
-      if(no)
-      {
-        no=false;
+        no=false; //reseta o valor do botão NO para false.
+        tempMn = time.getMonth(century); //tempMn recebe o valor do mes do rtc.
+        track--;  //retorna a track anterior.
       }
 
       break;
