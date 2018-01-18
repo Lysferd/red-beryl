@@ -17,7 +17,7 @@
 
 
 #include <AD5933.h> //incluir a library da AD.
-#define START_FREQ  (50000*.95) // frequencia inicial padrão.
+#define START_FREQ  (50000) // frequencia inicial padrão.
 #define FREQ_INCR   (START_FREQ/100) // incremento de frequencia padrão.
 #define NUM_INCR    (10)  // numero padrão de incrementos.
 #define REF_RESIST  (10000) // valor de referencia de resistor.
@@ -399,6 +399,7 @@ void checkPins()
           break;
 
         case 1:
+          yes = true;
           break;
 
         case 2:
@@ -1058,19 +1059,74 @@ void menu()
 
       case 1:   //screen 1 - Leituras
       {
+        static int choice = 0;  //inicializa uma variavel int 'choice' que deve ser usada para percorrer o menu secundario da tela de leituras. (0)1-Nova Leitura | (1)2-historico |
+                                //usar a opção choice para imprimir as telas dos submenus. (2)Fazer a leitura, gerar a media e o angulo de phase e retornar. | (3)abrir historico salvo na EEPROM(a fazer)
+        switch(choice){
+          case 0: //1-Nova Leitura.
+            display.setCursor(0,barSize); //reseta posição do cursor
+            display.setTextColor(BLACK,WHITE);  //fundo branco, letras pretas.
+            display.println(" 1-Nova Leitura."); 
+            display.setTextColor(WHITE);  //letras brancas.
+            display.print(" 2-Historico.");
+            if(yes){  //se YES for true.
+              choice=2; //altera para a choice 2, aonde a AD vai realizar a leitura.
+              yes = false;  //reseta YES.
+            }
+            if(no){
+              screen = 0;
+              no = false;
+            }
+            break;
+
+          case 1:
+            
+            break;
+        }
+
+/*
+
+        
         static boolean sweep = false; //inicializa uma variavel boolean sweep que determina se uma sweep ja foi feita e declara como false.
         static int i = 0; //inicializa uma variavel int para percorrer os vetores reais e imaginarios sem travar a atualização de frames.
         if(!sweep){ //se sweep ainda não tiver sido realizado.
           frequencySweepEasy(); //realiza um sweep(utilizar o Serial Monitor para acompanhar os valores e checar se tudo ocorreu corretamente).
+          sweep = true;
         }
-        else{
-          display.setCursor(2,barSize);
-          display.setTextColor(WHITE);
-          double cfreq = (START_FREQ);
-          //if(int i = 0; i < NUM_INCR+1; i++, cfreq +=
+        else{ //se o sweep ja tiver sido realizado.
+          display.setCursor(0,barSize); //seta o cursor na margem esquerda superior da tela abaixo da barrar de informações.
+          display.setTextColor(WHITE);  //setta a cor do texto como branca.
+          static double cfreq = (START_FREQ*0.95); //inicializa a variavel static cfreq a partir da frequencia default.
+          Serial.print(i);
+          if(i < NUM_INCR+1) { //se a variavel i for menor que o numero de incrementos
+            if(i==0){
+              cfreq = (START_FREQ*0.95);
+            }
+            display.print(" ");
+            display.print(cfreq/1000);  //imprime a variavel cfreq.
+            display.println("KHz.");
+            display.print(" R=");  
+            display.println(real[i]); //imprime a posição i do vetor real.
+            //display.setCursor(2,barSize+8); //setta o cursor na linha abaixo.
+            display.print(" I=");
+            display.print(imag[i]);
+            if(yes){  //se YES tiver valor true.
+              i++;  //incrementa o i
+              cfreq += FREQ_INCR; //incrementa a frequencia
+              yes = false;  //reseta YES
+            }
+            
+          }
         }
+        if(no){
+              sweep = false;
+              i = 0;
+              no = false;
+              screen = 0;
+            }
+            */
         break;
         }
+        
       case 2:  //criar tela de configuração.
       {
         static int choice = 0;
@@ -1399,7 +1455,7 @@ bool defaultConfig()
   delay(1);
 
     Serial.print("Iniciar frequencia(");Serial.print(START_FREQ*(0.95));Serial.print("):");
-  if(AD5933::setStartFrequency(START_FREQ))  {    Serial.println("Sucesso");  }
+  if(AD5933::setStartFrequency(START_FREQ*0.95))  {    Serial.println("Sucesso");  }
   else{ Serial.println("Falhou");
         return false;            }
   delay(1);
