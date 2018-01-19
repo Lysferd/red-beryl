@@ -25,6 +25,7 @@ double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
 int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
 
 int real[NUM_INCR+1], imag[NUM_INCR+1]; // vetores do tipo int para conter os valores reais e imaginarios da impedancia.
+int medReal, medImag; //variaveis int para receber os valores médios dos vetores.
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
@@ -104,7 +105,7 @@ void setup() {
   Wire.setClock(400000);  //Definir a velocidade de clock do Wire para conversar com a AD.
 
   while(!defaultConfig());
-
+  Serial.println("configurado?");
     //calibrar.
     if (AD5933::calibrate(gain, phase, REF_RESIST, (NUM_INCR+1)))
     {
@@ -339,6 +340,11 @@ void checkPins()
             }
             break;
           }
+          case 1:
+          {
+            up=true;
+            break;
+          }
           case 2:
           {
             up=true;
@@ -372,6 +378,10 @@ void checkPins()
           else {
             selector = 1;
           }
+        }
+        if(screen == 1)
+        {
+          down=true;
         }
         if(screen == 2)
         {
@@ -1062,26 +1072,128 @@ void menu()
         static int choice = 0;  //inicializa uma variavel int 'choice' que deve ser usada para percorrer o menu secundario da tela de leituras. (0)1-Nova Leitura | (1)2-historico |
                                 //usar a opção choice para imprimir as telas dos submenus. (2)Fazer a leitura, gerar a media e o angulo de phase e retornar. | (3)abrir historico salvo na EEPROM(a fazer)
         switch(choice){
-          case 0: //1-Nova Leitura.
+          case 0: {//1-Nova Leitura.
             display.setCursor(0,barSize); //reseta posição do cursor
             display.setTextColor(BLACK,WHITE);  //fundo branco, letras pretas.
+            display.setTextSize(1);
             display.println(" 1-Nova Leitura."); 
             display.setTextColor(WHITE);  //letras brancas.
             display.print(" 2-Historico.");
+            if(up){ //se UP for true.
+              up=false; //reseta UP.
+            }
+            if(down){  //se DOWN for true
+              choice++; //opção 2 do menu.
+              down=false; //reseta DOWN.
+            }
             if(yes){  //se YES for true.
               choice=2; //altera para a choice 2, aonde a AD vai realizar a leitura.
               yes = false;  //reseta YES.
             }
-            if(no){
-              screen = 0;
-              no = false;
+            if(no){  //se NO for true.
+              screen = 0; //retorna ao menu inicial
+              choice = 0; //reseta choice.
+              no = false; //reseta NO.
             }
-            break;
+            break;  //fim da logica da opção 0 de choice(LEITURA)
+          }
 
-          case 1:
-            
-            break;
+          case 1:{  //historico
+            display.setCursor(0,barSize); //reseta posição do cursor
+            display.setTextColor(WHITE);  //letras brancas.
+            display.println(" 1-nova Leitura.");
+            display.setTextColor(BLACK,WHITE);  //fundo branco, letras pretas.
+            display.print(" 2-Historico.");
+            if(up){ //se UP for true.
+              choice--; //opção 1 do menu.
+              up=false; //resta UP.
+            }
+            if(down){  //se DOWN for true
+              down=false; //reseta DOWN
+            }
+            if(yes){  //se YES for true.
+              yes=false;  //reseta YES
+            }
+            if(no){  //se NO for true
+              screen = 0; //retorna ao menu principal
+              choice = 0; //reseta choice.
+              no=false; //reseta NO
+            }
+            break;  //fim da logica da opção 1 de choice(HISTORICO)
+          }
+          case 2:{  //fazer leitura.
+            display.setCursor(0,barSize); //reseta posição do cursor.
+            display.setTextColor(WHITE);  //letras brancas.
+            display.println("Realizar sweep?(50KHz)");
+            display.print("     NAO/SIM");
+            if(up){ //se UP for true.
+              up=false; //reseta UP.
+            }
+            if(down){ //se DOWN for true.
+              down=false; //reseta DOWN.
+            }
+            if(yes){  //se YES for true.
+              Serial.println("yes");
+              
+              /*if(frequencySweepCustom(50000, 10 )){
+                Serial.println("Sucesso");
+              }
+
+              for(int i=0; i<NUM_INCR+1; i++){  //abre o FOR para percorrer do 0 ao NUM_INCR+1(geralmente 11), somando os valores reais e imaginarios respectivamente.
+                if(i=0){  //se i=0.
+                   medReal=0; //reseta medReal
+                   medImag=0; //reseta medImag
+                }
+                medReal+= real[i];  //soma os valores reais.
+                medImag+= imag[i];  //soma os valores imaginarios.
+              }
+              medReal = medReal/(NUM_INCR+1); //divide o somatorio real pelo numero de valores (valor da frequencia inicial + os incrementos, por default: 11)
+              medImag = medImag/(NUM_INCR+1); //divide o somatorio imaginario pelo numero de valores (valor da frequencia inicial + os incrementos, por default: 11)
+              yes=false;  //reseta YES.
+              choice=3; //proxima tela, aonde os resultados da sweep serão informados.
+          */
+          
+          //while(frequencySweepCustom(50000, 10));   //corrigir o codigo do frequencySweepCustom que esta falho, verificar se é a configuração dos valores de frequencia e incrementos antes de começar
+                                                      //o sweep que esta dando problema, usar delay para isso, se não, provavelmente modificar aos poucos a função frequencySweepEasy até termos o que precisamos.
+          frequencySweepEasy();
+          choice=0;
+          yes = false;
+            }
+            if(no){  //se NO for true
+              choice=0; //retornar a tela anterior.
+              no-false; //reseta NO.
+            }
+            break;  //fim da logica da opção 2 de choice(CONFIRMA LEITURA).
+          }
+          case 3:{  //leitura.
+            display.setCursor(0,barSize); //reseta a posição do cursor.
+            display.setTextColor(WHITE);  //texto em cor branca.
+            display.print(" ");
+            display.print(START_FREQ/1000, 0);
+            display.println("KHz");
+            display.print(" R: ");
+            display.print(medReal);
+            display.print("   |   I: ");
+            display.print(medImag);
+
+            if(up){ //se UP for true.
+              up=false; //reseta UP.
+            }
+            if(down){ //se DOWN for true.
+              down=false; //reseta DOWN;.
+            }
+            if(yes){  //se YES for true.
+              choice=1; //retorna ao menu, com a opção indo diretamente para a opção de historico.
+              yes=false;  //reseta YES.
+            }
+            if(no){ //se NO for true.
+              choice=0; //reseta choice.
+              screen=0; //reseta ao menu inicial.
+              no=false; //reseta NO.
+            }
+          }
         }
+      
 
 /*
 
@@ -1439,6 +1551,52 @@ void frequencySweepEasy() {
     }
 }
 
+bool frequencySweepCustom(int FREQ, int NUM ){
+  medReal=0;  //reseta os valores medios de real e imaginario.
+  medImag=0;
+
+  if(!AD5933::setStartFrequency(FREQ*0.95)){    //setta a frequencia inicial a partir do parametro recebido
+    Serial.println("Falha ao settar frequencia inicial.");
+    return false; //retorna false em caso de falha.
+  }
+  if(!AD5933::setIncrementFrequency(FREQ/1000)){    //setta o incremento de frequencia, calculado a partir da frequencia inicial.
+    Serial.println("Falha ao settar o incremento de frequencia.");
+    return false; //retorna false em caso de falha.
+  }
+  if(!AD5933::setNumberIncrements(NUM)){   //setta o numero de incrementos.
+    Serial.println("Falha ao settar o numero de incrementos.");
+    return false; //retorna false em caso de falha.
+  }
+  
+  if(AD5933::frequencySweep(real, imag, NUM+1)){   //realiza o sweep de frequencia, e fornece as variaveis globais real e imag, assim como o numero de incrementos +1 como paramtros.
+    double cfreq = FREQ*0.95;   //inicializa uma variavel cfreq para acompanhar no serial
+    for(int i=0; i < NUM+1; i++, cfreq += (FREQ/1000)){
+      medReal+=real[i];
+      medImag+=imag[i];
+      Serial.print(cfreq/1000);
+      Serial.print(": R=");
+      Serial.print(real[i]);
+      Serial.print("|I=");
+      Serial.print(imag[i]);
+
+      double magnitude = sqrt(pow(real[i], 2) + pow(imag[i], 2));
+      double impedance = 1/(magnitude*gain[i]);
+      Serial.print("  |Z|=");
+      Serial.print(impedance);
+      
+    }
+    Serial.println("Sweep completo com sucesso");
+    medReal /= 11;
+    medImag /= 11;
+    Serial.println(medReal);
+    Serial.println(medImag);
+    return true;
+  }
+  else{
+    Serial.println("Sweep Falhou Inesperadamente");
+    return false;
+  }
+}
 
 bool defaultConfig()
 {
@@ -1479,5 +1637,4 @@ bool defaultConfig()
   delay(1);
   return true;
 }
-
 
