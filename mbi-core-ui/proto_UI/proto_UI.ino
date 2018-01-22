@@ -24,8 +24,8 @@
 double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
 int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
 
-int real[NUM_INCR+1], imag[NUM_INCR+1]; // vetores do tipo int para conter os valores reais e imaginarios da impedancia.
-int medReal, medImag; //variaveis int para receber os valores médios dos vetores.
+//int real[NUM_INCR+1], imag[NUM_INCR+1]; // vetores do tipo int para conter os valores reais e imaginarios da impedancia.
+double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
@@ -1069,6 +1069,7 @@ void menu()
 
       case 1:   //screen 1 - Leituras
       {
+        unsigned int f=50000;
         static int choice = 0;  //inicializa uma variavel int 'choice' que deve ser usada para percorrer o menu secundario da tela de leituras. (0)1-Nova Leitura | (1)2-historico |
                                 //usar a opção choice para imprimir as telas dos submenus. (2)Fazer a leitura, gerar a media e o angulo de phase e retornar. | (3)abrir historico salvo na EEPROM(a fazer)
         switch(choice){
@@ -1134,30 +1135,9 @@ void menu()
             }
             if(yes){  //se YES for true.
               Serial.println("yes");
-              
-              /*if(frequencySweepCustom(50000, 10 )){
-                Serial.println("Sucesso");
-              }
-
-              for(int i=0; i<NUM_INCR+1; i++){  //abre o FOR para percorrer do 0 ao NUM_INCR+1(geralmente 11), somando os valores reais e imaginarios respectivamente.
-                if(i=0){  //se i=0.
-                   medReal=0; //reseta medReal
-                   medImag=0; //reseta medImag
-                }
-                medReal+= real[i];  //soma os valores reais.
-                medImag+= imag[i];  //soma os valores imaginarios.
-              }
-              medReal = medReal/(NUM_INCR+1); //divide o somatorio real pelo numero de valores (valor da frequencia inicial + os incrementos, por default: 11)
-              medImag = medImag/(NUM_INCR+1); //divide o somatorio imaginario pelo numero de valores (valor da frequencia inicial + os incrementos, por default: 11)
-              yes=false;  //reseta YES.
-              choice=3; //proxima tela, aonde os resultados da sweep serão informados.
-          */
-          
-          //while(frequencySweepCustom(50000, 10));   //corrigir o codigo do frequencySweepCustom que esta falho, verificar se é a configuração dos valores de frequencia e incrementos antes de começar
-                                                      //o sweep que esta dando problema, usar delay para isso, se não, provavelmente modificar aos poucos a função frequencySweepEasy até termos o que precisamos.
-          frequencySweepEasy();
-          choice=0;
-          yes = false;
+              frequencySweepCustom(f, 10);          
+              choice=3;
+              yes = false;
             }
             if(no){  //se NO for true
               choice=0; //retornar a tela anterior.
@@ -1169,11 +1149,11 @@ void menu()
             display.setCursor(0,barSize); //reseta a posição do cursor.
             display.setTextColor(WHITE);  //texto em cor branca.
             display.print(" ");
-            display.print(START_FREQ/1000, 0);
+            display.print(f/1000);
             display.println("KHz");
             display.print(" R: ");
-            display.print(medReal);
-            display.print("   |   I: ");
+            display.println(medReal);
+            display.print(" I:");
             display.print(medImag);
 
             if(up){ //se UP for true.
@@ -1193,49 +1173,6 @@ void menu()
             }
           }
         }
-      
-
-/*
-
-        
-        static boolean sweep = false; //inicializa uma variavel boolean sweep que determina se uma sweep ja foi feita e declara como false.
-        static int i = 0; //inicializa uma variavel int para percorrer os vetores reais e imaginarios sem travar a atualização de frames.
-        if(!sweep){ //se sweep ainda não tiver sido realizado.
-          frequencySweepEasy(); //realiza um sweep(utilizar o Serial Monitor para acompanhar os valores e checar se tudo ocorreu corretamente).
-          sweep = true;
-        }
-        else{ //se o sweep ja tiver sido realizado.
-          display.setCursor(0,barSize); //seta o cursor na margem esquerda superior da tela abaixo da barrar de informações.
-          display.setTextColor(WHITE);  //setta a cor do texto como branca.
-          static double cfreq = (START_FREQ*0.95); //inicializa a variavel static cfreq a partir da frequencia default.
-          Serial.print(i);
-          if(i < NUM_INCR+1) { //se a variavel i for menor que o numero de incrementos
-            if(i==0){
-              cfreq = (START_FREQ*0.95);
-            }
-            display.print(" ");
-            display.print(cfreq/1000);  //imprime a variavel cfreq.
-            display.println("KHz.");
-            display.print(" R=");  
-            display.println(real[i]); //imprime a posição i do vetor real.
-            //display.setCursor(2,barSize+8); //setta o cursor na linha abaixo.
-            display.print(" I=");
-            display.print(imag[i]);
-            if(yes){  //se YES tiver valor true.
-              i++;  //incrementa o i
-              cfreq += FREQ_INCR; //incrementa a frequencia
-              yes = false;  //reseta YES
-            }
-            
-          }
-        }
-        if(no){
-              sweep = false;
-              i = 0;
-              no = false;
-              screen = 0;
-            }
-            */
         break;
         }
         
@@ -1525,7 +1462,7 @@ void menu()
 }
 void frequencySweepEasy() {
     // Create arrays to hold the data
-    //int real[NUM_INCR+1], imag[NUM_INCR+1];
+    int real[NUM_INCR+1], imag[NUM_INCR+1];
 
     // Perform the frequency sweep
     if (AD5933::frequencySweep(real, imag, NUM_INCR+1)) {
@@ -1551,28 +1488,90 @@ void frequencySweepEasy() {
     }
 }
 
-bool frequencySweepCustom(int FREQ, int NUM ){
+bool frequencySweepCustom(unsigned int FREQ, int NUM ){
   medReal=0;  //reseta os valores medios de real e imaginario.
   medImag=0;
+  int real, imag, i=0;
+  double cfreq = FREQ*0.95;
+  double inc = (FREQ/100);
+  Serial.println(FREQ);
+  Serial.println(cfreq);
+  if(!(AD5933::setPowerMode(POWER_STANDBY) &&
+       AD5933::setControlMode(CTRL_INIT_START_FREQ) &&
+       AD5933::setControlMode(CTRL_START_FREQ_SWEEP)))
+       {
+        Serial.print("Falhou em inicializar SWEEP.");
+       }
+  while((AD5933::readStatusRegister() & STATUS_SWEEP_DONE) != STATUS_SWEEP_DONE){
+    if(!AD5933::getComplexData(&real, &imag)){
+      Serial.println("Falhou em adquirir DATA de frequencia.");
+    }
+    Serial.print(cfreq/1000);
+    Serial.print(": R=");
+    Serial.print(real);
 
+    medReal+=real;
+    
+    Serial.print("/I=");
+    Serial.print(imag);
+
+    medImag+=imag;
+
+    double magnitude = sqrt(pow(real, 2) + pow(imag, 2));
+    double impedance = 1/(magnitude*gain[i]);
+    Serial.print("  |Z|=");
+    Serial.println(impedance);
+
+    i++;
+    cfreq +=inc;
+    AD5933::setControlMode(CTRL_INCREMENT_FREQ);
+  }
+  medReal/=(NUM+1);
+  medImag/=(NUM+1);
+  
+  Serial.println("Completo!");
+  Serial.print("MedReal=");
+  Serial.println(medReal);
+  Serial.print("MedImag=");
+  Serial.println(medImag);
+  
+    // Set AD5933 power mode to standby when finished
+  if (!AD5933::setPowerMode(POWER_STANDBY))
+        Serial.println("Could not set to standby...");
+  /*if(!AD5933::reset()) {
+    Serial.println("Falha ao resetar a AD.");  
+    return false;
+  }
+  delay(1);
   if(!AD5933::setStartFrequency(FREQ*0.95)){    //setta a frequencia inicial a partir do parametro recebido
     Serial.println("Falha ao settar frequencia inicial.");
     return false; //retorna false em caso de falha.
   }
+  delay(1);
+  if(!AD5933::setInternalClock(true)){
+    Serial.println("Falha ao settar relogio interno.");
+    return false;
+  }
+  delay(1);
   if(!AD5933::setIncrementFrequency(FREQ/1000)){    //setta o incremento de frequencia, calculado a partir da frequencia inicial.
     Serial.println("Falha ao settar o incremento de frequencia.");
     return false; //retorna false em caso de falha.
   }
+  delay(1);
   if(!AD5933::setNumberIncrements(NUM)){   //setta o numero de incrementos.
     Serial.println("Falha ao settar o numero de incrementos.");
     return false; //retorna false em caso de falha.
   }
-  
+  delay(1);
+
+  Serial.println("Configuração da AD completa. A começar o sweep.");
+  *//*
   if(AD5933::frequencySweep(real, imag, NUM+1)){   //realiza o sweep de frequencia, e fornece as variaveis globais real e imag, assim como o numero de incrementos +1 como paramtros.
     double cfreq = FREQ*0.95;   //inicializa uma variavel cfreq para acompanhar no serial
+    Serial.println("done");
     for(int i=0; i < NUM+1; i++, cfreq += (FREQ/1000)){
-      medReal+=real[i];
-      medImag+=imag[i];
+      //medReal+=real[i];
+      //medImag+=imag[i];
       Serial.print(cfreq/1000);
       Serial.print(": R=");
       Serial.print(real[i]);
@@ -1586,16 +1585,17 @@ bool frequencySweepCustom(int FREQ, int NUM ){
       
     }
     Serial.println("Sweep completo com sucesso");
-    medReal /= 11;
-    medImag /= 11;
-    Serial.println(medReal);
-    Serial.println(medImag);
+    //medReal /= 11;
+    //medImag /= 11;
+    //Serial.println(medReal);
+    //Serial.println(medImag);
     return true;
   }
   else{
     Serial.println("Sweep Falhou Inesperadamente");
     return false;
   }
+  */
 }
 
 bool defaultConfig()
