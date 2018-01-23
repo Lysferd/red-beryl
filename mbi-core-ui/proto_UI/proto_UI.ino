@@ -14,6 +14,8 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <Math.h>
+#include <EEPROM.h>
+
 
 
 #include <AD5933.h> //incluir a library da AD.
@@ -31,6 +33,13 @@ double medReal, medImag; //variaveis int para receber os valores médios dos vet
 Adafruit_SSD1306 display(OLED_RESET);
 DS3231 time;
 AD5933 AD;
+
+struct leitura {
+  unsigned int freq;
+  double real,imag;
+  int hora, minuto, dia, mes, ano;
+};
+struct leitura leitura0 = {50000,1,2,3,45,5,1,2018};
 
 #define BAT8_HEIGHT 8 
 #define BAT8_WIDTH 16
@@ -83,6 +92,7 @@ const int potPin = A15;
 
 int pwr;
 int pct;
+int addr=0;   //declara a variavel int responsavel por percorrer os endereços da EEPROM
 
 int selector = 1;
 int screen = 0;
@@ -143,32 +153,18 @@ void setup() {
   delay(1500);
   display.clearDisplay();
   delay(100);
-  /*
-  display.drawRect(0,0, display.width(), display.height(), WHITE);
-  display.display();
-  delay(250);
-  clock();
-  display.display();
-  delay(250);
-  selector = 0;
-  menu();
-  display.display();
-  delay(250);
-  */
+
   selector = 1;
 
-  
-  /*Wire.requestFrom(0x0D, 7);
-  delay(1);
-      byte d = Wire.available();
-    Serial.print(d);
-  while(Wire.available())
-  {
+  int lSize = sizeof(struct leitura);   //verifica o tamanho da struct criada para conter os dados de cada leitura e imprime esse valor no Serial.
+  Serial.print("Tamanho da struct leitura: ");
+  Serial.println(lSize);
 
-    char c = Wire.read();
-    Serial.print(c);
-  }
-  */
+    Serial.print(leitura0.freq/1000);  Serial.println("KHz");
+    Serial.print(leitura0.real);  Serial.print(" ");
+    Serial.print(leitura0.imag);  Serial.print(" ");
+    Serial.print(leitura0.hora);  Serial.print(":");  Serial.print(leitura0.minuto);  Serial.print(" ");
+    Serial.print(leitura0.dia); Serial.print("/");  Serial.print(leitura0.mes); Serial.print("/");  Serial.println(leitura0.ano);
   delay(500);
   
 }
@@ -1146,6 +1142,7 @@ void menu()
             break;  //fim da logica da opção 2 de choice(CONFIRMA LEITURA).
           }
           case 3:{  //leitura.
+    
             display.setCursor(0,barSize); //reseta a posição do cursor.
             display.setTextColor(WHITE);  //texto em cor branca.
             display.print(" ");
@@ -1178,62 +1175,21 @@ void menu()
         
       case 2:  //criar tela de configuração.
       {
-        static int choice = 0;
-        switch(choice)
-        {
-          case 0:
-          {
-            display.setCursor(2,barSize);
-            display.fillRect(2,barSize, display.width()-5, 8, WHITE);
-            display.setTextColor(BLACK);
-            display.println("1.Relogio.");
-            display.setTextColor(WHITE);
-            display.println("2.Eletrodos.");
-            if(down)
-            {
-              down = false;
-              choice++;
-            }
-            if(yes)
-            {
-              yes = false;
-              screen = 5;
-            }
-            break;
-          }
-          case 1:
-          {
-            display.setCursor(2,barSize);
-            display.fillRect(2,barSize+8, display.width()-5, 8, WHITE);
-            display.setTextColor(WHITE);
-            display.println("1.Relogio.");
-            display.setTextColor(BLACK);
-            display.println("2.Eletrodos.");
-            if(up)
-            {
-              up = false;
-              choice--;
-            }
-            if(yes)
-            {
-              yes = false;
-              screen = 6;
-            }
-            if(no)
-            {
-              no = false;
-              choice = 0;
-              screen = 0;
-            }
-            break;
-          }
-        }
+
+        for (int i = 0 ; i < EEPROM.length() ; i++) {
+          EEPROM.write(i, 0);
+          Serial.println(i);
+          int exp = map(i,0,4095,0,100);
+          display.setCursor(0, barSize);
+          display.setTextColor(WHITE);
+          display.print(exp);     //alterar o codigo para que pelo menos a porcentage do processo de clear EEPROM esteja funcionando, no momento, por causa do 'for' a tela fica travada(usar 'if');
+
+          
+        } 
+        screen = 0;
         break;
       }
-        /*display.setCursor( 2, barSize);
-        display.setTextColor(WHITE);
-        display.print(menu0[1]);
-        break;*/
+
 
       case 3:
         {
@@ -1534,68 +1490,14 @@ bool frequencySweepCustom(unsigned int FREQ, int NUM ){
   Serial.println(medReal);
   Serial.print("MedImag=");
   Serial.println(medImag);
+  bool h12,PM,century;
+  leitura0={FREQ, medReal, medImag, time.getHour( h12,  PM), time.getMinute(), time.getDate(), time.getMonth( century), time.getYear()};
+
+  Serial.print("EEPROM address 0:");Serial.println(EEPROM.read(addr));
   
     // Set AD5933 power mode to standby when finished
   if (!AD5933::setPowerMode(POWER_STANDBY))
         Serial.println("Could not set to standby...");
-  /*if(!AD5933::reset()) {
-    Serial.println("Falha ao resetar a AD.");  
-    return false;
-  }
-  delay(1);
-  if(!AD5933::setStartFrequency(FREQ*0.95)){    //setta a frequencia inicial a partir do parametro recebido
-    Serial.println("Falha ao settar frequencia inicial.");
-    return false; //retorna false em caso de falha.
-  }
-  delay(1);
-  if(!AD5933::setInternalClock(true)){
-    Serial.println("Falha ao settar relogio interno.");
-    return false;
-  }
-  delay(1);
-  if(!AD5933::setIncrementFrequency(FREQ/1000)){    //setta o incremento de frequencia, calculado a partir da frequencia inicial.
-    Serial.println("Falha ao settar o incremento de frequencia.");
-    return false; //retorna false em caso de falha.
-  }
-  delay(1);
-  if(!AD5933::setNumberIncrements(NUM)){   //setta o numero de incrementos.
-    Serial.println("Falha ao settar o numero de incrementos.");
-    return false; //retorna false em caso de falha.
-  }
-  delay(1);
-
-  Serial.println("Configuração da AD completa. A começar o sweep.");
-  *//*
-  if(AD5933::frequencySweep(real, imag, NUM+1)){   //realiza o sweep de frequencia, e fornece as variaveis globais real e imag, assim como o numero de incrementos +1 como paramtros.
-    double cfreq = FREQ*0.95;   //inicializa uma variavel cfreq para acompanhar no serial
-    Serial.println("done");
-    for(int i=0; i < NUM+1; i++, cfreq += (FREQ/1000)){
-      //medReal+=real[i];
-      //medImag+=imag[i];
-      Serial.print(cfreq/1000);
-      Serial.print(": R=");
-      Serial.print(real[i]);
-      Serial.print("|I=");
-      Serial.print(imag[i]);
-
-      double magnitude = sqrt(pow(real[i], 2) + pow(imag[i], 2));
-      double impedance = 1/(magnitude*gain[i]);
-      Serial.print("  |Z|=");
-      Serial.print(impedance);
-      
-    }
-    Serial.println("Sweep completo com sucesso");
-    //medReal /= 11;
-    //medImag /= 11;
-    //Serial.println(medReal);
-    //Serial.println(medImag);
-    return true;
-  }
-  else{
-    Serial.println("Sweep Falhou Inesperadamente");
-    return false;
-  }
-  */
 }
 
 bool defaultConfig()
