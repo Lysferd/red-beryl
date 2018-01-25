@@ -1109,6 +1109,7 @@ void menu()
               down=false; //reseta DOWN
             }
             if(yes){  //se YES for true.
+              choice = 4;   //ir para a tela de historico.
               yes=false;  //reseta YES
             }
             if(no){  //se NO for true
@@ -1153,6 +1154,8 @@ void menu()
             display.print(" I:");
             display.print(medImag);
 
+
+
             if(up){ //se UP for true.
               up=false; //reseta UP.
             }
@@ -1160,6 +1163,8 @@ void menu()
               down=false; //reseta DOWN;.
             }
             if(yes){  //se YES for true.
+              EEPROM.put( ((EEPROM.read(0)*20)+1)  , leitura0);   //salva a nova leitura na EEPROM.
+              EEPROM.write(0, (EEPROM.read(0)+1));    //incrementa o numero na posição 0 da EEPROM, referente a quantas leituras foram salvas.
               choice=1; //retorna ao menu, com a opção indo diretamente para a opção de historico.
               yes=false;  //reseta YES.
             }
@@ -1168,25 +1173,179 @@ void menu()
               screen=0; //reseta ao menu inicial.
               no=false; //reseta NO.
             }
+            break;
           }
+
+          case 4:{    //tela de historico.
+            static int i = 0;   //declara a variavel i referente aos numeros do historico(+1), por padrão usaremos apenas 10 valores, mas como o arduino Mega oferece muito mais espaço é possivel liberar mais espaço para salvar as leituras.
+            static int l = 1;   //declara a variavel l referente as linhas do historico, estou testando seu uso para um menu mais dinamico e inteligente.
+
+  //em relação ao historico, o tamanho da struct são 20 bytes, então cada struct, e cada leitura salva ocupa 20 bytes, ignorando-se o endereço 0, que será usado para definir quantas leituras estão salvas
+  //significando que o numero de bytes será o endereço 1+(EEPROM(0)*20)... para poder ler o valor de cada EEPROM preciso do endereço inicial [EEPROM(0)*20] e uma struct inicializada pronta para receber
+  //o valor da struct salva. nesse caso, temos a leitura0 que usei anteriormente... então: EEPROM.get([20*(i+1)], leitura0) seria a função a ser chamada...
+
+            if(EEPROM.read(0)!=0){    //primeiro testa se tem algo no historico para apresentar.
+              if(l==1){   //se estiver na primeira linha.
+                EEPROM.get(((i*20)+1), leitura0);   //leitura0 recebe o valor salvo no historico referente a posição i;
+                display.setCursor(2, barSize);    //reseta a posição do cursor.
+                display.setTextColor(BLACK,WHITE);    //Define a fonte na cor preta com fundo branco, selecionado
+                display.print(i+1);   //posição da leitura no historico.
+                display.print("- ");
+                display.print(leitura0.dia);   //imprime o valor dia.
+                display.print("/");    //separador
+                display.print(leitura0.mes);   //imprime o valor mes.
+                display.print("/");    //separador
+                display.print(leitura0.ano);    //imprime o valor ano.
+                display.print(" ");   //espaço.
+                display.print(leitura0.hora);   //imprime valor hora.
+                display.print(":");   //separador de horario.
+                if(leitura0.minuto<10){
+                          display.print("0");
+                        }
+                display.print(leitura0.minuto);   //imprime valor minuto.
+
+                if((i+1)<10){   //se o proximo valor ainda estiver dentro do limite de 10 valores.
+                  if(EEPROM.read(0)>1){   //se a EEPROM tiver mais de uma leitura salva.
+                    EEPROM.get((((i+1)*20)+1), leitura0);   //leitura0 recebe o valor salvo no historico referente a posição i+1.
+                    display.setCursor(2, barSize*2);    //reseta a posição do cursor na segunda linha.
+                    display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
+                    display.print(i+2);   //posição da leitura no historico.
+                    display.print("- ");
+                    display.print(leitura0.dia);   //imprime o valor dia.
+                    display.print("/");    //separador
+                    display.print(leitura0.mes);   //imprime o valor mes.
+                    display.print("/");    //separador
+                    display.print(leitura0.ano);    //imprime o valor ano.
+                    display.print(" ");   //espaço.
+                    display.print(leitura0.hora);   //imprime valor hora.
+                    display.print(":");   //separador de horario.
+                    if(leitura0.minuto<10){
+                          display.print("0");
+                        }
+                    display.print(leitura0.minuto);   //imprime valor minuto.
+
+                    if((i+2)<10){   //se o proximo valor ainda estiver dentro do limite de 10 valores.
+                      if(EEPROM.read(0)>2){   //se a EEPROM tiver mais de duas leituras salvas.
+                        EEPROM.get((((i+2)*20)+1), leitura0);   //leitura0 recebe o valor salvo no historico referente a posição i+2.
+                        display.setCursor(2, barSize*3);    //reseta a posição do cursor na terceira linha.
+                        display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
+                        display.print(i+3);   //posição da leitura no historico.
+                        display.print("- ");
+                        display.print(leitura0.dia);   //imprime o valor dia.
+                        display.print("/");    //separador
+                        display.print(leitura0.mes);   //imprime o valor mes.
+                        display.print("/");    //separador
+                        display.print(leitura0.ano);    //imprime o valor ano.
+                        display.print(" ");   //espaço.
+                        display.print(leitura0.hora);   //imprime valor hora.
+                        display.print(":");   //separador de horario.
+                        if(leitura0.minuto<10){
+                          display.print("0");
+                        }
+                        display.print(leitura0.minuto);   //imprime valor minuto.
+                      }
+                    }
+                  }
+                }
+                if(up){
+                  
+                }
+                if(down){
+                  
+                }
+                if(yes){    //se YES for true.
+                  yes=false;    //reseta YES.
+                }
+                if(no){   //se NO for true.
+                  screen=0;   //retorna ao menu inicial.
+                  choice=0;   //reseta choice.
+                  no=false;   //reseta NO.
+                }
+                
+              }
+              if(l==2){   //se estiver na segunda linha.
+              
+              }
+              if(l==3){   //se estiver na terceira(e ultima) linha.
+              
+              }
+            }
+            else{   //se o historico estiver vazio.
+              display.setCursor(0, barSize*2);    //define a posição do cursor
+              display.setTextColor(WHITE);    //define a cor da fonte(branca);
+              display.print(" Historico Vazio.");
+              if(yes){
+                yes=false;    //reseta YES
+              }
+              if(up){
+                up=false;   //reseta UP.
+              }
+              if(down){
+                down=false;   //reseta DOWN.
+              }
+              if(no){
+                choice=0;   //retorna ao menu anterior.
+                no=false;   //reseta NO.
+              }
+            }
+            
+            break;
+          }
+          
         }
         break;
         }
         
-      case 2:  //criar tela de configuração.
+      case 2:  //criar tela de Sincronização(no momento apenas reseta toda a EEPROM
       {
+        static bool reseter = false;    //declara e inicia como falsa uma 
+        
+        if(!reseter){   //se o reseter for falso, faz a logica para perguntar se o usuario deseja apagar o historico.
+          display.setCursor(0, barSize);    //reseta a posição do cursor
+          display.setTextColor(WHITE);    //define as fonte branca.
+          display.println(" Limpar historico?");
+          display.print("   N/S");
 
-        for (int i = 0 ; i < EEPROM.length() ; i++) {
-          EEPROM.write(i, 0);
-          Serial.println(i);
-          int exp = map(i,0,4095,0,100);
-          display.setCursor(0, barSize);
-          display.setTextColor(WHITE);
-          display.print(exp);     //alterar o codigo para que pelo menos a porcentage do processo de clear EEPROM esteja funcionando, no momento, por causa do 'for' a tela fica travada(usar 'if');
-
-          
+          if(yes){    //se o botão YES for true.
+            reseter=true;   //define reseter como true para começar a logica de limpar o historico
+            yes=false;       //reseta YES.
+          }
+          if(no){   //se o botão NO for true.
+            screen=0;   //retorna para o menu inicial
+            reseter=false;    //reseta o reseter por garantia.
+            no=false;   //reseta NO.
+          }
+        }
+        else{   //se o valor de RESETER for true.
+          static int i=0;   //declara variavel int com valor 0 de modo estatico para percorrer os endereços da EEPROM
+          display.setCursor(display.width()/2-30, display.height()/2-4);    //define posição do cursor
+          display.setTextColor(WHITE);    //define a fonte branca.
+          if(i < EEPROM.length()){    //se i for menor que o tamanho da memoria da EEPROM
+            EEPROM.write(i,0);    //o valor da posição 'i' recebe '0'.
+            Serial.println(i);    //imprime no serial o endereço atual para acomapnhar.
+            int exp = map(i,0,4095,0,100);    //mapeia em uma variavel int de 0 a 100 o espelho do endereço da EEPROM, de forma que o valor da variavel seja a porcentagem da memoria ja percorrida e 'limpa'.
+            display.print("Limpando...");
+            display.setCursor(display.width()/2-10, display.height()/2+4);    //define posição do cursor
+            display.setTextColor(WHITE);    //define a fonte branca.
+            display.print(exp);   //imprime na tela esse valor.
+            display.print("%");   //completa com o simbolo de porcentagem.
+            i++;    //incrementa 'i' para começar no proximo endereço.
+          }
+          else{   //se i for maior que o tamanho da memoria da EEPROM, ou seja, se terminar de limpar a memoria.
+            display.setCursor(display.width()/2-25, display.height()/2-4);    //define a posição do cursor.
+            display.setTextColor(WHITE);    //define a fonte branca.
+            display.print("Concluido!");    //imprime a frase que indica que completou a logica.
+            if(yes || no || up || down){    //se qualquer um dos botões for TRUE.
+              screen=0;   //retorna ao menu inicial.
+              reseter=false;    //reseta RESETER.
+              i=0;    //reseta o vaolor de i;
+              yes=false;    //reseta YES.
+              no=false;   //reseta NO.
+              up=false;   //reseta UP.
+              down=false;   //reseta DOWN.
+            }
+          }
         } 
-        screen = 0;
         break;
       }
 
