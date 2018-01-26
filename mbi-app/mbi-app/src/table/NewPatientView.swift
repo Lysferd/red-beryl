@@ -1,5 +1,5 @@
 //
-//  NewPatientTableViewController.swift
+//  NewPatientView.swift
 //  mbi-app
 //
 //  Created by 埜原菽也 on H30/01/17.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import os.log
 
-class NewPatientTableViewController: UITableViewController {
+class NewPatientView: UITableViewController {
 
   // MARK: UI Outlets
   @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -33,7 +32,6 @@ class NewPatientTableViewController: UITableViewController {
     super.prepare(for: segue, sender: sender)
 
     guard let button = sender as? UIBarButtonItem, button == saveButton else {
-      os_log("Save button not pressed. Cancelling.", log: OSLog.default, type: .debug)
       return
     }
 

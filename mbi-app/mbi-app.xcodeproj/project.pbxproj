@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		E539688E1FAA619400FD11AE /* SectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539688D1FAA619400FD11AE /* SectionImageView.swift */; };
-		E570B00C2009756A0054FFEE /* PatientDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E570B00B2009756A0054FFEE /* PatientDetailTableViewController.swift */; };
+		E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */; };
+		E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */; };
+		E58DEA2F201BD04400C3FDE4 /* NewPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA21201BD04300C3FDE4 /* NewPatientView.swift */; };
+		E58DEA30201BD04400C3FDE4 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA22201BD04300C3FDE4 /* Device.swift */; };
+		E58DEA31201BD04400C3FDE4 /* PatientDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA23201BD04300C3FDE4 /* PatientDataSource.swift */; };
+		E58DEA32201BD04400C3FDE4 /* BTDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */; };
+		E58DEA33201BD04400C3FDE4 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */; };
+		E58DEA34201BD04400C3FDE4 /* ExamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA26201BD04300C3FDE4 /* ExamListView.swift */; };
+		E58DEA35201BD04400C3FDE4 /* PatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA27201BD04300C3FDE4 /* PatientViewController.swift */; };
+		E58DEA36201BD04400C3FDE4 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA28201BD04300C3FDE4 /* Patient.swift */; };
+		E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA29201BD04300C3FDE4 /* BTService.swift */; };
+		E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */; };
+		E58DEA43201BD43700C3FDE4 /* PatientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA42201BD43700C3FDE4 /* PatientListView.swift */; };
 		E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767541F97E5B800083C11 /* AppDelegate.swift */; };
 		E597675C1F97E5B800083C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675A1F97E5B800083C11 /* Main.storyboard */; };
 		E597675E1F97E5B800083C11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E597675D1F97E5B800083C11 /* Assets.xcassets */; };
 		E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */; };
 		E597676C1F97E5B800083C11 /* mbi_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E597676B1F97E5B800083C11 /* mbi_appTests.swift */; };
 		E59767771F97E5B800083C11 /* mbi_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767761F97E5B800083C11 /* mbi_appUITests.swift */; };
-		E59767851F97F44B00083C11 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767841F97F44B00083C11 /* Patient.swift */; };
-		E59767871F98078D00083C11 /* PatientListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767861F98078D00083C11 /* PatientListTableViewCell.swift */; };
-		E59A2E1C1F983CE500AEE7A1 /* PatientListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59A2E1B1F983CE500AEE7A1 /* PatientListTableViewController.swift */; };
-		E5A94CCD200FCE1C00CFB0F6 /* NewPatientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A94CCC200FCE1C00CFB0F6 /* NewPatientTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +48,19 @@
 
 /* Begin PBXFileReference section */
 		E539688D1FAA619400FD11AE /* SectionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionImageView.swift; sourceTree = "<group>"; };
-		E570B00B2009756A0054FFEE /* PatientDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailTableViewController.swift; sourceTree = "<group>"; };
+		E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
+		E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesDataSource.swift; sourceTree = "<group>"; };
+		E58DEA21201BD04300C3FDE4 /* NewPatientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPatientView.swift; sourceTree = "<group>"; };
+		E58DEA22201BD04300C3FDE4 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		E58DEA23201BD04300C3FDE4 /* PatientDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDataSource.swift; sourceTree = "<group>"; };
+		E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDiscovery.swift; sourceTree = "<group>"; };
+		E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
+		E58DEA26201BD04300C3FDE4 /* ExamListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamListView.swift; sourceTree = "<group>"; };
+		E58DEA27201BD04300C3FDE4 /* PatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientViewController.swift; sourceTree = "<group>"; };
+		E58DEA28201BD04300C3FDE4 /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		E58DEA29201BD04300C3FDE4 /* BTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTService.swift; sourceTree = "<group>"; };
+		E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
+		E58DEA42201BD43700C3FDE4 /* PatientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListView.swift; sourceTree = "<group>"; };
 		E59767511F97E5B800083C11 /* mbi-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mbi-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767541F97E5B800083C11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E597675B1F97E5B800083C11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,10 +73,6 @@
 		E59767721F97E5B800083C11 /* mbi-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mbi-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767761F97E5B800083C11 /* mbi_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mbi_appUITests.swift; sourceTree = "<group>"; };
 		E59767781F97E5B800083C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E59767841F97F44B00083C11 /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
-		E59767861F98078D00083C11 /* PatientListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListTableViewCell.swift; sourceTree = "<group>"; };
-		E59A2E1B1F983CE500AEE7A1 /* PatientListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListTableViewController.swift; sourceTree = "<group>"; };
-		E5A94CCC200FCE1C00CFB0F6 /* NewPatientTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPatientTableViewController.swift; sourceTree = "<group>"; };
 		E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -85,14 +101,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E58DEA3B201BD05500C3FDE4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA41201BD09100C3FDE4 /* view */,
+				E58DEA40201BD08400C3FDE4 /* datasource */,
+				E58DEA3F201BD07B00C3FDE4 /* table */,
+				E58DEA3E201BD07500C3FDE4 /* cell */,
+				E58DEA3D201BD06600C3FDE4 /* structure */,
+				E58DEA3C201BD05900C3FDE4 /* bluetooth */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E58DEA3C201BD05900C3FDE4 /* bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */,
+				E58DEA29201BD04300C3FDE4 /* BTService.swift */,
+			);
+			path = bluetooth;
+			sourceTree = "<group>";
+		};
+		E58DEA3D201BD06600C3FDE4 /* structure */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA22201BD04300C3FDE4 /* Device.swift */,
+				E58DEA28201BD04300C3FDE4 /* Patient.swift */,
+			);
+			path = structure;
+			sourceTree = "<group>";
+		};
+		E58DEA3E201BD07500C3FDE4 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */,
+				E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		E58DEA3F201BD07B00C3FDE4 /* table */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA21201BD04300C3FDE4 /* NewPatientView.swift */,
+				E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */,
+				E58DEA27201BD04300C3FDE4 /* PatientViewController.swift */,
+			);
+			path = table;
+			sourceTree = "<group>";
+		};
+		E58DEA40201BD08400C3FDE4 /* datasource */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */,
+				E58DEA23201BD04300C3FDE4 /* PatientDataSource.swift */,
+			);
+			path = datasource;
+			sourceTree = "<group>";
+		};
+		E58DEA41201BD09100C3FDE4 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA26201BD04300C3FDE4 /* ExamListView.swift */,
+				E58DEA42201BD43700C3FDE4 /* PatientListView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		E59767481F97E5B800083C11 = {
 			isa = PBXGroup;
 			children = (
+				E5F7601B1F9E67E800B7DFB9 /* Frameworks */,
 				E59767531F97E5B800083C11 /* mbi-app */,
 				E597676A1F97E5B800083C11 /* mbi-appTests */,
 				E59767751F97E5B800083C11 /* mbi-appUITests */,
 				E59767521F97E5B800083C11 /* Products */,
-				E5F7601B1F9E67E800B7DFB9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,17 +193,13 @@
 		E59767531F97E5B800083C11 /* mbi-app */ = {
 			isa = PBXGroup;
 			children = (
-				E59A2E1B1F983CE500AEE7A1 /* PatientListTableViewController.swift */,
-				E59767861F98078D00083C11 /* PatientListTableViewCell.swift */,
-				E59767841F97F44B00083C11 /* Patient.swift */,
+				E58DEA3B201BD05500C3FDE4 /* src */,
+				E59767621F97E5B800083C11 /* Info.plist */,
 				E59767541F97E5B800083C11 /* AppDelegate.swift */,
-				E5A94CCC200FCE1C00CFB0F6 /* NewPatientTableViewController.swift */,
-				E597675A1F97E5B800083C11 /* Main.storyboard */,
-				E570B00B2009756A0054FFEE /* PatientDetailTableViewController.swift */,
+				E539688D1FAA619400FD11AE /* SectionImageView.swift */,
 				E597675D1F97E5B800083C11 /* Assets.xcassets */,
 				E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */,
-				E59767621F97E5B800083C11 /* Info.plist */,
-				E539688D1FAA619400FD11AE /* SectionImageView.swift */,
+				E597675A1F97E5B800083C11 /* Main.storyboard */,
 			);
 			path = "mbi-app";
 			sourceTree = "<group>";
@@ -284,13 +364,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E59767851F97F44B00083C11 /* Patient.swift in Sources */,
-				E570B00C2009756A0054FFEE /* PatientDetailTableViewController.swift in Sources */,
-				E59767871F98078D00083C11 /* PatientListTableViewCell.swift in Sources */,
+				E58DEA43201BD43700C3FDE4 /* PatientListView.swift in Sources */,
+				E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */,
+				E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */,
 				E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */,
-				E5A94CCD200FCE1C00CFB0F6 /* NewPatientTableViewController.swift in Sources */,
+				E58DEA32201BD04400C3FDE4 /* BTDiscovery.swift in Sources */,
+				E58DEA2F201BD04400C3FDE4 /* NewPatientView.swift in Sources */,
+				E58DEA31201BD04400C3FDE4 /* PatientDataSource.swift in Sources */,
+				E58DEA36201BD04400C3FDE4 /* Patient.swift in Sources */,
+				E58DEA35201BD04400C3FDE4 /* PatientViewController.swift in Sources */,
+				E58DEA33201BD04400C3FDE4 /* DeviceCell.swift in Sources */,
+				E58DEA30201BD04400C3FDE4 /* Device.swift in Sources */,
+				E58DEA34201BD04400C3FDE4 /* ExamListView.swift in Sources */,
 				E539688E1FAA619400FD11AE /* SectionImageView.swift in Sources */,
-				E59A2E1C1F983CE500AEE7A1 /* PatientListTableViewController.swift in Sources */,
+				E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */,
+				E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
