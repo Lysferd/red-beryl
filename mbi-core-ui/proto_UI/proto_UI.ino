@@ -86,20 +86,18 @@ static const unsigned char PROGMEM BT2_bmp[] =
 };
 
 bool h12, PM;
-const int buttonLeft = 23;
-const int buttonRight = 25;
-const int buttonConfirm = 24;
-const int buttonCancel = 22;
-const int potPin = A15;
+const int buttonUP = 23;    //declarar e inicializar o botão UP(para cima)
+const int buttonDOWN = 25;    //declarar e inicializar o botão DOWN(para baixo)
+const int buttonConfirm = 24;   //declarar e inicializar o botão YES(confirma)
+const int buttonCancel = 22;    //declarar e inicializar o botão NO(cancela)
+const int potPin = A15;   //declarar e inicializar(a partir do valor pre-programado na Arduino-Board) o PIN conectado ao potenciometro usado para simular a bateria.
 
-int pwr;
-int pct;
 int addr=0;   //declara a variavel int responsavel por percorrer os endereços da EEPROM
 
 int selector = 1;
 int screen = 0;
-int barSize = 8;
-bool up=false,down=false,yes=false,no=false, BLE;
+const int barSize = 8;
+static bool up=false,down=false,yes=false,no=false, BLE;
 static String temptime = "0:0";
 
 //Inicialização.
@@ -130,8 +128,8 @@ void setup() {
   frequencySweepEasy();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // inicializando o OLED.
 
-  pinMode(buttonLeft, INPUT);
-  pinMode(buttonRight, INPUT);
+  pinMode(buttonUP, INPUT);
+  pinMode(buttonDOWN, INPUT);
   pinMode(buttonConfirm, INPUT);
   pinMode(buttonCancel, INPUT);
 
@@ -181,13 +179,16 @@ void loop() {
   display.clearDisplay();
   //clock();
   checkPins();
-  menu();  // ALTERAR MENU COMEÇAR TUDO ABAIXO DA BARRA SUPERIOR
+  //menu();  // ALTERAR MENU COMEÇAR TUDO ABAIXO DA BARRA SUPERIOR
+  menu1();
   upperBar(); // desenha a barra superior com bateria, bluetooth e relogio.
   serialTalk();
   display.display();
   delay(1);  
 
 }
+//DEPOIS DE COMPLETAR OS MENUS, COMEÇAR A PENSAR EM UM MODO SLEEP/IDLE DENTRO DA OPÇÃO DE AJUSTES, PENSAR EM UM MODO DE CRIAR UM SLEEP/WAKE, CONTAR TEMPO IDLE, ACORDAR USANDO CHECKPIN(MUDAR A FUNÇÃO PARA BOOL QUE RETORNA TRUE SE UM BOTÃO FOR APERTADO.
+
 
 void menu1(){   //segunda versão do menu principal
   static int choice=1;    //declara e inicializa a variavel estatica responsavel pelo seletor
@@ -195,16 +196,16 @@ void menu1(){   //segunda versão do menu principal
   static char* menu1[] = { "1.Leituras", "2.Sincronizar", "3.Ajustes" };    //declara e inicializa as opções em vetores para facilidade de repetição.
 
   /*Ordem:
-    1-"Leituras." 
-      11-"Nova Leitura"
-        111-"Confirma leitura."(realizar)
-          1111-"Mostrar resultado da leitura e salvar no historico.
-      12-"Historico"
-        121-"Detalhes."
-    2-"Sincronizar."
-      21-"Dispositivo Bluetooth."
-    3-"Ajustes."
-      31-"Relogio."
+    1-"Leituras." **
+      11-"Nova Leitura" **
+        111-"Confirma leitura."(realizar) **
+          1111-"Mostrar resultado da leitura e salvar no historico. **
+      12-"Historico" **
+        121-"Detalhes." **
+    2-"Sincronizar." --
+      21-"Dispositivo Bluetooth." --
+    3-"Ajustes." *
+      31-"Relogio." 
       32-"Apagar historico."
   */
   switch(choice){   //inicio da logica de switch case usada para peercorrer os menus
@@ -230,7 +231,7 @@ void menu1(){   //segunda versão do menu principal
         no=false;
       }
       if(up){
-        choice=3;;
+        choice--;;
         up=false;
       }
       if(down){
@@ -247,7 +248,7 @@ void menu1(){   //segunda versão do menu principal
 
       display.setCursor(2,barSize*2);   //define a posição do cursor na linha 2.
       display.setTextColor(WHITE);  //define a cor do texto, letras brancas, não selecionado.
-      display.print(" 2-Historico.");   //imprime a opção 2.
+      display.print("2-Historico.");   //imprime a opção 2.
       
       if(up){ //se UP for true.
         choice=12;    //seleciona a opção 2
@@ -294,6 +295,8 @@ void menu1(){   //segunda versão do menu principal
       break;
     }
     case 1111:{   //Mostrar leitura
+            static unsigned int f = 50000;
+            //trocar isso por algo melhor
       display.setCursor(2,barSize); //define a posição do cursor
       display.setTextColor(WHITE);  //define o texto em cor branca.
       display.print(f/1000);    //imprime valor da frequencia em khz.
@@ -337,6 +340,34 @@ void menu1(){   //segunda versão do menu principal
       break;
     }
     case 12:{   //Historico.
+      display.setTextSize(1); //define tamanho do texto.
+      display.setCursor(2,barSize); //define a posição do cursor.
+      display.setTextColor(WHITE);  //define a cor do texto, branco, não selecionado.
+      display.println("1-Nova Leitura."); //imprime a opção 1.
+
+      display.setCursor(2,barSize*2);   //define a posição do cursor na linha 2.
+      display.setTextColor(BLACK,WHITE);  //define a cor do texto, letras pretas com fundo branco, selecionado.
+      display.print("2-Historico.");   //imprime a opção 2.
+      
+      if(up){ //se UP for true.
+        choice--;    //seleciona a opção 1
+        up=false; //reseta UP.
+      }
+      if(down){  //se DOWN for true
+        choice=11; //seleciona a opção 2 do menu.
+        down=false; //reseta DOWN.
+      }
+      if(yes){  //se YES for true.
+        choice=121; //Confirma Historico
+        yes = false;  //reseta YES.
+      }
+      if(no){  //se NO for true.
+        choice = 1; //reseta choice para a opção anterior do menu.
+        no = false; //reseta NO.
+      }
+      break;
+    }
+    case 121:{
       static int i = 0;   //declara a variavel i referente aos numeros do historico(+1), por padrão usaremos apenas 10 valores, mas como o arduino Mega oferece muito mais espaço é possivel liberar mais espaço para salvar as leituras.
       static int l = 1;   //declara a variavel l referente as linhas do historico, estou testando seu uso para um menu mais dinamico e inteligente.
       static bool detalhar = false;   //declara a variavel bool detalhar que define se os detalhes de uma leitura escolhida deverão ser mostrados ou não.
@@ -425,300 +456,197 @@ void menu1(){   //segunda versão do menu principal
               }
               ler=true;   //ler recebe true.
             }
-            display.setCursor(2, barSize);    //reseta a posição do cursor.
-            display.setTextColor(BLACK,WHITE);    //Define a fonte na cor preta com fundo branco, selecionado
-            display.print(i+1);   //posição da leitura no historico.
-            display.print("- ");
-            display.print(L1.dia);   //imprime o valor dia.
-            display.print("/");    //separador
-            display.print(L1.mes);   //imprime o valor mes.
-            display.print("/");    //separador
-            display.print(L1.ano);    //imprime o valor ano.
-            display.print(" ");   //espaço.
-            display.print(L1.hora);   //imprime valor hora.
-            display.print(":");   //separador de horario.
-            if(L1.minuto<10){
-              display.print("0");
-            }
-            display.print(L1.minuto);   //imprime valor minuto.
+            imprimeEscolha( i+1, l, L1, true);
             if((i+1)<EEPROM.read(0)){   //se o proximo valor ainda estiver dentro do limite de leituras validas.
-              display.setCursor(2, barSize*2);    //reseta a posição do cursor na segunda linha.
-              display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
-              display.print(i+2);   //posição da leitura no historico.
-              display.print("- ");
-              display.print(L2.dia);   //imprime o valor dia.
-              display.print("/");    //separador
-              display.print(L2.mes);   //imprime o valor mes.
-              display.print("/");    //separador
-              display.print(L2.ano);    //imprime o valor ano.
-              display.print(" ");   //espaço.
-              display.print(L2.hora);   //imprime valor hora.
-              display.print(":");   //separador de horario.
-              if(L2.minuto<10){
-                display.print("0");
-              }
-              display.print(L2.minuto);   //imprime valor minuto.
+              imprimeEscolha( i+2, l+1, L2, false);
               if((i+2)<EEPROM.read(0)){   //se o proximo valor ainda estiver dentro do limite de leituras validas.
-
-
-//AJEITAR FORMATAÇÃO, PROVAVELMENTE CRIAR UMA FUNÇÃO QUE IMPRIMA ESSA INFORMAÇÕES PARA O CODIGO FICAR MAIS LIMPO, ETC...
-
-                
-                      display.setCursor(2, barSize*3);    //reseta a posição do cursor na terceira linha.
-                      display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
-                      display.print(i+3);   //posição da leitura no historico.
-                      display.print("- ");
-                      display.print(L3.dia);   //imprime o valor dia.
-                      display.print("/");    //separador
-                      display.print(L3.mes);   //imprime o valor mes.
-                      display.print("/");    //separador
-                      display.print(L3.ano);    //imprime o valor ano.
-                      display.print(" ");   //espaço.
-                      display.print(L3.hora);   //imprime valor hora.
-                      display.print(":");   //separador de horario.
-                      if(L3.minuto<10){
-                        display.print("0");
-                      }
-                      display.print(L3.minuto);   //imprime valor minuto.
-                    }
-                  }
-              }
-              if(l==2){   //se estiver na segunda linha.
-                if(EEPROM.read(0)<2 || i==0){   //se tiver menos de dois endereços no historico ou se o i for 0, imediatamente retorna a primeira linha.
-                  l=1;
-                }
-                else {    //se tiver pelo menos dois endereços e i for diferente de 0;
-                  if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
-                    EEPROM.get((((i-1)*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-1;
-                    EEPROM.get((((i)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i.
-                    if((i+1)<EEPROM.read(0)){    //se o proximo valor ainda estiver dentro do limite de leituras validas.
-                      EEPROM.get((((i+1)*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+1.
-                    }
-                    ler=true;   //ler recebe true.
-                  }
-                  display.setCursor(2,barSize);   //define a posição do cursor para a primeira linha.
-                  display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
-                  display.print(i);
-                  display.print("- ");
-                  display.print(L1.dia);   //imprime o valor dia.
-                  display.print("/");    //separador
-                  display.print(L1.mes);   //imprime o valor mes.
-                  display.print("/");    //separador
-                  display.print(L1.ano);    //imprime o valor ano.
-                  display.print(" ");   //espaço.
-                  display.print(L1.hora);   //imprime valor hora.
-                  display.print(":");   //separador de horario.
-                  if(L1.minuto<10){
-                    display.print("0");
-                  }
-                  display.print(L1.minuto);   //imprime valor minuto.
-                  
-                  //final da logica das opções na linha 1 para quando a linha 2 estiver selecionada, a proxima parte conta com a linha 2.
-                  
-                  display.setCursor(2,barSize*2);   //define a posição do cursor para a segunda linha.
-                  display.setTextColor(BLACK,WHITE);    //define a fonte na cor preta com fundo branco, selecionado.
-                  display.print(i+1);
-                  display.print("- ");
-                  display.print(L2.dia);    //imprime o valor dia.
-                  display.print("/");   //separador de data.
-                  display.print(L2.mes);    //imprime o valor mes.
-                  display.print("/");   //separador de data.
-                  display.print(L2.ano);    //imprime o valor ano.
-                  display.print(" ");   //espaço.
-                  display.print(L2.hora);   //imprime o valor hora.
-                  display.print(":");   //separador de hora.
-                  if(L2.minuto<10){
-                    display.print("0");
-                  }
-                  display.print(L2.minuto);   //imprime o valor minuto.
-
-                  //final da logica das opções na linha 2 quando selecionada, a proxima parte conta com a linha 3, usando 'if' para verificar se ela deve existir.
-
-                  if(EEPROM.read(0)>i+1){   //se o numero de leituras for maior que i+1(ou seja, se i=1(primeira linha 0), a terceira linha seria(i+1)=2, nesse caso, tivermos 3 leituras EEPROM.read(0)=[3]>[2]
-                                            //portanto, nesse caso a terceira linha existe.
-                    display.setCursor(2,barSize*3);   //define a posição do cursor para a terceira linha.
-                    display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
-                    display.print(i+2);
-                    display.print("- ");
-                    display.print(L3.dia);    //imprime o valor dia.
-                    display.print("/");   //separador de data.
-                    display.print(L3.mes);    //imprime o valor mes.
-                    display.print("/");   //separador de data.
-                    display.print(L3.ano);    //imprime o valor ano.
-                    display.print(" ");   //espaço.
-                    display.print(L3.hora);   //imprime o valor hora.
-                    display.print(":");   //separador de hora.
-                    if(L3.minuto<10){
-                      display.print("0");
-                    }
-                    display.print(L3.minuto);   //imprime o valor minuto.
-                  }
-                }
-              }
-              if(l==3){   //se estiver na terceira(e ultima) linha.
-                if(EEPROM.read(0)<3 || i==0 || i==1){   //se tiver menos de tres endereços no historico ou se o i for 0 ou 1, imediatamente retorna a primeira linha.
-                  l=1;
-                }
-                else {    //se tiver pelo menos tres endereços e i for diferente de 0 e 1;
-                  if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
-                    EEPROM.get((((i-2)*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-2;
-                    EEPROM.get((((i-1)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i-1.
-                    EEPROM.get(((i*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i.
-                    ler=true;   //ler recebe true.
-                  }
-                  display.setCursor(2,barSize);   //define a posição do cursor para a primeira linha.
-                  display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
-                  display.print(i-1);
-                  display.print("- ");
-                  display.print(L1.dia);   //imprime o valor dia.
-                  display.print("/");    //separador
-                  display.print(L1.mes);   //imprime o valor mes.
-                  display.print("/");    //separador
-                  display.print(L1.ano);    //imprime o valor ano.
-                  display.print(" ");   //espaço.
-                  display.print(L1.hora);   //imprime valor hora.
-                  display.print(":");   //separador de horario.
-                  if(L1.minuto<10){
-                    display.print("0");
-                  }
-                  display.print(L1.minuto);   //imprime valor minuto.
-
-                  //Final da logica da linha 1.
-
-                  display.setCursor(2,barSize*2);   //define a posição do cursor para a segunda linha.
-                  display.setTextColor(WHITE);    //define a fonte na cor branca, não selecionado.
-                  display.print(i);
-                  display.print("- ");
-                  display.print(L2.dia);   //imprime o valor dia.
-                  display.print("/");    //separador
-                  display.print(L2.mes);   //imprime o valor mes.
-                  display.print("/");    //separador
-                  display.print(L2.ano);    //imprime o valor ano.
-                  display.print(" ");   //espaço.
-                  display.print(L2.hora);   //imprime valor hora.
-                  display.print(":");   //separador de horario.
-                  if(L2.minuto<10){
-                    display.print("0");
-                  }
-                  display.print(L2.minuto);   //imprime valor minuto.
-
-                  //Final da logica da linha 2.
-
-                  display.setCursor(2,barSize*3);   //define a posição do cursor para a terceira linha.
-                  display.setTextColor(BLACK,WHITE);    //define a fonte na cor preta com fundo branco, selecionado.
-                  display.print(i+1);
-                  display.print("- ");
-                  display.print(L3.dia);   //imprime o valor dia.
-                  display.print("/");    //separador
-                  display.print(L3.mes);   //imprime o valor mes.
-                  display.print("/");    //separador
-                  display.print(L3.ano);    //imprime o valor ano.
-                  display.print(" ");   //espaço.
-                  display.print(L3.hora);   //imprime valor hora.
-                  display.print(":");   //separador de horario.
-                  if(L3.minuto<10){
-                    display.print("0");
-                  }
-                  display.print(L3.minuto);   //imprime valor minuto.
-                }
-              }
-              if(up){   //se UP for true
-                if(l==1){   //se a linha 1 estiver selecionada.
-                  if(i!=0){   //se i não for 0.
-                    i--;    //i-1;    
-                  }
-                  else if(EEPROM.read(0)>1){    //se i for 0 e houver mais de uma leitura salva no historico.
-                    i=EEPROM.read(0)-1;   //i recebe o valor da ultima posição valida do historico.
-                    if(i>1){      //se i for maior que 1.
-                      l=3;    //seleciona a terceira linha.
-                    }
-                    else if(i==1){    //se i for igual a 1.
-                      l==2;   //seleciona a segunda linha.
-                    }
-                  }
-                }
-                else {    //para as linhas 2 e 3, sempre que UP for true, apenas decresce os valores de i e l.
-                  i--;
-                  l--;
-                }
-                ler=false;    //reseta LER
-                up=false;   //reseta UP.
-              }
-              if(down){   //se DOWN for true.
-                if(l==3){   //se a linha 3 estiver selecionada.
-                  if(i==EEPROM.read(0)-1){    //se i for igual a ultima leitura possivel.
-                    i=0;    //volta a primeira leitura.
-                    l=1;    //seleciona a primeira linha.
-                  }
-                  else{   //se i não for a ultima leitura possivel.
-                    i++;    //incrementa o valor de i.
-                  }
-                }
-                else {    //se a linha 1 ou 2 estiver selecionada.
-                  if(!(i==EEPROM.read(0)-1)){    //se i NÃO for igual a ultima leitura possivel.
-                    i++;  //incremente o valor de i.
-                    l++;    //incrementa o valor l(indo para a segunda ou terceira linha).
-                  }
-                  else {    //se i for igual a ultima leitura possivel.
-                    i=0;    //volta a primeira leitura.
-                    l=1;    //seleciona a primeira linha.
-                  }
-                }
-                ler=false;    //reseta LER
-                down=false;   //reset DOWN
-              }
-              if(yes){
-                detalhar=true;
-                yes=false;    //reseta YES
-              }
-              if(no){   //se NO for true.
-                  screen=1;   //retorna ao menu inicial.
-                  choice=0;   //reseta choice.
-                  i=0;
-                  l=1;
-                  ler=false;
-                  no=false;   //reseta NO.
-                }
-            }
-            }
-            else{   //se o historico estiver vazio.
-              display.setCursor(0, barSize*2);    //define a posição do cursor
-              display.setTextColor(WHITE);    //define a cor da fonte(branca);
-              display.print(" Historico Vazio.");
-              if(yes){
-                yes=false;    //reseta YES
-              }
-              if(up){
-                up=false;   //reseta UP.
-              }
-              if(down){
-                down=false;   //reseta DOWN.
-              }
-              if(no){
-                choice=0;   //retorna ao menu anterior.
-                no=false;   //reseta NO.
+                imprimeEscolha( i+3, l+2, L3, false);
               }
             }
-
-
-
-
-
-
-
-      
-      break;
-    }
-    case 121:{
+          }
+          if(l==2){   //se estiver na segunda linha.
+            if(EEPROM.read(0)<2 || i==0){   //se tiver menos de dois endereços no historico ou se o i for 0, imediatamente retorna a primeira linha.
+              l=1;
+            }
+            else {    //se tiver pelo menos dois endereços e i for diferente de 0;
+              if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
+                EEPROM.get((((i-1)*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-1;
+                EEPROM.get((((i)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i.
+                if((i+1)<EEPROM.read(0)){    //se o proximo valor ainda estiver dentro do limite de leituras validas.
+                  EEPROM.get((((i+1)*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+1.
+                }
+                ler=true;   //ler recebe true.
+              }
+              imprimeEscolha( i, l-1, L1, false);           
+              //final da logica das opções na linha 1 para quando a linha 2 estiver selecionada, a proxima parte conta com a linha 2.
+              imprimeEscolha( i+1, l, L2, true);          
+              //final da logica das opções na linha 2 quando selecionada, a proxima parte conta com a linha 3, usando 'if' para verificar se ela deve existir.
+              if(EEPROM.read(0)>i+1){   //se o numero de leituras for maior que i+1(ou seja, se i=1(primeira linha 0), a terceira linha seria(i+1)=2, nesse caso, tivermos 3 leituras EEPROM.read(0)=[3]>[2]
+                //portanto, nesse caso a terceira linha existe.
+                imprimeEscolha( i+2, l+1, L3, false);
+              }
+            }
+          }
+          if(l==3){   //se estiver na terceira(e ultima) linha.
+            if(EEPROM.read(0)<3 || i==0 || i==1){   //se tiver menos de tres endereços no historico ou se o i for 0 ou 1, imediatamente retorna a primeira linha.
+              l=1;
+            }
+            else {    //se tiver pelo menos tres endereços e i for diferente de 0 e 1;
+              if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
+                EEPROM.get((((i-2)*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-2;
+                EEPROM.get((((i-1)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i-1.
+                EEPROM.get(((i*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i.
+                ler=true;   //ler recebe true.
+              }
+              imprimeEscolha( i-1, l-2, L1, false);
+              //Final da logica da linha 1.
+              imprimeEscolha( i, l-1, L2, false);
+              //Final da logica da linha 2.
+              imprimeEscolha( i+1, l, L3, true);
+            }
+          }
+          if(up){   //se UP for true
+            if(l==1){   //se a linha 1 estiver selecionada.
+              if(i!=0){   //se i não for 0.
+                i--;    //i-1;    
+              }
+              else if(EEPROM.read(0)>1){    //se i for 0 e houver mais de uma leitura salva no historico.
+                i=EEPROM.read(0)-1;   //i recebe o valor da ultima posição valida do historico.
+                if(i>1){      //se i for maior que 1.
+                  l=3;    //seleciona a terceira linha.
+                }
+                else if(i==1){    //se i for igual a 1.
+                  l==2;   //seleciona a segunda linha.
+                }
+              }
+            }
+            else {    //para as linhas 2 e 3, sempre que UP for true, apenas decresce os valores de i e l.
+              i--;
+              l--;
+            }
+            ler=false;    //reseta LER
+            up=false;   //reseta UP.
+          }
+          if(down){   //se DOWN for true.
+            if(l==3){   //se a linha 3 estiver selecionada.
+              if(i==EEPROM.read(0)-1){    //se i for igual a ultima leitura possivel.
+                i=0;    //volta a primeira leitura.
+                l=1;    //seleciona a primeira linha.
+              }
+              else{   //se i não for a ultima leitura possivel.
+                i++;    //incrementa o valor de i.
+              }
+            }
+            else {    //se a linha 1 ou 2 estiver selecionada.
+              if(!(i==EEPROM.read(0)-1)){    //se i NÃO for igual a ultima leitura possivel.
+                i++;  //incremente o valor de i.
+                l++;    //incrementa o valor l(indo para a segunda ou terceira linha).
+              }
+              else {    //se i for igual a ultima leitura possivel.
+                i=0;    //volta a primeira leitura.
+                l=1;    //seleciona a primeira linha.
+              }
+            }
+            ler=false;    //reseta LER
+            down=false;   //reset DOWN
+          }
+          if(yes){
+            detalhar=true;
+            yes=false;    //reseta YES
+          }
+          if(no){   //se NO for true.
+            choice=12;   //reseta choice.
+            i=0;
+            l=1;
+            ler=false;
+            no=false;   //reseta NO.
+          }
+          scrollBar(i);
+        }
+      }
+      else{   //se o historico estiver vazio.
+        display.setCursor(0, barSize*2);    //define a posição do cursor
+        display.setTextColor(WHITE);    //define a cor da fonte(branca);
+        display.print(" Historico Vazio.");
+        if(yes){
+          yes=false;    //reseta YES
+        }
+        if(up){
+          up=false;   //reseta UP.
+        }
+        if(down){
+          down=false;   //reseta DOWN.
+        }
+        if(no){
+          choice=12;   //retorna ao menu anterior.
+          no=false;   //reseta NO.
+        }
+      }
       break;
     }
     case 2:{
+      display.setCursor(2, barSize);   //define a posição do cursor na primeira linha
+      display.setTextColor(WHITE);    //define a cor do texto como branca
+      display.println(menu1[0]);    //imprime a string previamente inicializada.
+      
+      display.fillRect(1, barSize*2, display.width()-5, barSize, WHITE);    //desenha um quadrado em volta da opção 1 selecionada
+      display.setCursor(2, barSize*2);    //define a posição do cursor
+      display.setTextColor(BLACK);    //define a cor do texto como preto.
+      display.print(menu1[1]);    //imprime a string previamente inicializada.
+      
+      display.setCursor(2, barSize*3);  //define a posição do cursor para a proxima linha
+      display.setTextColor(WHITE);    //define a cor do texto como branca.
+      display.println(menu1[2]);    //imprime a string previamente inicializada.
+
+      if(yes){    //se YES
+        choice=21;    //nova leitura
+        yes=false;
+      }
+      if(no){
+        no=false;
+      }
+      if(up){
+        choice--;;
+        up=false;
+      }
+      if(down){
+        choice++;
+        down=false;
+      }
       break;
     }
     case 21:{
       break;
     }
     case 3:{
+      display.setCursor(2, barSize);    //define a posição do cursor na primeira linha.
+      display.setTextColor(WHITE);    //define a cor do texto como branca.
+      display.print(menu1[0]);    //imprime a string previamente inicializada.
+      
+      display.setCursor(2, barSize*2);   //define a posição do cursor na segunda linha.
+      display.setTextColor(WHITE);    //define a cor do texto como branca.
+      display.println(menu1[1]);    //imprime a string previamente inicializada.
+      
+      display.fillRect(1, barSize*3, display.width()-5, barSize, WHITE);    //desenha um quadrado em volta da opção 3 selecionada
+      display.setCursor(2, barSize*3);  //define a posição do cursor na terceira linha.
+      display.setTextColor(BLACK);    //define a cor do texto como branca.
+      display.println(menu1[2]);    //imprime a string previamente inicializada.
+
+      if(yes){    //se YES
+        choice=31;    //Menu de ajustes.
+        yes=false;
+      }
+      if(no){
+        no=false;
+      }
+      if(up){
+        choice--;;
+        up=false;
+      }
+      if(down){
+        choice++;
+        down=false;
+      }
       break;
     }
     case 31:{
@@ -728,20 +656,52 @@ void menu1(){   //segunda versão do menu principal
       break;
     }
     default:{
+      if(choice<=0){
+        choice=3;
+      }
+      else{
+        choice=1;
+      }
       break;
     }
   }
 }
 
+void imprimeEscolha(int i, int l, struct leitura lt, bool s){    //função imprimeEscolha, que recebe o i da posição, a struct leitura com os valores e o bool s se for selecionado ou não.
+  display.setCursor(2, barSize*l);    //reseta a posição do cursor, multiplicando o tamanho de uma linha pelo numero de linhas
+  if(s){    //se a linha for selecionada
+    display.setTextColor(BLACK,WHITE);    //Define a fonte na cor preta com fundo branco, selecionado.
+  }
+  else{
+    display.setTextColor(WHITE);    //Define a fonta na cor branca, selecionado.
+  }
+  display.print(i);   //posição da leitura no historico.
+  display.print("- ");
+  display.print(lt.dia);   //imprime o valor dia.
+  display.print("/");    //separador
+  display.print(lt.mes);   //imprime o valor mes.
+  display.print("/");    //separador
+  display.print(lt.ano);    //imprime o valor ano.
+  display.print(" ");   //espaço.
+  display.print(lt.hora);   //imprime valor hora.
+  display.print(":");   //separador de horario.
+  if(lt.minuto<10){
+    display.print("0");
+  }
+  display.print(lt.minuto);   //imprime valor minuto.
+}
+
 
 void upperBar() // barra superior.
 {
-  display.fillRect(0, 0, display.width(), barSize, BLACK); // desenha a barra em preto, mantendo permanentemente a barrar acima de tudo.
-
+  static int pwr;   //declara o inteiro estatico pwr(POWER)
+  static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
   
-  pwr = analogRead(potPin); 
-  pct = map(pwr,0,1023,0,100);
-  pwr = map(pwr, 0, 1023, 0, 12);
+  display.fillRect(0, 0, display.width(), barSize, BLACK); // desenha a barra em preto, mantendo permanentemente a barrar acima de tudo.
+  
+  pwr = analogRead(potPin);   //pwr le o valor analogico do potenciometro, recebendo o valor 'raw' da bateria.
+  pct = map(pwr,0,1023,0,100);    //pct recebe o valor mapeado de pwr entre 0-100.
+  pwr = map(pwr, 0, 1023, 0, 12);   //pwr recebe o valor mapeado entre0-12
 
   display.fillRect(display.width()-1-pwr, 2, pwr, 4, WHITE); //desenha a barra da bateria
   
@@ -790,7 +750,7 @@ void upperBar() // barra superior.
   display.write((uint8_t) 247);
   
   
-  scrollBar();
+  //scrollBar();
 
 
 }
@@ -820,10 +780,27 @@ void serialTalk(){
   }
 }
 
-void scrollBar()
+void scrollBar(int j)
 {
+
+    static int offset = 100*(3*8)/(EEPROM.read(0)*8);
+    //Inicializando um int offset que vai receber um a divisão do tamanho de uma tela pelo numero de opções multiplicadas pelo tamanho de uma linha, tudo multiplicado por 100.
+    offset = map(offset,1,100,(3*8)-1,0);
+    //mapeando o valor de offset de 1 a 100 para o tamanho da tela até 1, ou seja, quanto mais proximo de 100 offset for, menor o offset será, em relação ao tamanho livre na tela,
+    // desaparecendo em 100 ou mais. de forma que, quando tiver apenas tres opções ou menos, a barra de scroll não aparecerá, mas a partir de quatro opções, a barra cobrira 75% do espaço livre
+    //na tela, dividindo os 25% restantes entre o [numero de opções -1], no caso [4-1=(3)], cada opção alem da selecionada contara com aproximadamente 8,333% para fazer offset relevante a posição
+    //da opção selecionada(j)
+
+    offset/=(EEPROM.read(0)-1);   //dividindo o offset pelo numero de opções -1.
+    display.drawLine(display.width()-1, (barSize+(j*offset)), display.width()-1,display.height()-((EEPROM.read(0)-j)*offset), WHITE);
+
+/*
+//1 opção: s = 3*8 pixels completos
+//2 opções: s = (3*8)/(2*8)?
+
+  
   static int n=4; //inicializando um int com o numero de opções na tela 0.
-  static int s= 100*(3*8)/(n*8); // inicializando um float s para receber o valor de 0 a 100 entre o numero 3*8(3 opções, limite de opções em uma tela) dividido por n*8(n opções) tudo multiplicado por 100.
+  static int s= 100*(3*8)/n*8); // inicializando um float s para receber o valor de 0 a 100 entre o numero 3*8(3 opções, limite de opções em uma tela) dividido por n*8(n opções) tudo multiplicado por 100.
 
   s = map(s,1,100,(3*8),1); //utiliza a função map para definir o tamanho em pixels da barra de scroll;
 
@@ -838,162 +815,41 @@ void scrollBar()
       display.drawLine(display.width()-1, display.height(), display.width()-1, display.height()-s, WHITE);
     }
   }
+  */
 }
 
 
-void checkPins()
+void checkPins()    //função void necessaria para checar os botões.
 {
-  static int temp = 0;
-  if(digitalRead(buttonLeft)||digitalRead(buttonRight)||digitalRead(buttonConfirm)||digitalRead(buttonCancel))
+  static int tempButton = 0;    //botão temporario que vai receber o valor do ultimo botão apertado para impedir que a ação se repita.
+  if(digitalRead(buttonUP)||digitalRead(buttonDOWN)||digitalRead(buttonConfirm)||digitalRead(buttonCancel))    
   {
     //int buttonState = digitalRead(buttonLeft);
     // print out the state of the button:
-    if(digitalRead(buttonLeft) && temp != digitalRead(buttonLeft)){
-      temp = digitalRead(buttonLeft);
-      Serial.print("Left:");Serial.println(digitalRead(buttonLeft));
-        switch(screen)
-        {
-          case 0:
-          {
-            if(selector>1)
-            {
-              selector--;
-            }
-            else
-            {
-              selector = 4;
-            }
-            break;
-          }
-          case 1:
-          {
-            up=true;
-            break;
-          }
-          case 2:
-          {
-            up=true;
-            break;
-          }
-          case 3:
-          {
-            up=true;
-            break;
-          }
-          case 4:
-          {
-            up = true;
-            break;
-          }
-          case 5:
-          {
-            up = true;
-            break;
-          }
-        }
+    if(digitalRead(buttonUP) && tempButton != digitalRead(buttonUP)){
+      tempButton = digitalRead(buttonUP);
+      Serial.print("UP:");Serial.println(digitalRead(buttonUP));
+      up=true;          
     }
-    if(digitalRead(buttonRight) && temp != digitalRead(buttonRight)){
-      temp = digitalRead(buttonRight);
-      Serial.print("Right:");Serial.println(digitalRead(buttonRight));        
-        if(screen == 0)
-        {
-          if(selector < 4 ) {
-            selector++;
-          }
-          else {
-            selector = 1;
-          }
-        }
-        if(screen == 1)
-        {
-          down=true;
-        }
-        if(screen == 2)
-        {
-          down = true;
-        }
-        if(screen == 3)
-        {
-          down = true;
-        }
-        if(screen == 4)
-        {
-          down = true;
-        }
-        if(screen == 5)
-        {
-          down = true;
-        }
+    if(digitalRead(buttonDOWN) && tempButton != digitalRead(buttonDOWN)){
+      tempButton = digitalRead(buttonDOWN);
+      Serial.print("DOWN:");Serial.println(digitalRead(buttonDOWN));
+      down=true;
     }
-    if(digitalRead(buttonConfirm) && temp != digitalRead(buttonConfirm)){
-      temp = digitalRead(buttonConfirm);
+    if(digitalRead(buttonConfirm) && tempButton != digitalRead(buttonConfirm)){
+      tempButton = digitalRead(buttonConfirm);
       Serial.print("Confirm:");Serial.println(digitalRead(buttonConfirm));
-      switch(screen) {
-        case 0:
-          screen = selector;
-          break;
-
-        case 1:
-          yes = true;
-          break;
-
-        case 2:
-          yes = true;
-          break;
-
-        case 3:
-          yes = true;
-          break;
-          
-        case 4:
-          yes = true;
-          break;
-
-        case 5:
-          yes = true;
-          break;
-
-        default:
-          //yes = true;
-          break;
-          
-      }
+      yes=true;
     }
-    if(digitalRead(buttonCancel) && temp != digitalRead(buttonCancel)){
-      temp = digitalRead(buttonCancel);
+    if(digitalRead(buttonCancel) && tempButton != digitalRead(buttonCancel)){
+      tempButton = digitalRead(buttonCancel);
       Serial.print("Cancel:");Serial.println(digitalRead(buttonCancel));
-      switch(screen) {
-        case 1:
-          no = true;
-          break;
-
-        case 2:
-          screen = 0;
-          break;
-
-        case 3:
-          //screen = 0;
-          no = true;
-          break;
-
-        case 4:
-          //screen = 0;
-          no = true;
-          break;
-
-        case 5:
-        no = true;
-        break;
-
-        case 6:
-        no = true;
-        break;
-      }
+      no=true;
     }
     delay(10);
   }
   else {
-    temp = 0;
+    tempButton = 0;
   }
 }
 void clock()
