@@ -160,11 +160,12 @@ void setup() {
   Serial.print("Tamanho da struct leitura: ");
   Serial.println(lSize);
 
-    Serial.print(leitura0.freq/1000);  Serial.println("KHz");
-    Serial.print(leitura0.real);  Serial.print(" ");
-    Serial.print(leitura0.imag);  Serial.print(" ");
-    Serial.print(leitura0.hora);  Serial.print(":");  Serial.print(leitura0.minuto);  Serial.print(" ");
-    Serial.print(leitura0.dia); Serial.print("/");  Serial.print(leitura0.mes); Serial.print("/");  Serial.println(leitura0.ano);
+    Serial.print(leitura0.freq/1000);  Serial.print("KHz = "); Serial.println(sizeof(leitura0.freq));
+    Serial.print(leitura0.real);  Serial.print("= "); Serial.println(sizeof(leitura0.real));
+    Serial.print(leitura0.imag);  Serial.print("= "); Serial.println(sizeof(leitura0.imag));
+    Serial.print(leitura0.hora);  Serial.print(":");  Serial.print(leitura0.minuto);  Serial.print("= "); Serial.print(sizeof(leitura0.hora)); Serial.print("+");Serial.print(sizeof(leitura0.minuto));Serial.println(sizeof(leitura0.hora)+sizeof(leitura0.minuto));
+    Serial.print(leitura0.dia); Serial.print("/");  Serial.print(leitura0.mes); Serial.print("/");  Serial.print(leitura0.ano);
+    Serial.print("= ");Serial.println(sizeof(leitura0.dia)+sizeof(leitura0.mes)+sizeof(leitura0.ano));
 
   eeLimit = (EEPROM.length()-1)/sizeof(struct leitura);
   Serial.print("limite de leituras possiveis:");
@@ -599,7 +600,7 @@ void menu1(){   //segunda versão do menu principal
       display.println(menu1[2]);    //imprime a string previamente inicializada.
 
       if(yes){    //se YES
-        choice=21;    //nova leitura
+        //choice=21;    //Menu Sincronizar(temporariamente desabilitado até termos algo em que isso possa ser usado.)
         yes=false;
       }
       if(no){
@@ -650,9 +651,120 @@ void menu1(){   //segunda versão do menu principal
       break;
     }
     case 31:{
+      display.setCursor(2, barSize);    //definir a posição do cursor na primeira linha.
+      display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+      display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+      display.println("1- Relogio");    //imprimir opção 1.
+
+      display.setCursor(2, barSize*2);    //definir a posição do cursor na segunda linha.
+      display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+      display.println("2- APAGAR HISTORICO");   //imprimir opção 2.
+
+      if(up){   //se UP.
+        choice=32;    //ultima opção do menu(no momento opção 32, ou segunda opção).
+        up=false;   //reseta UP.
+      }
+      if(down){   //se DOWN.
+        choice++;   //proxima opção do menu.
+        down=false;   //reseta DOWN.
+      }
+      if(yes){    //se YES.
+        choice=311;   //proximo menu: 3-1-1.
+        yes=false;
+      }
+      if(no){   //se NO.
+        choice=3;   //retorna ao menu anterior: 3
+        no=false;
+      }
+      
+      break;
+    }
+    case 311:{    //ajuste de relogio
+      clockAdjust();    //chama função clockAdjust onde tudo deve funcionar, teoricamente
+      if(no){   //se NO, e se a função clockAdjust estiver funcionando corretamente NO só vai ser true nesse estagio se NO for true e o track do clock estiver nas horas.
+        choice=31;    //retorna ao menu anterior, dentro da função de ajustes.
+        no=false;
+      }
       break;
     }
     case 32:{
+      display.setCursor(2, barSize);    //definir a posição do cursor na primeira linha.
+      display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+      display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+      display.println("1- Relogio");    //imprimir opção 1.
+
+      display.setCursor(2, barSize*2);    //definir a posição do cursor na segunda linha.
+      display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+      display.println("2- APAGAR HISTORICO");   //imprimir opção 2.
+
+      if(up){   //se UP.
+        choice--;    //opção anterior do menu.
+        up=false;   //reseta UP.
+      }
+      if(down){   //se DOWN.
+        choice=31;   //como ja é a ultima opção do menu, retorna a primeira, no caso 31.
+        down=false;   //reseta DOWN.
+      }
+      if(yes){    //se YES.
+        choice=321;   //proximo menu: 3-2-1.
+        yes=false;
+      }
+      if(no){   //se NO.
+        choice=3;   //retorna ao menu anterior: 3
+        no=false;
+      }
+      
+      break;
+    }
+    case 321:{    //apagar historico.
+      static bool reseter = false;    //declara e inicia como falsa uma 
+      if(!reseter){   //se o reseter for falso, faz a logica para perguntar se o usuario deseja apagar o historico.
+        display.setCursor(2, barSize);    //reseta a posição do cursor
+        display.setTextColor(WHITE);    //define as fonte branca.
+        display.println("Limpar historico?");
+        
+        display.setCursor(display.width()/2, barSize*2);    //define a posição do cursor
+        display.print("N|S");
+        if(yes){    //se o botão YES for true.
+          reseter=true;   //define reseter como true para começar a logica de limpar o historico
+          yes=false;       //reseta YES.
+        }
+        if(no){   //se o botão NO for true.
+          choice=32;   //retorna para o menu inicial
+          reseter=false;    //reseta o reseter por garantia.
+          no=false;   //reseta NO.
+        }
+      }
+      else{   //se o valor de RESETER for true.
+        static int i=0;   //declara variavel int com valor 0 de modo estatico para percorrer os endereços da EEPROM
+        display.setCursor(display.width()/2-30, display.height()/2-4);    //define posição do cursor
+        display.setTextColor(WHITE);    //define a fonte branca.
+        if(i < EEPROM.length()){    //se i for menor que o tamanho da memoria da EEPROM
+          EEPROM.write(i,0);    //o valor da posição 'i' recebe '0'.
+          Serial.println(i);    //imprime no serial o endereço atual para acomapnhar.
+          int exp = map(i,0,4095,0,100);    //mapeia em uma variavel int de 0 a 100 o espelho do endereço da EEPROM, de forma que o valor da variavel seja a porcentagem da memoria ja percorrida e 'limpa'.
+          display.print("Limpando...");
+          display.setCursor(display.width()/2-10, display.height()/2+4);    //define posição do cursor
+          display.setTextColor(WHITE);    //define a fonte branca.
+          display.print(exp);   //imprime na tela esse valor.
+          display.print("%");   //completa com o simbolo de porcentagem.
+          i++;    //incrementa 'i' para começar no proximo endereço.
+        }
+        else{   //se i for maior que o tamanho da memoria da EEPROM, ou seja, se terminar de limpar a memoria.
+          display.setCursor(display.width()/2-25, display.height()/2-4);    //define a posição do cursor.
+          display.setTextColor(WHITE);    //define a fonte branca.
+          display.print("Concluido!");    //imprime a frase que indica que completou a logica.
+          if(yes || no || up || down){    //se qualquer um dos botões for TRUE.
+            choice=3;   //retorna ao menu inicial.
+            reseter=false;    //reseta RESETER.
+            i=0;    //reseta o valor de i;
+            yes=false;    //reseta YES.
+            no=false;   //reseta NO.
+            up=false;   //reseta UP.
+            down=false;   //reseta DOWN.
+          }
+        }
+      }
       break;
     }
     default:{
@@ -759,14 +871,42 @@ void serialTalk(){
   String input, output;
   static bool waiting = false;
   static int i=0;
-  if(waiting){
-    i++;
-    Serial.println(i);
-  }
   if(Serial1.available()){
     if((input=Serial1.readString())!=-1)
     {
-      Serial.print( input );
+      Serial.println( input );
+      if(input=="CHK"){
+        int bH = time.getHour(h12, PM);
+        int bM = time.getMinute();
+        //output=temptime;
+        //output += time.getHour()
+        Serial1.print(bH);
+        delay(1);
+        Serial1.print(bM);
+      }
+      if(input=="AT"){
+
+        //LEMBRAR: sempre que os doubles real e imag forem enviados, o tamanho é de 8 e não 4, calcular os 20 bytes do pacote usando isso
+        leitura lt;
+        EEPROM.get(1,lt);
+        
+        //Serial1.print(lt.hora); Serial.println(sizeof(lt.hora));
+        //delay(1);
+        //Serial1.print(lt.minuto); Serial.println(sizeof(lt.minuto));
+        //delay(1);
+        Serial1.print(lt.real); Serial.println(sizeof(lt.real));
+        delay(1);
+        Serial1.print(lt.imag); Serial.println(sizeof(lt.imag));
+        delay(1);
+        Serial1.print("000");
+        delay(1);
+        Serial1.print(lt.hora);
+        delay(1);
+        Serial1.print(lt.minuto);
+        delay(1);
+        //Serial1.print(lt);
+      }
+      
       i=0;
       waiting=false;
     }
@@ -776,7 +916,12 @@ void serialTalk(){
     {
       Serial1.print( output );
       waiting = true;
-    }
+      }
+    //}
+  }
+  if(waiting){
+    Serial.println(i);
+    i++;
   }
 }
 
@@ -792,7 +937,7 @@ void scrollBar(int j)
     //da opção selecionada(j)
 
     offset/=(EEPROM.read(0)-1);   //dividindo o offset pelo numero de opções -1.
-    display.drawLine(display.width()-1, (barSize+(j*offset)), display.width()-1,display.height()-((EEPROM.read(0)-j)*offset), WHITE);
+    display.drawLine(display.width()-1, (barSize+(j*offset)/2), display.width()-1,display.height()-1-((EEPROM.read(0)-(j+1))*offset)/2, WHITE);
 
 /*
 //1 opção: s = 3*8 pixels completos
@@ -927,13 +1072,15 @@ void clockAdjust()
       {
         time.setHour(tempH);  //setta o minuto do rtc com o valor de tempH;
         yes=false;  //reseta o valor do botão YES para false. Melhor fazer isso antes de avançar a track.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         track++;  //track avança para a proxima.
         }
       if(no)  //se o botão NO tiver valor true.
       {
-        tempH = time.getHour( h12, PM );  //recupera o valor valor de hora salvo no rtc.
-        no=false; //reseta o valor do botão NO para false.
+        //tempH = time.getHour( h12, PM );  //recupera o valor valor de hora salvo no rtc.
+        //no=false; //reseta o valor do botão NO para false.
         //screen = 0; //retornar para a screen anterior.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
       }
 
     display.setCursor(display.width()/2-24, barSize); //prepara o cursor para ficar em posição.
@@ -995,11 +1142,12 @@ void clockAdjust()
       {
         time.setMinute(tempM);  //setta o minuto do rtc com o valor de tempM;
         yes=false;  //reseta o valor do botão YES para false.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         track++;  //avança para a proxima track.
       }
       if(no)  //se o botão NO tiver valor true.
       {
-        tempM = time.getMinute(); //recupera o valor de minuto salvo no rtc.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         no=false; //reseta o valor do botão NO para false.
         track--;  //retorna a track anterior.
       }
@@ -1115,12 +1263,13 @@ void clockAdjust()
       {
         yes=false;  //reseta o valor do botão YES para false.
         time.setDate(tempD);  //setta o valor de dia no rtc com o valor do tempD.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         track++;  //avança ao proximo track.
       }
       if(no)  //se o valor do botão NO for true.
       {
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         no=false; //reseta o valor do botão NO para false.
-        tempD = time.getDate(); //recupera o valor da data salvo no rtc.
         track--;  //retorna a track anterior.
       }
 
@@ -1207,14 +1356,15 @@ void clockAdjust()
               time.setDate(tempD); //setta o dia no rtc para 30.
             }
           }
-        }        
+        }
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.        
         track++;  //avança para a proxima track.
       }
       
       if(no)  //se o valor do botão NO for true.
       {
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         no=false; //reseta o valor do botão NO para false.
-        tempMn = time.getMonth(century); //tempMn recebe o valor do mes do rtc.
         track--;  //retorna a track anterior.
       }      
       display.setCursor(display.width()/2-39, barSize); //prepara o cursor para ficar em posição.
@@ -1271,12 +1421,13 @@ void clockAdjust()
       if(yes) //se o valor do botão YES for true.
       {
         time.setYear(tempY);  //setta o valor no rtc do ano com valor em tempY.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         yes=false;  //resetar o valor de YES para false.
         track = 0; //retorna a track 0 representando a hora.
       }
       if(no)  //se o valor do botão NO for true.
       {
-        tempY = time.getYear(); //tempY recebe o valor de ano salvo no rtc.
+        doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
         no=false; //resetar o valor do botão NO para false.
         track--;  //retornar a track anterior.
       }
