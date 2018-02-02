@@ -35,7 +35,7 @@ DS3231 time;
 AD5933 AD;
 
 struct leitura {
-  unsigned int freq;
+  unsigned long freq;
   double real,imag;
   int hora, minuto, dia, mes, ano;
 };
@@ -183,7 +183,9 @@ void loop() {
   //menu();  // ALTERAR MENU COMEÇAR TUDO ABAIXO DA BARRA SUPERIOR
   menu1();
   upperBar(); // desenha a barra superior com bateria, bluetooth e relogio.
-  serialTalk();
+  if(BLE){
+    serialTalk();
+  }
   display.display();
   delay(1);  
 
@@ -270,28 +272,92 @@ void menu1(){   //segunda versão do menu principal
       break;    //fim da logica da opção 11 - Nova leitura.
     }
     case 111:{    //Confirma Leitura.(realizar)
-      static unsigned int f = 50000;
-      display.setCursor(2,barSize); //define a posição do cursor.
-      display.setTextColor(WHITE);  //letras brancas.
-      display.println("Realizar sweep?");   //imprime questão
-
-      display.setCursor(display.width()/2,barSize*2);   //define a posição do cursor
-      display.print("NAO | SIM");   //exige confirmação
+      static bool freq=false;   //inicializa variavel bool freq que define se o usuario esta escolhendo a frequencia.
+      static unsigned long f = 50000;
+      if(!freq){    //tela normal.
+        display.setCursor(2,barSize); //define a posição do cursor.
+        display.setTextColor(WHITE);  //letras brancas.
+        display.println("Realizar sweep?");   //imprime questão
+        
+        display.setCursor(display.width()/2,barSize*2);   //define a posição do cursor
+        display.print("NAO | SIM");   //exige confirmação
       
-      if(up){ //se UP for true.
-        up=false; //reseta UP.
+        if(up){ //se UP for true.
+          up=false; //reseta UP.
+        }
+        if(down){ //se DOWN for true.
+          down=false; //reseta DOWN.
+        }
+        if(yes){  //se YES for true.
+          //frequencySweepCustom(f, 10);          
+          //choice=1111;
+          freq=true;
+          yes = false;
+        }
+        if(no){  //se NO for true
+          choice=11; //retornar a tela anterior.
+          no=false; //reseta NO.
+        }
       }
-      if(down){ //se DOWN for true.
-        down=false; //reseta DOWN.
-      }
-      if(yes){  //se YES for true.
-        frequencySweepCustom(f, 10);          
-        choice=1111;
-        yes = false;
-      }
-      if(no){  //se NO for true
-        choice=11; //retornar a tela anterior.
-        no=false; //reseta NO.
+      else{   //tela de escolher frequencia.
+        display.setCursor(2,barSize*2);
+        display.setTextColor(WHITE);
+        display.print("Frequencia: ");
+        display.setTextColor(BLACK,WHITE);
+        display.print(f/1000);
+        display.print(" KHz");
+        if(yes){
+          frequencySweepCustom(f, 10);
+          choice=1111;
+          freq=false;
+          yes=false;
+        }
+        if(no){
+          freq=false;
+          no=false;
+        }
+        if(up){
+          switch(f){
+            case 5000:{
+              f=25000;
+              break;
+            }
+            case 25000:{
+              f=50000;
+              break;
+            }
+            case 50000:{
+              f=100000;
+              break;
+            }
+            case 100000:{
+              f=5000;
+              break;
+            }
+          }
+          up=false;
+        }
+        if(down){
+          switch(f){
+            case 5000:{
+              f=100000;
+              break;
+            }
+            case 25000:{
+              f=5000;
+              break;
+            }
+            case 50000:{
+              f=25000;
+              break;
+            }
+            case 100000:{
+              f=50000;
+              break;
+            }
+          }
+          down=false;
+        }
       }
       break;
     }
@@ -300,7 +366,7 @@ void menu1(){   //segunda versão do menu principal
             //trocar isso por algo melhor
       display.setCursor(2,barSize); //define a posição do cursor
       display.setTextColor(WHITE);  //define o texto em cor branca.
-      display.print(f/1000);    //imprime valor da frequencia em khz.
+      display.print(leitura0.freq/1000);    //imprime valor da frequencia em khz.
       display.println("KHz");
 
       display.setCursor(2,barSize*2);   //define a posição do cursor na linha 2.
@@ -314,7 +380,7 @@ void menu1(){   //segunda versão do menu principal
       static bool done = false;   //inicializa uma variavel bool DONE que marca se a leitura ja foi salva na EEPROM.
       if(!done){    //se DONE for false;
         if(EEPROM.read(0)<eeLimit){   //se o numero de leituras presentes na EEPROM estiver dentro dos limites.
-          EEPROM.put( ((EEPROM.read(0)*20)+1)  , leitura0);   //salva a nova leitura na EEPROM.
+          EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);   //salva a nova leitura na EEPROM.
           EEPROM.write(0, (EEPROM.read(0)+1));    //incrementa o numero na posição 0 da EEPROM, referente a quantas leituras foram salvas.
         }
         else{   //se o numero de leituras presentes estiver no limite.
@@ -377,7 +443,7 @@ void menu1(){   //segunda versão do menu principal
           static bool recebeu=false;   //inicializa uma variavel bool que informa se a leitura ja foi recebida da EEPROM
           static struct leitura leituraTemp;    //inicializa uma struct leitura temporaria para receber a struct leitura da EEPROM, feita static para que não se repita.
           if(!recebeu){   //se não tiver recebido a leitura da EEPROM
-            EEPROM.get((20*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
+            EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
             recebeu=true;   //recebeu recebe valor true.
             Serial.println("recebeu leitura");    //imprime a confirmação no serial
           }
@@ -401,6 +467,10 @@ void menu1(){   //segunda versão do menu principal
           display.setCursor(2,barSize*3);   //define a posição do cursor
           display.print("I:");    //imaginario
           display.print(leituraTemp.imag);    //imprime o valor imaginario
+
+          display.setCursor(display.width()-(6*7), barSize*2+4);
+          display.print(leituraTemp.freq/1000);
+          display.print("KHz");
           if(yes){    //se YES for true.
             yes=false;    //reseta YES.
           }
@@ -448,11 +518,11 @@ void menu1(){   //segunda versão do menu principal
           static bool ler = false;
           if(l==1){   //se estiver na primeira linha.
             if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
-              EEPROM.get(((i*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i;
+              EEPROM.get(((i*22)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i;
               if((i+1)<EEPROM.read(0)){    //se o proximo valor ainda estiver dentro do limite de leituras validas.
-                EEPROM.get((((i+1)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i+1.
+                EEPROM.get((((i+1)*22)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i+1.
                 if((i+2)<EEPROM.read(0)){    //se o proximo valor ainda estiver dentro do limite de leituras validas.
-                  EEPROM.get((((i+2)*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+2.
+                  EEPROM.get((((i+2)*22)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+2.
                 }
               }
               ler=true;   //ler recebe true.
@@ -471,10 +541,10 @@ void menu1(){   //segunda versão do menu principal
             }
             else {    //se tiver pelo menos dois endereços e i for diferente de 0;
               if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
-                EEPROM.get((((i-1)*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-1;
-                EEPROM.get((((i)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i.
+                EEPROM.get((((i-1)*22)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-1;
+                EEPROM.get((((i)*22)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i.
                 if((i+1)<EEPROM.read(0)){    //se o proximo valor ainda estiver dentro do limite de leituras validas.
-                  EEPROM.get((((i+1)*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+1.
+                  EEPROM.get((((i+1)*22)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+1.
                 }
                 ler=true;   //ler recebe true.
               }
@@ -494,9 +564,9 @@ void menu1(){   //segunda versão do menu principal
             }
             else {    //se tiver pelo menos tres endereços e i for diferente de 0 e 1;
               if(!ler){   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
-                EEPROM.get((((i-2)*20)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-2;
-                EEPROM.get((((i-1)*20)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i-1.
-                EEPROM.get(((i*20)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i.
+                EEPROM.get((((i-2)*22)+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-2;
+                EEPROM.get((((i-1)*22)+1), L2);   //L2 recebe o valor salvo no historico referente a posição i-1.
+                EEPROM.get(((i*22)+1), L3);   //L3 recebe o valor salvo no historico referente a posição i.
                 ler=true;   //ler recebe true.
               }
               imprimeEscolha( i-1, l-2, L1, false);
@@ -600,7 +670,7 @@ void menu1(){   //segunda versão do menu principal
       display.println(menu1[2]);    //imprime a string previamente inicializada.
 
       if(yes){    //se YES
-        //choice=21;    //Menu Sincronizar(temporariamente desabilitado até termos algo em que isso possa ser usado.)
+        choice=21;    //Menu Sincronizar(temporariamente desabilitado até termos algo em que isso possa ser usado.)        
         yes=false;
       }
       if(no){
@@ -616,7 +686,37 @@ void menu1(){   //segunda versão do menu principal
       }
       break;
     }
-    case 21:{
+    case 21:{   //menu dentro do sincronizar, usaremos isso para ativar e desativar o bluetooth.
+      display.setCursor(2, barSize);   //define a posição do cursor na primeira linha.
+      display.setTextColor(BLACK,WHITE);    //define a cor do texto.(preto no fundo branco.)
+      if(BLE){
+        display.print("Desativar Bluetooth.");
+        if(yes){
+          Serial1.end();
+          BLE=false;
+          choice=2;
+          yes=false;
+        }
+      }
+      else{
+        display.print("Ativar Bluetooth.");
+        if(yes){
+          Serial1.begin(9600);
+          BLE=true;
+          choice=2;
+          yes=false;
+        }
+      }
+      if(no){
+        choice=2;
+        no=false;
+      }
+      if(up){
+        up=false;
+      }
+      if(down){
+        down=false;
+      }
       break;
     }
     case 3:{
@@ -1021,13 +1121,7 @@ void clockAdjust()
     doing = true;
   }
 
-
-  timeTemp = millis();  //variavels temporaria recebe tempo.
-      if((timeTemp-tempTemp) > 500){ //se a diferença entre as variaveis temporarias for de 1 segundo
-        blinker = true; //blinker recebe valor true e é ativado.
-        tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-      }
-
+//[6+1][6+1][6+1]
 
   if(blinker){
     timeTemp = millis();    //variavel temporario recebe tempo em millis.
@@ -1039,7 +1133,7 @@ void clockAdjust()
     if(track!=0){   //se NÃO for HORA.
       display.setTextSize(1);   //Definir tamanho do texto(1).
       display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
-      display.setCursor(display.width()/2-12.5, barSize+4);    //Definir a posição do cursor(metade da largura da tela menos 2 caracteres e meio, meia linha abaixo da barra superior).
+      display.setCursor(display.width()/2-15, barSize+4);    //Definir a posição do cursor(metade da largura da tela menos 2 caracteres e meio, meia linha abaixo da barra superior).
       if(tempH<10){
         display.print("0");   //Se o valor de HORA for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
       }
@@ -1047,13 +1141,13 @@ void clockAdjust()
     }
     display.setTextSize(1);   //Definir tamanho do texto(1).
     display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
-    display.setCursor(display.width()/2-2.5, barSize+4);    //Definir a posição do cursor(metade da largura da tela menos meio caractere, meia linha abaixo da barra superior).
+    display.setCursor(display.width()/2-3, barSize+4);    //Definir a posição do cursor(metade da largura da tela menos meio caractere, meia linha abaixo da barra superior).
     display.print(":");   //Imprime separador de tempo.
     
     if(track!=1){   //se NÃO for MINUTO.
       display.setTextSize(1);   //Definir tamanho do texto(1).
       display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
-      display.setCursor(display.width()/2+2.5, barSize+4);    //Definir a posição do cursor(metade da largura da tela mais meio caractere, meia linha abaixo da barra superior).
+      display.setCursor(display.width()/2+3, barSize+4);    //Definir a posição do cursor(metade da largura da tela mais meio caractere, meia linha abaixo da barra superior).
       if(tempM<10){
         display.print("0");   //Se o valor de MINUTO for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
       }
@@ -1063,7 +1157,7 @@ void clockAdjust()
     if(track!=2){   //se NÃO for DIA.
       display.setTextSize(1);   //Definir tamanho do texto(1).
       display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
-      display.setCursor(display.width()/2-20, barSize*2+4);   //Definir a posição do cursor(metade da largura da tela menos 4 caracteres, uma linha e meia abaixo da barrar superior).
+      display.setCursor(display.width()/2-25, barSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 4 caracteres, uma linha e meia abaixo da barrar superior).
       if(tempD<10){
         display.print(" ");   //Se o valor de DIA for menor que 10(e portante, apenas um caractere), imprime [ ] na posição.
       }
@@ -1071,13 +1165,13 @@ void clockAdjust()
     }
     display.setTextSize(1);   //Definir tamanho do texto(1).
     display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
-    display.setCursor(display.width()/2-10, barSize*2+4);   //Definir a posição do cursor(metade da largura da tela menos 2 caracteres, uma linha e meia abaixo da barra superior).
+    display.setCursor(display.width()/2-13, barSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 2 caracteres, uma linha e meia abaixo da barra superior).
     display.print("/");   //Imprime separador de data.
     
     if(track!=3){   //se NÃO for MES.
       display.setTextSize(1);   //Definir tamanho do texto(1).
       display.setTextColor(WHITE);    //Definir a cor do texto(BRANCO).
-      display.setCursor(display.width()/2-5, barSize*2+4);   //Definir a posição do cursor(metade da largura da tela menos 1 caractere, uma linha e meia abaixo da barra superior).
+      display.setCursor(display.width()/2-7, barSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 1 caractere, uma linha e meia abaixo da barra superior).
       if(tempMn<10){
         display.print("0");   //Se o valor de MES for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
       }
@@ -1085,13 +1179,13 @@ void clockAdjust()
     }
     display.setTextSize(1);   //Definir tamanho do texto(1).
     display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
-    display.setCursor(display.width()/2+5, barSize*2+4);    //Definir a posição do cursor(metade da largura da tela mais 1 caractere, uma linha e meia abaixo da barra superior).
+    display.setCursor(display.width()/2+5, barSize*2+6);    //Definir a posição do cursor(metade da largura da tela mais 1 caractere, uma linha e meia abaixo da barra superior).
     display.print("/");   //Imprime separador de data.
     
     if(track!=4){   //se NÃO for ANO.
       display.setTextSize(1);   //Definir tamanho do texto(1).
       display.setTextColor(WHITE);    //Definir a cor do texto(BRANCO).
-      display.setCursor(display.width()/2+10, barSize*2+4);   //Definir a posição do cursor(metade da largura da tela mais 2 caracteres, uma linha e meia abaixo da barra superior).
+      display.setCursor(display.width()/2+11, barSize*2+6);   //Definir a posição do cursor(metade da largura da tela mais 2 caracteres, uma linha e meia abaixo da barra superior).
       if(tempY<10){
         display.print("0");   //Se o valor de ano for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
       }
@@ -1107,7 +1201,7 @@ void clockAdjust()
     
     display.setTextSize(1);   //Definir tamanho do texto(1).
     display.setTextColor(WHITE);    //Definir a cor do texto(BRANCO).
-    display.setCursor(display.width()/2-12.5, barSize+4);   //Definir a posição do cursor(metade da largura da tela menos 2 caracteres e meio).
+    display.setCursor(display.width()/2-15, barSize+4);   //Definir a posição do cursor(metade da largura da tela menos 2 caracteres e meio).
     if(tempH<10){
       display.print("0");   //Se o valor de HORA for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
     }
@@ -1120,7 +1214,7 @@ void clockAdjust()
     }
     display.print(tempM);   //Imprime valor Temporario de MINUTE.
 
-    display.setCursor(display.width()/2-20, barSize*2+4);   //Definir a posição do cursor(metade da largura da tela menos 4 caracteres).
+    display.setCursor(display.width()/2-25, barSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 4 caracteres).
     if(tempD<10){
       display.print(" ");   //Se o valor de DIA for menor que 10(e portanto, apenas um caractere), imprime [ ] na posição.
     }
@@ -1596,7 +1690,7 @@ void frequencySweepEasy() {
     }
 }
 
-bool frequencySweepCustom(unsigned int FREQ, int NUM ){
+bool frequencySweepCustom(unsigned long FREQ, int NUM ){
   medReal=0;  //reseta os valores medios de real e imaginario.
   medImag=0;
   int real, imag, i=0;
@@ -1604,6 +1698,38 @@ bool frequencySweepCustom(unsigned int FREQ, int NUM ){
   double inc = (FREQ/100);
   Serial.println(FREQ);
   Serial.println(cfreq);
+
+  if(!AD5933::reset()){
+    Serial.println("Reset Falhou");
+    return false;
+  }
+  delay(1);
+  if(!AD5933::setInternalClock(true)){
+    Serial.println("SetInternalClock Falhou");
+    return false;
+  }
+  delay(1);
+  if(!AD5933::setStartFrequency(FREQ*0.95)){
+    Serial.println("SetStartFrequency Falhou");
+    return false;
+  }
+  delay(1);
+  if(!AD5933::setIncrementFrequency(FREQ/100)){
+    Serial.println("SetIncrementFrequency Falhou");
+    return false;
+  }
+  delay(1);
+  if(!AD5933::setNumberIncrements(NUM)){
+    Serial.println("SetNumberIncrements Falhou");
+    return false;
+  }
+  delay(1);
+  if(!AD5933::setPGAGain(PGA_GAIN_X1)){
+    Serial.println("SetPGAGain Falhou");
+    return false;
+  }
+  delay(1);
+  
   if(!(AD5933::setPowerMode(POWER_STANDBY) &&
        AD5933::setControlMode(CTRL_INIT_START_FREQ) &&
        AD5933::setControlMode(CTRL_START_FREQ_SWEEP)))
