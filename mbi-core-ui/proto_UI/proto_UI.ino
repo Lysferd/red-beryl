@@ -969,42 +969,175 @@ void upperBar() // barra superior.
 
 void serialTalk(){
   String input, output;
-  static bool waiting = false;
-  static int i=0;
+  static bool waiting = false, sending = false, getter = false;
+  static int i=0, x;
+
+  if(getter){   //se get tiver sido recebido
+    Serial.println("GETTER");
+    if(x==0){
+      //se for 0 fazer aqui o codigo de enviar todas as leituras.
+      Serial.println("x=0");
+    }
+    else{
+      static int inf = 0;
+      static leitura lt;
+      if(EEPROM.read(0)<x){
+        Serial1.print("ERROR");
+        getter = false;
+      }
+      else{
+        //sizeof(struct leitura)
+        EEPROM.get(1+(sizeof(struct leitura)*(x-1)), lt);
+        switch(inf){
+          case 0:{
+            Serial.println("Enviando DATA.");
+            Serial1.print("D");
+            if(lt.dia<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.dia);
+            if(lt.mes<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.mes);
+            if(lt.ano<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.ano);
+            inf++;
+            break;
+          }
+          case 1:{
+            Serial.println("Enviando HORA e MINUTO.");
+            Serial1.print("T");
+            if(lt.hora<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.hora);
+            if(lt.minuto<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.minuto);
+            inf++;
+            break;
+          }
+          case 2:{
+            Serial.println("Enviando valor REAL.");
+            Serial1.print("R");
+            Serial1.print(lt.real);
+            inf++;
+            break;
+          }
+          case 3:{
+            Serial.println("Enviando valor IMAGINARIO.");
+            Serial1.print("J");
+            Serial1.print(lt.imag);
+            inf++;
+            break;
+          }
+          case 4:{
+            Serial.println("Enviando valor de FREQUENCIA.");
+            Serial1.print("F");
+            Serial1.print(lt.freq);
+            inf++;
+            break;
+          }
+          case 5:{
+            inf = 0;
+            getter = false;
+            break;
+          }
+        }
+      }
+    }
+  }
+  if(sending){
+    static int inf = 0;
+    static leitura lt;
+    if(EEPROM.read(0)>0){
+      EEPROM.get(1,lt);
+    }
+    else{
+      lt = {00000,0,0,0,0,0,0,0};
+    }
+    switch(inf){
+      case 0:{
+        Serial.println("Enviando DATA.");
+        Serial1.print("D");
+        if(lt.dia<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.dia);
+        if(lt.mes<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.mes);
+        if(lt.ano<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.ano);
+        inf++;
+        break;
+      }
+      case 1:{
+        Serial.println("Enviando HORA e MINUTO.");
+        Serial1.print("T");
+        if(lt.hora<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.hora);
+        if(lt.minuto<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.minuto);
+        inf++;
+        break;
+      }
+      case 2:{
+        Serial.println("Enviando valor REAL.");
+        Serial1.print("R");
+        Serial1.print(lt.real);
+        inf++;
+        break;
+      }
+      case 3:{
+        Serial.println("Enviando valor IMAGINARIO.");
+        Serial1.print("J");
+        Serial1.print(lt.imag);
+        inf++;
+        break;
+      }
+      case 4:{
+        Serial.println("Enviando valor de FREQUENCIA.");
+        Serial1.print("F");
+        Serial1.print(lt.freq);
+        inf++;
+        break;
+      }
+      case 5:{
+        inf = 0;
+        sending = false;
+        break;
+      }
+    }
+  }
   if(Serial1.available()){
-    if((input=Serial1.readString())!=-1)
+    if((input=Serial1.readStringUntil('+'))!=-1)
     {
+      x = Serial.parseInt();
       Serial.println( input );
+      Serial.println( x );
       if(input=="CHK"){
-        int bH = time.getHour(h12, PM);
-        int bM = time.getMinute();
-        //output=temptime;
-        //output += time.getHour()
-        Serial1.print(bH);
-        delay(1);
-        Serial1.print(bM);
+        Serial.println("Recebeu CHK. Enviando numero de leituras.");
+        Serial1.print(EEPROM.read(0));
+      }
+      if(input=="GET"){
+        Serial.print("GET+");
+        Serial.println(x);
+        getter = true;
       }
       if(input=="AT"){
-
-        //LEMBRAR: sempre que os doubles real e imag forem enviados, o tamanho é de 8 e não 4, calcular os 20 bytes do pacote usando isso
-        leitura lt;
-        EEPROM.get(1,lt);
-        
-        //Serial1.print(lt.hora); Serial.println(sizeof(lt.hora));
-        //delay(1);
-        //Serial1.print(lt.minuto); Serial.println(sizeof(lt.minuto));
-        //delay(1);
-        Serial1.print(lt.real); Serial.println(sizeof(lt.real));
-        delay(1);
-        Serial1.print(lt.imag); Serial.println(sizeof(lt.imag));
-        delay(1);
-        Serial1.print("000");
-        delay(1);
-        Serial1.print(lt.hora);
-        delay(1);
-        Serial1.print(lt.minuto);
-        delay(1);
-        //Serial1.print(lt);
+        sending = true;
       }
       
       i=0;
@@ -1269,36 +1402,6 @@ void clockAdjust()
         //screen = 0; //retornar para a screen anterior.
         doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
       }
-    /*
-    display.setCursor(display.width()/2-24, barSize); //prepara o cursor para ficar em posição.
-    if(blinker == false){ //se o blinker for FALSE.
-      if(tempH <10){  //se a hora for menor que 10.
-        display.print("0"); //imprime 0.
-      }
-      display.print(tempH); //imprime a hora.
-      timeTemp = millis();  //variavels temporaria recebe tempo.
-      if((timeTemp-tempTemp) > 500){ //se a diferença entre as variaveis temporarias for de 1 segundo
-        blinker = true; //blinker recebe valor true e é ativado.
-        tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-      }
-    }
-    else{ //se o blinker for TRUE.
-      display.print("  ");  //printa apenas espaços vazios, passando o cursor para dois caracteres a diante.
-      timeTemp = millis();  //variavel temporaria recebe tempo.
-      if((timeTemp-tempTemp) > 200){  //se a diferença entre variaveis temporarias for de 1/2 segundo.
-        blinker = false; //blinker recebe valor false e é desativado.
-        tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-      }
-    }
-    
-    //fim da logica de blinker da hora.
-
-    display.print(":"); //imprime os dois pontos separando os valores de hora e minuto.
-    if(tempM < 10){ //se o minuto for menor que 10.
-      display.print("0"); //imprime 0.
-    }
-    display.print(tempM); //imprime minuto.
-    //fim da logica de minuto.*/
       break;  //fim da logica da track 0 representando as horas.
     }
     
@@ -1340,34 +1443,6 @@ void clockAdjust()
         no=false; //reseta o valor do botão NO para false.
         track--;  //retorna a track anterior.
       }
-/*
-      display.setCursor(display.width()/2-24, barSize); //prepara o cursor para ficar em posição.
-      if(tempH<10){ //se a hora for menor que 10.
-        display.print("0"); //imprime 0.
-      }
-      display.print(tempH); //imprime a hora.
-      display.print(":"); //imprime dois pontos separando hora e minuto.
-
-      if(blinker == false){ //se o blinker for FALSE.
-        if(tempM <10){  //se o minuto for menor que 10.
-          display.print("0"); //imprime 0.
-        }
-        display.print(tempM); //imprime o minuto.
-        timeTemp = millis();  //variavels temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 500){ //se a diferença entre as variaveis temporarias for de 1 segundo
-          blinker = true; //blinker recebe valor true e é ativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      else{ //se o blinker for TRUE.
-        display.print("  ");  //printa apenas espaços vazios, passando o cursor para dois caracteres a diante.
-        timeTemp = millis();  //variavel temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 200){  //se a diferença entre variaveis temporarias for de 1/2 segundo.
-          blinker = false; //blinker recebe valor false e é desativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-*/
       break;  //fim da logica da track 1 representando os minutos.
       
     }
@@ -1462,42 +1537,6 @@ void clockAdjust()
         no=false; //reseta o valor do botão NO para false.
         track--;  //retorna a track anterior.
       }
-/*
-      display.setCursor(display.width()/2-39, barSize); //prepara o cursor para ficar em posição.
-
-      if(blinker == false){ //se o blinker for FALSE.
-        if(tempD <10){  //se a dia for menor que 10.
-          display.print("0"); //imprime 0.
-        }
-        display.print(tempD); //imprime o dia.
-        timeTemp = millis();  //variavels temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 500){ //se a diferença entre as variaveis temporarias for de 1 segundo
-          blinker = true; //blinker recebe valor true e é ativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      else{ //se o blinker for TRUE.
-        display.print("  ");  //printa apenas espaços vazios, passando o cursor para dois caracteres a diante.
-        timeTemp = millis();  //variavel temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 200){  //se a diferença entre variaveis temporarias for de 1/2 segundo.
-          blinker = false; //blinker recebe valor false e é desativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      //final da logica de blinker do dia.
-
-      display.print("/"); //imprime '/' como separador entre dia e mes.
-      if(tempMn<10){  //se o mes for menor que 10.
-        display.print("0"); //imprime 0.
-      }
-      display.print(tempMn);  //imprime o mes.
-
-      display.print("/"); //imprime '/' como separador entre mes e ano.
-      if(tempY<10){
-        display.print("0");
-      }
-      display.print(tempY); //imprime o ano
-      */
       break;  //final da track 2 do dia.
     }
     case 3: //mes
@@ -1557,44 +1596,6 @@ void clockAdjust()
         no=false; //reseta o valor do botão NO para false.
         track--;  //retorna a track anterior.
       }      
-      /*
-      display.setCursor(display.width()/2-39, barSize); //prepara o cursor para ficar em posição.
-      
-      if(tempD<10){  //se o dia for menor que 10.
-        display.print("0"); //imprime 0.
-      }
-      display.print(tempD);  //imprime o dia.
-      display.print("/"); //imprime '/' como separador entre dia e mes.
-      
-      if(blinker == false){ //se o blinker for FALSE.
-        if(tempMn <10){  //se a mes for menor que 10.
-          display.print("0"); //imprime 0.
-        }
-        display.print(tempMn); //imprime o mes.
-        timeTemp = millis();  //variavels temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 500){ //se a diferença entre as variaveis temporarias for de 1 segundo
-          blinker = true; //blinker recebe valor true e é ativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      else{ //se o blinker for TRUE.
-        display.print("  ");  //printa apenas espaços vazios, passando o cursor para dois caracteres a diante.
-        timeTemp = millis();  //variavel temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 200){  //se a diferença entre variaveis temporarias for de 1/2 segundo.
-          blinker = false; //blinker recebe valor false e é desativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      //final da logica de blinker do mes.
-
-      display.print("/"); //imprime '/' como separador entre mes e ano.
-      
-      if(tempY<10){
-        display.print("0");
-      }
-      display.print(tempY); //imprime o ano
-      
-*/
       break;  //final da track 3.
     }
     case 4: //ano
@@ -1622,42 +1623,6 @@ void clockAdjust()
         no=false; //resetar o valor do botão NO para false.
         track--;  //retornar a track anterior.
       }
-      /*
-      display.setCursor(display.width()/2-39, barSize); //prepara o cursor para ficar em posição.
-    
-      if(tempD<10){  //se o dia for menor que 10.
-        display.print("0"); //imprime 0.
-      }
-      display.print(tempD);  //imprime o dia.
-      
-      display.print("/"); //imprime '/' como separador entre dia e mes.
-      if(tempMn<10){  //se o mes for menor que 10.
-        display.print("0"); //imprime 0.
-      }
-      display.print(tempMn);  //imprime o mes.
-
-      display.print("/"); //imprime '/' como separador entre mes e ano.
-       if(blinker == false){ //se o blinker for FALSE.
-        if(tempY <10){  //se o ano for menor que 10(apenas os ultimos dois digitos).
-          display.print("0"); //imprime 0.
-        }
-        display.print(tempY); //imprime o ano.
-        timeTemp = millis();  //variavels temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 500){ //se a diferença entre as variaveis temporarias for de 1 segundo
-          blinker = true; //blinker recebe valor true e é ativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      else{ //se o blinker for TRUE.
-        display.print("  ");  //printa apenas espaços vazios, passando o cursor para dois caracteres a diante.
-        timeTemp = millis();  //variavel temporaria recebe tempo.
-        if((timeTemp-tempTemp) > 200){  //se a diferença entre variaveis temporarias for de 1/2 segundo.
-          blinker = false; //blinker recebe valor false e é desativado.
-          tempTemp = timeTemp;  //a variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
-        }
-      }
-      //final da logica de blinker do ano.
-*/
       break;  //fim da track 4 representando o ano
     }
   }
