@@ -972,85 +972,7 @@ void serialTalk(){
   static bool waiting = false, sending = false, getter = false;
   static int i=0, x;
 
-  if(getter){   //se get tiver sido recebido
-    Serial.println("GETTER");
-    if(x==0){
-      //se for 0 fazer aqui o codigo de enviar todas as leituras.
-      Serial.println("x=0");
-    }
-    else{
-      static int inf = 0;
-      static leitura lt;
-      if(EEPROM.read(0)<x){
-        Serial1.print("ERROR");
-        getter = false;
-      }
-      else{
-        //sizeof(struct leitura)
-        EEPROM.get(1+(sizeof(struct leitura)*(x-1)), lt);
-        switch(inf){
-          case 0:{
-            Serial.println("Enviando DATA.");
-            Serial1.print("D");
-            if(lt.dia<10){
-              Serial1.print("0");
-            }
-            Serial1.print(lt.dia);
-            if(lt.mes<10){
-              Serial1.print("0");
-            }
-            Serial1.print(lt.mes);
-            if(lt.ano<10){
-              Serial1.print("0");
-            }
-            Serial1.print(lt.ano);
-            inf++;
-            break;
-          }
-          case 1:{
-            Serial.println("Enviando HORA e MINUTO.");
-            Serial1.print("T");
-            if(lt.hora<10){
-              Serial1.print("0");
-            }
-            Serial1.print(lt.hora);
-            if(lt.minuto<10){
-              Serial1.print("0");
-            }
-            Serial1.print(lt.minuto);
-            inf++;
-            break;
-          }
-          case 2:{
-            Serial.println("Enviando valor REAL.");
-            Serial1.print("R");
-            Serial1.print(lt.real);
-            inf++;
-            break;
-          }
-          case 3:{
-            Serial.println("Enviando valor IMAGINARIO.");
-            Serial1.print("J");
-            Serial1.print(lt.imag);
-            inf++;
-            break;
-          }
-          case 4:{
-            Serial.println("Enviando valor de FREQUENCIA.");
-            Serial1.print("F");
-            Serial1.print(lt.freq);
-            inf++;
-            break;
-          }
-          case 5:{
-            inf = 0;
-            getter = false;
-            break;
-          }
-        }
-      }
-    }
-  }
+  
   if(sending){
     static int inf = 0;
     static leitura lt;
@@ -1124,16 +1046,13 @@ void serialTalk(){
   if(Serial1.available()){
     if((input=Serial1.readStringUntil('+'))!=-1)
     {
-      x = Serial.parseInt();
       Serial.println( input );
-      Serial.println( x );
       if(input=="CHK"){
         Serial.println("Recebeu CHK. Enviando numero de leituras.");
         Serial1.print(EEPROM.read(0));
       }
       if(input=="GET"){
         Serial.print("GET+");
-        Serial.println(x);
         getter = true;
       }
       if(input=="AT"){
@@ -1156,7 +1075,92 @@ void serialTalk(){
     Serial.println(i);
     i++;
   }
-}
+
+  if(getter){   //se get tiver sido recebido
+    Serial.println("GETTER");
+    static int inf = 0;
+    static leitura lt;
+    static bool first=true;
+    if(first){
+      input=Serial1.readString();
+      char temp[10];
+      input.toCharArray(temp, 10);
+      char *ptr;
+      x = strtol(temp, &ptr, 10);
+      Serial.print("X=");
+      Serial.println(x);
+      first=false;
+    }
+    if(EEPROM.read(0)<x){
+      Serial1.print("ERROR");
+      getter = false;
+    }
+    else{
+      //sizeof(struct leitura)
+      EEPROM.get(1+(sizeof(struct leitura)*(x-1)), lt);
+      switch(inf){
+        case 0:{
+          Serial.println("Enviando DATA.");
+          Serial1.print("D");
+          if(lt.dia<10){
+            Serial1.print("0");
+            }
+            Serial1.print(lt.dia);
+            if(lt.mes<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.mes);
+            if(lt.ano<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.ano);
+            inf++;
+            break;
+          }
+          case 1:{
+            Serial.println("Enviando HORA e MINUTO.");
+            Serial1.print("T");
+            if(lt.hora<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.hora);
+            if(lt.minuto<10){
+              Serial1.print("0");
+            }
+            Serial1.print(lt.minuto);
+            inf++;
+            break;
+          }
+          case 2:{
+            Serial.println("Enviando valor REAL.");
+            Serial1.print("R");
+            Serial1.print(lt.real);
+            inf++;
+            break;
+          }
+          case 3:{
+            Serial.println("Enviando valor IMAGINARIO.");
+            Serial1.print("J");
+            Serial1.print(lt.imag);
+            inf++;
+            break;
+          }
+          case 4:{
+            Serial.println("Enviando valor de FREQUENCIA.");
+            Serial1.print("F");
+            Serial1.print(lt.freq);
+            inf++;
+            break;
+          }
+          case 5:{
+            inf = 0;
+            getter = false;
+            break;
+          }
+        }
+      }
+    }
+  }
 
 void scrollBar(int j)
 {
