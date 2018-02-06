@@ -903,6 +903,12 @@ void imprimeEscolha(int i, int l, struct leitura lt, bool s){    //função impr
   display.print(lt.minuto);   //imprime valor minuto.
 }
 
+int getBatteryPct(){
+  int pwr, pct;
+  pwr = analogRead(potPin);
+  pct = map(pwr,0,1023,0,100);
+  return pct;
+}
 
 void upperBar() // barra superior.
 {
@@ -968,10 +974,145 @@ void upperBar() // barra superior.
 }
 
 void serialTalk(){
-  String input, output;
-  static bool waiting = false, sending = false, getter = false;
-  static int i=0, x;
-
+  //String input, output;
+  //static bool waiting = false, sending = false, getter = false;
+  //static int i=0, x;
+  char comStr[4], inStr[30], debugStr[30];
+  static int index;
+  static bool Get=false;
+  if(Get){
+    Serial.print("Get ");
+    Serial.println(index);
+    
+    static int inf = 0;
+    static leitura lt;
+    if(index==0){
+      Serial.println("x=0 TBD---");
+      Get=false;
+    }
+    if(index>EEPROM.read(0)){
+      Serial.println("Index recebido superior ao numero de leituras, retornando ERRO");
+      Serial1.print("ERR");
+      Get=false;
+    } else {
+      EEPROM.get(1+(sizeof(struct leitura)*(index-1)), lt);
+      switch(inf){
+        case 0:{
+          Serial.println("Enviando DATA.");
+          Serial1.print("D");
+          if(lt.dia<10){
+            Serial1.print("0");
+          }
+          Serial1.print(lt.dia);
+          Serial1.print("/");
+          if(lt.mes<10){
+            Serial1.print("0");
+          }
+          Serial1.print(lt.mes);
+          Serial1.print("/");
+          if(lt.ano<10){
+            Serial1.print("0");
+          }
+          Serial1.print(lt.ano);
+          inf++;
+          break;
+        }
+        case 1:{
+          Serial.println("Enviando HORA e MINUTO.");
+          Serial1.print("T");
+          if(lt.hora<10){
+            Serial1.print("0");
+          }
+          Serial1.print(lt.hora);
+          Serial1.print(":");
+          if(lt.minuto<10){
+            Serial1.print("0");
+          }
+          Serial1.print(lt.minuto);
+          inf++;
+          break;
+        }
+        case 2:{
+          Serial.println("Enviando valor REAL.");
+          Serial1.print("R");
+          Serial1.print(lt.real);
+          inf++;
+          break;
+        }
+        case 3:{
+          Serial.println("Enviando valor IMAGINARIO.");
+          Serial1.print("J");
+          Serial1.print(lt.imag);
+          inf++;
+          break;
+        }
+        case 4:{
+          Serial.println("Enviando valor de FREQUENCIA.");
+          Serial1.print("F");
+          Serial1.print(lt.freq);
+          inf++;
+          break;
+        }
+        case 5:{
+          inf = 0;
+          Get = false;
+          break;
+        }
+      }
+    }
+  }
+  if(Serial1.available()!=-1 && Serial1.available()!=  0){
+    Serial.print("Serial1 enviou algo:");
+    Serial.print(Serial1.available());
+    Serial.println(" caracteres.");
+    while(Serial1.available()>0){
+      static int i=0;
+      Serial.println(i);
+      if(i<3){
+        comStr[i]=Serial1.read();
+        Serial.println(comStr[i]);
+        i++;
+        comStr[i]= '\0';
+      }
+      else{
+        inStr[i-3]=Serial1.read();
+        Serial.println(inStr[i-3]);
+        i++;
+        inStr[i-3]= '\0';
+      }
+      if(Serial1.available()==-1 || Serial1.available()==0){
+        i=0;
+      }
+    }
+    Serial.print(comStr);
+    Serial.print("|");
+    Serial.println(inStr);
+    if(strcmp(comStr, "CHK")== 0){
+      Serial1.print(EEPROM.read(0));
+    }
+    if(strcmp(comStr, "BAT")==0){
+      Serial1.print(getBatteryPct());
+    }
+    if(strcmp(comStr, "GET")==0){
+      char *ptr, temp[30];
+      index = strtol(temp, &ptr, 30);
+      Serial.print("INDEX=");
+      Serial.println(index);
+      Get=true;
+    }
+  }
+  if(Serial.available()!=-1 && Serial.available() != 0){
+    while(Serial.available()>0){
+      static int i=0;
+      debugStr[i]=Serial.read();
+      i++;
+      if(Serial.available()==-1 || Serial.available()==0){
+        i=0;
+      }
+    }
+    Serial1.print(debugStr);
+  }
+  /*
   
   if(sending){
     static int inf = 0;
@@ -1159,7 +1300,7 @@ void serialTalk(){
           }
         }
       }
-    }
+    }*/
   }
 
 void scrollBar(int j)
