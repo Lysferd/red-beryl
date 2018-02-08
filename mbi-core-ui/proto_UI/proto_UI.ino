@@ -1131,28 +1131,19 @@ void serialTalk(){
     Serial.print("Serial1 enviou algo:");
     Serial.print(Serial1.available());
     Serial.println(" caracteres.");
-    while(Serial1.available()>0){
-      static int i=0;
+    int i=0;
+    while(Serial1.available()>0 && i<3 ){
+      //static int i=0;
       Serial.println(i);
       if(i<3){
         comStr[i]=Serial1.read();
-        Serial.println(comStr[i]);
+        //Serial.print(comStr[i]);
         i++;
         comStr[i]= '\0';
       }
-      else{
-        inStr[i-3]=Serial1.read();
-        Serial.println(inStr[i-3]);
-        i++;
-        inStr[i-3]= '\0';
-      }
-      if(Serial1.available()==-1 || Serial1.available()==0){
-        i=0;
-      }
     }
-    Serial.print(comStr);
-    Serial.print("|");
-    Serial.println(inStr);
+    Serial.println(comStr);
+
     if(strcmp(comStr, "CHK")== 0){
       Serial1.print(EEPROM.read(0));
     }
@@ -1167,6 +1158,7 @@ void serialTalk(){
     }
     else if(strcmp(comStr, "WIP")==0){
       //WIPE MEMORY = LIMPAR OS ENDEREÇOS DA EEPROM RECONHECIDOS PELA POSIÇÃO 0(INDEX).
+      Serial1.flush();
       if(EEPROM.read(0)>0){
         int i=1;
         while(i<1+(EEPROM.read(0)*(sizeof(struct leitura)))){
@@ -1182,10 +1174,143 @@ void serialTalk(){
         Serial1.print("OK");
       }
     }
+    else if(strcmp(comStr, "CLK")==0){    //Se o comando recebido for CLK, realiza a logica de relogio.
+      delay(10);
+      if(Serial1.available()!=-1 && Serial1.available()!=0){    //checa se recebeu mais alguma coisa por bluetooth,.
+        int dia,mes,ano,hora,minuto,segundo;    //inicializa as variaveis tmeporarias para receber os valores de dat e hora
+        
+        while(Serial1.available()<12){    //enquanto o buffer não estiver com todos os caracteres prontos, fazer delay.
+          Serial.print("Aguardando o buffer receber todos os caracteres antes de avançar. ");
+          Serial.print(Serial1.available());
+          Serial.println(" Recebidos.");
+          delay(10);
+        }
+        int n=0;    //inicializa um i temporario.
+        char *ptr;
+
+        Serial.println("Atualizando Hora e Data.");
+        
+        while(n<12){    //enquanto i for menor que 12.
+          delay(1);
+          if(n<2){    //primeira dupla de valores: DIA
+            inStr[n]=Serial1.read();
+          }
+          else if(n<4){   //segunda dupla de valores: MES
+            inStr[n-2]=Serial1.read();
+          }
+          else if(n<6){   //terceira dupla de valores: ANO
+            inStr[n-4]=Serial1.read();
+          }
+          else if(n<8){   //quarta dupla de valores: HORA
+            inStr[n-6]=Serial1.read();
+          }
+          else if(n<10){    //quinta dupla de valores: MINUTO
+            inStr[n-8]=Serial1.read();
+          }
+          else if(n<12){    //sexta dupla de valores: SEGUNDO
+            inStr[n-10]=Serial1.read();
+          }
+
+          //VERIFICAR O CODIGO, VER SE TODOS OS 'i' FORAM MUDADOS PARA 'n', DAR UMA OLHADA NO CODIGO DE 'inStr' para ver se esta funcionando corretamente.
+          
+          n++;    //incrementa i;
+          inStr[2]='\0';  //finalizador de string na terceira posição
+          if(n==2){   //primeiro valor: DIA
+            delay(1);
+            Serial.print(inStr);
+            dia = strtol(inStr, &ptr, 10);
+            time.setDate(dia);    //alterar DIA no RTC
+            Serial.println(" - dia atualizado.");
+          }
+          if(n==4){   //segundo valor: MES
+            delay(1);
+            Serial.print(inStr);
+            mes = strtol(inStr, &ptr, 10);
+            time.setMonth(mes);   //alterar MES no RTC
+            Serial.println(" - mes atualizado.");
+          }
+          if(n==6){   //terceiro valor: ANO
+            delay(1);
+            Serial.print(inStr);
+            ano = strtol(inStr, &ptr, 10);
+            time.setYear(ano);    //alterar ANO no RTC
+            Serial.println(" - ano atualizado.");
+          }
+          if(n==8){   //quarto valor: HORA
+            delay(1);
+            Serial.print(inStr);
+            hora = strtol(inStr, &ptr, 10);
+            time.setHour(hora);   //alterar HORA no RTC
+            Serial.println(" - hora atualizada.");
+          }
+          if(n==10){
+            delay(1);
+            Serial.print(inStr);
+            minuto = strtol(inStr, &ptr, 10);
+            time.setMinute(minuto);   //alterar MINUTO no RTC
+            Serial.println(" - minuto atualizado.");
+          }
+          if(n==12){
+            delay(1);
+            Serial.print(inStr);
+            segundo = strtol(inStr, &ptr, 10);
+            time.setSecond(segundo);    //alterar SEGUNDO no RTC
+            Serial.println(" - segundo atualizado");
+          }
+        }
+        Serial.println("Data e Hora atualizados(eu acho)");
+        //Serial1.print("OK");
+      }
+      else{
+        if(time.getDate()<10){
+          Serial1.print("0");
+        }
+        Serial1.print(time.getDate());
+        Serial1.print("/");
+
+        bool century;   //cria uma bool temporaria simplesmente para que a função getMonth funcione.
+        
+        if(time.getMonth(century)<10){
+          Serial1.print("0");
+        }
+        Serial1.print(time.getMonth(century));
+        Serial1.print("/");
+        if(time.getYear()<10){
+          Serial1.print("0");
+        }
+        Serial1.print(time.getYear());
+        
+        Serial1.print(" ");
+        
+        if(time.getHour(h12, PM)<10){
+          Serial1.print("0");
+        }
+        Serial1.print(time.getHour(h12, PM));
+        Serial1.print(":");
+        if(time.getMinute()<10){
+          Serial1.print("0");
+        }
+        Serial1.print(time.getMinute());
+        Serial.println("Data e Hora enviados.");
+      }
+    }
     else if(strcmp(comStr, "REQ")==0){
 
       //SE A FREQUENCIA REQUISITA FOR INVALIDA(ABAIXO DE 1K OU ACIMA DE 100K) DEVOLVER UM ERRO/AVISO/ETC... A fazer
-      
+      delay(10);
+      while(Serial1.available()!=-1 && Serial1.available()!=0){
+        if(Serial1.available()>=4){
+          int i=0;
+          while(Serial1.available()!=-1 && Serial1.available()!=0){
+            inStr[i]=Serial1.read();
+            Serial.print(inStr[i]);
+            i++;
+            inStr[i]= '\0';
+          }
+        }
+      }
+      Serial.print("|");
+      Serial.println(inStr);
       char *ptr;
       index = strtol(inStr, &ptr, 10);
       Serial.print("INDEX=");
@@ -1193,23 +1318,50 @@ void serialTalk(){
       Serial.print("PTR='");
       Serial.print(ptr);
       Serial.println("'");
-      if(frequencySweepCustom(index, 10 )){
-        Serial.print("Sweep usando frequencia ");
-        Serial.print(index);
-        Serial.println(" completa.");
-        Req = true;
+      Serial1.flush();
+      if(index>=1000 && index <=100000){
+        if(frequencySweepCustom(index, 10 )){
+          Serial.print("Sweep usando frequencia ");
+          Serial.print(index);
+          Serial.println(" completa.");
+          EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);  //salva a nova leitura na EEPROM.
+          Serial.println("Salvo na EEPROM.");
+          EEPROM.write(0,(EEPROM.read(0)+1));    //o valor da posição 'i' recebe '0'.
+          
+          Req = true;
+        }
+        else{
+          Serial.println("Sweep falhou, enviando erro.");
+          Serial1.print("ERR");
+        }
       }
       else{
-        Serial.println("Sweep falhou, enviando erro.");
+        Serial.print("Valor de frequencia requerido não esta dentro dos limites validos, retornando ERRO.");
         Serial1.print("ERR");
       }
     }
     else if(strcmp(comStr, "TMP")==0){
       Serial.println("Enviando temperatura.");
       double temperature = AD5933::getTemperature();
+
       Serial1.print(temperature);
+      
     }
     else if(strcmp(comStr, "GET")==0){
+      delay(10);
+      while(Serial1.available()!=-1 && Serial1.available()!=0){
+        if(Serial1.available()>=1){
+          int i=0;
+          while(Serial1.available()!=-1 && Serial1.available()!=0){
+            inStr[i]=Serial1.read();
+            Serial.print(inStr[i]);
+            i++;
+            inStr[i]= '\0';
+          }
+        }
+      }
+      Serial.print("|");
+      Serial.println(inStr);
       char *ptr;
       index = strtol(inStr, &ptr, 10);
       Serial.print("INDEX=");
@@ -1217,11 +1369,17 @@ void serialTalk(){
       Serial.print("PTR='");
       Serial.print(ptr);
       Serial.println("'");
+      Serial1.flush();
       Get=true;
     }
     else{
       Serial.println("Algo inesperado foi recebido, limpando o serial.");
-      Serial1.flush();
+      for (int i=0; i<10; i++){
+        Serial1.read();
+        if(Serial1.available()==0){
+          i=10;
+        }
+      }
     }
   }
   if(Serial.available()!=-1 && Serial.available() != 0){
@@ -1239,16 +1397,22 @@ void serialTalk(){
 
 void scrollBar(int j)
 {
-
-    static int offset = 100*(3*8)/(EEPROM.read(0)*8);
+    //CONSERTAR O MOVIMENTO DE LAGARTA QUE A SCROLL BAR ESTA FAZENDO NO MOMENTO MAS NÃO RETIRAR O MOVIMENTO DE EXPANSÃO.
+    int offset = 100*(3*8)/(EEPROM.read(0)*8);
+    
     //Inicializando um int offset que vai receber um a divisão do tamanho de uma tela pelo numero de opções multiplicadas pelo tamanho de uma linha, tudo multiplicado por 100.
     offset = map(offset,1,100,(3*8)-1,0);
+    
     //mapeando o valor de offset de 1 a 100 para o tamanho da tela até 1, ou seja, quanto mais proximo de 100 offset for, menor o offset será, em relação ao tamanho livre na tela,
     // desaparecendo em 100 ou mais. de forma que, quando tiver apenas tres opções ou menos, a barra de scroll não aparecerá, mas a partir de quatro opções, a barra cobrira 75% do espaço livre
     //na tela, dividindo os 25% restantes entre o [numero de opções -1], no caso [4-1=(3)], cada opção alem da selecionada contara com aproximadamente 8,333% para fazer offset relevante a posição
     //da opção selecionada(j)
 
     offset/=(EEPROM.read(0)-1);   //dividindo o offset pelo numero de opções -1.
+    
+    if(offset==0){
+      offset=1;
+    }
     display.drawLine(display.width()-1, (barSize+(j*offset)/2), display.width()-1,display.height()-1-((EEPROM.read(0)-(j+1))*offset)/2, WHITE);
 }
 
