@@ -104,7 +104,7 @@ static String temptime = "0:0";
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(19200);
   Serial1.begin(9600);
   BLE=true;
   
@@ -177,6 +177,10 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  Serial1.print("0123456789");
+  delay(10);
+  Serial1.print("ABCDEFGHIJ");
+  
   display.clearDisplay();
   //clock();
   checkPins();
@@ -977,6 +981,22 @@ void serialTalk(){
   //String input, output;
   //static bool waiting = false, sending = false, getter = false;
   //static int i=0, x;
+
+
+
+
+
+  /*CRIAR FUNÇÕES WRAP-SEND-RECEIVE(?) E SIMILARES PARA DIMINUIR SERIALTALK()
+   * E TRANSFERIR PARA UMA LIBRARY PERSONALIZADA('Red_Beryl'?) 
+   * PARA QUE O CODIGO FIQUE MAIS LIMPO E FACIL DE NAVEGAR
+   * E PARA SIMPLIFICAR O PROCESSO DE ALTERAR O CODIGO.
+   */
+
+
+
+
+
+  
   char comStr[4], inStr[30], debugStr[30];
   static long index;
   static bool Get=false, Req=false;
@@ -993,6 +1013,7 @@ void serialTalk(){
     switch(inf){
       case 0:{
         Serial.println("Enviando DATA e HORA.");
+        Serial1.print("S");
         Serial1.print("D");
         if(lt.dia<10){
           Serial1.print("0");
@@ -1018,27 +1039,38 @@ void serialTalk(){
           Serial1.print("0");
         }
         Serial1.print(lt.minuto);
+        Serial1.print("E");
+        //Serial1.flush();
         inf++;
         break;
       }
       case 1:{
         Serial.println("Enviando valor REAL.");
+        Serial1.print("S");
         Serial1.print("R");
         Serial1.print(lt.real);
+        Serial1.print("E");
+        //Serial1.flush();
         inf++;
         break;
       }
       case 2:{
         Serial.println("Enviando valor IMAGINARIO.");
+        Serial1.print("S");
         Serial1.print("J");
         Serial1.print(lt.imag);
+        Serial1.print("E");
+        //Serial1.flush();
         inf++;
         break;
       }
       case 3:{
         Serial.println("Enviando valor de FREQUENCIA.");
+        Serial1.print("S");
         Serial1.print("F");
         Serial1.print(lt.freq);
+        Serial1.print("E");
+        //Serial1.flush();
         inf++;
         break;
       }
@@ -1063,12 +1095,14 @@ void serialTalk(){
     if(index>EEPROM.read(0)){
       Serial.println("Index recebido superior ao numero de leituras, retornando ERRO");
       Serial1.print("ERR");
+      //Serial1.flush();
       Get=false;
     } else {
       EEPROM.get(1+(sizeof(struct leitura)*(index-1)), lt);
       switch(inf){
         case 0:{
           Serial.println("Enviando DATA e HORA.");
+          Serial1.print("S");
           Serial1.print("D");
           if(lt.dia<10){
             Serial1.print("0");
@@ -1095,27 +1129,38 @@ void serialTalk(){
             Serial1.print("0");
           }
           Serial1.print(lt.minuto);
+          Serial1.print("E");
+          //Serial1.flush();
           inf++;
           break;
         }
         case 1:{
           Serial.println("Enviando valor REAL.");
+          Serial1.print("S");
           Serial1.print("R");
           Serial1.print(lt.real);
+          Serial1.print("E");
+          //Serial1.flush();
           inf++;
           break;
         }
         case 2:{
           Serial.println("Enviando valor IMAGINARIO.");
+          Serial1.print("S");
           Serial1.print("J");
           Serial1.print(lt.imag);
+          Serial1.print("E");
+          //Serial1.flush();
           inf++;
           break;
         }
         case 3:{
           Serial.println("Enviando valor de FREQUENCIA.");
+          Serial1.print("S");
           Serial1.print("F");
           Serial1.print(lt.freq);
+          Serial1.print("E");
+          //Serial1.flush();
           inf++;
           break;
         }
@@ -1134,31 +1179,43 @@ void serialTalk(){
     int i=0;
     while(Serial1.available()>0 && i<3 ){
       //static int i=0;
-      Serial.println(i);
-      if(i<3){
-        comStr[i]=Serial1.read();
-        //Serial.print(comStr[i]);
-        i++;
-        comStr[i]= '\0';
-      }
+      Serial.print(i);
+      comStr[i]=Serial1.read();
+      Serial.print(comStr[i]);
+      i++;
+      comStr[i]= '\0';
     }
+    Serial.println("");
     Serial.println(comStr);
 
+    delay(10);
+
     if(strcmp(comStr, "CHK")== 0){
+      Serial1.print("S");
       Serial1.print(EEPROM.read(0));
+      Serial1.print("E");
+      //Serial1.flush();
+      delay(1);
     }
     else if(strcmp(comStr, "BAT")==0){
+      Serial1.print("S");
       Serial1.print(getBatteryPct());
+      Serial1.print("E");
+      //Serial1.flush();
+      delay(1);
     }
     else if(strcmp(comStr, "CLR")==0){
       //FAST CLEAR = APENAS MARCAR A POSIÇÃO 0 DA EEPROM COMO 0.
       EEPROM.write(0,0);
       Serial.println("Limpeza rapida concluida.");
+      Serial1.print("S");
       Serial1.print("OK");
+      Serial1.print("E");
+      //Serial1.flush();
+      delay(1);
     }
     else if(strcmp(comStr, "WIP")==0){
       //WIPE MEMORY = LIMPAR OS ENDEREÇOS DA EEPROM RECONHECIDOS PELA POSIÇÃO 0(INDEX).
-      Serial1.flush();
       if(EEPROM.read(0)>0){
         int i=1;
         while(i<1+(EEPROM.read(0)*(sizeof(struct leitura)))){
@@ -1167,12 +1224,16 @@ void serialTalk(){
         }
         EEPROM.write(0,0);
         Serial.println("Wipe realizado com sucesso");
+        Serial1.print("S");
         Serial1.print("OK");
+        Serial1.print("E");
       }
       else{
         Serial.println("Wipe impossivel, historico ja limpo");
         Serial1.print("OK");
       }
+      //Serial1.flush();
+      delay(1);
     }
     else if(strcmp(comStr, "CLK")==0){    //Se o comando recebido for CLK, realiza a logica de relogio.
       delay(10);
@@ -1262,6 +1323,7 @@ void serialTalk(){
         //Serial1.print("OK");
       }
       else{
+        Serial1.print("S");
         if(time.getDate()<10){
           Serial1.print("0");
         }
@@ -1291,8 +1353,10 @@ void serialTalk(){
           Serial1.print("0");
         }
         Serial1.print(time.getMinute());
+        Serial1.print("E");
         Serial.println("Data e Hora enviados.");
       }
+      //Serial1.flush();
     }
     else if(strcmp(comStr, "REQ")==0){
 
@@ -1318,7 +1382,6 @@ void serialTalk(){
       Serial.print("PTR='");
       Serial.print(ptr);
       Serial.println("'");
-      Serial1.flush();
       if(index>=1000 && index <=100000){
         if(frequencySweepCustom(index, 10 )){
           Serial.print("Sweep usando frequencia ");
@@ -1339,12 +1402,16 @@ void serialTalk(){
         Serial.print("Valor de frequencia requerido não esta dentro dos limites validos, retornando ERRO.");
         Serial1.print("ERR");
       }
+      //Serial1.flush();
     }
     else if(strcmp(comStr, "TMP")==0){
       Serial.println("Enviando temperatura.");
+      
       double temperature = AD5933::getTemperature();
-
+      Serial1.print("S");
       Serial1.print(temperature);
+      Serial1.print("E");
+      //Serial1.flush();
       
     }
     else if(strcmp(comStr, "GET")==0){
@@ -1369,11 +1436,12 @@ void serialTalk(){
       Serial.print("PTR='");
       Serial.print(ptr);
       Serial.println("'");
-      Serial1.flush();
+      //Serial1.flush();
       Get=true;
     }
     else{
-      Serial.println("Algo inesperado foi recebido, limpando o serial.");
+      Serial.println("Algo inesperado foi recebido, limpando o serial. Enviando ERRO");
+      Serial1.print("ERR");
       for (int i=0; i<10; i++){
         Serial1.read();
         if(Serial1.available()==0){
