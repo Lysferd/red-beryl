@@ -176,10 +176,15 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-  Serial1.print("0123456789");
-  delay(10);
-  Serial1.print("ABCDEFGHIJ");
+  static int teste = 0;
+  static bool doneTest=false;
+  if((!serialLeitura(leitura0, teste)) && (!doneTest)){
+    teste++;
+  }
+  else{
+    doneTest=true;
+  }
+ 
   
   display.clearDisplay();
   //clock();
@@ -976,6 +981,144 @@ void upperBar() // barra superior.
 
 
 }
+void serialEnviar(char message[]){
+  Serial.print("S");
+    Serial.println("[S] enviado.");
+  Serial.print(message);
+    Serial.print("[");
+    Serial.print(message);
+    Serial.println("] enviado.");
+  Serial.print("E");
+    Serial.println("[E] enviado.");
+}
+
+bool serialLeitura(leitura lt, int i){    //função serialLeitura que retorna true quando completa para enviar uma leitura em pacotes divididos em ciclos.
+  switch(i){    //usa-se switch case para dividir o que cada ciclo diferente deve fazer.
+    case 0:{    //0 é referente ao primeiro ciclo referente a DATA e HORA da leitura.
+      char lStr[30], filler[30];    //Inicializar um char lStr para receber tudo e passar a proxima função e um filler para ajudar a construir lStr.
+      strcpy (lStr, "D");   //Recebe o tag inicial do tipo de informação a ser enviada, D para data.
+      if(lt.dia<10){  strcat (lStr, "0"); }              //se o valor de dia for inferior a 10, a string recebe um 0.
+        
+      itoa (lt.dia,filler, 10);   //filler recebe os caracteres traduzidos do valor dia.
+      strcat (lStr, filler);    //filler(dia) adicionado a string
+      strcat( lStr, "/");   //Separador de data adicionado a string.
+      if(lt.mes<10){    strcat (lStr, "0"); }    //se o valor de mes for inferior a 10, a string recebe um 0.
+      
+      itoa ( lt.mes, filler, 10);    //filler recebe os caracteres traduzidos do valor mes.
+      strcat ( lStr, filler );   //filler(mes) adicionado a string.
+      strcat( lStr, "/" );    //Separador de data adicionado a string.
+      if(lt.ano<10){    strcat (lStr, "0" ); }    //se o valor de ano for inferior a 10, a string recebe um 0.
+        
+      itoa (lt.ano, filler, 10);    //filler recebe os caracteres traduzidos do valor ano.
+      strcat( lStr, filler);    //filler(ano) adicionado a string.
+      strcat ( lStr, " ");    //espaço adicionado a string.
+      if(lt.hora<10){   strcat(lStr, "0" );  }   //se o valor de hora for inferior a 10, a string recebe um 0.
+
+      itoa (lt.hora, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
+      strcat( lStr, filler);    //filer(hora) adicionado a string.
+      strcat( lStr, ":");   //separador de hora adicionado a string.
+      if(lt.minuto<10){   strcat(lStr, "0" );  }   //se o valor de minuto for inferior a 10, a string recebe um 0.
+
+      itoa (lt.minuto, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
+      strcat( lStr, filler);    //filer(minutor) adicionado a string.
+
+      serialEnviar(lStr);   //a string construida até aqui é enviada a função serialEnviar() para ser enviada ao bluetooth dentro do pacote S||E.
+      
+      return false;
+      break;
+    }
+    case 1:{    //1 é referente ao segundo ciclo referente ao valor REAL da leitura.
+      Serial.println("TESTE CONCLUIDO.");
+      return true;
+      break;
+    }
+  }
+}
+/*
+if(Req){
+    static int inf = 0;
+    static leitura lt;
+    static bool first=true;
+    if(first){
+      Serial.print("Req ");
+      Serial.println(index);
+      lt = leitura0;
+      first=false;
+    }
+    switch(inf){
+      case 0:{
+        Serial.println("Enviando DATA e HORA.");
+        Serial1.print("S");
+        Serial1.print("D");
+        if(lt.dia<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.dia);
+        Serial1.print("/");
+        if(lt.mes<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.mes);
+        Serial1.print("/");
+        if(lt.ano<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.ano);
+        Serial1.print(" ");
+        if(lt.hora<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.hora);
+        Serial1.print(":");
+        if(lt.minuto<10){
+          Serial1.print("0");
+        }
+        Serial1.print(lt.minuto);
+        Serial1.print("E");
+        //Serial1.flush();
+        inf++;
+        break;
+      }
+      case 1:{
+        Serial.println("Enviando valor REAL.");
+        Serial1.print("S");
+        Serial1.print("R");
+        Serial1.print(lt.real);
+        Serial1.print("E");
+        //Serial1.flush();
+        inf++;
+        break;
+      }
+      case 2:{
+        Serial.println("Enviando valor IMAGINARIO.");
+        Serial1.print("S");
+        Serial1.print("J");
+        Serial1.print(lt.imag);
+        Serial1.print("E");
+        //Serial1.flush();
+        inf++;
+        break;
+      }
+      case 3:{
+        Serial.println("Enviando valor de FREQUENCIA.");
+        Serial1.print("S");
+        Serial1.print("F");
+        Serial1.print(lt.freq);
+        Serial1.print("E");
+        //Serial1.flush();
+        inf++;
+        break;
+      }
+      case 4:{
+        inf = 0;
+        first=true;
+        Req = false;
+        break;
+      }
+    }
+  }
+
+*/
 
 void serialTalk(){
   //String input, output;
@@ -995,7 +1138,7 @@ void serialTalk(){
 
 
 
-
+  
   
   char comStr[4], inStr[30], debugStr[30];
   static long index;
@@ -1164,6 +1307,7 @@ void serialTalk(){
           inf++;
           break;
         }
+        
         case 4:{
           inf = 0;
           Get = false;
@@ -1193,9 +1337,7 @@ void serialTalk(){
     if(strcmp(comStr, "CHK")== 0){
       Serial1.print("S");
       Serial1.print(EEPROM.read(0));
-      Serial1.print("E");
-      //Serial1.flush();
-      delay(1);
+      Serial1.print("E");      
     }
     else if(strcmp(comStr, "BAT")==0){
       Serial1.print("S");
@@ -1461,6 +1603,7 @@ void serialTalk(){
     }
     Serial1.print(debugStr);
   }
+  
 }
 
 void scrollBar(int j)
