@@ -39,7 +39,7 @@ struct leitura {
   double real,imag;
   int hora, minuto, dia, mes, ano;
 };
-struct leitura leitura0 = {50000,1,2,3,45,5,1,2018};
+struct leitura leitura0 = {93517,1.23,2,3,45,5,1,8};
 int eeLimit;
 
 
@@ -176,14 +176,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  static int teste = 0;
-  static bool doneTest=false;
-  if((!serialLeitura(leitura0, teste)) && (!doneTest)){
-    teste++;
-  }
-  else{
-    doneTest=true;
-  }
+  
  
   
   display.clearDisplay();
@@ -982,14 +975,15 @@ void upperBar() // barra superior.
 
 }
 void serialEnviar(char message[]){
-  Serial.print("S");
+  Serial1.print("S");
     Serial.println("[S] enviado.");
-  Serial.print(message);
+  Serial1.print(message);
     Serial.print("[");
     Serial.print(message);
     Serial.println("] enviado.");
-  Serial.print("E");
+  Serial1.print("E");
     Serial.println("[E] enviado.");
+    delay(50);
 }
 
 bool serialLeitura(leitura lt, int i){    //função serialLeitura que retorna true quando completa para enviar uma leitura em pacotes divididos em ciclos.
@@ -997,38 +991,71 @@ bool serialLeitura(leitura lt, int i){    //função serialLeitura que retorna t
     case 0:{    //0 é referente ao primeiro ciclo referente a DATA e HORA da leitura.
       char lStr[30], filler[30];    //Inicializar um char lStr para receber tudo e passar a proxima função e um filler para ajudar a construir lStr.
       strcpy (lStr, "D");   //Recebe o tag inicial do tipo de informação a ser enviada, D para data.
+      
       if(lt.dia<10){  strcat (lStr, "0"); }              //se o valor de dia for inferior a 10, a string recebe um 0.
         
       itoa (lt.dia,filler, 10);   //filler recebe os caracteres traduzidos do valor dia.
       strcat (lStr, filler);    //filler(dia) adicionado a string
-      strcat( lStr, "/");   //Separador de data adicionado a string.
+        strcat( lStr, "/");   //Separador de data adicionado a string.
+        
       if(lt.mes<10){    strcat (lStr, "0"); }    //se o valor de mes for inferior a 10, a string recebe um 0.
       
       itoa ( lt.mes, filler, 10);    //filler recebe os caracteres traduzidos do valor mes.
       strcat ( lStr, filler );   //filler(mes) adicionado a string.
-      strcat( lStr, "/" );    //Separador de data adicionado a string.
-      if(lt.ano<10){    strcat (lStr, "0" ); }    //se o valor de ano for inferior a 10, a string recebe um 0.
+        strcat( lStr, "/" );    //Separador de data adicionado a string.
         
+      if(lt.ano<10){   strcat(lStr, "0" );  }   //se o valor de ano for inferior a 10, a string recebe um 0.
+
       itoa (lt.ano, filler, 10);    //filler recebe os caracteres traduzidos do valor ano.
       strcat( lStr, filler);    //filler(ano) adicionado a string.
-      strcat ( lStr, " ");    //espaço adicionado a string.
+        strcat ( lStr, " ");    //espaço adicionado a string.
+        
       if(lt.hora<10){   strcat(lStr, "0" );  }   //se o valor de hora for inferior a 10, a string recebe um 0.
 
       itoa (lt.hora, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
       strcat( lStr, filler);    //filer(hora) adicionado a string.
-      strcat( lStr, ":");   //separador de hora adicionado a string.
+        strcat( lStr, ":");   //separador de hora adicionado a string.
+        
       if(lt.minuto<10){   strcat(lStr, "0" );  }   //se o valor de minuto for inferior a 10, a string recebe um 0.
 
       itoa (lt.minuto, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
-      strcat( lStr, filler);    //filer(minutor) adicionado a string.
+      strcat( lStr, filler);    //filler(minuto) adicionado a string.
 
       serialEnviar(lStr);   //a string construida até aqui é enviada a função serialEnviar() para ser enviada ao bluetooth dentro do pacote S||E.
       
-      return false;
+      return false;   //retorna false
       break;
     }
     case 1:{    //1 é referente ao segundo ciclo referente ao valor REAL da leitura.
-      Serial.println("TESTE CONCLUIDO.");
+      char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+      strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+      dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
+      serialEnviar(lStr);   //chama a função serialEnviar.
+      
+      return false;   //retorna false
+      break;
+    }
+    case 2:{    //2 é referente ao terceiro ciclo referente ao valor IMAGINARIO da leitura.
+      char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+      strcpy (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
+      dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor imaginario.
+      serialEnviar(lStr);   //chama a função serialEnviar.
+      
+      return false;   //retorna false
+      break;
+    }
+    case 3:{    //3 é referente ao quarto ciclo referente ao valor de FREQUENCIA da leitura.
+      char lStr[30], filler[30];    //Inicializar um char lStr para recebe tudo e passar a proxima função e um filler para ajudar a construir a string.
+      strcpy (lStr, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
+      int n = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
+      strcat( lStr, filler);    //filler(frequencia) adicionado a string.
+
+      serialEnviar(lStr);   //chama a função serialEnviar.
+      return false;
+      break;
+    }
+    default:{
+      Serial.println("SUCESSO.");
       return true;
       break;
     }
@@ -1226,22 +1253,52 @@ void serialTalk(){
     }
   }
   if(Get){
-    Serial.print("Get ");
-    Serial.println(index);
+    //Serial.print("Get ");
+    //Serial.println(index);
     
     static int inf = 0;
     static leitura lt;
     if(index==0){
-      Serial.println("x=0 TBD---");
-      Get=false;
+      static int z=0;
+      EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
+      while(z<EEPROM.read(0)-1){
+        if(z==EEPROM.read(0)-1){
+            break;
+          }
+        if(!serialLeitura(lt, inf)){
+          inf++;
+          delay(20);
+        }
+        else{
+          inf=0;
+          z++;
+          Serial.print("Z=");
+          Serial.println(z);
+          
+          delay(50);
+        }
+      }
+      {
+        z=0;
+        Get=false;
+      }
     }
     if(index>EEPROM.read(0)){
       Serial.println("Index recebido superior ao numero de leituras, retornando ERRO");
       Serial1.print("ERR");
-      //Serial1.flush();
       Get=false;
     } else {
       EEPROM.get(1+(sizeof(struct leitura)*(index-1)), lt);
+
+      if(!serialLeitura(lt, inf)){
+        inf++;
+      }
+      else{
+        inf=0;
+        Get=false;
+      }
+
+      /*
       switch(inf){
         case 0:{
           Serial.println("Enviando DATA e HORA.");
@@ -1314,7 +1371,8 @@ void serialTalk(){
           break;
         }
       }
-    }
+    */}
+    
   }
   if(Serial1.available()!=-1 && Serial1.available()!=  0 && Serial1.available()>=3){
     Serial.print("Serial1 enviou algo:");
