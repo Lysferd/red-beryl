@@ -1162,7 +1162,12 @@ void serialTalk(){
    * E PARA SIMPLIFICAR O PROCESSO DE ALTERAR O CODIGO.
    */
 
-
+  /*Fazer as funções de deletar leitura do historico
+   * fazer a logica de receber CLR[n] para pagar a leitura [n] do historico usando a função de delete anterior.
+   * modificar a logica de get para que ao invez de GET[0], enviar todas as leituras esteja presente em GET[], assim como apagar tudo é CLR[]
+   * 
+   * NO MEIO DE ALTERAR TODAS AS RESPOSTAS DE OK PARA USAR SERIALENVIAR.
+   */
 
 
   
@@ -1180,76 +1185,15 @@ void serialTalk(){
       lt = leitura0;
       first=false;
     }
-    switch(inf){
-      case 0:{
-        Serial.println("Enviando DATA e HORA.");
-        Serial1.print("S");
-        Serial1.print("D");
-        if(lt.dia<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.dia);
-        Serial1.print("/");
-        if(lt.mes<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.mes);
-        Serial1.print("/");
-        if(lt.ano<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.ano);
-        Serial1.print(" ");
-        if(lt.hora<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.hora);
-        Serial1.print(":");
-        if(lt.minuto<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.minuto);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 1:{
-        Serial.println("Enviando valor REAL.");
-        Serial1.print("S");
-        Serial1.print("R");
-        Serial1.print(lt.real);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 2:{
-        Serial.println("Enviando valor IMAGINARIO.");
-        Serial1.print("S");
-        Serial1.print("J");
-        Serial1.print(lt.imag);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 3:{
-        Serial.println("Enviando valor de FREQUENCIA.");
-        Serial1.print("S");
-        Serial1.print("F");
-        Serial1.print(lt.freq);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 4:{
-        inf = 0;
-        first=true;
-        Req = false;
-        break;
-      }
+    if(!serialLeitura(lt, inf)){
+      inf++;
+      delay(20);
+    }
+    else{
+      inf=0;
+      first=true;
+      Req=false;
+      
     }
   }
   if(Get){
@@ -1262,9 +1206,9 @@ void serialTalk(){
       static int z=0;
       EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
       while(z<EEPROM.read(0)-1){
-        if(z==EEPROM.read(0)-1){
+        /*if(z==EEPROM.read(0)-1){
             break;
-          }
+          }*/
         if(!serialLeitura(lt, inf)){
           inf++;
           delay(20);
@@ -1274,20 +1218,26 @@ void serialTalk(){
           z++;
           Serial.print("Z=");
           Serial.println(z);
-          
-          delay(50);
+          EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
+          delay(200);
         }
+        /*if(z==EEPROM.read(0)-1){
+          z=0;
+          Get=false;
+          break;
+        }*/
       }
       {
         z=0;
         Get=false;
       }
     }
-    if(index>EEPROM.read(0)){
+    else if(index>EEPROM.read(0)){
       Serial.println("Index recebido superior ao numero de leituras, retornando ERRO");
       Serial1.print("ERR");
       Get=false;
-    } else {
+    }
+    else {
       EEPROM.get(1+(sizeof(struct leitura)*(index-1)), lt);
 
       if(!serialLeitura(lt, inf)){
@@ -1393,26 +1343,21 @@ void serialTalk(){
     delay(10);
 
     if(strcmp(comStr, "CHK")== 0){
-      Serial1.print("S");
-      Serial1.print(EEPROM.read(0));
-      Serial1.print("E");      
+      char num[4];
+      itoa (EEPROM.read(0),num, 10);
+      serialEnviar(num);
     }
     else if(strcmp(comStr, "BAT")==0){
-      Serial1.print("S");
-      Serial1.print(getBatteryPct());
-      Serial1.print("E");
-      //Serial1.flush();
-      delay(1);
+      char bat[4];
+      itoa (getBatteryPct(), bat, 10);
+      serialEnviar(bat);
     }
     else if(strcmp(comStr, "CLR")==0){
       //FAST CLEAR = APENAS MARCAR A POSIÇÃO 0 DA EEPROM COMO 0.
       EEPROM.write(0,0);
       Serial.println("Limpeza rapida concluida.");
-      Serial1.print("S");
-      Serial1.print("OK");
-      Serial1.print("E");
-      //Serial1.flush();
-      delay(1);
+      
+      serialEnviar("OK");
     }
     else if(strcmp(comStr, "WIP")==0){
       //WIPE MEMORY = LIMPAR OS ENDEREÇOS DA EEPROM RECONHECIDOS PELA POSIÇÃO 0(INDEX).
@@ -1424,16 +1369,12 @@ void serialTalk(){
         }
         EEPROM.write(0,0);
         Serial.println("Wipe realizado com sucesso");
-        Serial1.print("S");
-        Serial1.print("OK");
-        Serial1.print("E");
+        serialEnviar("OK");
       }
       else{
         Serial.println("Wipe impossivel, historico ja limpo");
-        Serial1.print("OK");
+        serialEnviar("OK");
       }
-      //Serial1.flush();
-      delay(1);
     }
     else if(strcmp(comStr, "CLK")==0){    //Se o comando recebido for CLK, realiza a logica de relogio.
       delay(10);
@@ -1523,6 +1464,10 @@ void serialTalk(){
         //Serial1.print("OK");
       }
       else{
+
+        char clk[30], filler[5];
+        
+        
         Serial1.print("S");
         if(time.getDate()<10){
           Serial1.print("0");
