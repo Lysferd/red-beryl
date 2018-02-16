@@ -1147,6 +1147,41 @@ if(Req){
 
 */
 
+bool testarData(int dia, int mes, int ano, int hora, int minuto, int segundo){    //testar se os valores de data são validos, true se sim, false se não.
+  if(segundo>59 || segundo<0){    //testar se o valor de segundo é negativo ou maior que 59.
+    return false;   //retorna false.
+  }
+  if(minuto>59 || minuto<0){    //testar se o valor de minuto é negativo ou maior que 59.
+    return false;   //retorna false.
+  }
+  if(hora>23 || hora<0){    //testar se o valor de hora é negativo ou maior que 23.
+    return false;   //retorna false.
+  }
+  if(ano>99 || ano<0){    //testar se o valor de ano é negativo ou maior que 99.
+    return false;   //retorna false.
+  }
+  if(mes>12 || mes<1){    //testar se o valor de mes não está entre 1 e 12.
+    return false;   //retorna false.
+  }
+  if(dia>31 || dia<1){    //testar se o valor de dia não está entre 1 e 31.
+    return false;   //retorna false.
+  }
+  if(mes==2 && dia>28){   //testar se, quando o mes for 2(fevereiro) se o valor de dia é maior que 28.
+    return false;    //retorna false.
+  }
+  if( dia==31 ){    //testar se o dia for 31.
+    if(mes==4 || mes==6 || mes==9 || mes==11){    //testar se o mes for um dos meses com apenas 30 dias.
+      return false;   //retorna false.
+    }
+  }
+  return true;    //se tiver passado por todos os outros testes, retorna true.
+}
+
+
+/*
+ * else if(tempMn<8){  //se o mes for antes de agosto
+ * if(tempMn % 2 != 0){  //se o mes for impar(meses impares antes de agosto tem 31 dias)
+ */
 void serialTalk(){
   //String input, output;
   //static bool waiting = false, sending = false, getter = false;
@@ -1197,18 +1232,13 @@ void serialTalk(){
     }
   }
   if(Get){
-    //Serial.print("Get ");
-    //Serial.println(index);
-    
     static int inf = 0;
     static leitura lt;
     if(index==0){
       static int z=0;
       EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
       while(z<EEPROM.read(0)-1){
-        /*if(z==EEPROM.read(0)-1){
-            break;
-          }*/
+
         if(!serialLeitura(lt, inf)){
           inf++;
           delay(20);
@@ -1221,11 +1251,6 @@ void serialTalk(){
           EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
           delay(200);
         }
-        /*if(z==EEPROM.read(0)-1){
-          z=0;
-          Get=false;
-          break;
-        }*/
       }
       {
         z=0;
@@ -1248,80 +1273,7 @@ void serialTalk(){
         Get=false;
       }
 
-      /*
-      switch(inf){
-        case 0:{
-          Serial.println("Enviando DATA e HORA.");
-          Serial1.print("S");
-          Serial1.print("D");
-          if(lt.dia<10){
-            Serial1.print("0");
-          }
-          Serial1.print(lt.dia);
-          Serial1.print("/");
-          if(lt.mes<10){
-            Serial1.print("0");
-          }
-          Serial1.print(lt.mes);
-          Serial1.print("/");
-          if(lt.ano<10){
-            Serial1.print("0");
-          }
-          Serial1.print(lt.ano);
-
-          Serial1.print(" ");
-          if(lt.hora<10){
-            Serial1.print("0");
-          }
-          Serial1.print(lt.hora);
-          Serial1.print(":");
-          if(lt.minuto<10){
-            Serial1.print("0");
-          }
-          Serial1.print(lt.minuto);
-          Serial1.print("E");
-          //Serial1.flush();
-          inf++;
-          break;
-        }
-        case 1:{
-          Serial.println("Enviando valor REAL.");
-          Serial1.print("S");
-          Serial1.print("R");
-          Serial1.print(lt.real);
-          Serial1.print("E");
-          //Serial1.flush();
-          inf++;
-          break;
-        }
-        case 2:{
-          Serial.println("Enviando valor IMAGINARIO.");
-          Serial1.print("S");
-          Serial1.print("J");
-          Serial1.print(lt.imag);
-          Serial1.print("E");
-          //Serial1.flush();
-          inf++;
-          break;
-        }
-        case 3:{
-          Serial.println("Enviando valor de FREQUENCIA.");
-          Serial1.print("S");
-          Serial1.print("F");
-          Serial1.print(lt.freq);
-          Serial1.print("E");
-          //Serial1.flush();
-          inf++;
-          break;
-        }
-        
-        case 4:{
-          inf = 0;
-          Get = false;
-          break;
-        }
       }
-    */}
     
   }
   if(Serial1.available()!=-1 && Serial1.available()!=  0 && Serial1.available()>=3){
@@ -1347,19 +1299,19 @@ void serialTalk(){
       itoa (EEPROM.read(0),num, 10);
       serialEnviar(num);
     }
-    else if(strcmp(comStr, "BAT")==0){
+    else if(strcmp(comStr, "BAT")==0){    //Se o comando recebido for BAT, retorna o valor da bateria.
       char bat[4];
       itoa (getBatteryPct(), bat, 10);
       serialEnviar(bat);
     }
-    else if(strcmp(comStr, "CLR")==0){
+    else if(strcmp(comStr, "CLR")==0){    //Se o comando recebido for CLR, realiza a logica de Fast Clear, limpando o primeiro endereço da EEPROM.
       //FAST CLEAR = APENAS MARCAR A POSIÇÃO 0 DA EEPROM COMO 0.
       EEPROM.write(0,0);
       Serial.println("Limpeza rapida concluida.");
       
       serialEnviar("OK");
     }
-    else if(strcmp(comStr, "WIP")==0){
+    else if(strcmp(comStr, "WIP")==0){    //Se o comando recebido for WIP, realiza a logica de limpar os endereços da EEPROM que estão sendo usados.
       //WIPE MEMORY = LIMPAR OS ENDEREÇOS DA EEPROM RECONHECIDOS PELA POSIÇÃO 0(INDEX).
       if(EEPROM.read(0)>0){
         int i=1;
@@ -1378,10 +1330,9 @@ void serialTalk(){
     }
     else if(strcmp(comStr, "CLK")==0){    //Se o comando recebido for CLK, realiza a logica de relogio.
       delay(10);
-      if(Serial1.available()!=-1 && Serial1.available()!=0){    //checa se recebeu mais alguma coisa por bluetooth,.
-        int dia,mes,ano,hora,minuto,segundo;    //inicializa as variaveis tmeporarias para receber os valores de dat e hora
-        
-        while(Serial1.available()<12){    //enquanto o buffer não estiver com todos os caracteres prontos, fazer delay.
+      if(Serial1.available()!=-1 && Serial1.available()!=0){//checa se recebeu mais alguma coisa por bluetooth,.
+        int dia,mes,ano,hora,minuto,segundo;                //inicializa as variaveis tmeporarias para receber os valores de dat e hora
+        while(Serial1.available()<12){                      //enquanto o buffer não estiver com todos os caracteres prontos, fazer delay.
           Serial.print("Aguardando o buffer receber todos os caracteres antes de avançar. ");
           Serial.print(Serial1.available());
           Serial.println(" Recebidos.");
@@ -1389,10 +1340,8 @@ void serialTalk(){
         }
         int n=0;    //inicializa um i temporario.
         char *ptr;
-
         Serial.println("Atualizando Hora e Data.");
-        
-        while(n<12){    //enquanto i for menor que 12.
+        while(n<12){                                        //enquanto n for menor que 12.
           delay(1);
           if(n<2){    //primeira dupla de valores: DIA
             inStr[n]=Serial1.read();
@@ -1417,93 +1366,110 @@ void serialTalk(){
           
           n++;    //incrementa i;
           inStr[2]='\0';  //finalizador de string na terceira posição
+          
           if(n==2){   //primeiro valor: DIA
             delay(1);
             Serial.print(inStr);
             dia = strtol(inStr, &ptr, 10);
-            time.setDate(dia);    //alterar DIA no RTC
+            /*time.setDate(dia);    //alterar DIA no RTC    //comentado por enquanto para que o sistema possa primeiro verificar se os valores recebidos são validos.
+             * não vai ser possivel testar imediatamente no dia, testar no mes
+             * cria uma função testarDia que recebe os valores de diae mes e retorne se são validos...
+             * talvez seja melhor criar uma função testarData, [bool testarData(int dia, int mes, int ano, int hora, int minuto, int segundo)]
+             * retorna false se invalido, true se valido.
+             */
+             
             Serial.println(" - dia atualizado.");
           }
           if(n==4){   //segundo valor: MES
             delay(1);
             Serial.print(inStr);
             mes = strtol(inStr, &ptr, 10);
-            time.setMonth(mes);   //alterar MES no RTC
+            //time.setMonth(mes);   //alterar MES no RTC
             Serial.println(" - mes atualizado.");
           }
           if(n==6){   //terceiro valor: ANO
             delay(1);
             Serial.print(inStr);
             ano = strtol(inStr, &ptr, 10);
-            time.setYear(ano);    //alterar ANO no RTC
+            //time.setYear(ano);    //alterar ANO no RTC
             Serial.println(" - ano atualizado.");
           }
           if(n==8){   //quarto valor: HORA
             delay(1);
             Serial.print(inStr);
             hora = strtol(inStr, &ptr, 10);
-            time.setHour(hora);   //alterar HORA no RTC
+            //time.setHour(hora);   //alterar HORA no RTC
             Serial.println(" - hora atualizada.");
           }
-          if(n==10){
+          if(n==10){  //quinto valor: MINUTO
             delay(1);
             Serial.print(inStr);
             minuto = strtol(inStr, &ptr, 10);
-            time.setMinute(minuto);   //alterar MINUTO no RTC
+            //time.setMinute(minuto);   //alterar MINUTO no RTC
             Serial.println(" - minuto atualizado.");
           }
-          if(n==12){
+          if(n==12){  //sexto valor: SEGUNDO
             delay(1);
             Serial.print(inStr);
             segundo = strtol(inStr, &ptr, 10);
-            time.setSecond(segundo);    //alterar SEGUNDO no RTC
+            //time.setSecond(segundo);    //alterar SEGUNDO no RTC
             Serial.println(" - segundo atualizado");
           }
         }
-        Serial.println("Data e Hora atualizados(eu acho)");
-        //Serial1.print("OK");
+        if(testarData(dia,mes,ano,hora, minuto,segundo)){   //chama a função testarData() para verificar se os valores recebidos são validos.
+          time.setDate(dia);    //alterar DIA no RTC.
+          time.setMonth(mes);   //alterar MES no RTC.
+          time.setYear(ano);    //alterar ANO no RTC.
+          time.setHour(hora);   //alterar HORA no RTC.
+          time.setMinute(minuto);   //alterar MINUTO no RTC.
+          time.setSecond(segundo);    //alterar SEGUNDO no RTC.
+          Serial.println("Data e Hora atualizados(eu acho)");
+          serialEnviar("OK");
+        }
+        else{                                               //se o valor recebido for invalido.
+          Serial1.print("ERR");                             //retorna um erro.
+        }
       }
-      else{
-
-        char clk[30], filler[5];
-        
-        
-        Serial1.print("S");
-        if(time.getDate()<10){
-          Serial1.print("0");
+      else{                                                 //se não receber mais nada depois de CLK.
+        char clk[30], filler[5];                            //inicializa os arrays clk para montar o array com as informações de hora e data, e filler para ajudar a construir clk
+        bool century;                                       //cria uma bool temporaria simplesmente para que a função getMonth funcione.
+        itoa(time.getDate(), filler, 10);                   //filler recebe o valor traduzido de date.
+        if(time.getDate()<10){                              //se o valor de date for inferior a 10, clk recebe 0 e depois o valor de date.
+          strcpy (clk, "0");                                //clk recebe [0].
+          strcat( clk, filler );                            //adiciona o conteudo de filler(date) ao final da string.
         }
-        Serial1.print(time.getDate());
-        Serial1.print("/");
-
-        bool century;   //cria uma bool temporaria simplesmente para que a função getMonth funcione.
-        
-        if(time.getMonth(century)<10){
-          Serial1.print("0");
+        else{                                               //se o valor de date for maior que 10, apenas recebe o valor de date.
+          strcpy (clk, filler );                            //recebe o valor da string(date).
         }
-        Serial1.print(time.getMonth(century));
-        Serial1.print("/");
-        if(time.getYear()<10){
-          Serial1.print("0");
+        strcat (clk, "/");                                  //adiciona o separador de data '/' ao final da string.
+        itoa(time.getMonth(century), filler, 10);           //filler recebe o valor traduzido de month.
+        if(time.getMonth(century)<10){                      //se o valor de month for inferior a 10, '0' é adicionado ao final da string.
+          strcat( clk, "0");                                //adiciona o valor '0' ao final da string.
         }
-        Serial1.print(time.getYear());
-        
-        Serial1.print(" ");
-        
-        if(time.getHour(h12, PM)<10){
-          Serial1.print("0");
+        strcat(clk, filler);                                //adiciona o conteudo de filler(month) ao final da string.
+        strcat(clk, "/");                                   //adiciona o separador de data '/' ao final da string.
+        itoa(time.getYear(), filler, 10);                   //filler recebe o valor traduzido de year.
+        if(time.getYear()<10){                              //se o valor de year for inferior a 10, '0' é adicionado ao final da string.
+          strcat (clk, "0");                                //adiciona o valor '0' ao final da string.
         }
-        Serial1.print(time.getHour(h12, PM));
-        Serial1.print(":");
-        if(time.getMinute()<10){
-          Serial1.print("0");
+        strcat(clk, filler);                                //adiciona o conteudo de filler(year) ao final da string.
+        strcat(clk, " ");                                   //adiciona um espaço de separação entre data e hora ao final da string.
+        itoa(time.getHour(h12, PM), filler, 10);                //filler recebe o valor traduzido de hour.
+        if(time.getHour(h12, PM)<10){                       //se o valor de hour for inferior a 10, '0' é adicionado ao final da string.
+          strcat (clk, "0");                                //adiciona o valor '0' ao final da string.
         }
-        Serial1.print(time.getMinute());
-        Serial1.print("E");
-        Serial.println("Data e Hora enviados.");
+        strcat(clk, filler);                                //adiciona o conteudo de filler(hour) ao final da string.
+        strcat(clk, ":");                                   //adiciona o separador de hora ':' ao final da string.
+        itoa(time.getMinute(), filler, 10);                     //filler recebe o valor traduzido de minute.
+        if(time.getMinute()<10){                            //se o valor de minute for inferior a 10, '0' é adicionado ao final da string.
+          strcat (clk, "0");                                //adiciona o valor '0' ao final da string.
+        }
+        strcat(clk, filler);                                //adiciona o conteudo de filler(minute) ao final da string.
+        serialEnviar(clk);                                  //envia a string construido a função serialEnviar() para ser enviada ao bluetooth.
+        Serial.println("Data e Hora enviados.");            //envia confirmação ao serial monitor(debug).
       }
-      //Serial1.flush();
     }
-    else if(strcmp(comStr, "REQ")==0){
+    else if(strcmp(comStr, "REQ")==0){    //Se o comando recebido for REQ, realiza a logica de realizar uma nova leitura com a frequencia indicada.
 
       //SE A FREQUENCIA REQUISITA FOR INVALIDA(ABAIXO DE 1K OU ACIMA DE 100K) DEVOLVER UM ERRO/AVISO/ETC... A fazer
       delay(10);
@@ -1551,12 +1517,25 @@ void serialTalk(){
     }
     else if(strcmp(comStr, "TMP")==0){
       Serial.println("Enviando temperatura.");
-      
+      /* char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+       * strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+       * dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
+       * serialEnviar(lStr);   //chama a função serialEnviar.
+       */
       double temperature = AD5933::getTemperature();
-      Serial1.print("S");
-      Serial1.print(temperature);
-      Serial1.print("E");
-      //Serial1.flush();
+      char tempChar[30];
+      dtostrf(temperature, 6, 2, tempChar);
+      serialEnviar(tempChar);
+      /*
+      char temperature[30];
+      //strcpy(temp, "");
+      Serial.println(AD5933::getTemperature());
+      dtostrf(AD5933::getTemperature(), 2, 2, &temperature[strlen(temperature)]);
+      serialEnviar(temperature);
+      /*Serial1.print("S");
+       *Serial1.print(temperature);
+       *Serial1.print("E");
+       */
       
     }
     else if(strcmp(comStr, "GET")==0){
