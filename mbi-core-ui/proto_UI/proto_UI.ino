@@ -1,38 +1,25 @@
-//#include <SoftwareSerial.h>
-//#include <BLESerial.h>
-
-
-
-// ADICITONAR UM COPYRIGHT NO SPLASHSCREEN. substituir Red Beryl por mbi (medidor de bio impedancia).
-// Encontrar de alguma forma um modo de fazer os acentos aparecerem.
-
-//Primeira iteração de um codigo de UI para o protótipo usando uma placa arduino nano e uma tela OLED azul 128x32 i2c
-
-//#include <SPI.h>
 #include <DS3231.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <Math.h>
 #include <EEPROM.h>
-
-
-
 #include <AD5933.h> //incluir a library da AD.
+
 #define START_FREQ  (50000) // frequencia inicial padrão.
 #define FREQ_INCR   (START_FREQ/100) // incremento de frequencia padrão.
 #define NUM_INCR    (10)  // numero padrão de incrementos.
 #define REF_RESIST  (10000) // valor de referencia de resistor.
-double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
-int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
-
-//int real[NUM_INCR+1], imag[NUM_INCR+1]; // vetores do tipo int para conter os valores reais e imaginarios da impedancia.
-double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
 DS3231 time;
 AD5933 AD;
+
+double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
+int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
+
+double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
 
 struct leitura {
   unsigned long freq;
@@ -92,10 +79,6 @@ const int buttonConfirm = 24;   //declarar e inicializar o botão YES(confirma)
 const int buttonCancel = 22;    //declarar e inicializar o botão NO(cancela)
 const int potPin = A15;   //declarar e inicializar(a partir do valor pre-programado na Arduino-Board) o PIN conectado ao potenciometro usado para simular a bateria.
 
-int addr=0;   //declara a variavel int responsavel por percorrer os endereços da EEPROM
-
-int selector = 1;
-int screen = 0;
 const int barSize = 8;
 static bool up=false,down=false,yes=false,no=false, BLE;
 static String temptime = "0:0";
@@ -150,11 +133,9 @@ void setup() {
   display.setCursor(1, 0);
   display.print("M.A.Engenharia");
   display.display();
-  delay(1500);
+  delay(100);
   display.clearDisplay();
   delay(100);
-
-  selector = 1;
 
   int lSize = sizeof(struct leitura);   //verifica o tamanho da struct criada para conter os dados de cada leitura e imprime esse valor no Serial.
   Serial.print("Tamanho da struct leitura: ");
@@ -170,7 +151,7 @@ void setup() {
   eeLimit = (EEPROM.length()-1)/sizeof(struct leitura);
   Serial.print("limite de leituras possiveis:");
   Serial.println(eeLimit);
-  delay(500);
+  delay(100);
   
 }
 
@@ -180,9 +161,7 @@ void loop() {
  
   
   display.clearDisplay();
-  //clock();
   checkPins();
-  //menu();  // ALTERAR MENU COMEÇAR TUDO ABAIXO DA BARRA SUPERIOR
   menu1();
   upperBar(); // desenha a barra superior com bateria, bluetooth e relogio.
   if(BLE){
@@ -436,13 +415,14 @@ void menu1(){   //segunda versão do menu principal
       }
       break;
     }
-    case 121:{
+    case 121:{  //Tela de historico
       static int i = 0;   //declara a variavel i referente aos numeros do historico(+1), por padrão usaremos apenas 10 valores, mas como o arduino Mega oferece muito mais espaço é possivel liberar mais espaço para salvar as leituras.
       static int l = 1;   //declara a variavel l referente as linhas do historico, estou testando seu uso para um menu mais dinamico e inteligente.
       static bool detalhar = false;   //declara a variavel bool detalhar que define se os detalhes de uma leitura escolhida deverão ser mostrados ou não.
       if(EEPROM.read(0)!=0){    //primeiro testa se tem algo no historico para apresentar.
         if(detalhar){
           static bool recebeu=false;   //inicializa uma variavel bool que informa se a leitura ja foi recebida da EEPROM
+          static bool perguntaDelete=false;   //inicializa uma variavel bool que decide se uma caixa de texto perguntando se o usuario quer deletar uma leitura aparece ou não.
           static struct leitura leituraTemp;    //inicializa uma struct leitura temporaria para receber a struct leitura da EEPROM, feita static para que não se repita.
           if(!recebeu){   //se não tiver recebido a leitura da EEPROM
             EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
@@ -473,7 +453,39 @@ void menu1(){   //segunda versão do menu principal
           display.setCursor(display.width()-(6*7), barSize*2+4);
           display.print(leituraTemp.freq/1000);
           display.print("KHz");
+
+
+          if(perguntaDelete){
+            display.fillRect(20, barSize+4, display.width()-40, barSize+4, BLACK);
+            display.drawRect(20, barSize+4, display.width()-40, barSize+4, WHITE);
+            display.setCursor(display.width()/2-36, barSize*2-2 );
+            display.setTextColor(WHITE);
+            display.setTextSize(1);
+            display.print("Deletar? N/S");
+            if(up){
+              up=false;
+            }
+            if(down){
+              down=false;
+            }
+            if(yes){
+              deletaLeitura(i);
+              detalhar=false;
+              recebeu=false;
+              perguntaDelete=false;
+              yes=false;
+              i=0;
+              l=1;
+              up=true;
+            }
+            if(no){
+              perguntaDelete=false;
+              no=false;
+            }
+            
+          }
           if(yes){    //se YES for true.
+            perguntaDelete=true;
             yes=false;    //reseta YES.
           }
           if(up){   //se UP for true.
@@ -514,6 +526,7 @@ void menu1(){   //segunda versão do menu principal
             detalhar=false;   //reseta DETALHAR
             no=false;   //reseta NO
           }
+          
         }
         else {
           static struct leitura L1,L2,L3;
@@ -625,6 +638,7 @@ void menu1(){   //segunda versão do menu principal
           }
           if(yes){
             detalhar=true;
+            ler=false;
             yes=false;    //reseta YES
           }
           if(no){   //se NO for true.
@@ -657,7 +671,7 @@ void menu1(){   //segunda versão do menu principal
       }
       break;
     }
-    case 2:{
+    case 2:{    //sincronização
       display.setCursor(2, barSize);   //define a posição do cursor na primeira linha
       display.setTextColor(WHITE);    //define a cor do texto como branca
       display.println(menu1[0]);    //imprime a string previamente inicializada.
@@ -721,7 +735,7 @@ void menu1(){   //segunda versão do menu principal
       }
       break;
     }
-    case 3:{
+    case 3:{    //opção ajustes
       display.setCursor(2, barSize);    //define a posição do cursor na primeira linha.
       display.setTextColor(WHITE);    //define a cor do texto como branca.
       display.print(menu1[0]);    //imprime a string previamente inicializada.
@@ -752,7 +766,7 @@ void menu1(){   //segunda versão do menu principal
       }
       break;
     }
-    case 31:{
+    case 31:{   //menu de ajustes-opção ajuste do relogio
       display.setCursor(2, barSize);    //definir a posição do cursor na primeira linha.
       display.setTextSize(1);   //definir o tamanho do texto(por garantia)
       display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
@@ -881,6 +895,28 @@ void menu1(){   //segunda versão do menu principal
   }
 }
 
+bool deletaLeitura(int delPos){   /* Função deletaLeitura, recebe como paramento um int delPos(deleta posição) que será a posição da leitura na EEPROM a ser deletada. */
+  if(delPos>EEPROM.read(0) || delPos<0 ){    //verificar se o numero recebido esta dentro do numero de leituras possiveis.
+    Serial.println("Numero de posição recebido superior ao numero de leituras reconhecidas na EEPROM, ou Negativo. Retornando 'false'");
+    return false;
+  }
+  else{   //se o numero recebido estiver dentro do numero de leituras possiveis
+    leitura lTemp;    //inicializa uma leitura temporaria para receber o valor de leitura do proximo valor e substituir no valor atual.
+    for(int i=delPos;i<EEPROM.read(0);i++){   //EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
+                                              //EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);   //salva a nova leitura na EEPROM.
+      EEPROM.get( 1+ (sizeof(struct leitura)*(i+1)) ,lTemp );   //lTemp recebe o valor da proxima leitura.
+      EEPROM.put( 1+ (sizeof(struct leitura)*i), lTemp );       //endereço EEPROM selecionado atual[i] recebe lTemp.
+      Serial.print("Posição ");Serial.print(i);Serial.print(" substituida por leitura na posição ");Serial.println(i+1);
+    }
+    for(int i=1+(EEPROM.read(0)*sizeof(struct leitura)); i<=(EEPROM.read(0)+1)*sizeof(struct leitura); i++){    //logica de apagar o ultimo endereço.
+      EEPROM.write(i,0);
+      Serial.println("Endereço final apagado.");
+    }
+    EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
+    Serial.println("DeletaLeitura concluido.");
+    return true;
+  }
+}
 void imprimeEscolha(int i, int l, struct leitura lt, bool s){    //função imprimeEscolha, que recebe o i da posição, a struct leitura com os valores e o bool s se for selecionado ou não.
   display.setCursor(2, barSize*l);    //reseta a posição do cursor, multiplicando o tamanho de uma linha pelo numero de linhas
   if(s){    //se a linha for selecionada
@@ -912,8 +948,7 @@ int getBatteryPct(){
   return pct;
 }
 
-void upperBar() // barra superior.
-{
+void upperBar(){    // barra superior.
   static int pwr;   //declara o inteiro estatico pwr(POWER)
   static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
   
@@ -1061,91 +1096,6 @@ bool serialLeitura(leitura lt, int i){    //função serialLeitura que retorna t
     }
   }
 }
-/*
-if(Req){
-    static int inf = 0;
-    static leitura lt;
-    static bool first=true;
-    if(first){
-      Serial.print("Req ");
-      Serial.println(index);
-      lt = leitura0;
-      first=false;
-    }
-    switch(inf){
-      case 0:{
-        Serial.println("Enviando DATA e HORA.");
-        Serial1.print("S");
-        Serial1.print("D");
-        if(lt.dia<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.dia);
-        Serial1.print("/");
-        if(lt.mes<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.mes);
-        Serial1.print("/");
-        if(lt.ano<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.ano);
-        Serial1.print(" ");
-        if(lt.hora<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.hora);
-        Serial1.print(":");
-        if(lt.minuto<10){
-          Serial1.print("0");
-        }
-        Serial1.print(lt.minuto);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 1:{
-        Serial.println("Enviando valor REAL.");
-        Serial1.print("S");
-        Serial1.print("R");
-        Serial1.print(lt.real);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 2:{
-        Serial.println("Enviando valor IMAGINARIO.");
-        Serial1.print("S");
-        Serial1.print("J");
-        Serial1.print(lt.imag);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 3:{
-        Serial.println("Enviando valor de FREQUENCIA.");
-        Serial1.print("S");
-        Serial1.print("F");
-        Serial1.print(lt.freq);
-        Serial1.print("E");
-        //Serial1.flush();
-        inf++;
-        break;
-      }
-      case 4:{
-        inf = 0;
-        first=true;
-        Req = false;
-        break;
-      }
-    }
-  }
-
-*/
 
 bool testarData(int dia, int mes, int ano, int hora, int minuto, int segundo){    //testar se os valores de data são validos, true se sim, false se não.
   if(segundo>59 || segundo<0){    //testar se o valor de segundo é negativo ou maior que 59.
@@ -1177,36 +1127,20 @@ bool testarData(int dia, int mes, int ano, int hora, int minuto, int segundo){  
   return true;    //se tiver passado por todos os outros testes, retorna true.
 }
 
-
-/*
- * else if(tempMn<8){  //se o mes for antes de agosto
- * if(tempMn % 2 != 0){  //se o mes for impar(meses impares antes de agosto tem 31 dias)
- */
 void serialTalk(){
-  //String input, output;
-  //static bool waiting = false, sending = false, getter = false;
-  //static int i=0, x;
-
-
-
-
-
-  /*CRIAR FUNÇÕES WRAP-SEND-RECEIVE(?) E SIMILARES PARA DIMINUIR SERIALTALK()
-   * E TRANSFERIR PARA UMA LIBRARY PERSONALIZADA('Red_Beryl'?) 
+  /*[X]CRIAR FUNÇÕES WRAP-SEND-RECEIVE(?) E SIMILARES PARA DIMINUIR SERIALTALK()
+   *[ ] E TRANSFERIR PARA UMA LIBRARY PERSONALIZADA('Red_Beryl'?) 
    * PARA QUE O CODIGO FIQUE MAIS LIMPO E FACIL DE NAVEGAR
    * E PARA SIMPLIFICAR O PROCESSO DE ALTERAR O CODIGO.
    */
 
-  /*Fazer as funções de deletar leitura do historico
-   * fazer a logica de receber CLR[n] para pagar a leitura [n] do historico usando a função de delete anterior.
-   * modificar a logica de get para que ao invez de GET[0], enviar todas as leituras esteja presente em GET[], assim como apagar tudo é CLR[]
+  /*[ ]Fazer as funções de deletar leitura do historico
+   *[ ]fazer a logica de receber CLR[n] para pagar a leitura [n] do historico usando a função de delete anterior.
+   *[-/-] modificar a logica de get para que ao invez de GET[0], enviar todas as leituras esteja presente em GET[], assim como apagar tudo é CLR[]
    * 
    * NO MEIO DE ALTERAR TODAS AS RESPOSTAS DE OK PARA USAR SERIALENVIAR.
    */
 
-
-  
-  
   char comStr[4], inStr[30], debugStr[30];
   static long index;
   static bool Get=false, Req=false;
@@ -1238,7 +1172,6 @@ void serialTalk(){
       static int z=0;
       EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
       while(z<EEPROM.read(0)-1){
-
         if(!serialLeitura(lt, inf)){
           inf++;
           delay(20);
@@ -1251,8 +1184,6 @@ void serialTalk(){
           EEPROM.get(1+(sizeof(struct leitura)*(z)), lt);
           delay(200);
         }
-      }
-      {
         z=0;
         Get=false;
       }
@@ -1264,7 +1195,6 @@ void serialTalk(){
     }
     else {
       EEPROM.get(1+(sizeof(struct leitura)*(index-1)), lt);
-
       if(!serialLeitura(lt, inf)){
         inf++;
       }
@@ -1272,9 +1202,7 @@ void serialTalk(){
         inf=0;
         Get=false;
       }
-
-      }
-    
+    }
   }
   if(Serial1.available()!=-1 && Serial1.available()!=  0 && Serial1.available()>=3){
     Serial.print("Serial1 enviou algo:");
@@ -1291,7 +1219,7 @@ void serialTalk(){
     }
     Serial.println("");
     Serial.println(comStr);
-
+      
     delay(10);
 
     if(strcmp(comStr, "CHK")== 0){
@@ -1305,11 +1233,39 @@ void serialTalk(){
       serialEnviar(bat);
     }
     else if(strcmp(comStr, "CLR")==0){    //Se o comando recebido for CLR, realiza a logica de Fast Clear, limpando o primeiro endereço da EEPROM.
-      //FAST CLEAR = APENAS MARCAR A POSIÇÃO 0 DA EEPROM COMO 0.
-      EEPROM.write(0,0);
-      Serial.println("Limpeza rapida concluida.");
-      
-      serialEnviar("OK");
+      delay(10);
+      if(Serial1.available()!=-1 && Serial1.available()!=0){    //checa se recebeu mais alguma coisa por bluetooth.
+        int i=0;
+        while(Serial1.available()!=-1 && Serial1.available()!=0){
+          inStr[i]=Serial1.read();
+          Serial.print(inStr[i]);
+          i++;
+          inStr[i]= '\0';
+        }
+        Serial.print("|");
+        Serial.println(inStr);
+        char *ptr;
+        int num = strtol(inStr, &ptr, 10);
+        Serial.print("NUM=");
+        Serial.println(num);
+        Serial.print("PTR='");
+        Serial.print(ptr);
+        Serial.println("'");
+        if(deletaLeitura(num-1)){
+          Serial.println("Concluido.");
+          serialEnviar("OK");
+        }
+        else{
+          Serial.println("ERRO, não foi possivel deletar a leitura.");
+          Serial.print("ERR");
+        }
+      }
+      else{
+        //FAST CLEAR = APENAS MARCAR A POSIÇÃO 0 DA EEPROM COMO 0.
+        EEPROM.write(0,0);
+        Serial.println("Limpeza rapida concluida.");
+        serialEnviar("OK");
+      }
     }
     else if(strcmp(comStr, "WIP")==0){    //Se o comando recebido for WIP, realiza a logica de limpar os endereços da EEPROM que estão sendo usados.
       //WIPE MEMORY = LIMPAR OS ENDEREÇOS DA EEPROM RECONHECIDOS PELA POSIÇÃO 0(INDEX).
@@ -1513,32 +1469,15 @@ void serialTalk(){
         Serial.print("Valor de frequencia requerido não esta dentro dos limites validos, retornando ERRO.");
         Serial1.print("ERR");
       }
-      //Serial1.flush();
     }
-    else if(strcmp(comStr, "TMP")==0){
+    else if(strcmp(comStr, "TMP")==0){    //Se o comando recebido for TMP, retorna o valor de temperature na AD.
       Serial.println("Enviando temperatura.");
-      /* char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-       * strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
-       * dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
-       * serialEnviar(lStr);   //chama a função serialEnviar.
-       */
       double temperature = AD5933::getTemperature();
       char tempChar[30];
       dtostrf(temperature, 6, 2, tempChar);
-      serialEnviar(tempChar);
-      /*
-      char temperature[30];
-      //strcpy(temp, "");
-      Serial.println(AD5933::getTemperature());
-      dtostrf(AD5933::getTemperature(), 2, 2, &temperature[strlen(temperature)]);
-      serialEnviar(temperature);
-      /*Serial1.print("S");
-       *Serial1.print(temperature);
-       *Serial1.print("E");
-       */
-      
+      serialEnviar(tempChar);      
     }
-    else if(strcmp(comStr, "GET")==0){
+    else if(strcmp(comStr, "GET")==0){    //Se o comando recebido for GET, realiza logica para 'pegar' e retornar uma leitura salva.
       delay(10);
       while(Serial1.available()!=-1 && Serial1.available()!=0){
         if(Serial1.available()>=1){
@@ -1560,7 +1499,6 @@ void serialTalk(){
       Serial.print("PTR='");
       Serial.print(ptr);
       Serial.println("'");
-      //Serial1.flush();
       Get=true;
     }
     else{
@@ -1585,7 +1523,6 @@ void serialTalk(){
     }
     Serial1.print(debugStr);
   }
-  
 }
 
 void scrollBar(int j)
@@ -2172,7 +2109,7 @@ bool frequencySweepCustom(unsigned long FREQ, int NUM ){
   bool h12,PM,century;
   leitura0={FREQ, medReal, medImag, time.getHour( h12,  PM), time.getMinute(), time.getDate(), time.getMonth( century), time.getYear()};
 
-  Serial.print("EEPROM address 0:");Serial.println(EEPROM.read(addr));
+  Serial.print("EEPROM address 0:");Serial.println(EEPROM.read(0));
   
     // Set AD5933 power mode to standby when finished
   if (!AD5933::setPowerMode(POWER_STANDBY))
