@@ -1134,8 +1134,8 @@ void serialTalk(){
    * E PARA SIMPLIFICAR O PROCESSO DE ALTERAR O CODIGO.
    */
 
-  /*[ ]Fazer as funções de deletar leitura do historico
-   *[ ]fazer a logica de receber CLR[n] para pagar a leitura [n] do historico usando a função de delete anterior.
+  /*[X]Fazer as funções de deletar leitura do historico
+   *[X]fazer a logica de receber CLR[n] para pagar a leitura [n] do historico usando a função de delete anterior.
    *[-/-] modificar a logica de get para que ao invez de GET[0], enviar todas as leituras esteja presente em GET[], assim como apagar tudo é CLR[]
    * 
    * NO MEIO DE ALTERAR TODAS AS RESPOSTAS DE OK PARA USAR SERIALENVIAR.
