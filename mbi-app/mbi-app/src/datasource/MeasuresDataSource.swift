@@ -42,4 +42,8 @@ extension MeasuresDataSource: UITableViewDataSource {
     return cell
   }
 
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return "Leituras disponíveis:"
+  }
+
 }

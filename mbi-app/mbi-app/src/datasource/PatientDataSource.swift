@@ -23,7 +23,22 @@ class PatientsDataSource: NSObject {
 }
 
 extension PatientsDataSource: UITableViewDataSource {
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    if patients.count == 0 {
+      let emptyLabel = UILabel()
+      emptyLabel.numberOfLines = 0
+      emptyLabel.font = UIFont.systemFont(ofSize: 14)
+      emptyLabel.text = "Não há pacientes cadastrados.\nToque “+” para cadastrar um novo paciente."
+      emptyLabel.textAlignment = .center
+      tableView.backgroundView = emptyLabel
+      tableView.separatorStyle = .none
+    } else {
+      tableView.separatorStyle = .singleLine
+      tableView.backgroundView = nil
+    }
+
     return patients.count
   }
 

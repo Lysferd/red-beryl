@@ -19,7 +19,7 @@ class PatientListView: UIViewController {
   // MARK: - Initialization
   required init?(coder aDecoder: NSCoder) {
     let patients = [ Patient(record: "382", first_name: "Francisco", middle_name: "Alves", last_name: "Silva") ]
-    datasource = PatientsDataSource(patients)
+    datasource = PatientsDataSource([])//patients)
     super.init(coder: aDecoder)
   }
 
