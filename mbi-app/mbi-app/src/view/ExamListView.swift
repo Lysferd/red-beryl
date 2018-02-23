@@ -2,7 +2,7 @@
 //  ExamListView.swift
 //  mbi-app
 //
-//  Created by 埜原菽也 on H30/01/24.
+//  Created by 埜原菽也 on H30/01/30.
 //  Copyright © 平成30年 M.A. Eng. All rights reserved.
 //
 
@@ -11,25 +11,34 @@ import UIKit
 class ExamListView: UIViewController {
 
   // MARK: GUI Outlets
-  @IBOutlet weak var refreshButton: UIBarButtonItem!
-  @IBOutlet weak var devicesTable: UITableView!
+  @IBOutlet weak var addButton: UIBarButtonItem!
+  @IBOutlet weak var searchButton: UIBarButtonItem!
+  @IBOutlet weak var examsTable: UITableView!
 
-  // MARK: Instance Objects
-  var bluetooth: BTDiscovery?
-  let datasource: DevicesDataSource
+  // MARK: Properties
+  let datasource: ExamsDataSource
 
+  // MARK: - Initialization
   required init?(coder aDecoder: NSCoder) {
-    let devices = [ Device(name: "BT_Device", address: "01:AB:U4:C6:A2") ]
-    datasource = DevicesDataSource(devices)
+    //let exam = Exam(z_real: 1.0, z_imaginary: -1.0, frequency: 10, date: "12/12/12 02:54")
+    datasource = ExamsDataSource()
+
     super.init(coder: aDecoder)
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    devicesTable.dataSource = datasource
-    devicesTable.reloadData()
 
-    // Start the Bluetooth discovery process
-    _ = btDiscoverySharedInstance
+    examsTable.tableFooterView = UIView()
+    examsTable.dataSource = datasource
+    examsTable.reloadData()
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if let index = examsTable.indexPathForSelectedRow {
+      examsTable.deselectRow(at: index, animated: true)
+    }
   }
 }

@@ -6,34 +6,61 @@
 //  Copyright © 平成29年 M.A. Eng. All rights reserved.
 //
 
-struct Patient {
-  // MARK: Properties
+import UIKit
+
+class Patient {
   var record: String
   var first_name: String
   var middle_name: String
   var last_name: String
 
-  /*
-  struct PropertyKey {
-    static let record = "record"
-    static let first_name = "first_name"
-    static let middle_name = "middle_name"
-    static let last_name = "last_name"
-    static let personal_id = "personal_id"
-    static let birth_date = "birth_date"
-    static let phone_number = "phone_number"
-    static let email = "email"
-    static let address = "address"
-    static let city = "city"
-    static let state = "state"
-    static let country = "country"
-    static let blood_type = "blood_type"
-    static let risk_groups = "risk_groups"
-    static let regular_medicines = "regular_medicines"
-    static let register_date = "register_date"
-    static let update_date = "update_date"
-    static let last_consultation = "last_consultation"
-  }
- */
+  var personal_id: String
+  var birth_date: String
+  var phone_number: String
+  var email: String
+  var address: String
+  var city: String
+  var state: String
+  var country: String
 
+  var blood_type: String
+  var risk_groups: String
+  var regular_medication: String
+
+  var register_date: String
+  var update_date: String
+
+  var exams: [Exam]
+
+  init(record: String, first_name: String, middle_name: String,
+       last_name: String, personal_id: String = "", birth_date: String = "",
+       phone_number: String = "", email: String = "", address: String = "",
+       city: String = "", state: String = "", country: String = "",
+       blood_type: String = "", risk_groups: String = "",
+       regular_medication: String = "",
+       exams: [Exam] = []) {
+    self.record = record
+    self.first_name = first_name
+    self.middle_name = middle_name
+    self.last_name = last_name
+    self.personal_id = personal_id
+    self.birth_date = birth_date
+    self.phone_number = phone_number
+    self.email = email
+    self.address = address
+    self.city = city
+    self.state = state
+    self.country = country
+    self.blood_type = blood_type
+    self.risk_groups = risk_groups
+    self.regular_medication = regular_medication
+    self.register_date = ""
+    self.update_date = ""
+    self.exams = exams
+  }
+
+}
+
+func ==(lhs: Patient, rhs: Patient) -> Bool {
+  return lhs.record == rhs.record
 }

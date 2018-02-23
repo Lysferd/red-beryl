@@ -10,16 +10,11 @@ import UIKit
 
 class DeviceCell: UITableViewCell {
 
-  // MARK: Properties
+  // MARK: - Properties
   @IBOutlet weak var deviceName: UILabel!
-  @IBOutlet weak var deviceAddress: UILabel!
 
   var name: String? {
     didSet { deviceName.text = name }
-  }
-
-  var address: String? {
-    didSet { deviceAddress.text = address }
   }
 
 }

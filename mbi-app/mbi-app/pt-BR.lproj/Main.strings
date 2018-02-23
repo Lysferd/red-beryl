@@ -1,0 +1,141 @@
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "2Sn-ty-36M"; */
+"2Sn-ty-36M.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Versão 1.0a"; ObjectID = "2oc-Kw-ulf"; */
+"2oc-Kw-ulf.text" = "Versão 1.0a";
+
+/* Class = "UILabel"; text = "Diabetes, Hipertensão, Hipotireoidismo"; ObjectID = "656-3d-vSn"; */
+"656-3d-vSn.text" = "Diabetes, Hipertensão, Hipotireoidismo";
+
+/* Class = "UINavigationItem"; title = "Novo Paciente"; ObjectID = "6cM-Ec-Oq7"; */
+"6cM-Ec-Oq7.title" = "Novo Paciente";
+
+/* Class = "UILabel"; text = "Etnia"; ObjectID = "7ix-hA-Esf"; */
+"7ix-hA-Esf.text" = "Etnia";
+
+/* Class = "UINavigationItem"; title = "Opções"; ObjectID = "9vZ-bH-WLh"; */
+"9vZ-bH-WLh.title" = "Opções";
+
+/* Class = "UILabel"; text = "Prontuário"; ObjectID = "A92-Ic-V7X"; */
+"A92-Ic-V7X.text" = "Prontuário";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "AJy-iy-t6F"; */
+"AJy-iy-t6F.text" = "Subtitle";
+
+/* Class = "UITextField"; placeholder = "Nome"; ObjectID = "Cfx-vT-ra8"; */
+"Cfx-vT-ra8.placeholder" = "Nome";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "DmL-RN-j3Z"; */
+"DmL-RN-j3Z.text" = "Subtitle";
+
+/* Class = "UITabBarItem"; title = "Opções"; ObjectID = "E79-Bh-aTj"; */
+"E79-Bh-aTj.title" = "Opções";
+
+/* Class = "UITextField"; placeholder = "Prontuário"; ObjectID = "G67-CL-6xt"; */
+"G67-CL-6xt.placeholder" = "Prontuário";
+
+/* Class = "UILabel"; text = "Masculino"; ObjectID = "GNG-yj-3Mm"; */
+"GNG-yj-3Mm.text" = "Masculino";
+
+/* Class = "UILabel"; text = "Nome"; ObjectID = "HDT-xJ-DWL"; */
+"HDT-xJ-DWL.text" = "Nome";
+
+/* Class = "UILabel"; text = "Gênero"; ObjectID = "HxS-X6-7b6"; */
+"HxS-X6-7b6.text" = "Gênero";
+
+/* Class = "UITableViewSection"; headerTitle = "Personal Information"; ObjectID = "JVX-ZE-73O"; */
+"JVX-ZE-73O.headerTitle" = "Personal Information";
+
+/* Class = "UILabel"; text = "Relatórios"; ObjectID = "Mqy-eE-6fF"; */
+"Mqy-eE-6fF.text" = "Relatórios";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "NA1-lM-4JB"; */
+"NA1-lM-4JB.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Pacientes"; ObjectID = "Pzs-EW-xfi"; */
+"Pzs-EW-xfi.title" = "Pacientes";
+
+/* Class = "UILabel"; text = "Dispositivos MBI"; ObjectID = "UFm-GX-O9C"; */
+"UFm-GX-O9C.text" = "Dispositivos MBI";
+
+/* Class = "UILabel"; text = "Segurança"; ObjectID = "Wnv-ap-rYt"; */
+"Wnv-ap-rYt.text" = "Segurança";
+
+/* Class = "UITableViewSection"; headerTitle = "Informações Médicas"; ObjectID = "X2Q-oe-quF"; */
+"X2Q-oe-quF.headerTitle" = "Informações Médicas";
+
+/* Class = "UINavigationItem"; title = "Exames"; ObjectID = "YDS-Ge-RL2"; */
+"YDS-Ge-RL2.title" = "Exames";
+
+/* Class = "UILabel"; text = "CPF"; ObjectID = "Zq6-Ec-I1h"; */
+"Zq6-Ec-I1h.text" = "CPF";
+
+/* Class = "UITabBarItem"; title = "Pacientes"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Pacientes";
+
+/* Class = "UINavigationItem"; title = "Pacientes"; ObjectID = "akB-II-NPs"; */
+"akB-II-NPs.title" = "Pacientes";
+
+/* Class = "UILabel"; text = "Nome do meio"; ObjectID = "awo-kt-k7K"; */
+"awo-kt-k7K.text" = "Nome do meio";
+
+/* Class = "UILabel"; text = "Suporte"; ObjectID = "b9z-AD-FPT"; */
+"b9z-AD-FPT.text" = "Suporte";
+
+/* Class = "UITabBarItem"; title = "Exame"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Exame";
+
+/* Class = "UILabel"; text = "Caucasiano"; ObjectID = "fUG-fL-nCB"; */
+"fUG-fL-nCB.text" = "Caucasiano";
+
+/* Class = "UITextField"; placeholder = "CPF"; ObjectID = "fla-if-BA7"; */
+"fla-if-BA7.placeholder" = "CPF";
+
+/* Class = "UILabel"; text = "Tipo Sanguíneo"; ObjectID = "gRJ-DP-Toj"; */
+"gRJ-DP-Toj.text" = "Tipo Sanguíneo";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "gS7-J4-yHK"; */
+"gS7-J4-yHK.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Detalhes"; ObjectID = "ieC-IE-ieK"; */
+"ieC-IE-ieK.title" = "Detalhes";
+
+/* Class = "UITextField"; placeholder = "Sobrenome"; ObjectID = "jOZ-96-rag"; */
+"jOZ-96-rag.placeholder" = "Sobrenome";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "k3n-NI-ST5"; */
+"k3n-NI-ST5.text" = "Title";
+
+/* Class = "UILabel"; text = "Serviço de Nuvem"; ObjectID = "m2w-II-1pl"; */
+"m2w-II-1pl.text" = "Serviço de Nuvem";
+
+/* Class = "UILabel"; text = "Sobrenome"; ObjectID = "nGK-Ra-R4c"; */
+"nGK-Ra-R4c.text" = "Sobrenome";
+
+/* Class = "UILabel"; text = "Grupo de Risco"; ObjectID = "rhg-PY-6QV"; */
+"rhg-PY-6QV.text" = "Grupo de Risco";
+
+/* Class = "UILabel"; text = "AB+"; ObjectID = "uCH-iR-IuI"; */
+"uCH-iR-IuI.text" = "AB+";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "uaA-SQ-wor"; */
+"uaA-SQ-wor.text" = "Title";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "uhR-MW-0o4"; */
+"uhR-MW-0o4.text" = "Detail";
+
+/* Class = "UITableViewSection"; headerTitle = "Histórico de Exames"; ObjectID = "vCE-bK-dk3"; */
+"vCE-bK-dk3.headerTitle" = "Histórico de Exames";
+
+/* Class = "UITableViewSection"; headerTitle = "Informações Pessoais"; ObjectID = "vZH-Eg-0JZ"; */
+"vZH-Eg-0JZ.headerTitle" = "Informações Pessoais";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "w45-Lg-ZwB"; */
+"w45-Lg-ZwB.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "zhk-JF-WDc"; */
+"zhk-JF-WDc.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Nome do meio"; ObjectID = "zjN-bl-35c"; */
+"zjN-bl-35c.placeholder" = "Nome do meio";

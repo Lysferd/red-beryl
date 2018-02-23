@@ -9,99 +9,94 @@
 import Foundation
 import CoreBluetooth
 
-let btDiscoverySharedInstance = BTDiscovery();
+// MARK: Shared Instance
+let btDiscoverySharedInstance = BTDiscovery()
+
+// MARK: Notifications
+let BLEScanning = NSNotification.Name("BLEScanning")
+let BLEFound = Notification.Name("BLEFound")
+let BLEConnected = NSNotification.Name("BLEConnected")
 
 class BTDiscovery: NSObject, CBCentralManagerDelegate {
 
+  // MARK: - Private Variables
+  fileprivate var queue: DispatchQueue?
   fileprivate var centralManager: CBCentralManager?
-  fileprivate var peripheralBLE: CBPeripheral?
+  fileprivate var peripheral: CBPeripheral?
 
+  var service: BTService?
+
+  // MARK: - Initialization
   override init() {
     super.init()
 
-    let centralQueue = DispatchQueue(label: "com.raywenderlich", attributes: [])
-    centralManager = CBCentralManager(delegate: self, queue: centralQueue)
-
-    NSLog("Discovery initialized")
+    queue = DispatchQueue(label: "eng.moritzalmeida")
+    centralManager = CBCentralManager(delegate: self, queue: queue)
   }
 
+  // MARK: - Scanning
   func startScanning() {
-    NSLog( "Started scanning" )
-
     if let central = centralManager {
-      central.scanForPeripherals(withServices: nil)
+      central.scanForPeripherals(withServices: [ServiceUUID])
+      //queue?.asyncAfter(deadline: .now() + 10.0) { self.stopScanning() }
     }
-
   }
 
-  var bleService: BTService? {
-    didSet {
-      if let service = self.bleService {
-        service.startDiscoveringServices()
-      }
+  func stopScanning() {
+    if let central = centralManager {
+      postScanning(false)
+      central.stopScan()
     }
   }
 
   // MARK: - CBCentralManagerDelegate
+  func centralManager(_ central: CBCentralManager,
+                      didDiscover new_peripheral: CBPeripheral,
+                      advertisementData: [String : Any],
+                      rssi RSSI: NSNumber) {
+    if new_peripheral.name == nil || new_peripheral.name == "" { return }
+    print("Found device: \(new_peripheral.name ?? "NIL") [\(new_peripheral.identifier)]")
 
-  func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-    // Be sure to retain the peripheral or it will fail during connection.
+    if peripheral == nil || peripheral?.state == CBPeripheralState.disconnected {
+      peripheral = new_peripheral
+      service = nil
 
-    // Validate peripheral information
-    //if ((peripheral.name == nil) || (peripheral.name == "")) {
-    //  return
-    //}
+      print("Attempting connection with \(peripheral?.name ?? "NIL")")
 
-    NSLog("Found device: %@ [\(peripheral.identifier)]", peripheral.name ?? "NIL")
-    NSLog("Advertisement data: %@", advertisementData)
-
-    // If not already connected to a peripheral, then connect to this one
-    return
-
-    if ((self.peripheralBLE == nil) || (self.peripheralBLE?.state == CBPeripheralState.disconnected)) {
-      // Retain the peripheral before trying to connect
-      self.peripheralBLE = peripheral
-
-      // Reset service
-      self.bleService = nil
-
-      NSLog("Attempting connection with %@", self.peripheralBLE?.name ?? "NIL")
-
-      // Connect to peripheral
-      central.connect(peripheral, options: nil)
+      central.connect(peripheral!, options: nil)
+      postFound(peripheral!)
     }
   }
 
-  func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-
-    NSLog("Connection succeeded with %@", self.peripheralBLE?.name ?? "NIL")
-
-    // Create new service class
-    if (peripheral == self.peripheralBLE) {
-      self.bleService = BTService(initWithPeripheral: peripheral)
+  func centralManager(_ central: CBCentralManager,
+                      didConnect peripheral: CBPeripheral) {
+    if peripheral == self.peripheral {
+      self.service = BTService(peripheral)
+      print("Connected to \(peripheral.name ?? "NIL")")
     }
 
-    // Stop scanning for new devices
+    //postConnected(true)
     central.stopScan()
   }
 
-  func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+  func centralManager(_ central: CBCentralManager,
+                      didDisconnectPeripheral peripheral: CBPeripheral,
+                      error: Error?) {
 
     // See if it was our peripheral that disconnected
-    if (peripheral == self.peripheralBLE) {
-      self.bleService = nil;
-      self.peripheralBLE = nil;
+    if peripheral == self.peripheral {
+      self.service = nil
+      self.peripheral = nil
     }
 
-    // Start scanning for new devices
+    //postConnected(false)
     self.startScanning()
   }
 
   // MARK: - Private
-
   func clearDevices() {
-    self.bleService = nil
-    self.peripheralBLE = nil
+    self.service = nil
+    self.peripheral = nil
   }
 
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -126,6 +121,20 @@ class BTDiscovery: NSObject, CBCentralManagerDelegate {
     case .unsupported:
       break
     }
+  }
+
+  // MARK: - Post Notifications
+  func postFound(_ peripheral: CBPeripheral) {
+    let info = ["peripheral": peripheral ]
+    NotificationCenter.default.post(name: BLEFound,
+                                    object: self,
+                                    userInfo: info)
+  }
+
+  func postScanning(_ scanning: Bool) {
+    NotificationCenter.default.post(name: BLEScanning,
+                                    object: self,
+                                    userInfo: ["scanning": scanning])
   }
 
 }

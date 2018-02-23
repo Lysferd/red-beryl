@@ -9,10 +9,16 @@
 import UIKit
 
 class DevicesDataSource: NSObject {
-  let devices: [Device]
+  var devices: [Device]!
 
-  init(_ devices: [Device]) {
+  init(devices: [Device] = []) {
     self.devices = devices
+  }
+
+  func append(_ device: Device) -> Bool {
+    if devices.contains(where: { $0 == device }) { return false }
+    devices.append(device)
+    return true
   }
 }
 
@@ -24,8 +30,8 @@ extension DevicesDataSource: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DeviceCell.self)) as! DeviceCell
     let device = devices[indexPath.row]
+    
     cell.name = device.name
-    cell.address = device.address
     return cell
   }
 }

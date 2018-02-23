@@ -9,10 +9,16 @@
 import UIKit
 
 class PatientsDataSource: NSObject {
-  let patients: [Patient]
+  var patients: [Patient]
 
   init(_ patients: [Patient]) {
     self.patients = patients
+  }
+
+  func append(_ patient: Patient) -> Bool {
+    if patients.contains(where: { $0 == patient }) { return false }
+    patients.append(patient)
+    return true
   }
 }
 
