@@ -16,9 +16,14 @@
 
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
+#include <leituras.h>
+#include <red_crystal.h>
+#include <red_quartz.h>
+
 
 #define lineSize 8
-
+	
+		
 class red_beryl
 {
 	private:
@@ -32,9 +37,13 @@ class red_beryl
 		bool _down;
 		bool _yes;
 		bool _no;
+		
+		Adafruit_SSD1306 display;
+		leituras leitura0;
+		red_crystal c;
     
 	public:
-		Adafruit_SSD1306 display;
+		
 		red_beryl();
 		
 		int getBatteryPct();

@@ -7,6 +7,8 @@
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
+#include <leituras.h>
+#include <red_crystal.h>
 
 #define BAT8_HEIGHT 8 
 #define BAT8_WIDTH 16
@@ -52,11 +54,11 @@ static const unsigned char PROGMEM BT2_bmp[] =
 
 red_beryl::red_beryl()
 {
-	Serial.println("Construtor basico utilizado");
+	Serial.println("Construtor basico red_beryl utilizado.");
 	Wire.begin();
 
 	display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false);
-	Serial.println("display inicializado... Eu acho");
+	Serial.println("display inicializado.");
 	display.display();
 	delay(500);
 	display.clearDisplay();
@@ -84,6 +86,23 @@ red_beryl::red_beryl()
 	_down = false;
 	_yes = false;
 	_no = false;
+	
+	leitura0 = {0,0,0,0,0,0,0,0};
+	/*struct leitura leitura0;
+	
+	
+	
+	Serial.println(leitura0.freq);
+	Serial.println(leitura0.real);
+	Serial.println(leitura0.imag);
+	Serial.println(leitura0.hora);
+	Serial.println(leitura0.minuto);
+	Serial.println(leitura0.dia);
+	Serial.println(leitura0.mes);
+	Serial.println(leitura0.ano);
+	
+	Serial.println("now the crystal reading:");
+	*/
 }
 
 void red_beryl::checarPin()
@@ -125,79 +144,80 @@ void red_beryl::checarPin()
 
 int red_beryl::getBatteryPct()
 {
-  int pwr, pct;
-  pwr = analogRead(_pinBAT);
-  pct = map(pwr,0,1023,0,100);
-  return pct;
+	int pwr, pct;
+	pwr = analogRead(_pinBAT);
+	pct = map(pwr,0,1023,0,100);
+	return pct;
 }
 
 void red_beryl::upperBar()    // barra superior.
 {
-  static int pwr;   //declara o inteiro estatico pwr(POWER)
-  static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
+	static int pwr;   //declara o inteiro estatico pwr(POWER)
+	static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
   
-  display.fillRect(0, 0, display.width(), barSize, BLACK); // desenha a barra em preto, mantendo permanentemente a barrar acima de tudo.
+	/*display.fillRect(0, 0, display.width(), barSize, BLACK); // desenha a barra em preto, mantendo permanentemente a barrar acima de tudo.
   
-  pwr = analogRead(potPin);   //pwr le o valor analogico do potenciometro, recebendo o valor 'raw' da bateria.
-  pct = map(pwr,0,1023,0,100);    //pct recebe o valor mapeado de pwr entre 0-100.
-  pwr = map(pwr, 0, 1023, 0, 12);   //pwr recebe o valor mapeado entre0-12
-
-  display.fillRect(display.width()-1-pwr, 2, pwr, 4, WHITE); //desenha a barra da bateria
+	pwr = analogRead(potPin);   //pwr le o valor analogico do potenciometro, recebendo o valor 'raw' da bateria.
+	pct = map(pwr,0,1023,0,100);    //pct recebe o valor mapeado de pwr entre 0-100.
+	pwr = map(pwr, 0, 1023, 0, 12);   //pwr recebe o valor mapeado entre0-12
+	*/
+	pct = getBatteryPct();
+	pwr = map(pct, 0, 100, 0, 12);
   
-  if(pct<10)
-  {
-    display.setCursor(display.width()-BAT8_WIDTH-12, 0);
-  }
-  else if(pct != 100)
-  {
-    display.setCursor(display.width()-BAT8_WIDTH-18, 0);
-  }
-  else
-  {
-    display.setCursor(display.width()-BAT8_WIDTH-24, 0);
-  }
-
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.print(pct);
-  display.print("%");  // printando a porcentagem da bateria que foi calculada anteriormente usando map a partir de pwr, dependendo da porcentagem alterando quando começa o cursor.
+	display.fillRect(display.width()-1-pwr, 2, pwr, 4, WHITE); //desenha a barra da bateria
   
-  clock(); //chama o relogio, A FAZER: alterar coordenadas de impressão do relogio para canto superior DIREITO
-  display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
-  //display.drawBitmap(0, 0, BT_9_bmp, BT9_WIDTH, BT9_HEIGHT, WHITE); // desenha o simbolo de bluetooth depois da bateria. 9 de altura, 8 de largura.
-  if(BLE)
-  {
-    display.drawBitmap(0, 0, BT2_bmp, BT2_WIDTH, BT2_HEIGHT, WHITE);
-  }
-  display.setCursor(BT2_WIDTH+5,0);
+	if(pct<10)
+	{
+		display.setCursor(display.width()-BAT8_WIDTH-12, 0);
+	}
+	else if(pct != 100)
+	{
+		display.setCursor(display.width()-BAT8_WIDTH-18, 0);
+	}
+	else
+	{
+		display.setCursor(display.width()-BAT8_WIDTH-24, 0);
+	}
 
-  static unsigned long mill = 0;
-  static unsigned long tempMill = 0;
-  static double temperature = AD5933::getTemperature();
+	display.setTextSize(1);
+	display.setTextColor(WHITE);
+	display.print(pct);
+	display.print("%");  // printando a porcentagem da bateria que foi calculada anteriormente usando map a partir de pwr, dependendo da porcentagem alterando quando começa o cursor.
 
-  mill = millis();
-  if( (mill - tempMill) > 1000){
-    temperature = AD5933::getTemperature();
-    tempMill = mill;
-    //Serial.println("Temperatura atualizada");
-  }
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.print((int) temperature);
-  display.print("C");
-  //uint8_t i=247;
-  display.write((uint8_t) 247);
-  
-  
-  //scrollBar();
+	//clock(); //chama o relogio, A FAZER: alterar coordenadas de impressão do relogio para canto superior DIREITO
+	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
+	//display.drawBitmap(0, 0, BT_9_bmp, BT9_WIDTH, BT9_HEIGHT, WHITE); // desenha o simbolo de bluetooth depois da bateria. 9 de altura, 8 de largura.
+	
+	if(true)		//LEMBRAR DE RETORNA ISSO A """IF(BLE)"""
+	{
+		display.drawBitmap(0, 0, BT2_bmp, BT2_WIDTH, BT2_HEIGHT, WHITE);
+	}
+	/*display.setCursor(BT2_WIDTH+5,0);
 
+	static unsigned long mill = 0;
+	static unsigned long tempMill = 0;
+	
+	
+				static double temperature = AD5933::getTemperature();		//TRANSFERIR PARA RED_CRYSTAL
 
+	mill = millis();
+	if( (mill - tempMill) > 1000){
+				temperature = AD5933::getTemperature();						//TRANSFERIR PARA RED_CRYSTAL
+		tempMill = mill;
+	}
+	display.setTextSize(1);
+	display.setTextColor(WHITE);
+	display.print((int) temperature);
+	display.print("C");
+	display.write((uint8_t) 247);
+	*/
 }
 
 void red_beryl::menu()
 {
 	display.clearDisplay();
 	checarPin();
+	upperBar();
 	static int choice=1;
 	static char* menu[] = { "0.default", "1.Leituras", "2.Sincronizar", "3.Ajustes" };
 	switch(choice){

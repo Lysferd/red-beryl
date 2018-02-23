@@ -18,15 +18,30 @@
 class red_quartz
 {
 	private:
-		int _minute;
-		int _hour;
+		int _segundo;
+		int _minuto;
+		int _hora;
+		int _dia;
+		int _mes;
+		int _ano;
 	public:
 		DS3231 time;
 		red_quartz();
-		int serial_minute();
-		int serial_hour();
-		bool test_minute(int min);
-		bool test_hour(int hr);
+		
+		int segundo();
+		int minuto();
+		int hora();
+		int dia();
+		int mes();
+		int ano();
+		char* data_hora(bool completo);
+		
+		bool testa_segundo(int s);
+		bool testa_minuto(int min);
+		bool testa_hora(int hr);
+		bool testa_dia(int d, int mn);
+		bool testa_mes(int mn);
+		bool testa_ano(int a);
 };
 
 #endif
