@@ -34,7 +34,17 @@ class red_quartz
 		int dia();
 		int mes();
 		int ano();
+		
 		char* data_hora(bool completo);
+		
+		void checkTime();
+		
+		bool set_segundo(int s);
+		bool set_minuto(int m);
+		bool set_hora(int h);
+		bool set_dia(int d, int m);
+		bool set_mes(int m);
+		bool set_ano(int a);
 		
 		bool testa_segundo(int s);
 		bool testa_minuto(int min);

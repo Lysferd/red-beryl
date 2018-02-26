@@ -185,6 +185,13 @@ void red_beryl::upperBar()    // barra superior.
 	display.print("%");  // printando a porcentagem da bateria que foi calculada anteriormente usando map a partir de pwr, dependendo da porcentagem alterando quando começa o cursor.
 
 	//clock(); //chama o relogio, A FAZER: alterar coordenadas de impressão do relogio para canto superior DIREITO
+	
+	clock.checkTime();
+	display.setTextSize(1);
+	display.setTextColor(WHITE);
+	display.setCursor(display.width()/2-15, 0);
+	display.print(clock.data_hora(false));
+	
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
 	//display.drawBitmap(0, 0, BT_9_bmp, BT9_WIDTH, BT9_HEIGHT, WHITE); // desenha o simbolo de bluetooth depois da bateria. 9 de altura, 8 de largura.
 	

@@ -41,6 +41,7 @@ class red_beryl
 		Adafruit_SSD1306 display;
 		leituras leitura0;
 		red_crystal c;
+		red_quartz clock;
     
 	public:
 		
