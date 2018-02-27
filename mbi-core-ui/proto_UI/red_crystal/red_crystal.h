@@ -16,15 +16,28 @@
 #include <AD5933.h>
 #include <leituras.h>
 
+#define START_FREQ  (50000) 			// frequencia inicial padrão.
+#define FREQ_INCR   (START_FREQ/100) 	// incremento de frequencia padrão.
+#define NUM_INCR    (10)  				// numero padrão de incrementos.
+#define REF_RESIST  (10000) 			// valor de referencia de resistor.
+
+
 class red_crystal
 {
 	private:
-		AD5933 ad;
+		AD5933 AD;
 		leituras leitura1;
+		
+		double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
+		int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
+		double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
+
 		
 	public:
 		red_crystal();
-		
+		bool initialConfig();
+		bool configurar(long f);
+		leituras lerAD();
 };
 
 #endif

@@ -58,28 +58,28 @@ char* red_quartz::data_hora(bool completo)					//recebe um bool que define se re
 		else{												//se _dia for pelo menos 10.
 			strcpy(tempStr, filler);						//string recebe filler[dia]
 		}
-		strcat(tempStr, '/');								//adiciona separador de data ao final da string.
+		strcat(tempStr, "/");								//adiciona separador de data ao final da string.
 		
 		itoa(_mes, filler, 10);								//traduz o valor int de _mes para filler.
 		if(_mes<10){										//se _mes for menor que 10.
 			strcat(tempStr, zero);							//zero é adicionado ao fim da string.
 		}
 		strcat(tempStr, filler);							//valor de filler[mes] adicionado ao final da string.
-		strcat(tempStr, '/');								//adiciona separador de data ao final da string.
+		strcat(tempStr, "/");								//adiciona separador de data ao final da string.
 		
 		itoa(_ano, filler, 10);								//traduz o valor int de _ano para filler.
 		if(_ano<10){										//se o _ano for menor que 10.
 			strcat(tempStr, zero);							//zero é adicionado ao fim da string.
 		}
 		strcat(tempStr, filler);							//valor de filler[ano] adicionado ao final da string.
-		strcat(tempStr, ' ');								//adiciona um espaço vazio como separador.
+		strcat(tempStr, " ");								//adiciona um espaço vazio como separador.
 		
 		itoa(_hora, filler, 10);							//traduz o valor int de _hora para filler.
 		if(_hora<10){										//se _hora for menor que 10.
 			strcat(tempStr, zero);							//string recebe zero.
 		}
 		strcat(tempStr, filler);							//string recebe filler[hora]
-		strcat(tempStr, ':');								//adiciona separador de hora ao final da string.
+		strcat(tempStr, ":");								//adiciona separador de hora ao final da string.
 		
 		itoa(_minuto, filler, 10);							//traduz o valor int de _minuto para filler.
 		if(_minuto<10){										//se _minuto for menor que 10.
@@ -101,7 +101,7 @@ char* red_quartz::data_hora(bool completo)					//recebe um bool que define se re
 		else{												//se _hora for pelo menos 10.
 			strcpy(tempStr, filler);						//string recebe filler[hora]
 		}
-		strcat(tempStr, ':');								//adiciona separador de hora ao final da string.
+		strcat(tempStr, ":");								//adiciona separador de hora ao final da string.
 		
 		itoa(_minuto, filler, 10);							//traduz o valor int de _minuto para filler.
 		if(_minuto<10){										//se _minuto for menor que 10.
