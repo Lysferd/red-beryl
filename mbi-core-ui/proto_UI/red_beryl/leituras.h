@@ -1,10 +1,10 @@
 #ifndef LEITURAS_H
 #define LEITURAS_H
 
-struct leituras {
+typedef struct leituras {
 	unsigned long freq;
 	double real, imag;
 	int hora, minuto, dia, mes, ano;
-};
+} leitura;
 
 #endif

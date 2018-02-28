@@ -26,18 +26,19 @@ class red_crystal
 {
 	private:
 		AD5933 AD;
-		leituras leitura1;
+		leitura leitura1;
 		
 		double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
 		int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
 		double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
-
+		long _freq;
 		
 	public:
 		red_crystal();
 		bool initialConfig();
 		bool configurar(long f);
-		leituras lerAD();
+		leitura lerAD();
+		double temperatura();
 };
 
 #endif

@@ -37,15 +37,16 @@ class red_beryl
 		bool _down;
 		bool _yes;
 		bool _no;
-		
-		Adafruit_SSD1306 display;
-		leituras leitura0;
-		red_crystal c;
-		red_quartz clock;
     
 	public:
 		
 		red_beryl();
+		
+		Adafruit_SSD1306 display;
+		
+		leitura leitura0;
+		red_crystal crystal;
+		red_quartz clock;
 		
 		int getBatteryPct();
 		void upperBar();

@@ -12,6 +12,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  rb->display.clearDisplay();
+  rb->clock.checkTime();
+  
+  rb->checarPin();
   rb->menu();
+  rb->upperBar();
+  rb->display.display();
+  delay(1);
 }

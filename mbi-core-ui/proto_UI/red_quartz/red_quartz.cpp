@@ -48,11 +48,10 @@ char* red_quartz::data_hora(bool completo)					//recebe um bool que define se re
 {
 	if(completo){											//se o bool [completo] for true, retorna data e hora,[00/00/00-00:00]14 caracteres+finalizador=15 caracteres.
 		char *tempStr = malloc(sizeof(char) * 15);			//inicializa e aloca memoria para o array de char tempStr que será retornado.
-		char zero = '0';									//inicializa zero.
 		char filler[20];									//inicializa filler para construir a string.
 		itoa(_dia, filler, 10);								//traduz o valor int de _dia para filler.
 		if(_dia<10){										//se _dia for menor que 10.
-			strcpy(tempStr, zero);							//string recebe zero.
+			strcpy(tempStr, "0");							//string recebe zero.
 			strcat(tempStr, filler);						//valor de filler[dia] adicionado ao final da string.
 		}
 		else{												//se _dia for pelo menos 10.
@@ -62,28 +61,28 @@ char* red_quartz::data_hora(bool completo)					//recebe um bool que define se re
 		
 		itoa(_mes, filler, 10);								//traduz o valor int de _mes para filler.
 		if(_mes<10){										//se _mes for menor que 10.
-			strcat(tempStr, zero);							//zero é adicionado ao fim da string.
+			strcat(tempStr, "0");							//zero é adicionado ao fim da string.
 		}
 		strcat(tempStr, filler);							//valor de filler[mes] adicionado ao final da string.
 		strcat(tempStr, "/");								//adiciona separador de data ao final da string.
 		
 		itoa(_ano, filler, 10);								//traduz o valor int de _ano para filler.
 		if(_ano<10){										//se o _ano for menor que 10.
-			strcat(tempStr, zero);							//zero é adicionado ao fim da string.
+			strcat(tempStr, "0");							//zero é adicionado ao fim da string.
 		}
 		strcat(tempStr, filler);							//valor de filler[ano] adicionado ao final da string.
 		strcat(tempStr, " ");								//adiciona um espaço vazio como separador.
 		
 		itoa(_hora, filler, 10);							//traduz o valor int de _hora para filler.
 		if(_hora<10){										//se _hora for menor que 10.
-			strcat(tempStr, zero);							//string recebe zero.
+			strcat(tempStr, "0");							//string recebe zero.
 		}
 		strcat(tempStr, filler);							//string recebe filler[hora]
 		strcat(tempStr, ":");								//adiciona separador de hora ao final da string.
 		
 		itoa(_minuto, filler, 10);							//traduz o valor int de _minuto para filler.
 		if(_minuto<10){										//se _minuto for menor que 10.
-			strcat(tempStr, zero);							//zero é adicionado ao fim da string.
+			strcat(tempStr, "0");							//zero é adicionado ao fim da string.
 		}
 		strcat(tempStr, filler);							//valor de filler[minuto] adicionado ao final da string.
 		
@@ -91,11 +90,10 @@ char* red_quartz::data_hora(bool completo)					//recebe um bool que define se re
 	}
 	else{													//se o bool [completo] for false, retorna apenas hora [00:00]5 caracteres+finalizador=6.
 		char *tempStr = malloc(sizeof(char) * 6);			//inicializa e aloca memoria para o array de char tempStr que será retornado.
-		char zero = '0';									//inicializa zero para ser usado quando preciso.
 		char filler[20];									//inicializa filler para construir a string.
 		itoa(_hora, filler, 10);							//traduz o valor int de _hora para filler.
 		if(_hora<10){										//se _hora for menor que 10.
-			strcpy(tempStr, zero);							//string recebe zero.
+			strcpy(tempStr, "0");							//string recebe zero.
 			strcat(tempStr, filler);						//valor de filler[hora] adicionado ao final da string.
 		}
 		else{												//se _hora for pelo menos 10.
@@ -105,7 +103,7 @@ char* red_quartz::data_hora(bool completo)					//recebe um bool que define se re
 		
 		itoa(_minuto, filler, 10);							//traduz o valor int de _minuto para filler.
 		if(_minuto<10){										//se _minuto for menor que 10.
-			strcat(tempStr, zero);							//zero é adicionado ao fim da string.
+			strcat(tempStr, "0");							//zero é adicionado ao fim da string.
 		}
 		strcat(tempStr, filler);							//valor de filler[minuto] adicionado ao final da string.
 		

@@ -34,8 +34,9 @@ bool red_crystal::initialConfig()
 	}
 	if(!AD5933::setStartFrequency(START_FREQ*0.95)){
 		Serial.println("ERRO: SetStartFrequency falhou!");
-		return false
+		return false;
 	}
+	_freq=START_FREQ;
 	if(!AD5933::setIncrementFrequency(FREQ_INCR)){
 		Serial.println("ERRO: SetIncrementFrequency falhou!");
 		return false;
@@ -46,7 +47,7 @@ bool red_crystal::initialConfig()
 	}
 	if(!AD5933::setPGAGain(PGA_GAIN_X1)){
 		Serial.println("ERRO: SetPGAGain falhou!");
-		return false
+		return false;
 	}
 	return true;
 }
@@ -62,8 +63,9 @@ bool red_crystal::configurar(long f)
 	}
 	if(!AD5933::setStartFrequency(f*0.95)){
 		Serial.println("ERRO: SetStartFrequency falhou!");
-		return false
+		return false;
 	}
+	_freq=f;
 	if(!AD5933::setIncrementFrequency(f/100)){
 		Serial.println("ERRO: SetIncrementFrequency falhou!");
 		return false;
@@ -74,27 +76,27 @@ bool red_crystal::configurar(long f)
 	}
 	if(!AD5933::setPGAGain(PGA_GAIN_X1)){
 		Serial.println("ERRO: SetPGAGain falhou!");
-		return false
+		return false;
 	}
 	return true;
 }
 
 
-leituras red_crystal::lerAD()
+leitura red_crystal::lerAD()
 {
 	if(!(AD5933::setPowerMode(POWER_STANDBY) 	&&
 			AD5933::setControlMode(CTRL_INIT_START_FREQ)	&&
 				AD5933::setControlMode(CTRL_START_FREQ_SWEEP) ))
 				{
 					Serial.print("Falhou em inicializar SWEEP.");
-					return false;
+					return;
 				}
 	
-	long cfreq=f*0.95;
+	long cfreq=_freq*0.95;
+	long inc = _freq/100;
 	medReal=0;
 	medImag=0;
-	double real, imag;
-	leituras leiTemp;
+	int real, imag, i=0;
 	while((AD5933::readStatusRegister() & STATUS_SWEEP_DONE) != STATUS_SWEEP_DONE){
 		if(!AD5933::getComplexData(&real, &imag)){
 			Serial.println("Falhou em adquirir DATA de frequencia.");
@@ -127,7 +129,7 @@ leituras red_crystal::lerAD()
 	Serial.println(medReal);
 	Serial.print("MedImag=");
 	Serial.println(medImag);
-	leiTemp={f, medReal, medImag};
+	leitura leiTemp = {_freq, medReal, medImag};
 
 	//Serial.print("EEPROM address 0:");Serial.println(EEPROM.read(0));
   
@@ -136,4 +138,8 @@ leituras red_crystal::lerAD()
 		Serial.println("Could not set to standby...");
 	}
 	return leiTemp;
+}
+double red_crystal::temperatura()
+{
+	return AD5933::getTemperature();
 }

@@ -107,6 +107,7 @@ red_beryl::red_beryl()
 
 void red_beryl::checarPin()
 {
+	Serial.println("checarPin");
 	static bool first=true;
 	if(first){
 		Serial.println("Listening...");
@@ -144,6 +145,7 @@ void red_beryl::checarPin()
 
 int red_beryl::getBatteryPct()
 {
+	Serial.println("getBatteryPct");
 	int pwr, pct;
 	pwr = analogRead(_pinBAT);
 	pct = map(pwr,0,1023,0,100);
@@ -152,6 +154,7 @@ int red_beryl::getBatteryPct()
 
 void red_beryl::upperBar()    // barra superior.
 {
+	Serial.println("upperBar");
 	static int pwr;   //declara o inteiro estatico pwr(POWER)
 	static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
   
@@ -186,11 +189,15 @@ void red_beryl::upperBar()    // barra superior.
 
 	//clock(); //chama o relogio, A FAZER: alterar coordenadas de impressão do relogio para canto superior DIREITO
 	
-	clock.checkTime();
+	//clock.checkTime();
 	display.setTextSize(1);
 	display.setTextColor(WHITE);
 	display.setCursor(display.width()/2-15, 0);
-	display.print(clock.data_hora(false));
+	Serial.println(display.width());
+	static char* timeStr = clock.data_hora(false);
+	display.print(timeStr);
+	
+	Serial.println("relogio");
 	
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
 	//display.drawBitmap(0, 0, BT_9_bmp, BT9_WIDTH, BT9_HEIGHT, WHITE); // desenha o simbolo de bluetooth depois da bateria. 9 de altura, 8 de largura.
@@ -199,17 +206,15 @@ void red_beryl::upperBar()    // barra superior.
 	{
 		display.drawBitmap(0, 0, BT2_bmp, BT2_WIDTH, BT2_HEIGHT, WHITE);
 	}
-	/*display.setCursor(BT2_WIDTH+5,0);
+	display.setCursor(BT2_WIDTH+5,0);
 
 	static unsigned long mill = 0;
 	static unsigned long tempMill = 0;
-	
-	
-				static double temperature = AD5933::getTemperature();		//TRANSFERIR PARA RED_CRYSTAL
-
+	static double temperature = crystal.temperatura();		//TRANSFERIR PARA RED_CRYSTAL
 	mill = millis();
 	if( (mill - tempMill) > 1000){
-				temperature = AD5933::getTemperature();						//TRANSFERIR PARA RED_CRYSTAL
+		temperature = crystal.temperatura();						//TRANSFERIR PARA RED_CRYSTAL
+		timeStr = clock.data_hora(false);
 		tempMill = mill;
 	}
 	display.setTextSize(1);
@@ -217,14 +222,16 @@ void red_beryl::upperBar()    // barra superior.
 	display.print((int) temperature);
 	display.print("C");
 	display.write((uint8_t) 247);
-	*/
+	
+	//display.display();
 }
 
 void red_beryl::menu()
 {
-	display.clearDisplay();
+	Serial.println("menu");
+	/*display.clearDisplay();
 	checarPin();
-	upperBar();
+	upperBar();*/
 	static int choice=1;
 	static char* menu[] = { "0.default", "1.Leituras", "2.Sincronizar", "3.Ajustes" };
 	switch(choice){
@@ -232,6 +239,12 @@ void red_beryl::menu()
 		{
 			if(!menu_leitura()){		//chama a função [bool] menu_leitura, se retornar [false], retorna a opção 1 do menu.
 				choice = 1;
+			}
+			if(_up || _down || _yes || _no){
+				_up=false;
+				_down=false;
+				_yes=false;
+				_no=false;
 			}
 			break;
 		}
@@ -335,11 +348,118 @@ void red_beryl::menu()
 	if(_yes){
 		_yes = false;
 	}
-	display.display();
+	//display.display();
+	
 }
 bool red_beryl::menu_leitura()
 {
-	
+	static int choice=1;
+	static char* menu[] = { "0.default", "1.Nova Leitura", "2.Historico" };
+	switch(choice){
+		case 11:		//Nova leitura
+		{
+			display.fillRect(10, lineSize, display.width()-20, lineSize*3, BLACK);
+            display.drawRect(10, lineSize, display.width()-20, lineSize*3, WHITE);
+            display.setCursor(12, lineSize+2);
+            display.setTextColor(WHITE);
+            display.setTextSize(1);
+            display.print("Frequencia?");
+			
+			display.drawRect(display.width()/3-2, lineSize*2+2, 3*6+4, 11, WHITE);
+			display.setCursor(display.width()/3, lineSize*2+4);
+			display.setTextColor(WHITE);
+			display.print("000");
+			display.setTextColor(WHITE);
+			display.print(" KHz");
+			
+			if(_no){
+				choice=1;
+			}
+			if(_up || _down || _yes || _no){
+				_up=false;
+				_down=false;
+				_yes=false;
+				_no=false;
+			}
+			break;
+		}
+		case 21:		//Historico
+		{
+			break;
+		}
+		case 1:			//Opção Nova leitura
+		{
+			display.fillRect(1, lineSize, display.width()-5, lineSize, WHITE);  //desenha um quadrado em volta da opção 1 selecionada
+			display.setCursor(2, lineSize);   		 							//define a posição do cursor
+			display.setTextColor(BLACK);    									//define a cor do texto como preto.
+			display.print(menu[1]);    											//imprime a string previamente inicializada.
+			
+			display.setCursor(2, lineSize*2);   								//define a posição do cursor para a proxima linha
+			display.setTextColor(WHITE);    									//define a cor do texto como branca
+			display.println(menu[2]);    										//imprime a string previamente inicializada.
+			
+			if(_yes){
+				choice=11;
+				_yes=false;
+				
+				_up=false;
+				_down=false;
+				//_yes=false;
+				_no=false;
+			
+			}
+			break;
+		}
+		case 2:			//Opção Historico
+		{
+			display.setCursor(2, lineSize);   									//define a posição do cursor para a primeira linha
+			display.setTextColor(WHITE);    									//define a cor do texto como branca
+			display.println(menu[1]);    										//imprime a string previamente inicializada.
+			
+			display.fillRect(1, lineSize*2, display.width()-5, lineSize, WHITE);//desenha um quadrado em volta da opção 1 selecionada
+			display.setCursor(2, lineSize*2);   		 						//define a posição do cursor
+			display.setTextColor(BLACK);    									//define a cor do texto como preto.
+			display.print(menu[2]);    											//imprime a string previamente inicializada.
+			
+			if(_yes){
+				choice=21;
+				_yes=false;
+				
+				_up=false;
+				_down=false;
+				//_yes=false;
+				_no=false;
+			}
+			
+			break;
+		}
+		default:		//Se por alguma razão algo estiver diferente.
+		{
+			break;
+		}
+	}
+	if(_up){
+		choice--;
+		if(choice < 1){
+			choice = 2;
+		}
+		_up=false;
+	}
+	if(_down){
+		choice++;
+		if(choice > 2){
+			choice = 1;
+		}
+		_down=false;
+	}
+	if(_yes){
+		_yes=false;
+	}
+	if(_no){
+		_no=false;
+		return false;
+	}
+	return true;
 }
 bool red_beryl::menu_sinc()
 {
