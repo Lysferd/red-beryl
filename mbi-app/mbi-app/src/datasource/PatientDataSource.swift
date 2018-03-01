@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import SQLite3
 
 class PatientsDataSource: NSObject {
   var patients: [Patient]
 
   init(_ patients: [Patient]) {
+    _ = dbSharedInstance
     self.patients = patients
+
+    for patient in dbSharedInstance.selectPatients() {
+      self.patients.append(patient)
+    }
   }
 
   func append(_ patient: Patient) -> Bool {
     if patients.contains(where: { $0 == patient }) { return false }
+
+    dbSharedInstance.insertPatient(patient)
+
     patients.append(patient)
     return true
   }
@@ -30,7 +39,7 @@ extension PatientsDataSource: UITableViewDataSource {
       let emptyLabel = UILabel()
       emptyLabel.numberOfLines = 0
       emptyLabel.font = UIFont.systemFont(ofSize: 14)
-      emptyLabel.text = "Não há pacientes cadastrados.\nToque “+” para cadastrar um novo paciente."
+      emptyLabel.text = "Não há pacientes cadastrados.\nToque “+” para cadastrar um novo paciente." // FIXME: translation needed
       emptyLabel.textAlignment = .center
       tableView.backgroundView = emptyLabel
       tableView.separatorStyle = .none

@@ -47,7 +47,7 @@ class PeripheralListView: UIViewController {
                    object: nil)
 
     // Start the Bluetooth discovery process
-    _ = btDiscoverySharedInstance
+    //_ = btDiscoverySharedInstance
   }
 
   // MARK: - Actions

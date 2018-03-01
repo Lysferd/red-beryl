@@ -21,20 +21,25 @@ let BLEUpdateWIP = NSNotification.Name("BLEUpdateWIP")
 let BLEUpdateTMP = NSNotification.Name("BLEUpdateTMP")
 let BLEUpdateCLK = NSNotification.Name("BLEUpdateCLK")
 
-class BTService: NSObject, CBPeripheralDelegate {
+class BTService: NSObject {
 
   // MARK: - Properties
-  let queue = NotificationCenter.default
-  var peripheral: CBPeripheral?
-  var characteristic: CBCharacteristic?
-  var txTimer: Timer?
-  var allowTX: Bool = true
-  var command_queue: [String] = []
-  var command: String = ""
-  var partial: String = ""
-  var reading: [String: String] = [:]
+  // Bluetooth properties
+  let notification = NotificationCenter.default // aliasing
+  var peripheral: CBPeripheral?                 // peripheral instance
+  var characteristic: CBCharacteristic?         // peripheral's characteristic
 
-  // MARK: - Initialization
+  // Timing handling to avoid message spam
+  var txTimer: Timer?       // timer to avoid transmission spam
+  var allowTX: Bool = true  // blocks transmission during timeout
+
+  // Message system workaround for single-characteristic module
+  var command: String = ""                // last command transmitted
+  var command_queue: [String] = []        // next command to transmit
+  var partial: String = ""                // partial message received
+  var measurement: [String: String] = [:] // store measurement data temporarily
+
+  // MARK: - Constructors
   init(_ peripheral: CBPeripheral) {
     super.init()
     self.peripheral = peripheral
@@ -42,6 +47,7 @@ class BTService: NSObject, CBPeripheralDelegate {
     startDiscoveringServices()
   }
 
+  // Force reset at deconstruction
   deinit { self.reset() }
 
   // MARK: - Connection
@@ -53,6 +59,92 @@ class BTService: NSObject, CBPeripheralDelegate {
     if peripheral != nil { peripheral = nil }
   }
 
+  // MARK: - Data TX & RX
+  func write(_ string: String, arg: Int? = nil) {
+
+    if !allowTX {
+      command_queue.append(string)
+      return
+    }
+
+    command = string
+    var tx = string
+    if arg != nil { tx.append(String(arg!)) }
+
+    if let characteristic = self.characteristic {
+      if let data = tx.data(using: .ascii) {
+        //print("Write to device: ", tx, " [", data, "]")
+        self.peripheral?.writeValue(data, for: characteristic, type: .withoutResponse)
+        startTimer()
+      }
+    }
+  }
+
+  // FIXME: deprecated: reading is now handled by CBCentralManager
+  func read() -> String {
+    if let characteristic = self.characteristic {
+      if let data = characteristic.value {
+        if let input = String(bytes: data, encoding: .ascii) {
+          print("Read from device: ", input, " [", data, "]")
+          return input
+        }
+      }
+    }
+    return "<error>"
+  }
+
+  // MARK: - TX Timer
+  func startTimer(_ delay: Double = 2.0) {
+    allowTX = false
+    txTimer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(stopTimer), userInfo: nil, repeats: false)
+  }
+
+  @objc func stopTimer() {
+    if txTimer == nil { return } // nothing to stop
+    txTimer?.invalidate()
+    txTimer = nil
+    allowTX = true
+  }
+
+  // MARK: - Notifications
+  func postUpdate(_ characteristic: CBCharacteristic) {
+    let info = ["characteristic": characteristic]
+    notification.post(name: BLEUpdate, object: self, userInfo: info)
+  }
+
+  func postUpdateCHK(_ data: String) {
+    let info = ["data": data]
+    notification.post(name: BLEUpdateCHK, object: self, userInfo: info)
+  }
+
+  func postUpdateGetReq(_ reading: [String: String]) {
+    notification.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
+  }
+
+  func postUpdateBAT(_ data: String) {
+    let info = ["battery": data]
+    notification.post(name: BLEUpdateBAT, object: self, userInfo: info)
+  }
+
+  func postUpdateCLR(_ data: String) {
+    //notification.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
+  }
+
+  func postUpdateWIP(_ data: String) {
+    //notification.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
+  }
+
+  func postUpdateTMP(_ data: String) {
+    let info = ["temperature": data]
+    notification.post(name: BLEUpdateTMP, object: self, userInfo: info)
+  }
+
+  func postUpdateCLK(_ data: String) {
+    //notification.post(name: BLEUpdateCLK, object: self, userInfo: reading)
+  }
+}
+
+extension BTService: CBPeripheralDelegate {
   // MARK: - Peripheral Delegate Functions
   func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
     if peripheral != self.peripheral { return }
@@ -75,7 +167,6 @@ class BTService: NSObject, CBPeripheralDelegate {
         if characteristic.uuid == CharacteristicUUID {
           self.characteristic = characteristic
           peripheral.setNotifyValue(true, for: characteristic)
-          postConnected(true)
         }
       }
     }
@@ -91,7 +182,7 @@ class BTService: NSObject, CBPeripheralDelegate {
     // Verify if message is chopped:
     if let data = characteristic.value {
       guard let input = String(bytes: data, encoding: .ascii) else { fatalError("Invalid message!") }
-      print("Read from device: ", input, " [", data, "]")
+      //print("Read from device: ", input, " [", data, "]")
 
       // Detect invalid requests:
       if input == "ERR" {
@@ -115,11 +206,10 @@ class BTService: NSObject, CBPeripheralDelegate {
       case "CHK": postUpdateCHK(message)
       case "GET", "REQ":
         let tag = message.removeFirst()
-        reading[String(tag)] = message
-        if reading.count == 4 {
-          print(reading)
-          postUpdateGetReq(reading)
-          reading.removeAll()
+        measurement[String(tag)] = message
+        if measurement.count == 4 {
+          postUpdateGetReq(measurement)
+          measurement.removeAll()
         }
       case "BAT": postUpdateBAT(message)
       case "CLR": postUpdateCLR(message)
@@ -137,94 +227,4 @@ class BTService: NSObject, CBPeripheralDelegate {
     }
   }
 
-  // MARK: - Data TX & RX
-  func write(_ string: String, arg: Int? = nil) {
-
-    if !allowTX {
-      command_queue.append(string)
-      return
-    }
-
-    command = string
-    var tx = string
-    if arg != nil { tx.append(String(arg!)) }
-
-    if let characteristic = self.characteristic {
-      if let data = tx.data(using: .ascii) {
-        print("Write to device: ", tx, " [", data, "]")
-        self.peripheral?.writeValue(data, for: characteristic, type: .withoutResponse)
-        startTimer()
-      }
-    }
-  }
-
-  func read() -> String {
-    if let characteristic = self.characteristic {
-      if let data = characteristic.value {
-        if let input = String(bytes: data, encoding: .ascii) {
-          print("Read from device: ", input, " [", data, "]")
-          return input
-        }
-      }
-    }
-    return "<error>"
-  }
-
-  // MARK: - TX Timer
-  func startTimer(_ delay: Double = 5.0) {
-    allowTX = false
-    txTimer = Timer.scheduledTimer(timeInterval: delay,
-                                   target: self,
-                                   selector: #selector(stopTimer),
-                                   userInfo: nil, repeats: false)
-  }
-
-  @objc func stopTimer() {
-    if txTimer == nil { return }
-    txTimer?.invalidate()
-    txTimer = nil
-    allowTX = true
-  }
-
-  // MARK: - Notifications
-  func postConnected(_ connected: Bool) {
-    let info = ["connected": connected]
-    queue.post(name: BLEConnected, object: self, userInfo: info)
-  }
-
-  func postUpdate(_ characteristic: CBCharacteristic) {
-    let info = ["characteristic": characteristic]
-    queue.post(name: BLEUpdate, object: self, userInfo: info)
-  }
-
-  func postUpdateCHK(_ data: String) {
-    let info = ["data": data]
-    queue.post(name: BLEUpdateCHK, object: self, userInfo: info)
-  }
-
-  func postUpdateGetReq(_ reading: [String: String]) {
-    queue.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
-  }
-
-  func postUpdateBAT(_ data: String) {
-    let info = ["battery": data]
-    queue.post(name: BLEUpdateBAT, object: self, userInfo: info)
-  }
-
-  func postUpdateCLR(_ data: String) {
-    //queue.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
-  }
-
-  func postUpdateWIP(_ data: String) {
-    //queue.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
-  }
-
-  func postUpdateTMP(_ data: String) {
-    let info = ["temperature": data]
-    queue.post(name: BLEUpdateTMP, object: self, userInfo: info)
-  }
-
-  func postUpdateCLK(_ data: String) {
-    //queue.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
-  }
 }

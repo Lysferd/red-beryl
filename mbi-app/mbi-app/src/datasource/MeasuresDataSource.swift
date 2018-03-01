@@ -43,7 +43,7 @@ extension MeasuresDataSource: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Leituras disponíveis:"
+    return "Leituras disponíveis:" // FIXME: translation needed
   }
 
 }

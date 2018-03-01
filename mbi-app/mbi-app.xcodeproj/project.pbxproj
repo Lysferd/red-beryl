@@ -15,10 +15,8 @@
 		E5233B432037620B00F8E92F /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B422037620B00F8E92F /* Measure.swift */; };
 		E5233B452037690800F8E92F /* MeasureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B442037690800F8E92F /* MeasureCell.swift */; };
 		E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */; };
-		E539688E1FAA619400FD11AE /* SectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539688D1FAA619400FD11AE /* SectionImageView.swift */; };
 		E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5491BA8202A318E006796A0 /* ExamCell.swift */; };
 		E551FB6D2032299F002BA130 /* SettingsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E551FB6C2032299F002BA130 /* SettingsTab.storyboard */; };
-		E551FB6F2032352D002BA130 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E551FB6E2032352C002BA130 /* DebugView.swift */; };
 		E567B64F2020EB7800BEBF21 /* ExamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B64E2020EB7800BEBF21 /* ExamListView.swift */; };
 		E567B6512020EBA900BEBF21 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6502020EBA900BEBF21 /* Exam.swift */; };
 		E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */; };
@@ -34,6 +32,11 @@
 		E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA29201BD04300C3FDE4 /* BTService.swift */; };
 		E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */; };
 		E58DEA43201BD43700C3FDE4 /* PatientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA42201BD43700C3FDE4 /* PatientListView.swift */; };
+		E596B5742046FA1300CEC9C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B5732046FA1300CEC9C6 /* Database.swift */; };
+		E596B5762047453E00CEC9C6 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E596B5752047453E00CEC9C6 /* Cartfile */; };
+		E596B5782047479800CEC9C6 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E596B5772047479800CEC9C6 /* SQLite.framework */; };
+		E596B5792047479800CEC9C6 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E596B5772047479800CEC9C6 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */; };
 		E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767541F97E5B800083C11 /* AppDelegate.swift */; };
 		E597675C1F97E5B800083C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675A1F97E5B800083C11 /* Main.storyboard */; };
 		E597675E1F97E5B800083C11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E597675D1F97E5B800083C11 /* Assets.xcassets */; };
@@ -59,6 +62,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E596B57A2047479800CEC9C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E596B5792047479800CEC9C6 /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E507F67E20360C160058280A /* NewExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewExamView.swift; path = "mbi-app/src/table/NewExamView.swift"; sourceTree = SOURCE_ROOT; };
 		E507F68020360CC00058280A /* ExamsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExamsTab.storyboard; sourceTree = "<group>"; };
@@ -70,10 +87,8 @@
 		E52F9769201F9E0E00EFF5BE /* mbi-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mbi-app.entitlements"; sourceTree = "<group>"; };
 		E52F976A201F9E4E00EFF5BE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		E539688D1FAA619400FD11AE /* SectionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionImageView.swift; sourceTree = "<group>"; };
 		E5491BA8202A318E006796A0 /* ExamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCell.swift; sourceTree = "<group>"; };
 		E551FB6C2032299F002BA130 /* SettingsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTab.storyboard; sourceTree = "<group>"; };
-		E551FB6E2032352C002BA130 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		E567B64E2020EB7800BEBF21 /* ExamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamListView.swift; sourceTree = "<group>"; };
 		E567B6502020EBA900BEBF21 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamsDataSource.swift; sourceTree = "<group>"; };
@@ -89,6 +104,10 @@
 		E58DEA29201BD04300C3FDE4 /* BTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTService.swift; sourceTree = "<group>"; };
 		E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
 		E58DEA42201BD43700C3FDE4 /* PatientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListView.swift; sourceTree = "<group>"; };
+		E596B5732046FA1300CEC9C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		E596B5752047453E00CEC9C6 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		E596B5772047479800CEC9C6 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPatientView.swift; sourceTree = "<group>"; };
 		E59767511F97E5B800083C11 /* mbi-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mbi-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767541F97E5B800083C11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E597675B1F97E5B800083C11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */,
+				E596B5782047479800CEC9C6 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,18 +158,19 @@
 				E58DEA3F201BD07B00C3FDE4 /* table */,
 				E58DEA3E201BD07500C3FDE4 /* cell */,
 				E58DEA3D201BD06600C3FDE4 /* structure */,
-				E58DEA3C201BD05900C3FDE4 /* bluetooth */,
+				E58DEA3C201BD05900C3FDE4 /* modules */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		E58DEA3C201BD05900C3FDE4 /* bluetooth */ = {
+		E58DEA3C201BD05900C3FDE4 /* modules */ = {
 			isa = PBXGroup;
 			children = (
 				E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */,
+				E596B5732046FA1300CEC9C6 /* Database.swift */,
 				E58DEA29201BD04300C3FDE4 /* BTService.swift */,
 			);
-			path = bluetooth;
+			path = modules;
 			sourceTree = "<group>";
 		};
 		E58DEA3D201BD06600C3FDE4 /* structure */ = {
@@ -198,8 +219,8 @@
 		E58DEA41201BD09100C3FDE4 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */,
 				E58DEA26201BD04300C3FDE4 /* PeripheralListView.swift */,
-				E551FB6E2032352C002BA130 /* DebugView.swift */,
 				E567B64E2020EB7800BEBF21 /* ExamListView.swift */,
 				E58DEA42201BD43700C3FDE4 /* PatientListView.swift */,
 				E507F684203627360058280A /* MeasureListView.swift */,
@@ -210,6 +231,8 @@
 		E59767481F97E5B800083C11 = {
 			isa = PBXGroup;
 			children = (
+				E596B5772047479800CEC9C6 /* SQLite.framework */,
+				E596B5752047453E00CEC9C6 /* Cartfile */,
 				E5F7601B1F9E67E800B7DFB9 /* Frameworks */,
 				E59767531F97E5B800083C11 /* mbi-app */,
 				E597676A1F97E5B800083C11 /* mbi-appTests */,
@@ -235,7 +258,6 @@
 				E58DEA3B201BD05500C3FDE4 /* src */,
 				E59767621F97E5B800083C11 /* Info.plist */,
 				E59767541F97E5B800083C11 /* AppDelegate.swift */,
-				E539688D1FAA619400FD11AE /* SectionImageView.swift */,
 				E597675D1F97E5B800083C11 /* Assets.xcassets */,
 				E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */,
 				E597675A1F97E5B800083C11 /* Main.storyboard */,
@@ -283,6 +305,7 @@
 				E597674D1F97E5B800083C11 /* Sources */,
 				E597674E1F97E5B800083C11 /* Frameworks */,
 				E597674F1F97E5B800083C11 /* Resources */,
+				E596B57A2047479800CEC9C6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -388,6 +411,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E596B5762047453E00CEC9C6 /* Cartfile in Resources */,
 				E551FB6D2032299F002BA130 /* SettingsTab.storyboard in Resources */,
 				E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */,
 				E597675E1F97E5B800083C11 /* Assets.xcassets in Resources */,
@@ -436,12 +460,12 @@
 				E58DEA30201BD04400C3FDE4 /* Device.swift in Sources */,
 				E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */,
 				E58DEA34201BD04400C3FDE4 /* PeripheralListView.swift in Sources */,
-				E539688E1FAA619400FD11AE /* SectionImageView.swift in Sources */,
+				E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */,
 				E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */,
-				E551FB6F2032352D002BA130 /* DebugView.swift in Sources */,
 				E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */,
 				E5233B432037620B00F8E92F /* Measure.swift in Sources */,
 				E567B64F2020EB7800BEBF21 /* ExamListView.swift in Sources */,
+				E596B5742046FA1300CEC9C6 /* Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +637,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QU4A969CM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "mbi-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "red-beryl.mbi-app";
@@ -630,6 +658,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QU4A969CM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "mbi-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "red-beryl.mbi-app";

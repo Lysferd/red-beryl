@@ -30,7 +30,7 @@ extension ExamsDataSource: UITableViewDataSource {
       let emptyLabel = UILabel()
       emptyLabel.numberOfLines = 0
       emptyLabel.font = UIFont.systemFont(ofSize: 14)
-      emptyLabel.text = "Não há exames no histórico.\nToque “+” para gerar um novo exame."
+      emptyLabel.text = "Não há exames no histórico.\nToque “+” para gerar um novo exame." // FIXME: translation needed
       emptyLabel.textAlignment = .center
       tableView.backgroundView = emptyLabel
       tableView.separatorStyle = .none

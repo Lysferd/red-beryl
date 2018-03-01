@@ -18,8 +18,8 @@ class Measure {
 
 
   init(real: Double, imaginary: Double, frequency: Double, date: String) {
-    dateFormatIn.dateFormat = "dd/MM/yy HH:mm"
-    dateFormatOut.dateFormat = "dd/MM/yy HH:mm"
+    dateFormatIn.dateFormat = "dd/MM/yy HH:mm" // FIXME: translation needed
+    dateFormatOut.dateFormat = "dd/MM/yy HH:mm" // FIXME: translation needed
     self.real = real
     self.imaginary = imaginary
     self.frequency = frequency

@@ -52,7 +52,7 @@ class DebugView: UIViewController {
     //NotificationCenter.default.addObserver(self, selector: #selector(updateCharacteristic(_:)), name: BLEUpdate, object: nil)
 
     // Start the Bluetooth discovery process
-    _ = btDiscoverySharedInstance
+    //_ = btDiscoverySharedInstance
   }
 
   override func viewWillDisappear(_ animated: Bool) {
