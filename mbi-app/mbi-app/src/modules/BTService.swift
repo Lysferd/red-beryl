@@ -73,7 +73,7 @@ class BTService: NSObject {
 
     if let characteristic = self.characteristic {
       if let data = tx.data(using: .ascii) {
-        //print("Write to device: ", tx, " [", data, "]")
+        print("Write to device: ", tx, " [", data, "]")
         self.peripheral?.writeValue(data, for: characteristic, type: .withoutResponse)
         startTimer()
       }
@@ -107,6 +107,11 @@ class BTService: NSObject {
   }
 
   // MARK: - Notifications
+  func postConnected(_ status: Bool) {
+    let info = ["connected": status]
+    notification.post(name: BLEConnected, object: self, userInfo: info)
+  }
+
   func postUpdate(_ characteristic: CBCharacteristic) {
     let info = ["characteristic": characteristic]
     notification.post(name: BLEUpdate, object: self, userInfo: info)
@@ -167,6 +172,7 @@ extension BTService: CBPeripheralDelegate {
         if characteristic.uuid == CharacteristicUUID {
           self.characteristic = characteristic
           peripheral.setNotifyValue(true, for: characteristic)
+          postConnected(true)
         }
       }
     }

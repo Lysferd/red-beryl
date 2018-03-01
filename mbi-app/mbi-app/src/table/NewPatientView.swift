@@ -32,11 +32,22 @@ class NewPatientView: UITableViewController {
     let firstName = firstNameTextField.text! // obligatory
     let middleName = middleNameTextField.text ?? ""
     let lastName = lastNameTextField.text ?? ""
+    let personalId = ""
+    let birthDate = ""
+    let phoneNumber = ""
+    let email = ""
+    let address = ""
+    let city = ""
+    let state = ""
+    let country = ""
+    let bloodType = ""
+    let riskGroups = ""
+    let regularMedication = ""
+    let registerDate = Date()
+    let updateDate = Date()
+    let examIds: [Int] = []
 
-    patient = Patient(record: record,
-                      first_name: firstName,
-                      middle_name: middleName,
-                      last_name: lastName)
+    patient = Patient(record: record, first_name: firstName, middle_name: middleName, last_name: lastName, personal_id: personalId, birth_date: birthDate, phone_number: phoneNumber, email: email, address: address, city: city, state: state, country: country, blood_type: bloodType, risk_groups: riskGroups, regular_medication: regularMedication, register_date: registerDate, update_date: updateDate, exam_ids: examIds)
   }
 
   // MARK: - Actions

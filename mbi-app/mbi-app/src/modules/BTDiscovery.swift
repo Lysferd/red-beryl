@@ -11,8 +11,8 @@ import CoreBluetooth
 
 // MARK: Shared Instance
 let btDiscoverySharedInstance = BTDiscovery()
-let btQueueSharedInstance = DispatchQueue(label: "eng.moritzalmeida")
-let btCentralSharedInstance = CBCentralManager(delegate: btDiscoverySharedInstance, queue: btQueueSharedInstance)
+//let btQueueSharedInstance = DispatchQueue(label: "eng.moritzalmeida")
+//let btCentralSharedInstance = CBCentralManager(delegate: btDiscoverySharedInstance, queue: btQueueSharedInstance)
 
 // MARK: Notifications
 let BLEScanning = NSNotification.Name("BLEScanning")
@@ -22,8 +22,8 @@ let BLEConnected = NSNotification.Name("BLEConnected")
 class BTDiscovery: NSObject {
 
   // MARK: - Private Variables
-//  fileprivate var queue: DispatchQueue?
-//  fileprivate var centralManager: CBCentralManager?
+  var queue: DispatchQueue!
+  var centralManager: CBCentralManager!
   fileprivate var peripheral: CBPeripheral?
   fileprivate let notification = NotificationCenter.default
 
@@ -33,24 +33,24 @@ class BTDiscovery: NSObject {
   override init() {
     super.init()
 
-//    queue = DispatchQueue(label: "eng.moritzalmeida")
-//    centralManager = CBCentralManager(delegate: self, queue: queue)
+    queue = DispatchQueue(label: "eng.moritzalmeida")
+    centralManager = CBCentralManager(delegate: self, queue: queue)
   }
 
   // MARK: - Scanning
   func startScanning() {
-    btCentralSharedInstance.scanForPeripherals(withServices: [ServiceUUID])
-    //queue?.asyncAfter(deadline: .now() + 10.0) { self.stopScanning() }
+    centralManager.scanForPeripherals(withServices: [ServiceUUID])
   }
 
   func stopScanning() {
     postScanning(false)
-    btCentralSharedInstance.stopScan()
+    centralManager.stopScan()
   }
 
   func disconnect() {
     if let peripheral = self.peripheral {
-      btCentralSharedInstance.cancelPeripheralConnection(peripheral)
+      centralManager.cancelPeripheralConnection(peripheral)
+      clearDevices()
     }
   }
 
@@ -86,7 +86,7 @@ extension BTDiscovery: CBCentralManagerDelegate {
     print("Connected to \(peripheral.name ?? "NIL")")
 
     central.stopScan()
-    postConnected(true)
+    //postConnected(true)
   }
 
   func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {

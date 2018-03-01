@@ -109,6 +109,7 @@ class MeasureListView: UIViewController {
   // MARK: - Notifications
   @objc func connectionChanged(_ notification: Notification) {
     let userInfo = notification.userInfo as! [String: Bool]
+    NSLog("Connection Changed")
 
     queue.async {
       if let connected = userInfo["connected"] {

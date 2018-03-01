@@ -18,7 +18,7 @@ class PatientListView: UIViewController {
 
   // MARK: - Initialization
   required init?(coder aDecoder: NSCoder) {
-    datasource = PatientsDataSource([])
+    datasource = PatientsDataSource()
     super.init(coder: aDecoder)
   }
 
@@ -56,6 +56,19 @@ class PatientListView: UIViewController {
       let controller = segue.destination as? PatientDetailView
       controller?.patient = datasource.patients[index!.row]
     }
+  }
+
+  @IBAction func destroyTable(_ sender: Any) {
+    NSLog("Dropping all rows")
+    dbSharedInstance.dropAllPatients()
+    datasource.reload()
+    patientsTable.reloadData()
+  }
+
+  @IBAction func refreshTable(_ sender: Any) {
+    NSLog("Reloading rows")
+    datasource.reload()
+    patientsTable.reloadData()
   }
 
 }

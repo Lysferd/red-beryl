@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import SQLite3
 
 class PatientsDataSource: NSObject {
   var patients: [Patient]
 
-  init(_ patients: [Patient]) {
+  init(_ patients: [Patient] = []) {
     _ = dbSharedInstance
     self.patients = patients
 
@@ -28,6 +27,13 @@ class PatientsDataSource: NSObject {
 
     patients.append(patient)
     return true
+  }
+
+  func reload() {
+    patients.removeAll()
+    for patient in dbSharedInstance.selectPatients() {
+      self.patients.append(patient)
+    }
   }
 }
 

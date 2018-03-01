@@ -27,18 +27,12 @@ class Patient {
   var risk_groups: String
   var regular_medication: String
 
-  var register_date: String
-  var update_date: String
+  var register_date: Date
+  var update_date: Date
 
-  var exams: [Exam]
+  var exam_ids: [Int]
 
-  init(record: String, first_name: String, middle_name: String,
-       last_name: String, personal_id: String = "", birth_date: String = "",
-       phone_number: String = "", email: String = "", address: String = "",
-       city: String = "", state: String = "", country: String = "",
-       blood_type: String = "", risk_groups: String = "",
-       regular_medication: String = "",
-       exams: [Exam] = []) {
+  init(record: String, first_name: String, middle_name: String, last_name: String, personal_id: String, birth_date: String, phone_number: String, email: String, address: String, city: String, state: String, country: String, blood_type: String, risk_groups: String, regular_medication: String, register_date: Date, update_date: Date, exam_ids: [Int]) {
     self.record = record
     self.first_name = first_name
     self.middle_name = middle_name
@@ -54,9 +48,9 @@ class Patient {
     self.blood_type = blood_type
     self.risk_groups = risk_groups
     self.regular_medication = regular_medication
-    self.register_date = ""
-    self.update_date = ""
-    self.exams = exams
+    self.register_date = register_date
+    self.update_date = update_date
+    self.exam_ids = exam_ids
   }
 
 }

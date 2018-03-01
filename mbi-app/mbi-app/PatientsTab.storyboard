@@ -19,12 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ozu-KH-YwH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ozu-KH-YwH">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PatientCell" textLabel="hRT-iH-uwR" style="IBUITableViewCellStyleDefault" id="QW6-Jd-ZhY" customClass="PatientCell" customModule="mbi_app" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PatientCell" textLabel="hRT-iH-uwR" rowHeight="44" style="IBUITableViewCellStyleDefault" id="QW6-Jd-ZhY" customClass="PatientCell" customModule="mbi_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QW6-Jd-ZhY" id="UAL-1F-yNZ">
@@ -53,6 +53,18 @@
                         <viewLayoutGuide key="safeArea" id="Tw4-ZK-Qse"/>
                     </view>
                     <navigationItem key="navigationItem" title="Pacientes" id="hlz-vQ-Hig">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="TF4-cf-HEV">
+                                <connections>
+                                    <action selector="refreshTable:" destination="iGq-NR-X4T" id="r69-iG-zNL"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="XZU-pW-vcS">
+                                <connections>
+                                    <action selector="destroyTable:" destination="iGq-NR-X4T" id="7bV-cg-W0s"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="Eqx-Ey-ngF">
                                 <connections>
