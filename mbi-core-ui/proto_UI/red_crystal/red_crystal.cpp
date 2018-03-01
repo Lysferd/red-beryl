@@ -7,6 +7,7 @@
 #include <AD5933.h>
 #include <Wire.h>
 #include <leituras.h>
+#include <Math.h>
 
 #define START_FREQ  (50000) 			// frequencia inicial padrão.
 #define FREQ_INCR   (START_FREQ/100) 	// incremento de frequencia padrão.
@@ -49,6 +50,11 @@ bool red_crystal::initialConfig()
 		Serial.println("ERRO: SetPGAGain falhou!");
 		return false;
 	}
+	if(!AD5933::calibrate(gain, phase, REF_RESIST, (NUM_INCR+1)))
+    {
+      Serial.println("ERRO: Calibração falhou!");
+	  return false;
+    }
 	return true;
 }
 bool red_crystal::configurar(long f)
@@ -78,6 +84,11 @@ bool red_crystal::configurar(long f)
 		Serial.println("ERRO: SetPGAGain falhou!");
 		return false;
 	}
+	if(!AD5933::calibrate(gain, phase, REF_RESIST, (NUM_INCR+1)))
+    {
+      Serial.println("ERRO: Calibração falhou!");
+	  return false;
+    }
 	return true;
 }
 
@@ -116,6 +127,7 @@ leitura red_crystal::lerAD()
 		double impedance = 1/(magnitude*gain[i]);
 		Serial.print("  |Z|=");
 		Serial.println(impedance);
+
 
 		i++;
 		cfreq +=inc;

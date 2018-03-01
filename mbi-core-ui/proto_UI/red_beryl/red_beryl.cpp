@@ -9,6 +9,7 @@
 #include <Adafruit_GFX.h>
 #include <leituras.h>
 #include <red_crystal.h>
+#include <EEPROM.h>
 
 #define BAT8_HEIGHT 8 
 #define BAT8_WIDTH 16
@@ -107,7 +108,7 @@ red_beryl::red_beryl()
 
 void red_beryl::checarPin()
 {
-	Serial.println("checarPin");
+	//Serial.println("checarPin");
 	static bool first=true;
 	if(first){
 		Serial.println("Listening...");
@@ -145,7 +146,7 @@ void red_beryl::checarPin()
 
 int red_beryl::getBatteryPct()
 {
-	Serial.println("getBatteryPct");
+	//Serial.println("getBatteryPct");
 	int pwr, pct;
 	pwr = analogRead(_pinBAT);
 	pct = map(pwr,0,1023,0,100);
@@ -154,19 +155,23 @@ int red_beryl::getBatteryPct()
 
 void red_beryl::upperBar()    // barra superior.
 {
-	Serial.println("upperBar");
+	//Serial.println("upperBar");
 	static int pwr;   //declara o inteiro estatico pwr(POWER)
 	static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
-  
-	/*display.fillRect(0, 0, display.width(), barSize, BLACK); // desenha a barra em preto, mantendo permanentemente a barrar acima de tudo.
-  
-	pwr = analogRead(potPin);   //pwr le o valor analogico do potenciometro, recebendo o valor 'raw' da bateria.
-	pct = map(pwr,0,1023,0,100);    //pct recebe o valor mapeado de pwr entre 0-100.
-	pwr = map(pwr, 0, 1023, 0, 12);   //pwr recebe o valor mapeado entre0-12
-	*/
-	pct = getBatteryPct();
-	pwr = map(pct, 0, 100, 0, 12);
-  
+	static long mill = 0;
+	static long tempMill = 0;
+	static double temperature = crystal.temperatura();		//TRANSFERIR PARA RED_CRYSTAL
+	mill = millis();
+	static char* timeStr = clock.data_hora(false);
+	
+	if( (mill - tempMill) > 1000){
+		temperature = crystal.temperatura();						//TRANSFERIR PARA RED_CRYSTAL
+		timeStr = clock.data_hora(false);
+		tempMill = mill;
+		pct = getBatteryPct();
+		pwr = map(pct, 0, 100, 0, 12);
+	}
+	  
 	display.fillRect(display.width()-1-pwr, 2, pwr, 4, WHITE); //desenha a barra da bateria
   
 	if(pct<10)
@@ -187,51 +192,37 @@ void red_beryl::upperBar()    // barra superior.
 	display.print(pct);
 	display.print("%");  // printando a porcentagem da bateria que foi calculada anteriormente usando map a partir de pwr, dependendo da porcentagem alterando quando começa o cursor.
 
-	//clock(); //chama o relogio, A FAZER: alterar coordenadas de impressão do relogio para canto superior DIREITO
-	
-	//clock.checkTime();
 	display.setTextSize(1);
 	display.setTextColor(WHITE);
 	display.setCursor(display.width()/2-15, 0);
-	Serial.println(display.width());
-	static char* timeStr = clock.data_hora(false);
+	//Serial.println(display.width());
+	
 	display.print(timeStr);
 	
-	Serial.println("relogio");
+	//Serial.println("relogio");
 	
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
 	//display.drawBitmap(0, 0, BT_9_bmp, BT9_WIDTH, BT9_HEIGHT, WHITE); // desenha o simbolo de bluetooth depois da bateria. 9 de altura, 8 de largura.
 	
-	if(true)		//LEMBRAR DE RETORNA ISSO A """IF(BLE)"""
+	/*if(true)		//LEMBRAR DE RETORNA ISSO A """IF(BLE)"""
 	{
 		display.drawBitmap(0, 0, BT2_bmp, BT2_WIDTH, BT2_HEIGHT, WHITE);
-	}
+	}*/
 	display.setCursor(BT2_WIDTH+5,0);
 
-	static unsigned long mill = 0;
-	static unsigned long tempMill = 0;
-	static double temperature = crystal.temperatura();		//TRANSFERIR PARA RED_CRYSTAL
-	mill = millis();
-	if( (mill - tempMill) > 1000){
-		temperature = crystal.temperatura();						//TRANSFERIR PARA RED_CRYSTAL
-		timeStr = clock.data_hora(false);
-		tempMill = mill;
-	}
+	
 	display.setTextSize(1);
 	display.setTextColor(WHITE);
 	display.print((int) temperature);
 	display.print("C");
 	display.write((uint8_t) 247);
 	
-	//display.display();
 }
 
 void red_beryl::menu()
 {
-	Serial.println("menu");
-	/*display.clearDisplay();
-	checarPin();
-	upperBar();*/
+	//Serial.println("menu");
+
 	static int choice=1;
 	static char* menu[] = { "0.default", "1.Leituras", "2.Sincronizar", "3.Ajustes" };
 	switch(choice){
@@ -358,21 +349,122 @@ bool red_beryl::menu_leitura()
 	switch(choice){
 		case 11:		//Nova leitura
 		{
-			display.fillRect(10, lineSize, display.width()-20, lineSize*3, BLACK);
-            display.drawRect(10, lineSize, display.width()-20, lineSize*3, WHITE);
-            display.setCursor(12, lineSize+2);
-            display.setTextColor(WHITE);
-            display.setTextSize(1);
-            display.print("Frequencia?");
+			static bool done=false;
 			
-			display.drawRect(display.width()/3-2, lineSize*2+2, 3*6+4, 11, WHITE);
-			display.setCursor(display.width()/3, lineSize*2+4);
-			display.setTextColor(WHITE);
-			display.print("000");
-			display.setTextColor(WHITE);
-			display.print(" KHz");
 			
+			if(!done){
+				display.fillRect(10, lineSize, display.width()-20, lineSize*3, BLACK);
+				display.drawRect(10, lineSize, display.width()-20, lineSize*3, WHITE);
+				display.setCursor(13, lineSize+2);
+				display.setTextColor(WHITE);
+				display.setTextSize(1);
+				display.print("Frequencia?");
+			
+				display.drawRect(display.width()/3-2, lineSize*2+2, 3*6+4, 11, WHITE);
+				display.setCursor(display.width()/3, lineSize*2+4);
+				display.setTextColor(WHITE);
+				display.print("000");
+				display.setTextColor(WHITE);
+				display.print(" KHz");
+			}
+			else{
+				/*
+				display.fillRect(1, lineSize, display.width()-2, lineSize*3, BLACK);
+				display.drawRect(1, lineSize, display.width()-2, lineSize*3, WHITE);
+				*/
+				display.setCursor(1, lineSize);
+				
+				display.setTextColor(WHITE);
+				display.setTextSize(1);
+				if(leitura0.dia<10){
+					display.print("0");
+				}
+				display.print(leitura0.dia);
+				display.print("/");
+				if(leitura0.mes<10){
+					display.print("0");
+				}
+				display.print(leitura0.mes);
+				/*
+				 *display.print("/");
+				 *if(leitura0.ano<10){
+				 *	display.print("0");
+				 *}
+				 *display.print(leitura0.ano);
+				 */
+				display.print(" ");
+				if(leitura0.hora<10){
+					display.print("0");
+				}
+				display.print(leitura0.hora);
+				display.print(":");
+				if(leitura0.minuto<10){
+					display.print("0");
+				}
+				display.print(leitura0.minuto);
+				display.print(" ");
+				if(leitura0.freq/1000<10){
+					display.setCursor(display.width()-2-6*4, lineSize);
+				}
+				else if(leitura0.freq/1000<100){
+					display.setCursor(display.width()-2-6*5, lineSize);
+				}
+				else{
+					display.setCursor(display.width()-2-6*6, lineSize);
+				}
+				display.print(leitura0.freq/1000);
+				display.print("KHz");
+				
+				display.setCursor(1, lineSize*2);
+				display.print("  R: ");
+				display.print(leitura0.real);
+				display.setCursor(1, lineSize*3);
+				display.print("  J:");
+				display.print(leitura0.imag);
+			}
+			
+			if(_yes){
+				if(!done){
+					while(!crystal.initialConfig()){
+						Serial.println("Configurando...");
+					}
+					leitura0 = crystal.lerAD();
+				
+					int h=clock.hora();
+					int	m=clock.minuto();
+					int d=clock.dia();
+					int mn=clock.mes();
+					int a=clock.ano();
+				
+					leitura0={leitura0.freq, leitura0.real, leitura0.imag, h, m, d, mn, a};
+				
+					Serial.println(leitura0.hora);
+					Serial.println(leitura0.minuto);
+					Serial.println(leitura0.dia);
+					Serial.println(leitura0.mes);
+					Serial.println(leitura0.ano);
+					done=true;
+					
+					Serial.print(EEPROM.read(0));
+					Serial.print(" leituras na eeprom, salvando na posição ");
+					Serial.println(EEPROM.read(0)+1);
+					
+					EEPROM.put( (EEPROM.read(0)*22+1), leitura0 );
+					EEPROM.write(0, EEPROM.read(0)+1);
+					
+					_yes=false;
+					done=true;
+				}
+				else{
+					done=false;
+					_yes=false;
+					return false;
+				}
+			}
 			if(_no){
+				if(done){
+					done=false;
+				}
 				choice=1;
 			}
 			if(_up || _down || _yes || _no){
