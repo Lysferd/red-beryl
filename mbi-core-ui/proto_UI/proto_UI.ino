@@ -87,7 +87,7 @@ static String temptime = "0:0";
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(19200);
+  Serial.begin(9600);
   Serial1.begin(9600);
   BLE=true;
   
@@ -1217,8 +1217,7 @@ void serialTalk(){
       i++;
       comStr[i]= '\0';
     }
-    Serial.println("");
-    Serial.println(comStr);
+    
       
     delay(10);
 

@@ -164,7 +164,7 @@ void red_beryl::upperBar()    // barra superior.
 	mill = millis();
 	static char* timeStr = clock.data_hora(false);
 	
-	if( (mill - tempMill) > 1000){
+	if( (mill - tempMill) > 250){
 		temperature = crystal.temperatura();						//TRANSFERIR PARA RED_CRYSTAL
 		timeStr = clock.data_hora(false);
 		tempMill = mill;

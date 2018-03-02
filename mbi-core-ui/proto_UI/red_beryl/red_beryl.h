@@ -19,7 +19,7 @@
 #include <leituras.h>
 #include <red_crystal.h>
 #include <red_quartz.h>
-
+#include <red_beryl.h>
 
 #define lineSize 8
 	
