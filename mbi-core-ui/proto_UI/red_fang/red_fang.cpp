@@ -13,13 +13,58 @@ red_fang::red_fang()
 {
 	Serial.begin(9600);
 	Serial.println("Construtor basico red_fang utilizado.");
+	_Get=false;
+	_Req=false;
 	Serial1.begin(9600);
 	Serial.end();
 }
 
 void red_fang::ler_serial()
 {
-	if(Serial1.available()!=-1 && Serial1.available()!=  0 && Serial1.available()>=3)		//Se tiver algo na serial1.
+	
+	if(_Get)
+	{
+		get(_num);
+	}
+	else if(_Req)
+	{
+		static bool done = false;
+		static leitura lt;
+		if(!done)
+		{
+			lt = beryl->crystal.lerAD();
+			
+			int h = beryl->clock.hora();
+			int	m = beryl->clock.minuto();
+			int d = beryl->clock.dia();
+			int mn = beryl->clock.mes();
+			int a = beryl->clock.ano();
+			
+			lt={lt.freq, lt.real, lt.imag, h, m, d, mn, a};
+			
+			Serial.println("Leitura concluida.");
+			EEPROM.put( ((EEPROM.read(0)*sizeof(leitura))+1)  , lt);  //salva a nova leitura na EEPROM.
+			Serial.println("Salvo na EEPROM.");
+			EEPROM.write(0,(EEPROM.read(0)+1));    //o valor da posição 'i' recebe '0'.
+			done=true;
+		}
+		else
+		{
+			static int inf = 0;
+			if(!serialLeitura(lt, inf))
+			{
+				inf++;
+				delay(20);
+			}
+			else
+			{
+				inf=0;
+				_Req = false;
+				done = false;
+			}
+		}
+	}
+	else if(Serial1.available()!=-1 && Serial1.available()!=  0 && Serial1.available()>=3)		//Se tiver algo na serial1.
 	{
 		char comStr[4];
 		int i=0;
@@ -46,7 +91,7 @@ void red_fang::check_string(char str[])
 		
 		serialEnviar(num);
 	}
-	if(strcmp(str, "BAT")==0)		//Se o comando recebido for BAT, retorna o valor da bateria.
+	else if(strcmp(str, "BAT")==0)		//Se o comando recebido for BAT, retorna o valor da bateria.
 	{    
 		char bat[4];
 		itoa (beryl->getBatteryPct(), bat, 10);
@@ -54,7 +99,7 @@ void red_fang::check_string(char str[])
 		Serial.print("Bateria em : ");
 		Serial.println(bat);
     }
-	if(strcmp(str, "CLR")==0)
+	else if(strcmp(str, "CLR")==0)
 	{    //Se o comando recebido for CLR, realiza a logica de Fast Clear, limpando o primeiro endereço da EEPROM.
 		if(Serial1.available()!=-1 && Serial1.available()!=0)    //checa se recebeu mais alguma coisa por bluetooth.
 		{
@@ -95,7 +140,7 @@ void red_fang::check_string(char str[])
 			serialEnviar("OK");
 		}
     }
-	if(strcmp(str, "WIP")==0)
+	else if(strcmp(str, "WIP")==0)
 	{    //Se o comando recebido for WIP, realiza a logica de limpar os endereços da EEPROM que estão sendo usados.
 		//WIPE MEMORY = LIMPAR OS ENDEREÇOS DA EEPROM RECONHECIDOS PELA POSIÇÃO 0(INDEX).
 		if(EEPROM.read(0)>0)
@@ -116,17 +161,15 @@ void red_fang::check_string(char str[])
 			serialEnviar("OK");
 		}
     }
-	if(strcmp(str, "TMP")==0){    //Se o comando recebido for TMP, retorna o valor de temperature na AD.
+	else if(strcmp(str, "TMP")==0)
+	{    //Se o comando recebido for TMP, retorna o valor de temperature na AD.
 		Serial.println("Enviando temperatura.");
 		double temperature = beryl->crystal.temperatura();
 		char tempChar[30];
 		dtostrf(temperature, 6, 2, tempChar);
 		serialEnviar(tempChar);      
     }
-	
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////
-	if(strcmp(str, "CLK")==0)
+	else if(strcmp(str, "CLK")==0)
 	{    //Se o comando recebido for CLK, realiza a logica de relogio.
 		delay(10);
 		char inStr[30];
@@ -298,7 +341,110 @@ void red_fang::check_string(char str[])
 			Serial.println("Data e Hora enviados.");            //envia confirmação ao serial monitor(debug).
 		}
     }
-	///////////////////////////////////////////////////////////////////////////////
+	else if(strcmp(str, "GET")==0)
+	{    //Se o comando recebido for GET, realiza logica para 'pegar' e retornar uma leitura salva.
+		delay(10);
+		char inStr[30];
+		while(Serial1.available()!=-1 && Serial1.available()!=0){
+			if(Serial1.available()>=1){
+				int i=0;
+				while(Serial1.available()!=-1 && Serial1.available()!=0){
+					inStr[i]=Serial1.read();
+					Serial.print(inStr[i]);
+					i++;
+					inStr[i]= '\0';
+				}
+			}
+		}
+		Serial.print("|");
+		Serial.println(inStr);
+		char *ptr;
+		_num = strtol(inStr, &ptr, 10);
+		Serial.print("INDEX=");
+		Serial.println(_num);
+		Serial.print("PTR='");
+		Serial.print(ptr);
+		Serial.println("'");
+		_Get=true;
+    }
+	else if(strcmp(str, "REQ")==0)
+	{    //Se o comando recebido for REQ, realiza a logica de realizar uma nova leitura com a frequencia indicada.
+
+		//SE A FREQUENCIA REQUISITA FOR INVALIDA(ABAIXO DE 1K OU ACIMA DE 100K) DEVOLVER UM ERRO/AVISO/ETC... A fazer
+		delay(10);
+		char inStr[30];
+		while(Serial1.available()!=-1 && Serial1.available()!=0)
+		{
+			if(Serial1.available()>=4)
+			{
+				int i=0;
+				while(Serial1.available()!=-1 && Serial1.available()!=0)
+				{
+					inStr[i]=Serial1.read();
+					Serial.print(inStr[i]);
+					i++;
+					inStr[i]= '\0';
+				}
+			}
+		}
+		Serial.print("|");
+		Serial.println(inStr);
+		char *ptr;
+		long frq = strtol(inStr, &ptr, 10);
+		Serial.print("INDEX=");
+		Serial.println(frq);
+		Serial.print("PTR='");
+		Serial.print(ptr);
+		Serial.println("'");
+		if(frq>=1000 && frq <=100000)
+		{
+			if(beryl->crystal.configurar(frq))
+			{
+				Serial.println("Configuração da AD concluida com sucesso.");
+				_Req = true;
+			}
+			else
+			{
+				Serial.println("Configuração da AD falhou.");
+				Serial1.print("ERR");
+			}
+			
+			//beryl->crystal.lerAD();
+			/*
+			if(frequencySweepCustom(index, 10 ))
+			{
+				Serial.print("Sweep usando frequencia ");
+				Serial.print(index);
+				Serial.println(" completa.");
+				EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);  //salva a nova leitura na EEPROM.
+				Serial.println("Salvo na EEPROM.");
+				EEPROM.write(0,(EEPROM.read(0)+1));    //o valor da posição 'i' recebe '0'.
+          
+				Req = true;
+			}	
+			else
+			{
+				Serial.println("Sweep falhou, enviando erro.");
+				Serial1.print("ERR");
+			}*/
+		}
+		else
+		{
+			Serial.print("Valor de frequencia requerido não esta dentro dos limites validos, retornando ERRO.");
+			Serial1.print("ERR");
+		}
+    }
+	else
+	{
+		Serial.println("Algo inesperado foi recebido, limpando o serial. Enviando ERRO");
+		Serial1.print("ERR");
+		for (int i=0; i<10; i++){
+			Serial1.read();
+			if(Serial1.available()==0){
+				i=10;
+			}
+		}
+	}
 }
 void red_fang::serialEnviar(char message[])
 {
@@ -411,4 +557,53 @@ bool red_fang::serialLeitura(leitura lt, int i)
       break;
     }
   }
+}
+bool red_fang::get(int n)
+{
+    static int inf = 0;
+    static leitura lt;
+    if(n==0){
+		static int z=0;
+		EEPROM.get(1+(sizeof(leitura)*(z)), lt);
+		while(z<EEPROM.read(0)-1)
+		{
+			if(!serialLeitura(lt, inf)){
+			inf++;
+			delay(20);
+        }
+        else
+		{
+			inf=0;
+			z++;
+			Serial.print("Z=");
+			Serial.println(z);
+			EEPROM.get(1+(sizeof(leitura)*(z)), lt);
+			delay(200);
+        }
+        z = 0;
+        _Get=false;
+		return true;
+      }
+    }
+    else if(n>EEPROM.read(0))
+	{
+		Serial.println("Index recebido superior ao numero de leituras, retornando ERRO");
+		Serial1.print("ERR");
+		_Get=false;
+		return true;
+    }
+    else 
+	{
+		EEPROM.get(1+(sizeof(leitura)*(n-1)), lt);
+		if(!serialLeitura(lt, inf))
+		{
+			inf++;
+		}
+		else
+		{
+			inf = 0;
+			_Get = false;
+			return true;
+		}
+    }
 }

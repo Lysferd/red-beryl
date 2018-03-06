@@ -20,7 +20,10 @@
 class red_fang
 {
 	private:
-
+		bool _Get;
+		bool _Req;
+		long _freq;
+		int _num;
 	public:
 		red_fang();
 		red_beryl *beryl;
@@ -29,6 +32,7 @@ class red_fang
 		void serialEnviar(char message[]);
 		bool deletaLeitura(int delPos);
 		bool serialLeitura(leitura lt, int i);
+		bool get(int n);
 };
 
 

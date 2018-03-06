@@ -84,11 +84,13 @@ bool red_crystal::configurar(long f)
 		Serial.println("ERRO: SetPGAGain falhou!");
 		return false;
 	}
+	/*
 	if(!AD5933::calibrate(gain, phase, REF_RESIST, (NUM_INCR+1)))
     {
       Serial.println("ERRO: Calibração falhou!");
 	  return false;
     }
+	*/
 	return true;
 }
 

@@ -156,24 +156,33 @@ int red_beryl::getBatteryPct()
 void red_beryl::upperBar()    // barra superior.
 {
 	//Serial.println("upperBar");
-	static int pwr;   //declara o inteiro estatico pwr(POWER)
-	static int pct;   //declara o inteiro estatico pct(PERCENTAGE)
+	
+	static int pct = getBatteryPct();   //declara o inteiro estatico pct(PERCENTAGE)
+	static int pwr = map(pct, 0, 100, 1, 12);   //declara o inteiro estatico pwr(POWER)
 	static long mill = 0;
 	static long tempMill = 0;
+	static long tempMill2 = 0;
 	static double temperature = crystal.temperatura();		//TRANSFERIR PARA RED_CRYSTAL
 	mill = millis();
 	static char* timeStr = clock.data_hora(false);
-	
+	if( (mill - tempMill2) > 50)
+	{
+		tempMill2 = mill;
+		int tempct = getBatteryPct();
+		if(!(pct==100 & tempct==99))
+		{
+			pct = tempct;
+		}
+		pwr = map(pct, 0, 100, 0, 12);
+	}
 	if( (mill - tempMill) > 250){
 		temperature = crystal.temperatura();						//TRANSFERIR PARA RED_CRYSTAL
 		timeStr = clock.data_hora(false);
 		tempMill = mill;
-		pct = getBatteryPct();
-		pwr = map(pct, 0, 100, 0, 12);
 	}
-	  
+	//pwr = map(pct, 0, 100, 1, 12);  
 	display.fillRect(display.width()-1-pwr, 2, pwr, 4, WHITE); //desenha a barra da bateria
-  
+	
 	if(pct<10)
 	{
 		display.setCursor(display.width()-BAT8_WIDTH-12, 0);
@@ -350,7 +359,7 @@ bool red_beryl::menu_leitura()
 		case 11:		//Nova leitura
 		{
 			static bool done=false;
-			
+			static long frequencia = 50000;
 			
 			if(!done){
 				display.fillRect(10, lineSize, display.width()-20, lineSize*3, BLACK);
@@ -363,9 +372,75 @@ bool red_beryl::menu_leitura()
 				display.drawRect(display.width()/3-2, lineSize*2+2, 3*6+4, 11, WHITE);
 				display.setCursor(display.width()/3, lineSize*2+4);
 				display.setTextColor(WHITE);
-				display.print("000");
+				if(frequencia<25000)
+				{
+					display.print("  ");
+				}
+				else if(frequencia<100000)
+				{
+					display.print(" ");
+				}
+				display.print(frequencia/1000);
 				display.setTextColor(WHITE);
 				display.print(" KHz");
+				
+				
+				if(_up)
+				{
+					_up = false;
+					switch(frequencia)
+					{
+						case 5000:
+						{
+							frequencia = 25000;
+							break;
+						}
+						case 25000:
+						{
+							frequencia = 50000;
+							break;
+						}
+						case 50000:
+						{
+							frequencia = 100000;
+							break;
+						}
+						case 100000:
+						{
+							frequencia = 5000;
+							break;
+						}
+					}
+				}
+				if(_down)
+				{
+					_down = false;
+					switch(frequencia)
+					{
+						
+						
+						case 5000:
+						{
+							frequencia = 100000;
+							break;
+						}
+						case 25000:
+						{
+							frequencia = 5000;
+							break;
+						}
+						case 50000:
+						{
+							frequencia = 25000;
+							break;
+						}
+						case 100000:
+						{
+							frequencia = 50000;
+							break;
+						}
+					}
+				}
 			}
 			else{
 				/*
@@ -425,7 +500,7 @@ bool red_beryl::menu_leitura()
 			
 			if(_yes){
 				if(!done){
-					while(!crystal.initialConfig()){
+					while(!crystal.configurar(frequencia)){
 						Serial.println("Configurando...");
 					}
 					leitura0 = crystal.lerAD();
@@ -477,6 +552,7 @@ bool red_beryl::menu_leitura()
 		}
 		case 21:		//Historico
 		{
+			historico();
 			break;
 		}
 		case 1:			//Opção Nova leitura
