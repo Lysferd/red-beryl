@@ -1,0 +1,1 @@
+- Criar comando serial 'VER' que retorna a versão do programa atual.

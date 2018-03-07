@@ -88,6 +88,7 @@ red_beryl::red_beryl()
 	_yes = false;
 	_no = false;
 	
+	BLE = true;
 	leitura0 = {0,0,0,0,0,0,0,0};
 	/*struct leitura leitura0;
 	
@@ -213,10 +214,10 @@ void red_beryl::upperBar()    // barra superior.
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
 	//display.drawBitmap(0, 0, BT_9_bmp, BT9_WIDTH, BT9_HEIGHT, WHITE); // desenha o simbolo de bluetooth depois da bateria. 9 de altura, 8 de largura.
 	
-	/*if(true)		//LEMBRAR DE RETORNA ISSO A """IF(BLE)"""
+	if(BLE)		//LEMBRAR DE RETORNA ISSO A """IF(BLE)"""
 	{
 		display.drawBitmap(0, 0, BT2_bmp, BT2_WIDTH, BT2_HEIGHT, WHITE);
-	}*/
+	}
 	display.setCursor(BT2_WIDTH+5,0);
 
 	
@@ -533,11 +534,14 @@ bool red_beryl::menu_leitura()
 				else{
 					done=false;
 					_yes=false;
-					return false;
+					choice=1;
+					//return false;
 				}
 			}
-			if(_no){
-				if(done){
+			if(_no)
+			{
+				if(done)
+				{
 					done=false;
 				}
 				choice=1;
@@ -552,7 +556,10 @@ bool red_beryl::menu_leitura()
 		}
 		case 21:		//Historico
 		{
-			historico();
+			if(historico())
+			{
+				choice = 2;
+			}
 			break;
 		}
 		case 1:			//Opção Nova leitura
@@ -603,6 +610,8 @@ bool red_beryl::menu_leitura()
 		}
 		default:		//Se por alguma razão algo estiver diferente.
 		{
+			choice=1;
+			Serial.println("CUIDADO, algo deu errado, choice resetado para 1");
 			break;
 		}
 	}
@@ -625,27 +634,1078 @@ bool red_beryl::menu_leitura()
 	}
 	if(_no){
 		_no=false;
+		choice=1;
 		return false;
 	}
 	return true;
 }
 bool red_beryl::menu_sinc()
 {
-	
+	display.setCursor(2, lineSize);   //define a posição do cursor na primeira linha.
+    display.setTextColor(BLACK,WHITE);    //define a cor do texto.(preto no fundo branco.)
+    if(BLE)
+	{
+		display.print("Desativar Bluetooth.");
+		if(_yes)
+		{
+			//Serial1.end();
+			BLE=false;
+			_yes=false;
+			return false;
+        }
+	}
+	else
+	{
+		display.print("Ativar Bluetooth.");
+        if(_yes)
+		{
+			//Serial1.begin(9600);
+			BLE=true;
+			_yes=false;
+			return false;
+        }
+	}
+	if(_no)
+	{
+		_no=false;
+		return false;
+	}
+	if(_up)
+	{
+		_up=false;
+	}
+	if(_down)
+	{
+		_down=false;
+	}
+	return true;
 }
+
 bool red_beryl::menu_ajuste()
 {
+	static int choice=1;
 	
+	switch(choice)
+	{
+		case 1:
+		{
+			static bool rel = false;
+			if(rel)
+			{
+				if(relogio())
+				{
+					rel=false;
+				}
+			}
+			else
+			{
+				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+				display.println("1- Relogio");    //imprimir opção 1.
+
+				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
+				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+				display.println("2- APAGAR HISTORICO");   //imprimir opção 2.
+			
+				if(_up)
+				{
+					choice--;
+					_up = false;
+				}
+				if(_down)
+				{
+					choice++;
+					_down = false;
+				}
+				if(_yes)
+				{
+					rel=true;
+					_yes=false;
+					_no=false;
+				}
+				if(_no)
+				{
+					_no=false;
+					return false;
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			static bool clean = false;
+			
+			if(clean)
+			{
+				static bool reseter = false;    //declara e inicia como falsa uma 
+				if(!reseter)
+				{   //se o reseter for falso, faz a logica para perguntar se o usuario deseja apagar o historico.
+					display.setCursor(2, lineSize);    //reseta a posição do cursor
+					display.setTextColor(WHITE);    //define as fonte branca.
+					display.println("Limpar historico?");
+        
+					display.setCursor(display.width()/2, lineSize*2);    //define a posição do cursor
+					display.print("N|S");
+					if(_yes)
+					{    //se o botão YES for true.
+						reseter=true;   //define reseter como true para começar a logica de limpar o historico
+						_yes=false;       //reseta YES.
+					}
+					if(_no)
+					{   //se o botão NO for true.
+						
+						reseter=false;    //reseta o reseter por garantia.
+						_no=false;   //reseta NO.
+						clean = false;
+					}
+				}
+				else
+				{   //se o valor de RESETER for true.
+					static int i=0;   //declara variavel int com valor 0 de modo estatico para percorrer os endereços da EEPROM
+					display.setCursor(display.width()/2-30, display.height()/2-4);    //define posição do cursor
+					display.setTextColor(WHITE);    //define a fonte branca.
+					if(i < EEPROM.length())
+					{    //se i for menor que o tamanho da memoria da EEPROM
+						EEPROM.write(i,0);    //o valor da posição 'i' recebe '0'.
+						Serial.println(i);    //imprime no serial o endereço atual para acomapnhar.
+						int exp = map(i,0,4095,0,100);    //mapeia em uma variavel int de 0 a 100 o espelho do endereço da EEPROM, de forma que o valor da variavel seja a porcentagem da memoria ja percorrida e 'limpa'.
+						display.print("Limpando...");
+						display.setCursor(display.width()/2-10, display.height()/2+4);    //define posição do cursor
+						display.setTextColor(WHITE);    //define a fonte branca.
+						display.print(exp);   //imprime na tela esse valor.
+						display.print("%");   //completa com o simbolo de porcentagem.
+						i++;    //incrementa 'i' para começar no proximo endereço.
+					}
+					else
+					{   //se i for maior que o tamanho da memoria da EEPROM, ou seja, se terminar de limpar a memoria.
+						display.setCursor(display.width()/2-25, display.height()/2-4);    //define a posição do cursor.
+						display.setTextColor(WHITE);    //define a fonte branca.
+						display.print("Concluido!");    //imprime a frase que indica que completou a logica.
+						if(_yes || _no || _up || _down)
+						{    //se qualquer um dos botões for TRUE.
+							
+							reseter=false;    //reseta RESETER.
+							i=0;    //reseta o valor de i;
+							_yes=false;    //reseta YES.
+							_no=false;   //reseta NO.
+							_up=false;   //reseta UP.
+							_down=false;   //reseta DOWN.
+							
+							clean=false;
+							
+							return false;
+						}
+					}
+				}
+			}
+			else
+			{
+				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+				display.println("1- Relogio");    //imprimir opção 1.
+
+				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
+				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+				display.println("2- APAGAR HISTORICO");   //imprimir opção 2.
+			
+				if(_up)
+				{
+					choice--;
+					_up = false;
+				}
+				if(_down)
+				{
+					choice++;
+					_down = false;
+				}
+				if(_yes)
+				{
+					clean=true;
+					_yes=false;
+					_no=false;
+				}
+				if(_no)
+				{
+					_no=false;
+					return false;
+				}
+			}	
+			break;
+		}
+		default:
+		{
+			if(choice<1)
+			{	
+				choice = 2;
+			}
+			if(choice>2)
+			{
+				choice = 1;
+			}
+			break;
+		}
+	}
+	return true;
 }
+
 bool red_beryl::nova_leitura()
 {
 	
 }
 bool red_beryl::historico()
 {
-	
+	static int i = 0;   //declara a variavel i referente aos numeros do historico(+1), por padrão usaremos apenas 10 valores, mas como o arduino Mega oferece muito mais espaço é possivel liberar mais espaço para salvar as leituras.
+	static int l = 1;   //declara a variavel l referente as linhas do historico, estou testando seu uso para um menu mais dinamico e inteligente.
+    static bool detalhar = false;   //declara a variavel bool detalhar que define se os detalhes de uma leitura escolhida deverão ser mostrados ou não.
+		if(EEPROM.read(0)!=0)
+		{    //primeiro testa se tem algo no historico para apresentar.
+			if(detalhar)
+			{
+				static bool recebeu=false;   //inicializa uma variavel bool que informa se a leitura ja foi recebida da EEPROM
+				static bool perguntaDelete=false;   //inicializa uma variavel bool que decide se uma caixa de texto perguntando se o usuario quer deletar uma leitura aparece ou não.
+				static leitura leituraTemp;    //inicializa uma struct leitura temporaria para receber a struct leitura da EEPROM, feita static para que não se repita.
+				if(!recebeu)
+				{   //se não tiver recebido a leitura da EEPROM
+					EEPROM.get((sizeof(leitura)*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
+					recebeu=true;   //recebeu recebe valor true.
+					Serial.println("recebeu leitura");    //imprime a confirmação no serial
+				}
+				display.setCursor(25,lineSize);    //define a posição do cursor.
+				display.setTextColor(WHITE);    //define a cor da fonte(branca).
+				display.print(leituraTemp.dia);   //imprime o valor dia.
+				display.print("/");   //separador de data.
+				display.print(leituraTemp.mes);   //imprime o valor mes.
+				display.print("/");   //separador de data.
+				display.print(leituraTemp.ano);   //imprime o valor ano.
+				display.print("  ");    //espaço vazio.
+				display.print(leituraTemp.hora);    //imprime o valor hora.
+				display.print(":");   //separador de hora.
+				if(leituraTemp.minuto<10)
+				{    //se o minuto for menor que 10, imprime 0 para manter a estetica.
+					display.print("0");
+				}
+				display.print(leituraTemp.minuto);    //imprime o valor minuto.
+				display.setCursor(2,lineSize*2);   //define a posição do cursor
+				display.print("R: ");   //real
+				display.print(leituraTemp.real);    //imprime o valor real
+				display.setCursor(2,lineSize*3);   //define a posição do cursor
+				display.print("I:");    //imaginario
+				display.print(leituraTemp.imag);    //imprime o valor imaginario
+
+				display.setCursor(display.width()-(6*7), lineSize*2+4);
+				display.print(leituraTemp.freq/1000);
+				display.print("KHz");
+
+				if(perguntaDelete)
+				{
+					display.fillRect(20, lineSize+4, display.width()-40, lineSize+4, BLACK);
+					display.drawRect(20, lineSize+4, display.width()-40, lineSize+4, WHITE);
+					display.setCursor(display.width()/2-36, lineSize*2-2 );
+					display.setTextColor(WHITE);
+					display.setTextSize(1);
+					display.print("Deletar? N/S");
+					if(_up)
+					{
+						_up=false;
+					}
+					if(_down)
+					{
+						_down=false;
+					}
+					if(_yes)
+					{
+						deletaLeitura(i);
+						detalhar=false;
+						recebeu=false;
+						perguntaDelete=false;
+						_yes=false;
+						i=0;
+						l=1;
+						_up=true;
+						_down=true;
+					}
+					if(_no)
+					{
+						perguntaDelete=false;
+						_no=false;
+					}
+            
+				}
+				if(_yes)
+				{    //se YES for true.
+					perguntaDelete=true;
+					_yes=false;    //reseta YES.
+				}
+				if(_up)
+				{   //se UP for true.
+					if(i!=0)
+					{   //se i não estiver na posição 0
+						i--;    //i-1
+						if(l!=1)
+						{   //se não estiver selecionando a primeira linha.
+							l--;    //seleciona a linha acima da atual.
+						}
+					}
+					else if(EEPROM.read(0)>1)
+					{    //se i for 0 e haver mais de uma leitura na EEPROM
+						i=EEPROM.read(0)-1;   //i recebe o valor equivalente a ultima leitura valida.
+						if(EEPROM.read(0)>2)
+						{   //se tiver mais de duas leituras validas
+							l=3;    //seleciona a terceira linha para quando retornar ao menu anterior
+						}
+						else if(EEPROM.read(0)==2)
+						{   //se tiverem extamente duas leituras validas.
+							l=2;    //seleciona a segunda linha para quando retornar ao menu anterior.
+						}
+					}
+					recebeu=false;    //reseta RECEBEU para que o valor em leituraTemp e a tela sejam atualizados com a nova posição de i.
+					_up=false;   //reseta UP.
+				}
+				if(_down)
+				{   //se DOWN for true.
+					if(i!=EEPROM.read(0)-1)
+					{    //se i não estiver na ultima posição valida a partir da EEPROM.
+						i++;    //i+1
+						if(l!=3)
+						{   //se não for a terceira linha
+							l++;
+						}
+					}
+					else if(EEPROM.read(0)>1)
+					{    //se i estiver na ultima posição valida e não for a unica leitura valida
+						i=0;    //i recebe o valor 0 e volta a primeira posição.
+						l=1;    //seleciona a primeira linha quando voltar ao menu de historicos.
+					}
+					recebeu=false;    //reseta RECEBEU para que o valor em leituraTemp e a tela sejam atualizados com a nova posição de i.
+					_down=false;   //reseta DOWN.
+				}
+				if(_no)
+				{
+					recebeu=false;    //reseta RECEBEU
+					detalhar=false;   //reseta DETALHAR
+					_no=false;   //reseta NO
+				} 
+			}
+			else 
+			{
+				static leitura L1,L2,L3;
+				static bool ler = false;
+				if(l==1)
+				{   //se estiver na primeira linha.
+					if(!ler)
+					{   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
+						EEPROM.get(((i*sizeof(leitura))+1), L1);   //L1 recebe o valor salvo no historico referente a posição i;
+						if((i+1)<EEPROM.read(0))
+						{    //se o proximo valor ainda estiver dentro do limite de leituras validas.
+							EEPROM.get((((i+1)*sizeof(leitura))+1), L2);   //L2 recebe o valor salvo no historico referente a posição i+1.
+							if((i+2)<EEPROM.read(0))
+							{    //se o proximo valor ainda estiver dentro do limite de leituras validas.
+								EEPROM.get((((i+2)*sizeof(leitura))+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+2.
+							}
+						}
+						ler=true;   //ler recebe true.
+					}
+					imprimeEscolha( i+1, l, L1, true);
+					if((i+1)<EEPROM.read(0))
+					{   //se o proximo valor ainda estiver dentro do limite de leituras validas.
+						imprimeEscolha( i+2, l+1, L2, false);
+						if((i+2)<EEPROM.read(0))
+						{   //se o proximo valor ainda estiver dentro do limite de leituras validas.
+							imprimeEscolha( i+3, l+2, L3, false);
+						}
+					}
+				}
+				if(l==2)
+				{   //se estiver na segunda linha.
+					if(EEPROM.read(0)<2 || i==0)
+					{   //se tiver menos de dois endereços no historico ou se o i for 0, imediatamente retorna a primeira linha.
+						l=1;
+					}
+					else 
+					{    //se tiver pelo menos dois endereços e i for diferente de 0;
+						if(!ler)
+						{   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
+							EEPROM.get((((i-1)*sizeof(leitura))+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-1;
+							EEPROM.get((((i)*sizeof(leitura))+1), L2);   //L2 recebe o valor salvo no historico referente a posição i.
+							if((i+1)<EEPROM.read(0))
+							{    //se o proximo valor ainda estiver dentro do limite de leituras validas.
+								EEPROM.get((((i+1)*sizeof(leitura))+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+1.
+							}
+							ler=true;   //ler recebe true.
+						}
+						imprimeEscolha( i, l-1, L1, false);           
+						//final da logica das opções na linha 1 para quando a linha 2 estiver selecionada, a proxima parte conta com a linha 2.
+						imprimeEscolha( i+1, l, L2, true);          
+						//final da logica das opções na linha 2 quando selecionada, a proxima parte conta com a linha 3, usando 'if' para verificar se ela deve existir.
+						if(EEPROM.read(0)>i+1)
+						{   //se o numero de leituras for maior que i+1(ou seja, se i=1(primeira linha 0), a terceira linha seria(i+1)=2, nesse caso, tivermos 3 leituras EEPROM.read(0)=[3]>[2]
+							//portanto, nesse caso a terceira linha existe.
+							imprimeEscolha( i+2, l+1, L3, false);
+						}
+					}
+				}
+				if(l==3)
+				{   //se estiver na terceira(e ultima) linha.
+					if(EEPROM.read(0)<3 || i==0 || i==1)
+					{   //se tiver menos de tres endereços no historico ou se o i for 0 ou 1, imediatamente retorna a primeira linha.
+						l=1;
+					}
+					else 
+					{    //se tiver pelo menos tres endereços e i for diferente de 0 e 1;
+						if(!ler)
+						{   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
+							EEPROM.get((((i-2)*sizeof(leitura))+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-2;
+							EEPROM.get((((i-1)*sizeof(leitura))+1), L2);   //L2 recebe o valor salvo no historico referente a posição i-1.
+							EEPROM.get(((i*sizeof(leitura))+1), L3);   //L3 recebe o valor salvo no historico referente a posição i.
+							ler=true;   //ler recebe true.
+						}
+						imprimeEscolha( i-1, l-2, L1, false);
+						//Final da logica da linha 1.
+						imprimeEscolha( i, l-1, L2, false);
+						//Final da logica da linha 2.
+						imprimeEscolha( i+1, l, L3, true);
+					}
+				}
+				if(_up)
+				{   //se UP for true
+					if(l==1)
+					{   //se a linha 1 estiver selecionada.
+						if(i!=0)
+						{   //se i não for 0.
+							i--;    //i-1;    
+						}
+						else if(EEPROM.read(0)>1)
+						{    //se i for 0 e houver mais de uma leitura salva no historico.
+							i=EEPROM.read(0)-1;   //i recebe o valor da ultima posição valida do historico.
+							if(i>1)
+							{      //se i for maior que 1.
+								l=3;    //seleciona a terceira linha.
+							}
+							else if(i==1)
+							{    //se i for igual a 1.
+								l==2;   //seleciona a segunda linha.
+							}
+						}
+					}
+					else 
+					{    //para as linhas 2 e 3, sempre que UP for true, apenas decresce os valores de i e l.
+						i--;
+						l--;
+					}
+					ler=false;    //reseta LER
+					_up=false;   //reseta UP.
+				}
+				if(_down)
+				{   //se DOWN for true.
+					if(l==3)
+					{   //se a linha 3 estiver selecionada.
+						if(i==EEPROM.read(0)-1)
+						{    //se i for igual a ultima leitura possivel.
+							i=0;    //volta a primeira leitura.
+							l=1;    //seleciona a primeira linha.
+						}
+						else
+						{   //se i não for a ultima leitura possivel.
+							i++;    //incrementa o valor de i.
+						}
+					}
+					else 
+					{    //se a linha 1 ou 2 estiver selecionada.
+						if(!(i==EEPROM.read(0)-1))
+						{    //se i NÃO for igual a ultima leitura possivel.
+							i++;  //incremente o valor de i.
+							l++;    //incrementa o valor l(indo para a segunda ou terceira linha).
+						}
+						else 
+						{    //se i for igual a ultima leitura possivel.
+							i=0;    //volta a primeira leitura.
+							l=1;    //seleciona a primeira linha.
+						}
+					}
+					ler=false;    //reseta LER
+					_down=false;   //reset DOWN
+				}
+				if(_yes)
+				{
+					detalhar=true;
+					ler=false;
+					_yes=false;    //reseta YES
+				}
+				if(_no)
+				{   //se NO for true.
+					//choice=12;   //reseta choice.
+					i=0;
+					l=1;
+					ler=false;
+					_no=false;   //reseta NO.
+					return true;
+				}
+				scrollBar(i);
+			}
+		}
+		else
+		{   //se o historico estiver vazio.
+			display.setCursor(0, lineSize*2);    //define a posição do cursor
+			display.setTextColor(WHITE);    //define a cor da fonte(branca);
+			display.print(" Historico Vazio.");
+			if(_yes)
+			{
+				_yes=false;    //reseta YES
+			}
+			if(_up)
+			{
+				_up=false;   //reseta UP.
+			}
+			if(_down)
+			{
+				_down=false;   //reseta DOWN.
+			}
+			if(_no)
+			{
+				//choice=12;   //retorna ao menu anterior.
+				_no=false;   //reseta NO.
+				return true;
+			}
+		}
+	return false;
 }
 bool red_beryl::relogio()
 {
-	
+	/////////////////////////////////////////////////////////////////////////////////////
+	static bool doing = false, blinker = true;
+	static int track = 0; //declarar e inicializar a variavel track, que será usada para definir o foco da função e o que será alterado(0=hora;1=minuto;2=dia;3=mes;4=ano)
+	static int tempH, tempM, tempD, tempMn, tempY;  //declarando as variaveis temporarias responsaveis por receber os valor do rtc.
+	static long timeTemp = 0;  static long tempTemp = 0;
+  
+	if( doing == false )  //se for a primeira vez rodando essa função, receber os valores do rtc para as variaveis.
+	{
+		tempH = clock.hora();
+		tempM = clock.minuto();
+		tempD = clock.dia();
+		tempMn = clock.mes();
+		tempY = clock.ano();
+    
+		doing = true;
+	}
+
+//[6+1][6+1][6+1]
+
+	if(blinker)
+	{
+		timeTemp = millis();    //variavel temporario recebe tempo em millis.
+		if((timeTemp-tempTemp) > 500)
+		{    //se a diferença entre as duas variaveis temporarias for de 1/2 segundos.
+			blinker = false;    //blinker recebe valor false.
+			tempTemp = timeTemp;    //A variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
+		}
+		if(track!=0)
+		{   //se NÃO for HORA.
+			display.setTextSize(1);   //Definir tamanho do texto(1).
+			display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
+			display.setCursor(display.width()/2-15, lineSize+4);    //Definir a posição do cursor(metade da largura da tela menos 2 caracteres e meio, meia linha abaixo da barra superior).
+			if(tempH<10)
+			{
+				display.print("0");   //Se o valor de HORA for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+			}
+			display.print(tempH);   //Imprime valor Temporario de HORA.
+		}
+		display.setTextSize(1);   //Definir tamanho do texto(1).
+		display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
+		display.setCursor(display.width()/2-3, lineSize+4);    //Definir a posição do cursor(metade da largura da tela menos meio caractere, meia linha abaixo da barra superior).
+		display.print(":");   //Imprime separador de tempo.
+		
+		if(track!=1)
+		{   //se NÃO for MINUTO.
+			display.setTextSize(1);   //Definir tamanho do texto(1).
+			display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
+			display.setCursor(display.width()/2+3, lineSize+4);    //Definir a posição do cursor(metade da largura da tela mais meio caractere, meia linha abaixo da barra superior).
+			if(tempM<10)
+			{
+				display.print("0");   //Se o valor de MINUTO for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+			}
+			display.print(tempM);   //Imprime valor Temporario de MINUTO.
+		}
+    
+		if(track!=2)
+		{   //se NÃO for DIA.
+			display.setTextSize(1);   //Definir tamanho do texto(1).
+			display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
+			display.setCursor(display.width()/2-25, lineSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 4 caracteres, uma linha e meia abaixo da barrar superior).
+			if(tempD<10)
+			{
+				display.print(" ");   //Se o valor de DIA for menor que 10(e portante, apenas um caractere), imprime [ ] na posição.
+			}
+			display.print(tempD);   //Imprime valor Temporario de DIA.
+		}
+		display.setTextSize(1);   //Definir tamanho do texto(1).
+		display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
+		display.setCursor(display.width()/2-13, lineSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 2 caracteres, uma linha e meia abaixo da barra superior).
+		display.print("/");   //Imprime separador de data.
+    
+		if(track!=3)
+		{   //se NÃO for MES.
+			display.setTextSize(1);   //Definir tamanho do texto(1).
+			display.setTextColor(WHITE);    //Definir a cor do texto(BRANCO).
+			display.setCursor(display.width()/2-7, lineSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 1 caractere, uma linha e meia abaixo da barra superior).
+			if(tempMn<10)
+			{
+				display.print("0");   //Se o valor de MES for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+			}
+			display.print(tempMn);    //Imprime valor Temporario de MES.
+		}
+		display.setTextSize(1);   //Definir tamanho do texto(1).
+		display.setTextColor(WHITE);    //Definir cor do texto(BRANCO).
+		display.setCursor(display.width()/2+5, lineSize*2+6);    //Definir a posição do cursor(metade da largura da tela mais 1 caractere, uma linha e meia abaixo da barra superior).
+		display.print("/");   //Imprime separador de data.
+    
+		if(track!=4)
+		{   //se NÃO for ANO.
+			display.setTextSize(1);   //Definir tamanho do texto(1).
+			display.setTextColor(WHITE);    //Definir a cor do texto(BRANCO).
+			display.setCursor(display.width()/2+11, lineSize*2+6);   //Definir a posição do cursor(metade da largura da tela mais 2 caracteres, uma linha e meia abaixo da barra superior).
+			if(tempY<10)
+			{
+				display.print("0");   //Se o valor de ano for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+			}
+			display.print(tempY);   //Imprime valor Temporario de ANO.
+		}
+	}
+	else
+	{
+		timeTemp = millis();    //variavel temporario recebe tempo em millis.
+		if((timeTemp-tempTemp) > 500)
+		{    //se a diferença entre as duas variaveis temporarias for de 1/2 segundos.
+			blinker = true;    //blinker recebe valor true e é ativado.
+			tempTemp = timeTemp;    //A variavel tempTemp recebe o valor da timeTemp para resetar a diferença.
+		}
+    
+		display.setTextSize(1);   //Definir tamanho do texto(1).
+		display.setTextColor(WHITE);    //Definir a cor do texto(BRANCO).
+		display.setCursor(display.width()/2-15, lineSize+4);   //Definir a posição do cursor(metade da largura da tela menos 2 caracteres e meio).
+		if(tempH<10)
+		{
+			display.print("0");   //Se o valor de HORA for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+		}
+		display.print(tempH);   //Imprime valor Temporario de HORA.
+		display.print(":");   //Imprime separador de hora.
+		if(tempM<10)
+		{
+			display.print("0");   //Se o valor de MINUTE for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+		}
+		display.print(tempM);   //Imprime valor Temporario de MINUTE.
+
+		display.setCursor(display.width()/2-25, lineSize*2+6);   //Definir a posição do cursor(metade da largura da tela menos 4 caracteres).
+		if(tempD<10)
+		{
+			display.print(" ");   //Se o valor de DIA for menor que 10(e portanto, apenas um caractere), imprime [ ] na posição.
+		}
+		display.print(tempD);   //Imprime valor Temporario de DIA.
+		display.print("/");   //Imprime separador de data.
+		if(tempMn<10)
+		{
+			display.print("0");   //Se o valor de MES for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+		}
+		display.print(tempMn);    //Imprime valor Temporario de MES.
+		display.print("/");   //Imprime separador de data.
+		if(tempY<10)
+		{
+			display.print("0");   //Se o valor de ANO for menor que 10(e portanto, apenas um caractere), imprime 0 na posição.
+		}
+		display.print(tempY);   //Imprime valor Temporario de ANO.
+	}
+
+	switch(track)
+	{
+		case 0: //hora: de 0 a 23 horas.
+		{
+			if(_up)  //se o botão UP tiver valor true.
+			{
+				if(tempH<23)
+				{ //se a hora for menor que 23 horas
+					tempH++;  //adiciona uma hora a mais.
+				}
+				else
+				{ //se a hora for 23 horas.
+					tempH = 0;  //volta a hora 0(equivalente as 24 horas)
+				}
+				_up=false; //reseta o valor do botão UP para false.
+			}
+			if(_down)  //se o botão DOWN tiver valor true.
+			{
+				if(tempH>0)
+				{  //se a hora for maior que 0 horas.
+					tempH--;  //diminui uma hora.
+				}
+				else
+				{ //se a hora tiver valor 0.
+					tempH = 23; //volta a hora 23.
+				}
+				_down=false; //reseta o valor do botão DOWN para false.
+			}
+			if(_yes) //se o botão YES tiver valor true.
+			{
+				//time.setHour(tempH);  //setta o minuto do rtc com o valor de tempH;
+				clock.set_hora(tempH);
+				_yes=false;  //reseta o valor do botão YES para false. Melhor fazer isso antes de avançar a track.
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				track++;  //track avança para a proxima.
+			}
+			if(_no)  //se o botão NO tiver valor true.
+			{
+				//tempH = time.getHour( h12, PM );  //recupera o valor valor de hora salvo no rtc.
+				//no=false; //reseta o valor do botão NO para false.
+				//screen = 0; //retornar para a screen anterior.
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				_no=false;  //resetar o valor de YES para false.
+				track = 0; //retorna a track 0 representando a hora.
+				return true;
+			}
+			break;  //fim da logica da track 0 representando as horas.
+		}
+    
+		case 1: //minuto
+		{     
+			if(_up)  //se o botão UP tiver valor true.
+			{
+				if(tempM<59)  //se o minuto for menor que 59.
+				{
+					tempM++; //adiciona um minuto a mais.
+				}
+				else  //se o minuto for 59.
+				{
+					tempM = 0;  //retornar ao minuto 0.
+				}
+				_up=false; //reseta o valor do botão UP para false.
+			}
+			if(_down)  //se o botão DOWN tiver valor true.
+			{
+				if(tempM>0)
+				{  //se o minuto for maior que 0.
+					tempM--;  //minuto diminui por um.
+				}
+				else
+				{ //se o minuto for 0.
+					tempM=59; //minuto retornar ao valor 59.
+				}
+				_down=false; //reseta o valor do botão DOWN para false.
+			}
+			if(_yes) //se o botão YES tiver valor true.
+			{
+				//time.setMinute(tempM);  //setta o minuto do rtc com o valor de tempM;
+				clock.set_minuto(tempM);
+				_yes=false;  //reseta o valor do botão YES para false.
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				track++;  //avança para a proxima track.
+			}
+			if(_no)  //se o botão NO tiver valor true.
+			{
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				_no=false; //reseta o valor do botão NO para false.
+				track--;  //retorna a track anterior.
+			}
+			break;  //fim da logica da track 1 representando os minutos.
+      
+		}
+		case 2: //dia
+		{ 
+			if(_up)
+			{  //se o botão UP tiver valor true.  
+				if(tempMn==2)
+				{  //se o mes for fevereiro
+					if(tempD<29)
+					{ //se o dia for menor que 29
+						tempD++;  //adiciona um dias a mais.
+					}
+					else
+					{ //se o dia for 29(ou mais).
+						tempD = 1;  //volta ao primeiro dia do mes.
+					}
+				}
+				else if(tempMn<8)
+				{  //se o mes for antes de agosto
+					if(tempMn % 2 != 0)
+					{  //se o mes for impar(meses impares antes de agosto tem 31 dias)
+						if(tempD<31)
+						{ //se o dia for menor que 31.
+							tempD++;  //adiciona um dia a mais.
+						}
+						else
+						{ //se o dia for 31.
+							tempD = 1;  //volta ao primeiro dia do mes.
+						}
+					}
+					else
+					{ //se o mes for par(meses pares antes de agosto tem 30 dias exceto por fevereiro.)
+						if(tempD<30)
+						{ //se o dia for menor que 30.
+							tempD++;  //adiciona um dia a mais.
+						}
+						else
+						{ //se o dia for 30.
+							tempD = 1;  //volta ao primeiro dia do mes.
+						}
+					}
+				}
+				else
+				{ //se o mes for pelo menos agosto.
+					if(tempMn % 2 == 0)
+					{ //se o mes for par(mese pares a partir de agosto tem 31 dias)
+						if(tempD<31)
+						{ //se o dia for menor que 31.
+							tempD++;  //adiciona um dia a mais.
+						}
+						else
+						{ //se o dia for 31.
+							tempD = 1;  //volta ao primeiro dia do mes.
+						}
+					}
+					else
+					{ //se o mes for impar(mese impares a partir de agosto tem 30 dias.
+						if(tempD<30)
+						{ //se o dia for menor que 30.
+							tempD++;  //adiciona um dias a mais.
+						}
+						else
+						{ //se o dia for 30.
+							tempD = 1;  //volta ao primeiro dias do mes.
+						}
+					}
+				}
+				_up=false; //reseta o valor do botão UP para false.
+			}
+			if(_down)
+			{  //se o valor do botão DOWN for true.
+				if(tempD>1)
+				{  //se o dia for maior que 1.
+					tempD--;
+				}
+				else
+				{ //se o dia for 1.
+					if(tempMn==2)
+					{  //se o mes for fevereiro.
+						tempD = 28; //dia retornar a 28.
+					}
+					else if(tempMn<8)
+					{  //se o mes não for fevereiro e for antes de agosto.
+						if(tempMn % 2 == 0)
+						{  //se o numero do mes for par.(meses pares antes de agosto tem 30 dias exceto por fevereiro)
+							tempD = 30; //dia retorna a 30.
+						}
+						else
+						{ //se o numero do mes for impar(31 dias).
+							tempD = 31; //dia retorna a 31.
+						}
+					}
+					else
+					{ //se o mes não for vereiro e for pelo menos agosto.
+						if(tempMn % 2 == 0)
+						{  //se o numero do mes for par.(meses pares a partir de agosto tem 31 dias)
+							tempD = 31; //dia retorna a 31.
+						}
+						else
+						{ //se o numero do mes for impar.(30 dias)
+							tempD = 30; //dia retorna a 30.
+						}
+					}
+				}
+				_down=false; //reseta o valor do botão DOWN para false.
+			}
+			if(_yes) //se o valor do botão YES for true.
+			{
+				_yes=false;  //reseta o valor do botão YES para false.
+				//time.setDate(tempD);  //setta o valor de dia no rtc com o valor do tempD.
+				clock.set_dia(tempD, tempMn);
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				track++;  //avança ao proximo track.
+			}
+			if(_no)  //se o valor do botão NO for true.
+			{
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				_no=false; //reseta o valor do botão NO para false.
+				track--;  //retorna a track anterior.
+			}
+			break;  //final da track 2 do dia.
+		}
+		
+		case 3: //mes
+		{
+			if(_up)  //se o valor do botão UP for true.
+			{
+				if(tempMn <12)
+				{ //se o mes for antes de dezembro.
+					tempMn++; //adiciona um mes.
+				}
+				else
+				{ //se o mes for dezembro.
+					tempMn = 1; //retorna ao mes 1
+				}
+				_up=false; //reseta o valor do botão UP para false.
+			}
+			if(_down)  //se o valor do botão DOWN for true.
+			{
+				if(tempMn>1)
+				{ //se o mes for maior que 1.
+					tempMn--; //diminuit um mes.
+				}
+				else
+				{ //se o mes for 1;
+					tempMn = 12;  //retorna ao mes 12.
+				}
+				_down=false; //reseta o valor do botão DOWN para false.
+			}
+			if(_yes) //se o valor do botão YES for true.
+			{
+				_yes=false;  //reseta o valor do botão YES para false.
+				//time.setMonth(tempMn);  //setta o valor do mes no rtc com o valor do tempMn
+				clock.set_mes(tempMn);
+				if(tempD>28)
+				{  //se o dia for maior ou igual a 28 quando o mes for mudado.
+					if(tempMn==2)
+					{  //se o mes for fevereiro
+						tempD=28; //tempD muda para dia 28.
+						//time.setDate(tempD); //setta o dia no rtc para 28.
+						clock.set_dia(tempD, tempMn);
+					}
+					else if(tempD>30)
+					{  //se o mes não for fevereiro e o dia for maior que 31.
+						if(tempMn < 8)
+						{ //se o mes for antes de agosto.
+							if(tempMn % 2 == 0)
+							{ //se o mes for par(meses pares antes de agosto tem 30 dias).
+								tempD = 30; //tempD muda para dia 30.
+								//time.setDate(tempD); //setta o dia no rtc para 30.
+								clock.set_dia(tempD, tempMn);
+							}
+						}
+						else if(tempMn % 2 != 0)
+						{ //se o mes for pelo menos agosto e impar(meses impares a partir de agosto tem 30 dias).
+							tempD = 30; //tempD muda para dia 30.
+							//time.setDate(tempD); //setta o dia no rtc para 30.
+							clock.set_dia(tempD, tempMn);
+						}
+					}
+				}
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.        
+				track++;  //avança para a proxima track.
+			}
+			if(_no)  //se o valor do botão NO for true.
+			{
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				_no=false; //reseta o valor do botão NO para false.
+				track--;  //retorna a track anterior.
+			}      
+			break;  //final da track 3.
+		}
+		case 4: //ano
+		{
+			if(_up)  //se o valor do botão UP for true.
+			{
+				tempY++;  //adiciona um numero ao valor de ano.
+				_up=false; //reseta o valor do botão UP para false.
+			}
+			if(_down)  //se o valor do botão DOWN for true.
+			{
+				tempY--;  //diminui o valor de ano.
+				_down=false; //reseta o valor do botão DOWN para false.
+			}
+			if(_yes) //se o valor do botão YES for true.
+			{
+				//time.setYear(tempY);  //setta o valor no rtc do ano com valor em tempY.
+				clock.set_ano(tempY);
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				_yes=false;  //resetar o valor de YES para false.
+				track = 0; //retorna a track 0 representando a hora.
+				return true;
+			}
+			if(_no)  //se o valor do botão NO for true.
+			{
+				doing=false;    //reseta o valor de doing para que a proxima vez que adjustClock for chamado que os valores das variaveis sejam recuperados do rtc.
+				_no=false; //resetar o valor do botão NO para false.
+				track--;  //retornar a track anterior.
+			}
+			break;  //fim da track 4 representando o ano
+		}
+	}
+	/////////////////////////////////////////////////////////////////////////////////////
+	return false;
+}
+
+
+bool red_beryl::deletaLeitura(int delPos)
+{   /* Função deletaLeitura, recebe como paramento um int delPos(deleta posição) que será a posição da leitura na EEPROM a ser deletada. */
+	if(delPos>EEPROM.read(0) || delPos<0 )
+	{    //verificar se o numero recebido esta dentro do numero de leituras possiveis.
+		Serial.println("Numero de posição recebido superior ao numero de leituras reconhecidas na EEPROM, ou Negativo. Retornando 'false'");
+		return false;
+	}
+	else
+	{   //se o numero recebido estiver dentro do numero de leituras possiveis
+		leitura lTemp;    //inicializa uma leitura temporaria para receber o valor de leitura do proximo valor e substituir no valor atual.
+		for(int i=delPos;i<EEPROM.read(0);i++)
+		{   //EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
+                                              //EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);   //salva a nova leitura na EEPROM.
+			EEPROM.get( 1+ (sizeof(leitura)*(i+1)) ,lTemp );   //lTemp recebe o valor da proxima leitura.
+			EEPROM.put( 1+ (sizeof(leitura)*i), lTemp );       //endereço EEPROM selecionado atual[i] recebe lTemp.
+			Serial.print("Posição ");Serial.print(i);Serial.print(" substituida por leitura na posição ");Serial.println(i+1);
+		}
+		for(int i=1+(EEPROM.read(0)*sizeof(leitura)); i<=(EEPROM.read(0)+1)*sizeof(leitura); i++)
+		{    //logica de apagar o ultimo endereço.
+			EEPROM.write(i,0);
+			Serial.println("Endereço final apagado.");
+		}
+		EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
+		Serial.println("DeletaLeitura concluido.");
+		return true;
+	}
+}
+
+void red_beryl::imprimeEscolha(int i, int l, leitura lt, bool s)
+{    //função imprimeEscolha, que recebe o i da posição, a struct leitura com os valores e o bool s se for selecionado ou não.
+	display.setCursor(2, lineSize*l);    //reseta a posição do cursor, multiplicando o tamanho de uma linha pelo numero de linhas
+	if(s)
+	{    //se a linha for selecionada
+		display.setTextColor(BLACK,WHITE);    //Define a fonte na cor preta com fundo branco, selecionado.
+	}
+	else
+	{
+		display.setTextColor(WHITE);    //Define a fonta na cor branca, selecionado.
+	}
+	display.print(i);   //posição da leitura no historico.
+	display.print("- ");
+	display.print(lt.dia);   //imprime o valor dia.
+	display.print("/");    //separador
+	display.print(lt.mes);   //imprime o valor mes.
+	display.print("/");    //separador
+	display.print(lt.ano);    //imprime o valor ano.
+	display.print(" ");   //espaço.
+	display.print(lt.hora);   //imprime valor hora.
+	display.print(":");   //separador de horario.
+	if(lt.minuto<10)
+	{
+		display.print("0");
+	}
+	display.print(lt.minuto);   //imprime valor minuto.
+}
+
+void red_beryl::scrollBar(int j)
+{
+    //CONSERTAR O MOVIMENTO DE LAGARTA QUE A SCROLL BAR ESTA FAZENDO NO MOMENTO MAS NÃO RETIRAR O MOVIMENTO DE EXPANSÃO.
+    int offset = 100*(3*8)/(EEPROM.read(0)*8);
+    
+    //Inicializando um int offset que vai receber um a divisão do tamanho de uma tela pelo numero de opções multiplicadas pelo tamanho de uma linha, tudo multiplicado por 100.
+    offset = map(offset,1,100,(3*8)-1,0);
+    
+    //mapeando o valor de offset de 1 a 100 para o tamanho da tela até 1, ou seja, quanto mais proximo de 100 offset for, menor o offset será, em relação ao tamanho livre na tela,
+    // desaparecendo em 100 ou mais. de forma que, quando tiver apenas tres opções ou menos, a barra de scroll não aparecerá, mas a partir de quatro opções, a barra cobrira 75% do espaço livre
+    //na tela, dividindo os 25% restantes entre o [numero de opções -1], no caso [4-1=(3)], cada opção alem da selecionada contara com aproximadamente 8,333% para fazer offset relevante a posição
+    //da opção selecionada(j)
+
+    offset/=(EEPROM.read(0)-1);   //dividindo o offset pelo numero de opções -1.
+    
+    if(offset==0){
+      offset=1;
+    }
+    display.drawLine(display.width()-1, (lineSize+(j*offset)/2), display.width()-1,display.height()-1-((EEPROM.read(0)-(j+1))*offset)/2, WHITE);
 }

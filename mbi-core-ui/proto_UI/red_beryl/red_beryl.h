@@ -37,7 +37,8 @@ class red_beryl
 		bool _down;
 		bool _yes;
 		bool _no;
-    
+		
+		bool BLE;
 	public:
 		
 		red_beryl();
@@ -59,6 +60,9 @@ class red_beryl
 		bool nova_leitura();
 		bool historico();
 		bool relogio();
+		bool deletaLeitura(int delPos);
+		void imprimeEscolha(int i, int l, leitura lt, bool s);
+		void scrollBar(int j);
 };
 
 #endif
