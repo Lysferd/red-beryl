@@ -1,0 +1,45 @@
+#######################################
+# Syntax Coloring Map For red_crystal
+#######################################
+
+#######################################
+# Constructor (KEYWORD2)
+#######################################
+
+red_crystal	KEYWORD2
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+gain	KEYWORD1
+phase	KEYWORD1
+medReal	KEYWORD1
+medImag	KEYWORD1
+_freq	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+initialConfig	KEYWORD2
+configurar	KEYWORD2
+lerAD	KEYWORD2
+temperatura	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+AD	KEYWORD2
+
+#######################################
+# Constants (KEYWORD3)
+#######################################
+
+leitura1	KEYWORD3
+
+#######################################
+# Constants (LITERAL1)
+#######################################

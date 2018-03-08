@@ -20,8 +20,7 @@ red_fang::red_fang()
 }
 
 void red_fang::ler_serial()
-{
-	
+{	
 	if(_Get)
 	{
 		get(_num);
@@ -84,7 +83,13 @@ void red_fang::ler_serial()
 
 void red_fang::check_string(char str[])
 {
-	if(strcmp(str, "CHK")== 0)
+	if(strcmp(str, "VER")==0)
+	{
+		serialEnviar(VERSION);
+		Serial.print("versão: ");
+		Serial.println(VERSION);
+	}
+	else if(strcmp(str, "CHK")== 0)
 	{
 		char num[4];
 		itoa (EEPROM.read(0),num, 10);

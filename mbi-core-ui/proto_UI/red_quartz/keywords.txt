@@ -1,0 +1,57 @@
+#######################################
+# Syntax Coloring Map For red_quartz
+#######################################
+
+#######################################
+# Constructor (KEYWORD2)
+#######################################
+
+red_quartz	KEYWORD2
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+_segundo	KEYWORD1
+_minuto	KEYWORD1
+_hora	KEYWORD1
+_dia	KEYWORD1
+_mes	KEYWORD1
+_ano	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+doSomething	KEYWORD2
+segundo	KEYWORD2
+minuto	KEYWORD2
+hora	KEYWORD2
+dia	KEYWORD2
+mes	KEYWORD2
+ano	KEYWORD2
+		
+data_hora	KEYWORD2
+checkTime	KEYWORD2
+		
+set_segundo	KEYWORD2
+set_minuto	KEYWORD2
+set_hora	KEYWORD2
+set_dia	KEYWORD2
+set_mes	KEYWORD2
+set_ano	KEYWORD2
+		
+testa_segundo	KEYWORD2
+testa_minuto	KEYWORD2
+testa_hora	KEYWORD2
+testa_dia	KEYWORD2
+testa_mes	KEYWORD2
+testa_ano	KEYWORD2
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+time	KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################

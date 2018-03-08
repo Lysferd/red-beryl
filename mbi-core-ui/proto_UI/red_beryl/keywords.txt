@@ -1,0 +1,58 @@
+#######################################
+# Syntax Coloring Map For red_beryl
+#######################################
+
+
+#######################################
+# Constructor (KEYWORD2)
+#######################################
+
+red_beryl	KEYWORD2
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+_pinUP	KEYWORD1
+_pinDOWN	KEYWORD1
+_pinYES	KEYWORD1
+_pinNO	KEYWORD1
+_pinBAT	KEYWORD1
+_up	KEYWORD1
+_down	KEYWORD1
+_yes	KEYWORD1
+_no	KEYWORD1
+BLE	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+getBatteryPct	KEYWORD2
+upperBar	KEYWORD2
+checarPin	KEYWORD2
+menu	KEYWORD2
+menu_leitura	KEYWORD2
+menu_sinc	KEYWORD2
+menu_ajuste	KEYWORD2
+nova_leitura	KEYWORD2
+historico	KEYWORD2
+relogio	KEYWORD2
+deletaLeitura	KEYWORD2
+imprimeEscolha	KEYWORD2
+scrollBar	KEYWORD2
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+time	KEYWORD2
+display	KEYWORD2
+leitura0	KEYWORD2
+crystal	KEYWORD2
+clock	KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+
+#######################################

@@ -18,7 +18,6 @@ void loop() {
   fang.ler_serial();
   rb->display.clearDisplay();
   rb->clock.checkTime();
-  
   rb->checarPin();
   rb->menu();
   rb->upperBar();

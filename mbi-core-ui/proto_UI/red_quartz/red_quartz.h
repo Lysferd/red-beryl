@@ -33,7 +33,7 @@ class red_quartz
 		int hora();
 		int dia();
 		int mes();
-		int ano();
+		int ano();		
 		
 		char* data_hora(bool completo);
 		

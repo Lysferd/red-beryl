@@ -60,8 +60,6 @@ red_beryl::red_beryl()
 
 	display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false);
 	Serial.println("display inicializado.");
-	display.display();
-	delay(500);
 	display.clearDisplay();
 	
 	display.setCursor(display.width()/2-(3*2*6/2),display.height()/2-(1*2*7/2)+2);
@@ -90,21 +88,10 @@ red_beryl::red_beryl()
 	
 	BLE = true;
 	leitura0 = {0,0,0,0,0,0,0,0};
-	/*struct leitura leitura0;
 	
-	
-	
-	Serial.println(leitura0.freq);
-	Serial.println(leitura0.real);
-	Serial.println(leitura0.imag);
-	Serial.println(leitura0.hora);
-	Serial.println(leitura0.minuto);
-	Serial.println(leitura0.dia);
-	Serial.println(leitura0.mes);
-	Serial.println(leitura0.ano);
-	
-	Serial.println("now the crystal reading:");
-	*/
+	Serial.print("versão: ");
+	Serial.println(VERSION);
+	delay(1000);
 }
 
 void red_beryl::checarPin()
