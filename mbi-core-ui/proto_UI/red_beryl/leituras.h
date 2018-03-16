@@ -3,7 +3,7 @@
 
 typedef struct leituras {
 	unsigned long freq;
-	double real, imag, arrayR[11], arrayJ[11];
+	double real, imag;
 	int hora, minuto, dia, mes, ano;
 } leitura;
 

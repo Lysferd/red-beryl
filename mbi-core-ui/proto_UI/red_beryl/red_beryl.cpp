@@ -87,7 +87,7 @@ red_beryl::red_beryl()
 	_no = false;
 	
 	BLE = true;
-	leitura0 = {0,0,0, 0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0};
+	leitura0 = {0,0,0,0,0,0,0,0};
 	
 	Serial.print("versão: ");
 	Serial.println(VERSION);
@@ -493,13 +493,13 @@ bool red_beryl::menu_leitura()
 					}
 					leitura0 = crystal.lerAD();
 				
-					leitura0.hora=clock.hora();
-					leitura0.minuto=clock.minuto();
-					leitura0.dia=clock.dia();
-					leitura0.mes=clock.mes();
-					leitura0.ano=clock.ano();
+					int h=clock.hora();
+					int	m=clock.minuto();
+					int d=clock.dia();
+					int mn=clock.mes();
+					int a=clock.ano();
 				
-					//leitura0={leitura0.freq, leitura0.real, leitura0.imag, h, m, d, mn, a};
+					leitura0={leitura0.freq, leitura0.real, leitura0.imag, h, m, d, mn, a};
 				
 					Serial.println(leitura0.hora);
 					Serial.println(leitura0.minuto);
@@ -512,7 +512,7 @@ bool red_beryl::menu_leitura()
 					Serial.print(" leituras na eeprom, salvando na posição ");
 					Serial.println(EEPROM.read(0)+1);
 					
-					EEPROM.put( (EEPROM.read(0)*sizeof(leitura)+1), leitura0 );
+					EEPROM.put( (EEPROM.read(0)*22+1), leitura0 );
 					EEPROM.write(0, EEPROM.read(0)+1);
 					
 					_yes=false;

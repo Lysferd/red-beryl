@@ -18,7 +18,7 @@ red_crystal::red_crystal()
 {
 	Serial.println("Construtor basico red_crystal utilizado.");
 	Wire.setClock(400000);  //Definir a velocidade de clock do Wire para conversar com a AD.
-	leitura1 = {1,1,1, 1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1};
+	leitura1 = {1,1,1,1,1,1,1,1};
 	if(initialConfig()){
 		Serial.println("Configuração inicial da AD5933 concluida.");
 	}
@@ -129,9 +129,7 @@ leitura red_crystal::lerAD()
 		double impedance = 1/(magnitude*gain[i]);
 		Serial.print("  |Z|=");
 		Serial.println(impedance);
-		
-		arrayR[i] = real;
-		arrayJ[i] = imag;
+
 
 		i++;
 		cfreq +=inc;
@@ -146,8 +144,6 @@ leitura red_crystal::lerAD()
 	Serial.print("MedImag=");
 	Serial.println(medImag);
 	leitura leiTemp = {_freq, medReal, medImag};
-	memcpy(leiTemp.arrayR, arrayR, sizeof leiTemp.arrayR);
-	memcpy(leiTemp.arrayJ, arrayJ, sizeof leiTemp.arrayJ);
 
 	//Serial.print("EEPROM address 0:");Serial.println(EEPROM.read(0));
   
