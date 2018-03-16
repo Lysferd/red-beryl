@@ -31,6 +31,7 @@ class red_crystal
 		double gain[NUM_INCR+1];  // vetor double para conter o valor de ganho.
 		int phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
 		double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
+		double arrayR[11], arrayJ[11];
 		long _freq;
 		
 	public:

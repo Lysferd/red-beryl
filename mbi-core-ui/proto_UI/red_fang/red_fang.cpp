@@ -15,6 +15,8 @@ red_fang::red_fang()
 	Serial.println("Construtor basico red_fang utilizado.");
 	_Get=false;
 	_Req=false;
+	_freq = 1010;
+	_num = 0;
 	Serial1.begin(9600);
 	Serial.end();
 }
@@ -32,19 +34,24 @@ void red_fang::ler_serial()
 		if(!done)
 		{
 			lt = beryl->crystal.lerAD();
-			
+			/*
 			int h = beryl->clock.hora();
 			int	m = beryl->clock.minuto();
 			int d = beryl->clock.dia();
 			int mn = beryl->clock.mes();
 			int a = beryl->clock.ano();
+			*/
 			
-			lt={lt.freq, lt.real, lt.imag, h, m, d, mn, a};
-			
+			lt.hora = beryl->clock.hora();
+			lt.minuto = beryl->clock.minuto();
+			lt.dia = beryl->clock.dia();
+			lt.mes = beryl->clock.mes();
+			lt.ano = beryl->clock.ano();
+						
 			Serial.println("Leitura concluida.");
-			EEPROM.put( ((EEPROM.read(0)*sizeof(leitura))+1)  , lt);  //salva a nova leitura na EEPROM.
+			EEPROM.put( ( ( EEPROM.read(0)*sizeof(leitura) )+1)  , lt);  //salva a nova leitura na EEPROM.
 			Serial.println("Salvo na EEPROM.");
-			EEPROM.write(0,(EEPROM.read(0)+1));    //o valor da posição 'i' recebe '0'.
+			EEPROM.write(0 , ( EEPROM.read(0)+1 ));    //o valor da posição '0' recebe 'i'.
 			done=true;
 		}
 		else
@@ -52,8 +59,15 @@ void red_fang::ler_serial()
 			static int inf = 0;
 			if(!serialLeitura(lt, inf))
 			{
+				if(inf!=3)
+				{
+					inf++;
+					delay(20);
+				}
+			}
+			else if(inf==3)
+			{
 				inf++;
-				delay(20);
 			}
 			else
 			{
@@ -67,8 +81,9 @@ void red_fang::ler_serial()
 	{
 		char comStr[4];
 		int i=0;
-		Serial.print("Serial1 enviou algo:"); Serial.print(Serial1.available()); Serial.println(" caracteres.");
-		while(Serial1.available()>0 && i<3 ){
+		Serial.print("Serial1 enviou algo: "); Serial.print(Serial1.available()); Serial.println(" caracteres.");
+		while(Serial1.available()>0 && i<3 )
+		{
 			Serial.print(i);
 			comStr[i]=Serial1.read();
 			Serial.print(comStr[i]);
@@ -89,7 +104,7 @@ void red_fang::check_string(char str[])
 		Serial.print("versão: ");
 		Serial.println(VERSION);
 	}
-	else if(strcmp(str, "CHK")== 0)
+	else if(strcmp(str, "CHK")==0)
 	{
 		char num[4];
 		itoa (EEPROM.read(0),num, 10);
@@ -120,13 +135,13 @@ void red_fang::check_string(char str[])
 			Serial.print("|");
 			Serial.println(inStr);
 			char *ptr;
-			int num = strtol(inStr, &ptr, 10);
+			_num = strtol(inStr, &ptr, 10);
 			Serial.print("NUM=");
-			Serial.println(num);
+			Serial.println(_num);
 			Serial.print("PTR='");
 			Serial.print(ptr);
 			Serial.println("'");
-			if(deletaLeitura(num-1))
+			if(deletaLeitura(_num-1))
 			{
 				Serial.println("Concluido.");
 				serialEnviar("OK");
@@ -464,27 +479,33 @@ void red_fang::serialEnviar(char message[])
     delay(50);
 }
 bool red_fang::deletaLeitura(int delPos)
+
 {   /* Função deletaLeitura, recebe como paramento um int delPos(deleta posição) que será a posição da leitura na EEPROM a ser deletada. */
-  if(delPos>EEPROM.read(0) || delPos<0 ){    //verificar se o numero recebido esta dentro do numero de leituras possiveis.
-    Serial.println("Numero de posição recebido superior ao numero de leituras reconhecidas na EEPROM, ou Negativo. Retornando 'false'");
-    return false;
-  }
-  else{   //se o numero recebido estiver dentro do numero de leituras possiveis
-    leitura lTemp;    //inicializa uma leitura temporaria para receber o valor de leitura do proximo valor e substituir no valor atual.
-    for(int i=delPos;i<EEPROM.read(0);i++){   //EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
+	Serial.print("deletaleitura chamado com posição:");Serial.println(delPos);
+	if(delPos>EEPROM.read(0) || delPos<0 )
+	{    //verificar se o numero recebido esta dentro do numero de leituras possiveis.
+		Serial.println("Numero de posição recebido superior ao numero de leituras reconhecidas na EEPROM, ou Negativo. Retornando 'false'");
+		return false;
+	}
+	else
+	{   //se o numero recebido estiver dentro do numero de leituras possiveis
+		leitura lTemp;    //inicializa uma leitura temporaria para receber o valor de leitura do proximo valor e substituir no valor atual.
+		for(int i=delPos;i<EEPROM.read(0);i++)
+		{   //EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
                                               //EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);   //salva a nova leitura na EEPROM.
-      EEPROM.get( 1+ (sizeof( leitura)*(i+1)) ,lTemp );   //lTemp recebe o valor da proxima leitura.
-      EEPROM.put( 1+ (sizeof( leitura)*i), lTemp );       //endereço EEPROM selecionado atual[i] recebe lTemp.
-      Serial.print("Posição ");Serial.print(i);Serial.print(" substituida por leitura na posição ");Serial.println(i+1);
-    }
-    for(int i=1+(EEPROM.read(0)*sizeof( leitura)); i<=(EEPROM.read(0)+1)*sizeof( leitura); i++){    //logica de apagar o ultimo endereço.
-      EEPROM.write(i,0);
-      Serial.println("Endereço final apagado.");
-    }
-    EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
-    Serial.println("DeletaLeitura concluido.");
-    return true;
-  }
+			EEPROM.get( 1+ ( sizeof(leitura)*(i+1) ) ,lTemp );   //lTemp recebe o valor da proxima leitura.
+			EEPROM.put( 1+ ( sizeof(leitura)*i ), lTemp );       //endereço EEPROM selecionado atual[i] recebe lTemp.
+			Serial.print("Posição ");Serial.print(i);Serial.print(" substituida por leitura na posição ");Serial.println(i+1);
+		}
+		for(int i= 1+ ( (EEPROM.read(0)-1)*sizeof(leitura)) ; i<=(EEPROM.read(0))*sizeof( leitura); i++)
+		{    //logica de apagar o ultimo endereço.
+			EEPROM.write(i,0);
+			Serial.println("Endereço final apagado.");
+		}
+		EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
+		Serial.println("DeletaLeitura concluido.");
+		return true;
+	}
 }
 
 bool red_fang::serialLeitura(leitura lt, int i)
@@ -529,24 +550,56 @@ bool red_fang::serialLeitura(leitura lt, int i)
       break;
     }
     case 1:{    //1 é referente ao segundo ciclo referente ao valor REAL da leitura.
-      char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-      strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
-      dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
-      serialEnviar(lStr);   //chama a função serialEnviar.
-      
-      return false;   //retorna false
-      break;
+		char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+		strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+		dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
+		serialEnviar(lStr);   //chama a função serialEnviar.
+
+		return false;   //retorna false
+		break;
+		
     }
     case 2:{    //2 é referente ao terceiro ciclo referente ao valor IMAGINARIO da leitura.
-      char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-      strcpy (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
-      dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor imaginario.
-      serialEnviar(lStr);   //chama a função serialEnviar.
-      
-      return false;   //retorna false
-      break;
+		char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+
+		strcpy (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
+		dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor imaginario.
+		serialEnviar(lStr);   //chama a função serialEnviar.
+		
+		return false;   //retorna false
+		break;
     }
-    case 3:{    //3 é referente ao quarto ciclo referente ao valor de FREQUENCIA da leitura.
+	case 3:
+	{
+		static int t=0, st=0;
+		char lStr[30];
+		if(t<22)
+		{
+			st=t/2;
+			if(t%2==0)
+			{
+				strcpy (lStr, "R");
+				dtostrf(lt.arrayR[st], 2, 2, &lStr[strlen(lStr)]);
+				serialEnviar(lStr);
+				t++;
+			}
+			else
+			{
+				strcpy (lStr, "J");
+				dtostrf(lt.arrayJ[st], 2, 2, &lStr[strlen(lStr)]);
+				serialEnviar(lStr);
+				t++;
+			}
+			return false;
+		}
+		else
+		{
+			t=0;
+			return true;
+		}
+		break;
+	}
+    case 4:{    //3 é referente ao quarto ciclo referente ao valor de FREQUENCIA da leitura.
       char lStr[30], filler[30];    //Inicializar um char lStr para recebe tudo e passar a proxima função e um filler para ajudar a construir a string.
       strcpy (lStr, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
       int n = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.

@@ -56,8 +56,10 @@ static const unsigned char PROGMEM BT2_bmp[] =
 red_beryl::red_beryl()
 {
 	Serial.println("Construtor basico red_beryl utilizado.");
-	Wire.begin();
-
+	
+	Serial.print("tamanho de uma leitura: ");
+	Serial.println(sizeof(leitura));
+	
 	display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false);
 	Serial.println("display inicializado.");
 	display.clearDisplay();
@@ -87,11 +89,11 @@ red_beryl::red_beryl()
 	_no = false;
 	
 	BLE = true;
-	leitura0 = {0,0,0,0,0,0,0,0};
+	leitura0 = {0};
 	
 	Serial.print("versão: ");
 	Serial.println(VERSION);
-	delay(1000);
+	//delay(1000);
 }
 
 void red_beryl::checarPin()
@@ -195,7 +197,7 @@ void red_beryl::upperBar()    // barra superior.
 	//Serial.println(display.width());
 	
 	display.print(timeStr);
-	
+	free(timeStr);
 	//Serial.println("relogio");
 	
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
@@ -493,13 +495,13 @@ bool red_beryl::menu_leitura()
 					}
 					leitura0 = crystal.lerAD();
 				
-					int h=clock.hora();
-					int	m=clock.minuto();
-					int d=clock.dia();
-					int mn=clock.mes();
-					int a=clock.ano();
+					leitura0.hora=clock.hora();
+					leitura0.minuto=clock.minuto();
+					leitura0.dia=clock.dia();
+					leitura0.mes=clock.mes();
+					leitura0.ano=clock.ano();
 				
-					leitura0={leitura0.freq, leitura0.real, leitura0.imag, h, m, d, mn, a};
+					//leitura0={leitura0.freq, leitura0.real, leitura0.imag, h, m, d, mn, a};
 				
 					Serial.println(leitura0.hora);
 					Serial.println(leitura0.minuto);
@@ -512,7 +514,7 @@ bool red_beryl::menu_leitura()
 					Serial.print(" leituras na eeprom, salvando na posição ");
 					Serial.println(EEPROM.read(0)+1);
 					
-					EEPROM.put( (EEPROM.read(0)*22+1), leitura0 );
+					EEPROM.put( (EEPROM.read(0)*sizeof(leitura)+1), leitura0 );
 					EEPROM.write(0, EEPROM.read(0)+1);
 					
 					_yes=false;
