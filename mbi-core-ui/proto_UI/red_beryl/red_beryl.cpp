@@ -56,8 +56,10 @@ static const unsigned char PROGMEM BT2_bmp[] =
 red_beryl::red_beryl()
 {
 	Serial.println("Construtor basico red_beryl utilizado.");
-	Wire.begin();
-
+	
+	Serial.print("tamanho de uma leitura: ");
+	Serial.println(sizeof(leitura));
+	
 	display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false);
 	Serial.println("display inicializado.");
 	display.clearDisplay();
@@ -87,11 +89,11 @@ red_beryl::red_beryl()
 	_no = false;
 	
 	BLE = true;
-	leitura0 = {0,0,0, 0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0};
+	leitura0 = {0};
 	
 	Serial.print("versão: ");
 	Serial.println(VERSION);
-	delay(1000);
+	//delay(1000);
 }
 
 void red_beryl::checarPin()
@@ -195,7 +197,7 @@ void red_beryl::upperBar()    // barra superior.
 	//Serial.println(display.width());
 	
 	display.print(timeStr);
-	
+	free(timeStr);
 	//Serial.println("relogio");
 	
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura

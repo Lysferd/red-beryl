@@ -18,7 +18,7 @@ red_crystal::red_crystal()
 {
 	Serial.println("Construtor basico red_crystal utilizado.");
 	Wire.setClock(400000);  //Definir a velocidade de clock do Wire para conversar com a AD.
-	leitura1 = {1,1,1, 1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1};
+	leitura1 = {1};
 	if(initialConfig()){
 		Serial.println("Configuração inicial da AD5933 concluida.");
 	}
