@@ -14,7 +14,7 @@
         <!--患者表-->
         <scene sceneID="naO-Kn-nyf">
             <objects>
-                <viewController id="iGq-NR-X4T" userLabel="患者表" customClass="PatientListView" customModule="mbi_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iGq-NR-X4T" userLabel="患者表" customClass="ListPatientView" customModule="mbi_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ga-fy-aAU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,14 +54,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Pacientes" id="hlz-vQ-Hig">
                         <leftBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="TF4-cf-HEV">
-                                <connections>
-                                    <action selector="refreshTable:" destination="iGq-NR-X4T" id="r69-iG-zNL"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem systemItem="trash" id="XZU-pW-vcS">
                                 <connections>
                                     <action selector="destroyTable:" destination="iGq-NR-X4T" id="7bV-cg-W0s"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="TF4-cf-HEV">
+                                <connections>
+                                    <action selector="refreshTable:" destination="iGq-NR-X4T" id="r69-iG-zNL"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -474,7 +474,7 @@
                                                     <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged:" destination="C3y-1f-W8a" eventType="editingChanged" id="oUM-Uc-lPh"/>
                                                     </connections>
@@ -499,7 +499,7 @@
                                                     <rect key="frame" x="16" y="-1" width="343" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next" textContentType="name"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged:" destination="C3y-1f-W8a" eventType="editingChanged" id="NX3-B8-p4E"/>
                                                     </connections>
@@ -524,7 +524,7 @@
                                                     <rect key="frame" x="16" y="-1" width="343" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next" textContentType="additional-name"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -546,7 +546,7 @@
                                                     <rect key="frame" x="16" y="-1" width="343" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next" textContentType="family-name"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -568,7 +568,7 @@
                                                     <rect key="frame" x="16" y="-1" width="343" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>

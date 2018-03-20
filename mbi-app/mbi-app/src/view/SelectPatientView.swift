@@ -12,9 +12,10 @@ class SelectPatientView: UIViewController {
 
   @IBOutlet weak var patientsTable: UITableView!
   let datasource: PatientsDataSource
+  public var selection: Patient?
 
   required init?(coder aDecoder: NSCoder) {
-    datasource = PatientsDataSource([])
+    datasource = PatientsDataSource(selectable: true)
     
     super.init(coder: aDecoder)
   }
@@ -25,6 +26,14 @@ class SelectPatientView: UIViewController {
     patientsTable.reloadData()
 
     super.viewDidLoad()
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+
+    if let index = patientsTable.indexPathForSelectedRow {
+      selection = datasource[index]
+    }
   }
 
 }

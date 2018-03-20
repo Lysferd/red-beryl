@@ -39,6 +39,7 @@ class BTDiscovery: NSObject {
 
   // MARK: - Scanning
   func startScanning() {
+    if centralManager.isScanning { return }
     centralManager.scanForPeripherals(withServices: [ServiceUUID])
   }
 

@@ -10,32 +10,38 @@
 		E507F67F20360C160058280A /* NewExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507F67E20360C160058280A /* NewExamView.swift */; };
 		E507F68120360CC00058280A /* ExamsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507F68020360CC00058280A /* ExamsTab.storyboard */; };
 		E507F68320360CCB0058280A /* PatientsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507F68220360CCB0058280A /* PatientsTab.storyboard */; };
-		E507F685203627360058280A /* MeasureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507F684203627360058280A /* MeasureListView.swift */; };
+		E507F685203627360058280A /* SelectMeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507F684203627360058280A /* SelectMeasureView.swift */; };
 		E5233B41203761B700F8E92F /* MeasuresDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B40203761B700F8E92F /* MeasuresDataSource.swift */; };
 		E5233B432037620B00F8E92F /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B422037620B00F8E92F /* Measure.swift */; };
 		E5233B452037690800F8E92F /* MeasureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B442037690800F8E92F /* MeasureCell.swift */; };
 		E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */; };
+		E5330D79205DC53800764D38 /* Impedance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5330D78205DC53800764D38 /* Impedance.swift */; };
+		E544CD87205346DF007C8292 /* ExamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544CD86205346DF007C8292 /* ExamDetailView.swift */; };
 		E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5491BA8202A318E006796A0 /* ExamCell.swift */; };
 		E551FB6D2032299F002BA130 /* SettingsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E551FB6C2032299F002BA130 /* SettingsTab.storyboard */; };
-		E567B64F2020EB7800BEBF21 /* ExamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B64E2020EB7800BEBF21 /* ExamListView.swift */; };
+		E567B64F2020EB7800BEBF21 /* ListExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B64E2020EB7800BEBF21 /* ListExamView.swift */; };
 		E567B6512020EBA900BEBF21 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6502020EBA900BEBF21 /* Exam.swift */; };
 		E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */; };
+		E5847CCA205D90DF00C47FD1 /* BIVA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5847CC9205D90DF00C47FD1 /* BIVA.swift */; };
+		E5847CCC205D918A00C47FD1 /* ChartDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5847CCB205D918A00C47FD1 /* ChartDefaults.swift */; };
 		E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */; };
 		E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */; };
 		E58DEA30201BD04400C3FDE4 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA22201BD04300C3FDE4 /* Device.swift */; };
 		E58DEA31201BD04400C3FDE4 /* PatientDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA23201BD04300C3FDE4 /* PatientDataSource.swift */; };
 		E58DEA32201BD04400C3FDE4 /* BTDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */; };
 		E58DEA33201BD04400C3FDE4 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */; };
-		E58DEA34201BD04400C3FDE4 /* PeripheralListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA26201BD04300C3FDE4 /* PeripheralListView.swift */; };
+		E58DEA34201BD04400C3FDE4 /* ListPeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA26201BD04300C3FDE4 /* ListPeripheralView.swift */; };
 		E58DEA35201BD04400C3FDE4 /* NewPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA27201BD04300C3FDE4 /* NewPatientView.swift */; };
 		E58DEA36201BD04400C3FDE4 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA28201BD04300C3FDE4 /* Patient.swift */; };
 		E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA29201BD04300C3FDE4 /* BTService.swift */; };
 		E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */; };
-		E58DEA43201BD43700C3FDE4 /* PatientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA42201BD43700C3FDE4 /* PatientListView.swift */; };
+		E58DEA43201BD43700C3FDE4 /* ListPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA42201BD43700C3FDE4 /* ListPatientView.swift */; };
+		E58EEC80205167E100FC1F5E /* SelectSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC7F205167E100FC1F5E /* SelectSegmentView.swift */; };
+		E58EEC86205185B900FC1F5E /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC85205185B900FC1F5E /* Segment.swift */; };
+		E58EEC88205189C200FC1F5E /* SegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC87205189C200FC1F5E /* SegmentCell.swift */; };
+		E58EEC8A20518BAC00FC1F5E /* SegmentDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */; };
 		E596B5742046FA1300CEC9C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B5732046FA1300CEC9C6 /* Database.swift */; };
 		E596B5762047453E00CEC9C6 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E596B5752047453E00CEC9C6 /* Cartfile */; };
-		E596B5782047479800CEC9C6 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E596B5772047479800CEC9C6 /* SQLite.framework */; };
-		E596B5792047479800CEC9C6 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E596B5772047479800CEC9C6 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */; };
 		E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767541F97E5B800083C11 /* AppDelegate.swift */; };
 		E597675C1F97E5B800083C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675A1F97E5B800083C11 /* Main.storyboard */; };
@@ -43,6 +49,11 @@
 		E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */; };
 		E597676C1F97E5B800083C11 /* mbi_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E597676B1F97E5B800083C11 /* mbi_appTests.swift */; };
 		E59767771F97E5B800083C11 /* mbi_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767761F97E5B800083C11 /* mbi_appUITests.swift */; };
+		E5BF57C1205964B700CFBF2C /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */; };
+		E5BF57C2205964B700CFBF2C /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5CCDF5520534DC5003B1406 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5CCDF5120534DA6003B1406 /* SQLite.framework */; };
+		E5CCDF5620534DC5003B1406 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5CCDF5120534DA6003B1406 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5E568F7204EEDD5009AC05D /* SelectableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E568F6204EEDD5009AC05D /* SelectableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +80,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E596B5792047479800CEC9C6 /* SQLite.framework in Embed Frameworks */,
+				E5CCDF5620534DC5003B1406 /* SQLite.framework in Embed Frameworks */,
+				E5BF57C2205964B700CFBF2C /* SwiftCharts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,36 +89,43 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E507F67E20360C160058280A /* NewExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewExamView.swift; path = "mbi-app/src/table/NewExamView.swift"; sourceTree = SOURCE_ROOT; };
+		E507F67E20360C160058280A /* NewExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewExamView.swift; path = "mbi-app/src/view/NewExamView.swift"; sourceTree = SOURCE_ROOT; };
 		E507F68020360CC00058280A /* ExamsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExamsTab.storyboard; sourceTree = "<group>"; };
 		E507F68220360CCB0058280A /* PatientsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientsTab.storyboard; sourceTree = "<group>"; };
-		E507F684203627360058280A /* MeasureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureListView.swift; sourceTree = "<group>"; };
+		E507F684203627360058280A /* SelectMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMeasureView.swift; sourceTree = "<group>"; };
 		E5233B40203761B700F8E92F /* MeasuresDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuresDataSource.swift; sourceTree = "<group>"; };
 		E5233B422037620B00F8E92F /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		E5233B442037690800F8E92F /* MeasureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureCell.swift; sourceTree = "<group>"; };
 		E52F9769201F9E0E00EFF5BE /* mbi-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mbi-app.entitlements"; sourceTree = "<group>"; };
 		E52F976A201F9E4E00EFF5BE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E5330D78205DC53800764D38 /* Impedance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Impedance.swift; sourceTree = "<group>"; };
+		E544CD86205346DF007C8292 /* ExamDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamDetailView.swift; sourceTree = "<group>"; };
 		E5491BA8202A318E006796A0 /* ExamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCell.swift; sourceTree = "<group>"; };
 		E551FB6C2032299F002BA130 /* SettingsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTab.storyboard; sourceTree = "<group>"; };
-		E567B64E2020EB7800BEBF21 /* ExamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamListView.swift; sourceTree = "<group>"; };
+		E567B64E2020EB7800BEBF21 /* ListExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExamView.swift; sourceTree = "<group>"; };
 		E567B6502020EBA900BEBF21 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamsDataSource.swift; sourceTree = "<group>"; };
+		E5847CC9205D90DF00C47FD1 /* BIVA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIVA.swift; sourceTree = "<group>"; };
+		E5847CCB205D918A00C47FD1 /* ChartDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDefaults.swift; sourceTree = "<group>"; };
 		E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
 		E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesDataSource.swift; sourceTree = "<group>"; };
 		E58DEA22201BD04300C3FDE4 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		E58DEA23201BD04300C3FDE4 /* PatientDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDataSource.swift; sourceTree = "<group>"; };
 		E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDiscovery.swift; sourceTree = "<group>"; };
 		E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
-		E58DEA26201BD04300C3FDE4 /* PeripheralListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralListView.swift; sourceTree = "<group>"; };
+		E58DEA26201BD04300C3FDE4 /* ListPeripheralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPeripheralView.swift; sourceTree = "<group>"; };
 		E58DEA27201BD04300C3FDE4 /* NewPatientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPatientView.swift; sourceTree = "<group>"; };
 		E58DEA28201BD04300C3FDE4 /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		E58DEA29201BD04300C3FDE4 /* BTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTService.swift; sourceTree = "<group>"; };
 		E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
-		E58DEA42201BD43700C3FDE4 /* PatientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListView.swift; sourceTree = "<group>"; };
+		E58DEA42201BD43700C3FDE4 /* ListPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPatientView.swift; sourceTree = "<group>"; };
+		E58EEC7F205167E100FC1F5E /* SelectSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSegmentView.swift; sourceTree = "<group>"; };
+		E58EEC85205185B900FC1F5E /* Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		E58EEC87205189C200FC1F5E /* SegmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCell.swift; sourceTree = "<group>"; };
+		E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentDatasource.swift; sourceTree = "<group>"; };
 		E596B5732046FA1300CEC9C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		E596B5752047453E00CEC9C6 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		E596B5772047479800CEC9C6 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPatientView.swift; sourceTree = "<group>"; };
 		E59767511F97E5B800083C11 /* mbi-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mbi-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767541F97E5B800083C11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +139,9 @@
 		E59767721F97E5B800083C11 /* mbi-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mbi-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767761F97E5B800083C11 /* mbi_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mbi_appUITests.swift; sourceTree = "<group>"; };
 		E59767781F97E5B800083C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCharts.framework; sourceTree = "<group>"; };
+		E5CCDF5120534DA6003B1406 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		E5E568F6204EEDD5009AC05D /* SelectableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableCell.swift; sourceTree = "<group>"; };
 		E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -128,8 +150,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BF57C1205964B700CFBF2C /* SwiftCharts.framework in Frameworks */,
+				E5CCDF5520534DC5003B1406 /* SQLite.framework in Frameworks */,
 				E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */,
-				E596B5782047479800CEC9C6 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,12 +176,11 @@
 		E58DEA3B201BD05500C3FDE4 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				E58DEA41201BD09100C3FDE4 /* view */,
-				E58DEA40201BD08400C3FDE4 /* datasource */,
-				E58DEA3F201BD07B00C3FDE4 /* table */,
 				E58DEA3E201BD07500C3FDE4 /* cell */,
-				E58DEA3D201BD06600C3FDE4 /* structure */,
+				E58DEA40201BD08400C3FDE4 /* datasource */,
 				E58DEA3C201BD05900C3FDE4 /* modules */,
+				E58DEA3D201BD06600C3FDE4 /* structures */,
+				E58DEA41201BD09100C3FDE4 /* view */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -167,47 +189,44 @@
 			isa = PBXGroup;
 			children = (
 				E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */,
-				E596B5732046FA1300CEC9C6 /* Database.swift */,
 				E58DEA29201BD04300C3FDE4 /* BTService.swift */,
+				E596B5732046FA1300CEC9C6 /* Database.swift */,
+				E5847CC9205D90DF00C47FD1 /* BIVA.swift */,
 			);
 			path = modules;
 			sourceTree = "<group>";
 		};
-		E58DEA3D201BD06600C3FDE4 /* structure */ = {
+		E58DEA3D201BD06600C3FDE4 /* structures */ = {
 			isa = PBXGroup;
 			children = (
+				E5330D78205DC53800764D38 /* Impedance.swift */,
+				E5847CCB205D918A00C47FD1 /* ChartDefaults.swift */,
 				E58DEA22201BD04300C3FDE4 /* Device.swift */,
-				E58DEA28201BD04300C3FDE4 /* Patient.swift */,
 				E567B6502020EBA900BEBF21 /* Exam.swift */,
 				E5233B422037620B00F8E92F /* Measure.swift */,
+				E58DEA28201BD04300C3FDE4 /* Patient.swift */,
+				E58EEC85205185B900FC1F5E /* Segment.swift */,
 			);
-			path = structure;
+			path = structures;
 			sourceTree = "<group>";
 		};
 		E58DEA3E201BD07500C3FDE4 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				E5233B442037690800F8E92F /* MeasureCell.swift */,
 				E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */,
 				E5491BA8202A318E006796A0 /* ExamCell.swift */,
+				E5233B442037690800F8E92F /* MeasureCell.swift */,
 				E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */,
+				E58EEC87205189C200FC1F5E /* SegmentCell.swift */,
+				E5E568F6204EEDD5009AC05D /* SelectableCell.swift */,
 			);
 			path = cell;
-			sourceTree = "<group>";
-		};
-		E58DEA3F201BD07B00C3FDE4 /* table */ = {
-			isa = PBXGroup;
-			children = (
-				E507F67E20360C160058280A /* NewExamView.swift */,
-				E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */,
-				E58DEA27201BD04300C3FDE4 /* NewPatientView.swift */,
-			);
-			path = table;
 			sourceTree = "<group>";
 		};
 		E58DEA40201BD08400C3FDE4 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
+				E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */,
 				E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */,
 				E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */,
 				E5233B40203761B700F8E92F /* MeasuresDataSource.swift */,
@@ -219,19 +238,55 @@
 		E58DEA41201BD09100C3FDE4 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */,
-				E58DEA26201BD04300C3FDE4 /* PeripheralListView.swift */,
-				E567B64E2020EB7800BEBF21 /* ExamListView.swift */,
-				E58DEA42201BD43700C3FDE4 /* PatientListView.swift */,
-				E507F684203627360058280A /* MeasureListView.swift */,
+				E58EEC8220516A3B00FC1F5E /* Creation */,
+				E58EEC8320516A4400FC1F5E /* Detailing */,
+				E58EEC812051698400FC1F5E /* Listing */,
+				E58EEC8420516A4A00FC1F5E /* Selecting */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		E58EEC812051698400FC1F5E /* Listing */ = {
+			isa = PBXGroup;
+			children = (
+				E567B64E2020EB7800BEBF21 /* ListExamView.swift */,
+				E58DEA42201BD43700C3FDE4 /* ListPatientView.swift */,
+				E58DEA26201BD04300C3FDE4 /* ListPeripheralView.swift */,
+			);
+			name = Listing;
+			sourceTree = "<group>";
+		};
+		E58EEC8220516A3B00FC1F5E /* Creation */ = {
+			isa = PBXGroup;
+			children = (
+				E507F67E20360C160058280A /* NewExamView.swift */,
+				E58DEA27201BD04300C3FDE4 /* NewPatientView.swift */,
+			);
+			name = Creation;
+			sourceTree = "<group>";
+		};
+		E58EEC8320516A4400FC1F5E /* Detailing */ = {
+			isa = PBXGroup;
+			children = (
+				E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */,
+				E544CD86205346DF007C8292 /* ExamDetailView.swift */,
+			);
+			name = Detailing;
+			sourceTree = "<group>";
+		};
+		E58EEC8420516A4A00FC1F5E /* Selecting */ = {
+			isa = PBXGroup;
+			children = (
+				E507F684203627360058280A /* SelectMeasureView.swift */,
+				E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */,
+				E58EEC7F205167E100FC1F5E /* SelectSegmentView.swift */,
+			);
+			name = Selecting;
 			sourceTree = "<group>";
 		};
 		E59767481F97E5B800083C11 = {
 			isa = PBXGroup;
 			children = (
-				E596B5772047479800CEC9C6 /* SQLite.framework */,
 				E596B5752047453E00CEC9C6 /* Cartfile */,
 				E5F7601B1F9E67E800B7DFB9 /* Frameworks */,
 				E59767531F97E5B800083C11 /* mbi-app */,
@@ -289,6 +344,8 @@
 		E5F7601B1F9E67E800B7DFB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */,
+				E5CCDF5120534DA6003B1406 /* SQLite.framework */,
 				E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */,
 				E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */,
 			);
@@ -442,16 +499,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E58DEA43201BD43700C3FDE4 /* PatientListView.swift in Sources */,
+				E58DEA43201BD43700C3FDE4 /* ListPatientView.swift in Sources */,
+				E58EEC86205185B900FC1F5E /* Segment.swift in Sources */,
 				E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */,
 				E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */,
-				E507F685203627360058280A /* MeasureListView.swift in Sources */,
+				E507F685203627360058280A /* SelectMeasureView.swift in Sources */,
 				E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */,
 				E507F67F20360C160058280A /* NewExamView.swift in Sources */,
+				E58EEC80205167E100FC1F5E /* SelectSegmentView.swift in Sources */,
+				E5847CCA205D90DF00C47FD1 /* BIVA.swift in Sources */,
 				E5233B452037690800F8E92F /* MeasureCell.swift in Sources */,
 				E567B6512020EBA900BEBF21 /* Exam.swift in Sources */,
+				E5330D79205DC53800764D38 /* Impedance.swift in Sources */,
 				E58DEA32201BD04400C3FDE4 /* BTDiscovery.swift in Sources */,
 				E58DEA31201BD04400C3FDE4 /* PatientDataSource.swift in Sources */,
+				E544CD87205346DF007C8292 /* ExamDetailView.swift in Sources */,
 				E58DEA36201BD04400C3FDE4 /* Patient.swift in Sources */,
 				E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */,
 				E5233B41203761B700F8E92F /* MeasuresDataSource.swift in Sources */,
@@ -459,12 +521,16 @@
 				E58DEA33201BD04400C3FDE4 /* DeviceCell.swift in Sources */,
 				E58DEA30201BD04400C3FDE4 /* Device.swift in Sources */,
 				E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */,
-				E58DEA34201BD04400C3FDE4 /* PeripheralListView.swift in Sources */,
+				E58EEC88205189C200FC1F5E /* SegmentCell.swift in Sources */,
+				E5E568F7204EEDD5009AC05D /* SelectableCell.swift in Sources */,
+				E58DEA34201BD04400C3FDE4 /* ListPeripheralView.swift in Sources */,
+				E5847CCC205D918A00C47FD1 /* ChartDefaults.swift in Sources */,
+				E58EEC8A20518BAC00FC1F5E /* SegmentDatasource.swift in Sources */,
 				E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */,
 				E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */,
 				E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */,
 				E5233B432037620B00F8E92F /* Measure.swift in Sources */,
-				E567B64F2020EB7800BEBF21 /* ExamListView.swift in Sources */,
+				E567B64F2020EB7800BEBF21 /* ListExamView.swift in Sources */,
 				E596B5742046FA1300CEC9C6 /* Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,6 +706,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "mbi-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -661,6 +728,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "mbi-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

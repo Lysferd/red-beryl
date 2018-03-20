@@ -10,10 +10,12 @@ import UIKit
 
 class PatientsDataSource: NSObject {
   var patients: [Patient]
+  var selectable: Bool
 
-  init(_ patients: [Patient] = []) {
+  init(_ patients: [Patient] = [], selectable: Bool = false) {
     _ = dbSharedInstance
     self.patients = patients
+    self.selectable = selectable
 
     for patient in dbSharedInstance.selectPatients() {
       self.patients.append(patient)
@@ -22,9 +24,8 @@ class PatientsDataSource: NSObject {
 
   func append(_ patient: Patient) -> Bool {
     if patients.contains(where: { $0 == patient }) { return false }
-
-    dbSharedInstance.insertPatient(patient)
-
+    let id = dbSharedInstance.insertPatient(patient)
+    patient.row_id = id
     patients.append(patient)
     return true
   }
@@ -34,6 +35,16 @@ class PatientsDataSource: NSObject {
     for patient in dbSharedInstance.selectPatients() {
       self.patients.append(patient)
     }
+  }
+
+  subscript(index: Int) -> Patient {
+    get { return patients[index] }
+    set(obj) { patients.insert(obj, at: index) }
+  }
+
+  subscript(index: IndexPath) -> Patient {
+    get { return patients[index.item] }
+    set(obj) { patients.insert(obj, at: index.item) }
   }
 }
 
@@ -58,9 +69,17 @@ extension PatientsDataSource: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PatientCell.self)) as! PatientCell
-    let patient = patients[indexPath.row]
-    cell.name = patient.first_name + " " + patient.last_name
-    return cell
+    if selectable {
+      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SelectableCell.self)) as! SelectableCell
+      let patient = patients[indexPath.row]
+      cell.name = patient.first_name + " " + patient.last_name
+      return cell
+
+    } else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PatientCell.self)) as! PatientCell
+      let patient = patients[indexPath.row]
+      cell.name = patient.first_name + " " + patient.last_name
+      return cell
+    }
   }
 }

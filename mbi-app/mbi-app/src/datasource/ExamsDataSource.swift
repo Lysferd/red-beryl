@@ -13,13 +13,27 @@ class ExamsDataSource: NSObject {
   var exams: [Exam]
 
   init(_ exams: [Exam] = []) {
+    _ = dbSharedInstance
     self.exams = exams
+
+    for exam in dbSharedInstance.selectExams() {
+      self.exams.append(exam)
+    }
   }
 
   func append(_ exam: Exam) -> Bool {
-    //if exams.contains(where: { $0 == exam }) { return false }
+    if exams.contains(where: { $0 == exam }) { return false }
+    let id = dbSharedInstance.insertExam(exam)
+    exam.row_id = id
     exams.append(exam)
     return true
+  }
+
+  func reload() {
+    exams.removeAll()
+    for exam in dbSharedInstance.selectExams() {
+      self.exams.append(exam)
+    }
   }
 }
 
@@ -44,9 +58,12 @@ extension ExamsDataSource: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ExamCell.self)) as! ExamCell
-    //let exam = exams[indexPath.row]
+    let exam = exams[indexPath.row]
 
-    cell.name = "Person A"
+    cell.name = exam.patient_name
+    cell.reading = exam.segment_string + " @ " + exam.frequency_string
+    cell.date = exam.date_string
+    
     return cell
   }
 }

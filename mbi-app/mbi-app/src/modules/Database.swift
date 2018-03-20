@@ -23,7 +23,7 @@ class Database {
   var exams: Table!
 
   // Database Columns for PATIENT
-  let id = Expression<Int64>("id")
+  let id = Expression<Int>("id")
   let record = Expression<String>("record")
   let first_name = Expression<String>("first_name")
   let middle_name = Expression<String>("middle_name")
@@ -41,7 +41,22 @@ class Database {
   let regular_medication = Expression<String>("regular_medication") // ?
   let register_date = Expression<Date>("register_date")
   let update_date = Expression<Date>("update_date")
-  let exam_ids = Expression<String>("exam_ids")
+
+  // Database Columns for EXAM
+  //let id = Expression<Int>("id")
+  let patient_id = Expression<Int>("patient_id") // reference back to patient table
+  let segment = Expression<Int>("segment")
+  let height = Expression<Double>("height")
+  let weight = Expression<Double>("weight")
+  let date = Expression<Date>("date")
+  let frequency = Expression<Double>("frequency")
+
+  let r_values = Expression<String>("r_values")
+  let j_values = Expression<String>("j_values")
+
+  let real = Expression<Double>("real")
+  let imaginary = Expression<Double>("imaginary")
+
 
   // MARK: - Object Initialization
   init() {
@@ -57,62 +72,6 @@ class Database {
   }
 
   // MARK: - Patients Table
-  func selectPatients() -> [Patient] {
-    var rows: [Patient] = []
-
-    for row in try! db.prepare(patients) {
-      NSLog("Read from table: %d\t%@\t%@", row[id], row[record], row[first_name])
-      let ids: [Int]
-      if row[exam_ids].count > 0 {
-        ids = row[exam_ids].components(separatedBy: ",").map { Int($0)! }
-      } else {
-        ids = []
-      }
-
-      rows.append(Patient(record: row[record],
-                          first_name: row[first_name],
-                          middle_name: row[middle_name],
-                          last_name: row[last_name],
-                          personal_id: row[personal_id],
-                          birth_date: row[birth_date],
-                          phone_number: row[phone_number],
-                          email: row[email],
-                          address: row[address],
-                          city: row[city],
-                          state: row[state],
-                          country: row[country],
-                          blood_type: row[blood_type],
-                          risk_groups: row[risk_groups],
-                          regular_medication: row[regular_medication],
-                          register_date: row[register_date],
-                          update_date: row[update_date],
-                          exam_ids: ids
-        )
-      )
-    }
-
-    return rows
-  }
-
-  func insertPatient(_ patient: Patient) {
-    let insert = patients.insert(record <- patient.record,
-                                 first_name <- patient.first_name,
-                                 middle_name <- patient.middle_name,
-                                 last_name <- patient.last_name)
-    let rowid = try! db.run(insert)
-
-    NSLog("Inserting %d\t%@\t%@", rowid, patient.record, patient.first_name)
-  }
-
-  func dropPatient(_ patient: Patient) {
-    let row = patients.filter(record == patient.record)
-    try! db.run(row.delete())
-  }
-
-  func dropAllPatients() {
-    try! db.run(patients.delete())
-  }
-
   fileprivate func createPatientsTable(overwrite: Bool = false) {
     patients = Table("patients")
     if overwrite { try! db.run(patients.drop(ifExists: true)) }
@@ -136,8 +95,86 @@ class Database {
       t.column(regular_medication, defaultValue: "")
       t.column(register_date, defaultValue: Date())
       t.column(update_date, defaultValue: Date())
-      t.column(exam_ids, defaultValue: "")
     }))
+  }
+
+  func selectPatient(_ index: Int) -> Patient {
+    var patient: Patient?
+
+    for row in try! db.prepare(patients.filter(id == index)) {
+      patient = Patient(id: row[id],
+                        record: row[record],
+                        first_name: row[first_name],
+                        middle_name: row[middle_name],
+                        last_name: row[last_name],
+                        personal_id: row[personal_id],
+                        birth_date: row[birth_date],
+                        phone_number: row[phone_number],
+                        email: row[email],
+                        address: row[address],
+                        city: row[city],
+                        state: row[state],
+                        country: row[country],
+                        blood_type: row[blood_type],
+                        risk_groups: row[risk_groups],
+                        regular_medication: row[regular_medication],
+                        register_date: row[register_date],
+                        update_date: row[update_date]
+      )
+    }
+
+    guard patient != nil else { fatalError("No patient exists with ID \(index)") }
+    return patient!
+  }
+
+  func selectPatients() -> [Patient] {
+    var rows: [Patient] = []
+
+    for row in try! db.prepare(patients) {
+      rows.append(Patient(id: row[id],
+                          record: row[record],
+                          first_name: row[first_name],
+                          middle_name: row[middle_name],
+                          last_name: row[last_name],
+                          personal_id: row[personal_id],
+                          birth_date: row[birth_date],
+                          phone_number: row[phone_number],
+                          email: row[email],
+                          address: row[address],
+                          city: row[city],
+                          state: row[state],
+                          country: row[country],
+                          blood_type: row[blood_type],
+                          risk_groups: row[risk_groups],
+                          regular_medication: row[regular_medication],
+                          register_date: row[register_date],
+                          update_date: row[update_date]
+        )
+      )
+    }
+
+    return rows
+  }
+
+  func insertPatient(_ patient: Patient) -> Int {
+    let insert = patients.insert(record <- patient.record,
+                                 first_name <- patient.first_name,
+                                 middle_name <- patient.middle_name,
+                                 last_name <- patient.last_name)
+    let rowid = try! db.run(insert)
+
+    NSLog("Inserting %d\t%@\t%@", rowid, patient.record, patient.first_name)
+
+    return Int(rowid)
+  }
+
+  func dropPatient(_ patient: Patient) {
+    let row = patients.filter(id == patient.row_id)
+    try! db.run(row.delete())
+  }
+
+  func dropAllPatients() {
+    try! db.run(patients.delete())
   }
 
   // MARK: - Exams Table
@@ -147,7 +184,86 @@ class Database {
 
     try! db.run(exams.create(ifNotExists: true, block: { t in
       t.column(id, primaryKey: .autoincrement)
+      t.column(patient_id, references: patients, id)
+      t.column(segment)
+      t.column(height)
+      t.column(weight)
+      t.column(date)
+      t.column(frequency)
+      t.column(r_values)
+      t.column(j_values)
     }))
+  }
+
+  func selectExams() -> [Exam] {
+    var rows: [Exam] = []
+
+    for row in try! db.prepare(exams) {
+      var impedances: [Impedance] = []
+      let r_str = row[r_values].split(separator: "|")
+      let j_str = row[j_values].split(separator: "|")
+      for i in 0..<r_str.count {
+        if let r = Double(r_str[i]), let j = Double(j_str[i]) {
+          impedances.append(Impedance(real: r, imaginary: j))
+        }
+      }
+
+
+      rows.append(
+        Exam(
+          row_id: row[id],
+          patient_id: row[patient_id],
+          segment: row[segment],
+          height: row[height],
+          weight: row[weight],
+          date: row[date],
+          frequency: row[frequency],
+          impedances: impedances
+        )
+      )
+    }
+
+    return rows
+  }
+
+  func insertExam(_ exam: Exam) -> Int {
+    var r_string = ""
+    var j_string = ""
+    for i in 0..<exam.impedances.count {
+      r_string.append(String(exam.impedances[i].real))
+      j_string.append(String(exam.impedances[i].imaginary))
+
+      if i < exam.impedances.count-1 {
+        r_string.append("|")
+        j_string.append("|")
+      }
+    }
+
+    let insert = exams.insert(patient_id <- exam.patient_id,
+                              segment <- exam.segment,
+                              height <- exam.height,
+                              weight <- exam.weight,
+                              frequency <- exam.frequency,
+                              date <- exam.date,
+                              r_values <- r_string,
+                              j_values <- j_string)
+
+    let rowid = try! db.run(insert)
+
+    NSLog("Inserting %d\t%d\t%d", rowid, exam.patient_id)
+
+    return Int(rowid)
+  }
+
+  func dropExam(_ exam: Exam) {
+    if let row_id = exam.row_id {
+      let row = exams.filter(id == row_id)
+      try! db.run(row.delete())
+    }
+  }
+
+  func dropAllExams() {
+    try! db.run(exams.delete())
   }
 
 }

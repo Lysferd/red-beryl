@@ -10,7 +10,7 @@ import UIKit
 
 class MeasuresDataSource: NSObject {
 
-  var measures: [Measure]
+  fileprivate var measures: [Measure]
 
   init(_ measures: [Measure] = []) {
     self.measures = measures
@@ -25,6 +25,44 @@ class MeasuresDataSource: NSObject {
     return true
   }
 
+  func clear() {
+    measures.removeAll()
+  }
+
+  subscript(index: Int) -> Measure {
+    get { return measures[index] }
+    set(obj) { measures.insert(obj, at: index) }
+  }
+
+  subscript(indexes: [Int]) -> [Measure] {
+    get {
+      var tmp: [Measure] = []
+      for i in indexes { tmp.append(measures[i]) }
+      return tmp
+    }
+
+    set(objs) {
+      for i in indexes { measures[i] = objs[i] }
+    }
+  }
+
+  subscript(index: IndexPath) -> Measure {
+    get { return measures[index.item] }
+    set(obj) { measures.insert(obj, at: index.item) }
+  }
+
+  subscript(indexes: [IndexPath]) -> [Measure] {
+    get {
+      var tmp: [Measure] = []
+      for i in indexes { tmp.append(measures[i.item]) }
+      return tmp
+    }
+
+    set(objs) {
+      for i in indexes { measures[i.item] = objs[i.item] }
+    }
+  }
+
 }
 
 extension MeasuresDataSource: UITableViewDataSource {
@@ -34,11 +72,13 @@ extension MeasuresDataSource: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MeasureCell.self)) as! MeasureCell
+
     let measure = measures[indexPath.row]
-    cell.date = measure.getDateString()
+    cell.date      = measure.date
     cell.frequency = measure.frequency
-    cell.real = measure.real
-    cell.imaginary = measure.imaginary
+    cell.real      = measure.impedances[0].real
+    cell.imaginary = measure.impedances[0].imaginary
+
     return cell
   }
 
