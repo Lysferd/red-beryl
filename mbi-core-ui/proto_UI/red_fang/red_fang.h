@@ -22,6 +22,7 @@ class red_fang
 	private:
 		bool _Get;
 		bool _Req;
+		bool _complex;
 		long _freq;
 		int _num;
 	public:
@@ -32,7 +33,8 @@ class red_fang
 		void serialEnviar(char message[]);
 		bool deletaLeitura(int delPos);
 		bool serialLeitura(leitura lt, int i);
-		bool get(int n);
+		bool getComplex(leitura lt, int n);
+		bool get(int n, bool complex);
 };
 
 

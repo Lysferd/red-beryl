@@ -154,7 +154,8 @@ void red_beryl::upperBar()    // barra superior.
 	static long tempMill2 = 0;
 	static double temperature = crystal.temperatura();		//TRANSFERIR PARA RED_CRYSTAL
 	mill = millis();
-	static char* timeStr = clock.data_hora(false);
+	static char* timeStr;// = clock.data_hora(false);
+	
 	if( (mill - tempMill2) > 50)
 	{
 		tempMill2 = mill;
@@ -167,6 +168,7 @@ void red_beryl::upperBar()    // barra superior.
 	}
 	if( (mill - tempMill) > 250){
 		temperature = crystal.temperatura();						//TRANSFERIR PARA RED_CRYSTAL
+		free(timeStr);
 		timeStr = clock.data_hora(false);
 		tempMill = mill;
 	}
@@ -197,7 +199,7 @@ void red_beryl::upperBar()    // barra superior.
 	//Serial.println(display.width());
 	
 	display.print(timeStr);
-	free(timeStr);
+	
 	//Serial.println("relogio");
 	
 	display.drawBitmap(display.width()-BAT8_WIDTH, 0, bat_6x16_bmp, BAT8_WIDTH, BAT8_HEIGHT, WHITE); // desenha o contorno da bateira no canto superior ESQUERDO. 6 de altura, 16 de largura
@@ -216,6 +218,7 @@ void red_beryl::upperBar()    // barra superior.
 	display.print("C");
 	display.write((uint8_t) 247);
 	
+	//free(timeStr);
 }
 
 void red_beryl::menu()

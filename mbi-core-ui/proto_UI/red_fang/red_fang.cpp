@@ -15,6 +15,7 @@ red_fang::red_fang()
 	Serial.println("Construtor basico red_fang utilizado.");
 	_Get=false;
 	_Req=false;
+	_complex=false;
 	_freq = 1010;
 	_num = 0;
 	Serial1.begin(9600);
@@ -25,7 +26,7 @@ void red_fang::ler_serial()
 {	
 	if(_Get)
 	{
-		get(_num);
+		get(_num, _complex);
 	}
 	else if(_Req)
 	{
@@ -56,7 +57,7 @@ void red_fang::ler_serial()
 		}
 		else
 		{
-			static int inf = 0;
+			/*static int inf = 0;
 			if(!serialLeitura(lt, inf))
 			{
 				if(inf!=3)
@@ -74,6 +75,16 @@ void red_fang::ler_serial()
 				inf=0;
 				_Req = false;
 				done = false;
+			}*/
+			int inf=0;
+			if(!serialLeitura(lt, inf))
+			{
+				inf++;
+			}
+			else
+			{
+				inf=0;
+				_Req = false;
 			}
 		}
 	}
@@ -361,7 +372,7 @@ void red_fang::check_string(char str[])
 			Serial.println("Data e Hora enviados.");            //envia confirmação ao serial monitor(debug).
 		}
     }
-	else if(strcmp(str, "GET")==0)
+	else if(strcmp(str, "GET")==0 || strcmp(str, "GTX")==0)
 	{    //Se o comando recebido for GET, realiza logica para 'pegar' e retornar uma leitura salva.
 		delay(10);
 		char inStr[30];
@@ -386,6 +397,14 @@ void red_fang::check_string(char str[])
 		Serial.print(ptr);
 		Serial.println("'");
 		_Get=true;
+		if(!strcmp(str, "GTX")==0)
+		{
+			_complex=false;
+		}
+		else
+		{
+			_complex=true;
+		}
     }
 	else if(strcmp(str, "REQ")==0)
 	{    //Se o comando recebido for REQ, realiza a logica de realizar uma nova leitura com a frequencia indicada.
@@ -476,7 +495,8 @@ void red_fang::serialEnviar(char message[])
     Serial.println("] enviado.");
 	Serial1.print("E");
     Serial.println("[E] enviado.");
-    delay(50);
+    delay(100);
+	//Serial1.flushRX();
 }
 bool red_fang::deletaLeitura(int delPos)
 
@@ -510,113 +530,313 @@ bool red_fang::deletaLeitura(int delPos)
 
 bool red_fang::serialLeitura(leitura lt, int i)
 {    //função serialLeitura que retorna true quando completa para enviar uma leitura em pacotes divididos em ciclos.
-  switch(i){    //usa-se switch case para dividir o que cada ciclo diferente deve fazer.
-    case 0:{    //0 é referente ao primeiro ciclo referente a DATA e HORA da leitura.
-      char lStr[30], filler[30];    //Inicializar um char lStr para receber tudo e passar a proxima função e um filler para ajudar a construir lStr.
-      strcpy (lStr, "D");   //Recebe o tag inicial do tipo de informação a ser enviada, D para data.
-      
-      if(lt.dia<10){  strcat (lStr, "0"); }              //se o valor de dia for inferior a 10, a string recebe um 0.
-        
-      itoa (lt.dia,filler, 10);   //filler recebe os caracteres traduzidos do valor dia.
-      strcat (lStr, filler);    //filler(dia) adicionado a string
-        strcat( lStr, "/");   //Separador de data adicionado a string.
-        
-      if(lt.mes<10){    strcat (lStr, "0"); }    //se o valor de mes for inferior a 10, a string recebe um 0.
-      
-      itoa ( lt.mes, filler, 10);    //filler recebe os caracteres traduzidos do valor mes.
-      strcat ( lStr, filler );   //filler(mes) adicionado a string.
-        strcat( lStr, "/" );    //Separador de data adicionado a string.
-        
-      if(lt.ano<10){   strcat(lStr, "0" );  }   //se o valor de ano for inferior a 10, a string recebe um 0.
 
-      itoa (lt.ano, filler, 10);    //filler recebe os caracteres traduzidos do valor ano.
-      strcat( lStr, filler);    //filler(ano) adicionado a string.
-        strcat ( lStr, " ");    //espaço adicionado a string.
-        
-      if(lt.hora<10){   strcat(lStr, "0" );  }   //se o valor de hora for inferior a 10, a string recebe um 0.
-
-      itoa (lt.hora, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
-      strcat( lStr, filler);    //filer(hora) adicionado a string.
-        strcat( lStr, ":");   //separador de hora adicionado a string.
-        
-      if(lt.minuto<10){   strcat(lStr, "0" );  }   //se o valor de minuto for inferior a 10, a string recebe um 0.
-
-      itoa (lt.minuto, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
-      strcat( lStr, filler);    //filler(minuto) adicionado a string.
-
-      serialEnviar(lStr);   //a string construida até aqui é enviada a função serialEnviar() para ser enviada ao bluetooth dentro do pacote S||E.
-      
-      return false;   //retorna false
-      break;
-    }
-    case 1:{    //1 é referente ao segundo ciclo referente ao valor REAL da leitura.
-		char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-		strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
-		dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
-		serialEnviar(lStr);   //chama a função serialEnviar.
-
-		return false;   //retorna false
-		break;
-		
-    }
-    case 2:{    //2 é referente ao terceiro ciclo referente ao valor IMAGINARIO da leitura.
-		char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-
-		strcpy (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
-		dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor imaginario.
-		serialEnviar(lStr);   //chama a função serialEnviar.
-		
-		return false;   //retorna false
-		break;
-    }
-	case 3:
+	char lStr[30], filler[30];
+	//strcpy (lStr, "Z");
+	/*
+	switch(i)
 	{
-		static int t=0, st=0;
-		char lStr[30];
-		if(t<22)
+		case 0:
 		{
-			st=t/2;
-			if(t%2==0)
+			strcpy (lStr, "S");
+			strcat (lStr, "D");
+			if(lt.dia<10){  strcat (lStr, "0"); }
+			itoa (lt.dia,filler, 10);
+			strcat (lStr, filler);
+			strcat( lStr, "/");
+			
+			if(lt.mes<10){    strcat (lStr, "0"); }
+			itoa ( lt.mes, filler, 10);    //filler recebe os caracteres traduzidos do valor mes.
+			strcat ( lStr, filler );   //filler(mes) adicionado a string.
+			strcat( lStr, "/" );    //Separador de data adicionado a string.
+			
+			if(lt.ano<10){   strcat(lStr, "0" );  }   //se o valor de ano for inferior a 10, a string recebe um 0.
+
+			itoa (lt.ano, filler, 10);    //filler recebe os caracteres traduzidos do valor ano.
+			strcat( lStr, filler);    //filler(ano) adicionado a string.
+			strcat ( lStr, " ");    //espaço adicionado a string.
+				
+			if(lt.hora<10){   strcat(lStr, "0" );  }   //se o valor de hora for inferior a 10, a string recebe um 0.
+
+			itoa (lt.hora, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
+			strcat( lStr, filler);    //filer(hora) adicionado a string.
+			strcat( lStr, ":");   //separador de hora adicionado a string.
+				
+			if(lt.minuto<10){   strcat(lStr, "0" );  }   //se o valor de minuto for inferior a 10, a string recebe um 0.
+
+			itoa (lt.minuto, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
+			strcat( lStr, filler);    //filler(minuto) adicionado a string.
+			
+			strcat (lStr, "|");
+			
+			strcat (lStr, "F");
+			int n = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
+			strcat( lStr, filler);    //filler(frequencia) adicionado a string.
+			//serialEnviar(lStr);
+			strcat (lStr, "|");
+
+			strcat (lStr, "R"); 
+			dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);
+
+			strcat (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
+			dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]); 
+			
+			Serial1.print(lStr);
+			return false;
+		}
+		case 1:
+		{
+			//serialEnviar(lStr);
+			
+			//strcat (lStr, "|");
+			
+			//strcat (lStr, "Z");
+			strcpy (lStr, "");
+
+			
+			for(int x=0; x<6; x++)
 			{
-				strcpy (lStr, "R");
-				dtostrf(lt.arrayR[st], 2, 2, &lStr[strlen(lStr)]);
-				serialEnviar(lStr);
-				t++;
+				strcat (lStr, "|");
+				strcat (lStr, "R");
+				dtostrf(lt.arrayR[x], 2, 2, &lStr[strlen(lStr)]);
+				strcat (lStr, "J");
+				dtostrf(lt.arrayJ[x], 2, 2, &lStr[strlen(lStr)]);
+			}
+			//strcat (lStr, "E"); 
+			//serialEnviar(lStr);
+			Serial1.print(lStr);
+			return false;
+		}
+		case 2:
+		{
+			strcpy (lStr, "");
+			for(int x=6;x<11;x++)
+			{
+				strcat (lStr, "|");
+				strcat (lStr, "R");
+				dtostrf(lt.arrayR[x], 2, 2, &lStr[strlen(lStr)]);
+				strcat (lStr, "J");
+				dtostrf(lt.arrayJ[x], 2, 2, &lStr[strlen(lStr)]);
+			}
+			strcat (lStr, "E");
+			Serial1.print(lStr);
+			return true;
+		}
+	}
+	*/
+  
+	switch(i)
+	{    //usa-se switch case para dividir o que cada ciclo diferente deve fazer.
+		case 0:
+		{    //0 é referente ao primeiro ciclo referente a DATA e HORA da leitura.
+			//char lStr[30], filler[30];    //Inicializar um char lStr para receber tudo e passar a proxima função e um filler para ajudar a construir lStr.
+			strcpy (lStr, "S");
+			strcat (lStr, "D");   //Recebe o tag inicial do tipo de informação a ser enviada, D para data.
+      
+			if(lt.dia<10)
+			{
+				strcat (lStr, "0"); 
+			}              //se o valor de dia for inferior a 10, a string recebe um 0.
+        
+			itoa (lt.dia,filler, 10);   //filler recebe os caracteres traduzidos do valor dia.
+			strcat (lStr, filler);    //filler(dia) adicionado a string
+			strcat( lStr, "/");   //Separador de data adicionado a string.
+        
+			if(lt.mes<10)
+			{
+				strcat (lStr, "0");
+			}    //se o valor de mes for inferior a 10, a string recebe um 0.
+      
+			itoa ( lt.mes, filler, 10);    //filler recebe os caracteres traduzidos do valor mes.
+			strcat ( lStr, filler );   //filler(mes) adicionado a string.
+			strcat( lStr, "/" );    //Separador de data adicionado a string.
+        
+			if(lt.ano<10)
+			{
+				strcat(lStr, "0" );
+			}   //se o valor de ano for inferior a 10, a string recebe um 0.
+
+			itoa (lt.ano, filler, 10);    //filler recebe os caracteres traduzidos do valor ano.
+			strcat( lStr, filler);    //filler(ano) adicionado a string.
+			strcat ( lStr, " ");    //espaço adicionado a string.
+        
+			if(lt.hora<10)
+			{
+				strcat(lStr, "0" );
+			}   //se o valor de hora for inferior a 10, a string recebe um 0.
+
+			itoa (lt.hora, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
+			strcat( lStr, filler);    //filer(hora) adicionado a string.
+			strcat( lStr, ":");   //separador de hora adicionado a string.
+        
+			if(lt.minuto<10)
+			{
+				strcat(lStr, "0" );
+			}   //se o valor de minuto for inferior a 10, a string recebe um 0.
+
+			itoa (lt.minuto, filler, 10);   //filler recebe os caracteres traduzidos do valor hora.
+			strcat( lStr, filler);    //filler(minuto) adicionado a string.
+
+			//serialEnviar(lStr);   //a string construida até aqui é enviada a função serialEnviar() para ser enviada ao bluetooth dentro do pacote S||E.
+      
+			Serial1.print(lStr);
+			return false;   //retorna false
+			break;
+		}
+		case 1:
+		{    //1 é referente ao segundo ciclo referente ao valor REAL da leitura.
+			//char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+			strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+			dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
+			//serialEnviar(lStr);   //chama a função serialEnviar.
+			Serial1.print(lStr);
+			return false;   //retorna false
+			break;	
+		}
+		case 2:
+		{    //2 é referente ao terceiro ciclo referente ao valor IMAGINARIO da leitura.
+			//char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
+
+			strcpy (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
+			dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor imaginario.
+			//serialEnviar(lStr);   //chama a função serialEnviar.
+			Serial1.print(lStr);
+			return false;   //retorna false
+			break;
+		}
+		case 3:
+		{
+			//char lStr[30], filler[30];    //Inicializar um char lStr para recebe tudo e passar a proxima função e um filler para ajudar a construir a string.
+			strcpy (lStr, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
+			int n = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
+			strcat( lStr, filler);    //filler(frequencia) adicionado a string.
+
+			//serialEnviar(lStr);   //chama a função serialEnviar.
+			strcat (lStr, "E");
+			Serial1.print(lStr);
+			return false;
+			break;
+		}
+		default:
+		{
+			Serial.println("SUCESSO.");
+			return true;
+			break;
+		}
+	}
+}
+
+bool red_fang::getComplex(leitura lt, int n)
+{
+	char string[30], filler[30];
+	switch(n)
+	{
+		case 0:
+		{		//data e hora.
+			strcpy (string, "S");
+			strcat (string, "D");
+			if(lt.dia<10)
+				{
+					strcat (string, "0"); 
+				}		
+				itoa (lt.dia, filler, 10);
+				strcat (string, filler);
+				strcat( string, "/");
+			
+			if(lt.mes<10)
+				{
+					strcat (string, "0"); 
+				}		
+				itoa (lt.mes, filler, 10);
+				strcat (string, filler);
+				strcat( string, "/");
+			
+			if(lt.ano<10)
+				{
+					strcat (string, "0"); 
+				}		
+				itoa (lt.ano, filler, 10);
+				strcat (string, filler);
+				strcat( string, " ");
+			
+			if(lt.hora<10)
+				{
+					strcat (string, "0"); 
+				}		
+				itoa (lt.hora, filler, 10);
+				strcat (string, filler);
+				strcat( string, ":");
+			
+			if(lt.minuto<10)
+				{
+					strcat (string, "0"); 
+				}		
+				itoa (lt.minuto, filler, 10);
+				strcat (string, filler);
+			
+			//serialEnviar(string);
+			Serial1.print(string);
+			return false;
+			break;
+		}
+		case 1:				//real
+		{
+			strcpy (string, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+			dtostrf(lt.real, 2, 2, &string[strlen(string)]);    //Recebe o valor real.
+			//serialEnviar(string);   //chama a função serialEnviar.
+			Serial1.print(string);
+			return false;   //retorna false
+			break;
+		}
+		case 2:				//imaginario
+		{
+			strcpy (string, "J");
+			dtostrf(lt.imag, 2, 2, &string[strlen(string)]);
+			//serialEnviar(string);
+			Serial1.print(string);
+			return false;
+			break;
+		}
+		case 3:				//pares de leitura
+		{
+			static int x=0;
+			if(x<11)
+			{
+				strcpy (string, "R");
+				dtostrf(lt.arrayR[x], 2, 2, &string[strlen(string)]);
+				strcat (string, "J");
+				dtostrf(lt.arrayJ[x], 2, 2, &string[strlen(string)]);
+				//serialEnviar(string);
+				Serial1.print(string);
+				x++;
+				return false;
 			}
 			else
 			{
-				strcpy (lStr, "J");
-				dtostrf(lt.arrayJ[st], 2, 2, &lStr[strlen(lStr)]);
-				serialEnviar(lStr);
-				t++;
+				x=0;
+				return true;
 			}
-			return false;
+			break;
 		}
-		else
+		case 4:
 		{
-			t=0;
-			return true;
+			strcpy (string, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
+			int x = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
+			strcat( string, filler);    //filler(frequencia) adicionado a string.
+			//serialEnviar(string);   //chama a função serialEnviar.
+			strcat ( string, "E");
+			Serial1.print(string);
+			return false;
+			break;
 		}
-		break;
+		default:{
+			Serial.println("SUCESSO.");
+			return true;
+			break;
+		}
 	}
-    case 4:{    //3 é referente ao quarto ciclo referente ao valor de FREQUENCIA da leitura.
-      char lStr[30], filler[30];    //Inicializar um char lStr para recebe tudo e passar a proxima função e um filler para ajudar a construir a string.
-      strcpy (lStr, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
-      int n = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
-      strcat( lStr, filler);    //filler(frequencia) adicionado a string.
-
-      serialEnviar(lStr);   //chama a função serialEnviar.
-      return false;
-      break;
-    }
-    default:{
-      Serial.println("SUCESSO.");
-      return true;
-      break;
-    }
-  }
 }
-bool red_fang::get(int n)
+bool red_fang::get(int n, bool complex)
 {
     static int inf = 0;
     static leitura lt;
@@ -625,23 +845,50 @@ bool red_fang::get(int n)
 		EEPROM.get(1+(sizeof(leitura)*(z)), lt);
 		while(z<EEPROM.read(0)-1)
 		{
-			if(!serialLeitura(lt, inf)){
-			inf++;
-			delay(20);
-        }
-        else
-		{
-			inf=0;
-			z++;
-			Serial.print("Z=");
-			Serial.println(z);
-			EEPROM.get(1+(sizeof(leitura)*(z)), lt);
-			delay(200);
+			if(!complex)
+			{
+				if(!serialLeitura(lt, inf)){
+					inf++;
+					delay(20);
+				}
+				else
+				{
+					inf=0;
+					z++;
+					Serial.print("Z=");
+					Serial.println(z);
+					EEPROM.get(1+(sizeof(leitura)*(z)), lt);
+					delay(200);
+				}
+			}
+			else
+			{
+				if(!getComplex(lt, inf))
+				{
+					if(inf!=3)
+					{
+						inf++;
+						delay(20);
+					}
+				}
+				else if(inf==3)
+				{
+					inf++;
+				}
+				else
+				{
+					inf=0;
+					z++;
+					Serial.print("Z=");
+					Serial.println(z);
+					EEPROM.get(1+(sizeof(leitura)*(z)), lt);
+					delay(200);
+				}
+			}
         }
         z = 0;
         _Get=false;
 		return true;
-      }
     }
     else if(n>EEPROM.read(0))
 	{
@@ -652,8 +899,49 @@ bool red_fang::get(int n)
     }
     else 
 	{
-		EEPROM.get(1+(sizeof(leitura)*(n-1)), lt);
-		if(!serialLeitura(lt, inf))
+		EEPROM.get( 1+ (sizeof(leitura)*(n-1) ), lt);
+		if(!complex)
+		{
+			if(!serialLeitura(lt, inf))
+			{
+				inf++;
+			}
+			else
+			{
+				_Get = false;
+				inf=0;
+				return true;
+			}
+		}
+		else
+		{
+			if(!getComplex(lt, inf))
+			{
+				if(inf!=3)
+				{
+					inf++;
+				}
+			}
+			else if(inf==3)
+			{
+				inf++;
+			}
+			else
+			{
+				_Get = false;
+				inf=0;
+				return true;
+			}
+		}
+		/*if(!serialLeitura(lt, inf))
+		{
+			if(inf!=3)
+				{
+					inf++;
+					delay(20);
+				}
+		}
+		else if(inf==3)
 		{
 			inf++;
 		}
@@ -662,6 +950,6 @@ bool red_fang::get(int n)
 			inf = 0;
 			_Get = false;
 			return true;
-		}
+		}*/
     }
 }
