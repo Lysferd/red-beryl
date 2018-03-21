@@ -76,7 +76,7 @@ void red_fang::ler_serial()
 				_Req = false;
 				done = false;
 			}*/
-			int inf=0;
+			static int inf=0;
 			if(!serialLeitura(lt, inf))
 			{
 				inf++;
@@ -686,7 +686,8 @@ bool red_fang::serialLeitura(leitura lt, int i)
 		case 1:
 		{    //1 é referente ao segundo ciclo referente ao valor REAL da leitura.
 			//char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-			strcpy (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+			strcpy (lStr, "|");
+			strcat (lStr, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
 			dtostrf(lt.real, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor real.
 			//serialEnviar(lStr);   //chama a função serialEnviar.
 			Serial1.print(lStr);
@@ -696,7 +697,6 @@ bool red_fang::serialLeitura(leitura lt, int i)
 		case 2:
 		{    //2 é referente ao terceiro ciclo referente ao valor IMAGINARIO da leitura.
 			//char lStr[30];    //Inicializar um char lStr para receber tudo e passar a proxima função.
-
 			strcpy (lStr, "J");   //Recebe o tag inicial do tipo de informação a ser enviada, J para Imaginario.
 			dtostrf(lt.imag, 2, 2, &lStr[strlen(lStr)]);    //Recebe o valor imaginario.
 			//serialEnviar(lStr);   //chama a função serialEnviar.
@@ -707,7 +707,8 @@ bool red_fang::serialLeitura(leitura lt, int i)
 		case 3:
 		{
 			//char lStr[30], filler[30];    //Inicializar um char lStr para recebe tudo e passar a proxima função e um filler para ajudar a construir a string.
-			strcpy (lStr, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
+			strcpy (lStr, "|");
+			strcat (lStr, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
 			int n = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
 			strcat( lStr, filler);    //filler(frequencia) adicionado a string.
 
@@ -781,7 +782,8 @@ bool red_fang::getComplex(leitura lt, int n)
 		}
 		case 1:				//real
 		{
-			strcpy (string, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
+			strcpy (string, "|");
+			strcat (string, "R");   //Recebe o tag inicial do tipo de informação a ser enviada, R para Real.
 			dtostrf(lt.real, 2, 2, &string[strlen(string)]);    //Recebe o valor real.
 			//serialEnviar(string);   //chama a função serialEnviar.
 			Serial1.print(string);
@@ -802,7 +804,8 @@ bool red_fang::getComplex(leitura lt, int n)
 			static int x=0;
 			if(x<11)
 			{
-				strcpy (string, "R");
+				strcpy (string, "|");
+				strcat (string, "R");
 				dtostrf(lt.arrayR[x], 2, 2, &string[strlen(string)]);
 				strcat (string, "J");
 				dtostrf(lt.arrayJ[x], 2, 2, &string[strlen(string)]);
@@ -820,7 +823,8 @@ bool red_fang::getComplex(leitura lt, int n)
 		}
 		case 4:
 		{
-			strcpy (string, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
+			strcpy (string, "|");
+			strcat (string, "F");   //Recebe o tag inicial do tipo de informação a ser enviada, F para Frequencia.
 			int x = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
 			strcat( string, filler);    //filler(frequencia) adicionado a string.
 			//serialEnviar(string);   //chama a função serialEnviar.
