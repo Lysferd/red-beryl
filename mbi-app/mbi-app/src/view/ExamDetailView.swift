@@ -8,43 +8,22 @@
 
 import UIKit
 
-enum MyExampleModelDataType {
-  case type0, type1, type2, type3
-}
-
-enum Shape {
-  case triangle, square, circle, cross
-}
-
 class ExamDetailView: UIViewController {
 
-//  @IBOutlet weak var nameLabel: UILabel!
-//  @IBOutlet weak var dateLabel: UILabel!
-//  @IBOutlet weak var segmentLabel: UILabel!
-//  @IBOutlet weak var impedanceLabel: UILabel!
-//  @IBOutlet weak var frequencyLabel: UILabel!
-  @IBOutlet weak var chartView: UIView!
+  @IBOutlet weak var chartView: ChartUIView!
   var exam: Exam?
   var biva: BIVA?
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
-    guard exam != nil else { return }
-
-//    nameLabel.text = exam?.getPatient().full_name()
-//    dateLabel.text = exam?.dateString()
-//    segmentLabel.text = exam?.segmentString()
-//    impedanceLabel.text = exam?.impedanceString()
-//    frequencyLabel.text = exam?.frequencyString()
-
-    if let model = exam?.impedances, let height = exam?.height {
-      biva = BIVA(view: chartView, model: model, height: height / 1e2)
-      if let view = biva?.chart?.view {
-        chartView.addSubview(view)
-      }
+    if let e = exam {
+      chartView.setData(e)
     }
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
 
 }

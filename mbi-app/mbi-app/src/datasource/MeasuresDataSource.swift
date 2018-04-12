@@ -76,8 +76,8 @@ extension MeasuresDataSource: UITableViewDataSource {
     let measure = measures[indexPath.row]
     cell.date      = measure.date
     cell.frequency = measure.frequency
-    cell.real      = measure.impedances[0].real
-    cell.imaginary = measure.impedances[0].imaginary
+    cell.real      = measure.impedance.real
+    cell.imaginary = measure.impedance.imaginary
 
     return cell
   }

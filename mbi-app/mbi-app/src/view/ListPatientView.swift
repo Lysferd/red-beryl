@@ -11,7 +11,7 @@ import UIKit
 class ListPatientView: UIViewController {
 
   // MARK: GUI Outlets
-  @IBOutlet weak var patientsTable: UITableView!
+  @IBOutlet weak var tableView: UITableView!
 
   // MARK: Properties
   let datasource: PatientsDataSource
@@ -25,25 +25,33 @@ class ListPatientView: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    patientsTable.tableFooterView = UIView()
-    patientsTable.dataSource = datasource
-    patientsTable.reloadData()
+    //tableView.tableFooterView = UIView()
+    tableView.dataSource = datasource
+    tableView.reloadData()
   }
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    if let index = patientsTable.indexPathForSelectedRow {
-      patientsTable.deselectRow(at: index, animated: true)
+    if let index = tableView.indexPathForSelectedRow {
+      tableView.deselectRow(at: index, animated: true)
     }
   }
 
   // MARK: - Actions
   @IBAction func unwindToPatientList(sender: UIStoryboardSegue) {
     if let source = sender.source as? NewPatientView, let patient = source.patient {
-      let newIndexPath = IndexPath(row: patientsTable.numberOfRows(inSection: 0), section: 0)
+      let newIndexPath = IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)
       if datasource.append(patient) {
-        patientsTable.insertRows(at: [newIndexPath], with: .automatic)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+      }
+    }
+
+    // DELETE REQUESTED
+    if let source = sender.source as? PatientDetailView, let patient = source.patient {
+      if let id = datasource.drop(patient) {
+        let index = IndexPath(row: id, section: 0)
+        tableView.deleteRows(at: [index], with: .automatic)
       }
     }
   }
@@ -52,7 +60,7 @@ class ListPatientView: UIViewController {
     super.prepare(for: segue, sender: sender)
 
     if segue.identifier == "showDetailSegue" {
-      if let index = patientsTable.indexPathForSelectedRow {
+      if let index = tableView.indexPathForSelectedRow {
         if let controller = segue.destination as? PatientDetailView {
           controller.patient = datasource.patients[index.row]
         }
@@ -64,13 +72,13 @@ class ListPatientView: UIViewController {
     NSLog("Dropping all rows")
     dbSharedInstance.dropAllPatients()
     datasource.reload()
-    patientsTable.reloadData()
+    tableView.reloadData()
   }
 
   @IBAction func refreshTable(_ sender: Any) {
     NSLog("Reloading rows")
     datasource.reload()
-    patientsTable.reloadData()
+    tableView.reloadData()
   }
 
 }

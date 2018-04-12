@@ -98,4 +98,5 @@ struct ChartDefaults {
   static var minBarSpacing: CGFloat {
     return isPad ? 10 : 5
   }
+  
 }

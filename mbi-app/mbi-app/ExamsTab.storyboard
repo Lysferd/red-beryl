@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,18 +71,6 @@
                         <viewLayoutGuide key="safeArea" id="4Ih-hR-KWG"/>
                     </view>
                     <navigationItem key="navigationItem" title="Exames" id="vQb-Wu-NMc">
-                        <leftBarButtonItems>
-                            <barButtonItem systemItem="trash" id="eoc-9G-keL">
-                                <connections>
-                                    <action selector="trashClicked:" destination="iAV-aL-5qU" id="TTP-wz-nWw"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="qg8-2X-9am">
-                                <connections>
-                                    <action selector="refreshClicked:" destination="iAV-aL-5qU" id="3ec-9g-3OX"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7Yj-Pc-3cI">
                             <connections>
                                 <segue destination="NSU-N8-Eku" kind="presentation" id="GJq-un-HX2"/>
@@ -93,8 +80,6 @@
                     <connections>
                         <outlet property="addButton" destination="7Yj-Pc-3cI" id="f6p-OW-g2i"/>
                         <outlet property="examsTable" destination="E3D-jh-Vek" id="Zbv-4p-agh"/>
-                        <outlet property="refreshButton" destination="qg8-2X-9am" id="tGN-8w-UTO"/>
-                        <outlet property="trashButton" destination="eoc-9G-keL" id="Qiv-DK-Ki1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2wA-21-bLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -109,7 +94,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7EM-Vf-hIA">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7EM-Vf-hIA" customClass="ChartUIView" customModule="mbi_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -546,7 +531,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIa-gA-M6t">
                                         <rect key="frame" x="0.0" y="0.0" width="83" height="36"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="ic_battery_std_36pt" translatesAutoresizingMaskIntoConstraints="NO" id="LlY-S6-2K7">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="ic_battery_unknown_36pt" translatesAutoresizingMaskIntoConstraints="NO" id="LlY-S6-2K7">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3D-dJ-ht3">
@@ -595,7 +580,7 @@
                         <viewLayoutGuide key="safeArea" id="yto-HY-MgH"/>
                     </view>
                     <navigationItem key="navigationItem" title="Medições" id="Cit-Ng-PG8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="UXS-gi-sng">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="UXS-gi-sng">
                             <connections>
                                 <segue destination="Tsm-KJ-29u" kind="unwind" unwindAction="unwindToNewExamWithSender:" id="VY5-gW-2fJ"/>
                             </connections>
@@ -603,12 +588,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="zqk-TX-3gj" id="4kd-Io-IY0"/>
+                        <outlet property="batteryImage" destination="LlY-S6-2K7" id="eqQ-Lf-Dco"/>
                         <outlet property="batteryLabel" destination="K3D-dJ-ht3" id="3m5-HN-Pes"/>
+                        <outlet property="doneButton" destination="UXS-gi-sng" id="boy-yR-kKv"/>
                         <outlet property="infoLabel" destination="4qP-h0-3hm" id="5bc-JP-Wfr"/>
                         <outlet property="measuresTable" destination="Kph-ae-ixN" id="jnv-Yz-XTp"/>
                         <outlet property="progressBar" destination="JQY-nA-LiW" id="1nb-8A-8hs"/>
                         <outlet property="refreshButton" destination="0Kq-ev-rW8" id="vSF-Db-ddV"/>
                         <outlet property="temperatureLabel" destination="woD-ne-MjP" id="mn6-H2-Q0b"/>
+                        <outlet property="tmpImage" destination="cPE-It-2Wb" id="l0e-X0-Uix"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W86-GN-ZQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -654,7 +642,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_battery_std_36pt" width="36" height="36"/>
+        <image name="ic_battery_unknown_36pt" width="36" height="36"/>
         <image name="ic_thermometer_36pt" width="36" height="36"/>
     </resources>
 </document>

@@ -11,20 +11,20 @@ import CoreBluetooth
 
 class SelectMeasureView: UIViewController {
 
-  // FIXME: This is ridiculous
-  typealias RawMeasure = (date: String, frequency: Double, rValues: [Double], jValues: [Double])
-
   @IBOutlet weak var addButton: UIBarButtonItem!
   @IBOutlet weak var refreshButton: UIBarButtonItem!
+  @IBOutlet weak var doneButton: UIBarButtonItem!
   @IBOutlet weak var measuresTable: UITableView!
   @IBOutlet weak var batteryLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet weak var infoLabel: UILabel!
-  @IBOutlet weak var spinner: UIActivityIndicatorView!
   @IBOutlet weak var progressBar: UIProgressView!
 
+  @IBOutlet weak var batteryImage: UIImageView!
+  @IBOutlet weak var tmpImage: UIImageView!
+
   // MARK: Properties
-  public var selection: Measure?
+  public var selection: Int?
   let datasource: MeasuresDataSource
   var dataDate: String?
   var dataReal: Double?
@@ -62,6 +62,12 @@ class SelectMeasureView: UIViewController {
     measuresTable.dataSource = datasource
     measuresTable.reloadData()
 
+    batteryImage.image = batteryImage.image?.withRenderingMode(.alwaysTemplate)
+    batteryImage.tintColor = UIColor.init(red: 0, green: 122/255, blue: 1, alpha: 1)
+
+    tmpImage.image = tmpImage.image?.withRenderingMode(.alwaysTemplate)
+    tmpImage.tintColor = UIColor.init(red: 0, green: 122/255, blue: 1, alpha: 1)
+
     super.viewDidLoad()
   }
 
@@ -69,7 +75,11 @@ class SelectMeasureView: UIViewController {
     datasource.clear()
     measuresTable.reloadData()
 
-    btDiscoverySharedInstance.disconnect()
+    // Do not disconnect in case something has been selected
+    // so that the previous controller can send requests
+    if selection == nil {
+      btDiscoverySharedInstance.disconnect()
+    }
 
     super.viewWillDisappear(animated)
   }
@@ -82,7 +92,7 @@ class SelectMeasureView: UIViewController {
     super.prepare(for: segue, sender: sender)
 
     if let index = measuresTable.indexPathForSelectedRow {
-      selection = datasource[index]
+      selection = index.row
     }
   }
 
@@ -95,12 +105,9 @@ class SelectMeasureView: UIViewController {
 
   private func refreshGetReqProgress() {
     if getIndex < getMax {
-        if let service = btDiscoverySharedInstance.service {
-          getIndex += 1
-          let progress = Float(getIndex) / Float(getMax)
-          progressBar.setProgress(progress, animated: true)
-          service.write("GET", arg: getIndex)
-      }
+      getIndex += 1
+      let progress = Float(getIndex) / Float(getMax)
+      progressBar.setProgress(progress, animated: true)
     } else {
       getMax = 0
       getIndex = 0
@@ -108,15 +115,14 @@ class SelectMeasureView: UIViewController {
       infoLabel.text = "Concluído" // FIXME: translation needed
       refreshButton.isEnabled = true
       addButton.isEnabled = true
+      doneButton.isEnabled = true
     }
   }
 
   @IBAction func addMeasure(_ sender: Any) {
-
-      if let service = btDiscoverySharedInstance.service {
-        service.write("REQ", arg: 50000) // FIXME: Frequency MUST BE selectable
-      }
-
+    if let service = btDiscoverySharedInstance.service {
+      service.write("REQ", with: 50000) // FIXME: Frequency MUST BE selectable
+    }
   }
 
   // MARK: - Notifications
@@ -152,28 +158,26 @@ class SelectMeasureView: UIViewController {
         self.getIndex = 1
         self.progressBar.setProgress(1.0 / Float(number), animated: true)
 
-          if let service = btDiscoverySharedInstance.service {
-            service.write("GET", arg: self.getIndex)
+        if let service = btDiscoverySharedInstance.service {
+          for i in 1...self.getMax {
+            service.write("GET", with: i)
           }
+        }
 
       }
     }
   }
 
   @objc func updateGETREQ(_ notification: Notification) {
-    let info = notification.userInfo as! [String: RawMeasure]
+    let info = notification.userInfo as! [String: RawGETData]
 
     queue.async {
       if let measure = info["measure"] {
         let date = measure.date
         let frequency = measure.frequency
-        var impedances: [Impedance] = []
+        let impedance = measure.impedance
 
-        for i in 0..<measure.rValues.count {
-          impedances.append(Impedance(real: measure.rValues[i], imaginary: measure.jValues[i]))
-        }
-
-        let measure = Measure(date: date, frequency: frequency, impedances: impedances)
+        let measure = Measure(date: date, frequency: frequency, impedance: impedance)
         self.refreshTable(measure)
         self.refreshGetReqProgress()
       }
@@ -185,6 +189,30 @@ class SelectMeasureView: UIViewController {
 
     queue.async {
       if let battery = info["battery"] {
+        if let b = Int(battery) {
+          if b < 10 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_10_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 20 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_20_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 30 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_30_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 40 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_40_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 50 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_50_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 60 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_60_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 70 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_70_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 80 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_80_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 90 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_90_36pt").withRenderingMode(.alwaysTemplate)
+          } else if b < 100 {
+            self.batteryImage.image = #imageLiteral(resourceName: "ic_battery_full_36pt").withRenderingMode(.alwaysTemplate)
+          }
+        }
+
         self.batteryLabel.text = battery + "%"
       }
     }

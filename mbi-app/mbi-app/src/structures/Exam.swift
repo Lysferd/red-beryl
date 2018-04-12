@@ -2,8 +2,9 @@
 //  Exam.swift
 //  mbi-app
 //
-//  `Exam' is a container class for multiple bioimpedance `Measures' made
-//  on a single patient at a given moment in time.
+//  Exam represents a complete bioimpedance exam with patient relationship,
+//  body segment, patient's height and weight, date, frequency and
+//  an array of impedance data.
 //
 //  Created by 埜原菽也 on H30/01/30.
 //  Copyright © 平成30年 M.A. Eng. All rights reserved.
@@ -12,14 +13,7 @@
 import Foundation
 
 class Exam {
-
-  // Array of measure pairs
-  //  First element [0] is always the ARITHMETIC MEAN,
-  // subsequent elements [1...-1] are measured impedance values
-  //  By default the MBI will always perform 10 measures during sweep,
-  // so this Array will always have `11' elements.
-//  typealias Data = [Impedance]
-
+  
   fileprivate let date_format = DateFormatter()
 
   // DB Variables
@@ -35,7 +29,7 @@ class Exam {
 
   // MARK: - Convenience Variables
   var patient_name: String! {
-    get { return patient().full_name() }
+    get { return patient()!.full_name() }
   }
 
   var date_string: String! {
@@ -58,6 +52,16 @@ class Exam {
     get {
       let freq = frequency / 1e3
       return String(format: "%.f KHz", freq)
+    }
+  }
+
+  var corrected_impedances: [Impedance]! {
+    get {
+      var result: [Impedance] = []
+      for i in impedances {
+        result.append(Impedance(real: i.real / height, imaginary: i.imaginary / height))
+      }
+      return result
     }
   }
 
@@ -92,7 +96,7 @@ class Exam {
     }
   }
 
-  fileprivate func patient() -> Patient {
+  fileprivate func patient() -> Patient? {
     return dbSharedInstance.selectPatient(patient_id)
   }
 }

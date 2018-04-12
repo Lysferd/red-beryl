@@ -30,6 +30,15 @@ class PatientsDataSource: NSObject {
     return true
   }
 
+  func drop(_ patient: Patient) -> Int? {
+    if let id = patients.index(where: { $0 == patient }) {
+      dbSharedInstance.dropPatient(patient)
+      patients.remove(at: id)
+      return id
+    }
+    return nil
+  }
+
   func reload() {
     patients.removeAll()
     for patient in dbSharedInstance.selectPatients() {

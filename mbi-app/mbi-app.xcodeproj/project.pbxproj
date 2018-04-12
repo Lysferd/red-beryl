@@ -16,9 +16,15 @@
 		E5233B452037690800F8E92F /* MeasureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B442037690800F8E92F /* MeasureCell.swift */; };
 		E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */; };
 		E5330D79205DC53800764D38 /* Impedance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5330D78205DC53800764D38 /* Impedance.swift */; };
+		E53B1690207833000043E838 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53B168F207833000043E838 /* SwiftCharts.framework */; };
+		E53B1691207833000043E838 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E53B168F207833000043E838 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E53CB7D72073F07600312214 /* StaticTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CB7D62073F07600312214 /* StaticTableView.swift */; };
+		E53CB7D92074038D00312214 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CB7D82074038D00312214 /* Error.swift */; };
 		E544CD87205346DF007C8292 /* ExamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544CD86205346DF007C8292 /* ExamDetailView.swift */; };
 		E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5491BA8202A318E006796A0 /* ExamCell.swift */; };
 		E551FB6D2032299F002BA130 /* SettingsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E551FB6C2032299F002BA130 /* SettingsTab.storyboard */; };
+		E5558F54207CEFA100A0BA72 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5558F53207CEFA000A0BA72 /* SQLite.framework */; };
+		E5558F55207CEFA100A0BA72 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5558F53207CEFA000A0BA72 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E567B64F2020EB7800BEBF21 /* ListExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B64E2020EB7800BEBF21 /* ListExamView.swift */; };
 		E567B6512020EBA900BEBF21 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6502020EBA900BEBF21 /* Exam.swift */; };
 		E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */; };
@@ -40,6 +46,7 @@
 		E58EEC86205185B900FC1F5E /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC85205185B900FC1F5E /* Segment.swift */; };
 		E58EEC88205189C200FC1F5E /* SegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC87205189C200FC1F5E /* SegmentCell.swift */; };
 		E58EEC8A20518BAC00FC1F5E /* SegmentDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */; };
+		E5938D3C2065AF9500968489 /* ChartUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5938D3B2065AF9500968489 /* ChartUIView.swift */; };
 		E596B5742046FA1300CEC9C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B5732046FA1300CEC9C6 /* Database.swift */; };
 		E596B5762047453E00CEC9C6 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E596B5752047453E00CEC9C6 /* Cartfile */; };
 		E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */; };
@@ -49,11 +56,12 @@
 		E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */; };
 		E597676C1F97E5B800083C11 /* mbi_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E597676B1F97E5B800083C11 /* mbi_appTests.swift */; };
 		E59767771F97E5B800083C11 /* mbi_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767761F97E5B800083C11 /* mbi_appUITests.swift */; };
-		E5BF57C1205964B700CFBF2C /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */; };
-		E5BF57C2205964B700CFBF2C /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E5CCDF5520534DC5003B1406 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5CCDF5120534DA6003B1406 /* SQLite.framework */; };
-		E5CCDF5620534DC5003B1406 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5CCDF5120534DA6003B1406 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5E568F7204EEDD5009AC05D /* SelectableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E568F6204EEDD5009AC05D /* SelectableCell.swift */; };
+		E5F04514206BE40B00784F1E /* PatientDetailTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04513206BE40B00784F1E /* PatientDetailTable.swift */; };
+		E5F04516206BE7AB00784F1E /* PatientDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */; };
+		E5F04518206BEC6100784F1E /* PatientDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04517206BEC6100784F1E /* PatientDetailDataSource.swift */; };
+		E5F0D2112076735D007D8FE7 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2102076735D007D8FE7 /* DefaultCell.swift */; };
+		E5F0D21320767567007D8FE7 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D21220767567007D8FE7 /* StaticView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +88,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E5CCDF5620534DC5003B1406 /* SQLite.framework in Embed Frameworks */,
-				E5BF57C2205964B700CFBF2C /* SwiftCharts.framework in Embed Frameworks */,
+				E5558F55207CEFA100A0BA72 /* SQLite.framework in Embed Frameworks */,
+				E53B1691207833000043E838 /* SwiftCharts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,9 +108,13 @@
 		E52F976A201F9E4E00EFF5BE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		E5330D78205DC53800764D38 /* Impedance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Impedance.swift; sourceTree = "<group>"; };
+		E53B168F207833000043E838 /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCharts.framework; path = Carthage/Build/iOS/SwiftCharts.framework; sourceTree = "<group>"; };
+		E53CB7D62073F07600312214 /* StaticTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableView.swift; sourceTree = "<group>"; };
+		E53CB7D82074038D00312214 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		E544CD86205346DF007C8292 /* ExamDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamDetailView.swift; sourceTree = "<group>"; };
 		E5491BA8202A318E006796A0 /* ExamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCell.swift; sourceTree = "<group>"; };
 		E551FB6C2032299F002BA130 /* SettingsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTab.storyboard; sourceTree = "<group>"; };
+		E5558F53207CEFA000A0BA72 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		E567B64E2020EB7800BEBF21 /* ListExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExamView.swift; sourceTree = "<group>"; };
 		E567B6502020EBA900BEBF21 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamsDataSource.swift; sourceTree = "<group>"; };
@@ -124,6 +136,7 @@
 		E58EEC85205185B900FC1F5E /* Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
 		E58EEC87205189C200FC1F5E /* SegmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCell.swift; sourceTree = "<group>"; };
 		E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentDatasource.swift; sourceTree = "<group>"; };
+		E5938D3B2065AF9500968489 /* ChartUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUIView.swift; sourceTree = "<group>"; };
 		E596B5732046FA1300CEC9C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		E596B5752047453E00CEC9C6 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPatientView.swift; sourceTree = "<group>"; };
@@ -139,9 +152,12 @@
 		E59767721F97E5B800083C11 /* mbi-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mbi-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767761F97E5B800083C11 /* mbi_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mbi_appUITests.swift; sourceTree = "<group>"; };
 		E59767781F97E5B800083C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCharts.framework; sourceTree = "<group>"; };
-		E5CCDF5120534DA6003B1406 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		E5E568F6204EEDD5009AC05D /* SelectableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableCell.swift; sourceTree = "<group>"; };
+		E5F04513206BE40B00784F1E /* PatientDetailTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailTable.swift; sourceTree = "<group>"; };
+		E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailCell.swift; sourceTree = "<group>"; };
+		E5F04517206BEC6100784F1E /* PatientDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailDataSource.swift; sourceTree = "<group>"; };
+		E5F0D2102076735D007D8FE7 /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
+		E5F0D21220767567007D8FE7 /* StaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticView.swift; sourceTree = "<group>"; };
 		E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -150,9 +166,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5BF57C1205964B700CFBF2C /* SwiftCharts.framework in Frameworks */,
-				E5CCDF5520534DC5003B1406 /* SQLite.framework in Frameworks */,
 				E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */,
+				E53B1690207833000043E838 /* SwiftCharts.framework in Frameworks */,
+				E5558F54207CEFA100A0BA72 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +196,7 @@
 				E58DEA40201BD08400C3FDE4 /* datasource */,
 				E58DEA3C201BD05900C3FDE4 /* modules */,
 				E58DEA3D201BD06600C3FDE4 /* structures */,
+				E5F04512206BE3E300784F1E /* table */,
 				E58DEA41201BD09100C3FDE4 /* view */,
 			);
 			path = src;
@@ -202,10 +219,12 @@
 				E5330D78205DC53800764D38 /* Impedance.swift */,
 				E5847CCB205D918A00C47FD1 /* ChartDefaults.swift */,
 				E58DEA22201BD04300C3FDE4 /* Device.swift */,
+				E5938D3B2065AF9500968489 /* ChartUIView.swift */,
 				E567B6502020EBA900BEBF21 /* Exam.swift */,
 				E5233B422037620B00F8E92F /* Measure.swift */,
 				E58DEA28201BD04300C3FDE4 /* Patient.swift */,
 				E58EEC85205185B900FC1F5E /* Segment.swift */,
+				E53CB7D82074038D00312214 /* Error.swift */,
 			);
 			path = structures;
 			sourceTree = "<group>";
@@ -213,12 +232,14 @@
 		E58DEA3E201BD07500C3FDE4 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */,
 				E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */,
 				E5491BA8202A318E006796A0 /* ExamCell.swift */,
 				E5233B442037690800F8E92F /* MeasureCell.swift */,
 				E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */,
 				E58EEC87205189C200FC1F5E /* SegmentCell.swift */,
 				E5E568F6204EEDD5009AC05D /* SelectableCell.swift */,
+				E5F0D2102076735D007D8FE7 /* DefaultCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -226,6 +247,7 @@
 		E58DEA40201BD08400C3FDE4 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
+				E5F04517206BEC6100784F1E /* PatientDetailDataSource.swift */,
 				E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */,
 				E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */,
 				E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */,
@@ -242,6 +264,7 @@
 				E58EEC8320516A4400FC1F5E /* Detailing */,
 				E58EEC812051698400FC1F5E /* Listing */,
 				E58EEC8420516A4A00FC1F5E /* Selecting */,
+				E5F0D21220767567007D8FE7 /* StaticView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -287,6 +310,8 @@
 		E59767481F97E5B800083C11 = {
 			isa = PBXGroup;
 			children = (
+				E5558F53207CEFA000A0BA72 /* SQLite.framework */,
+				E53B168F207833000043E838 /* SwiftCharts.framework */,
 				E596B5752047453E00CEC9C6 /* Cartfile */,
 				E5F7601B1F9E67E800B7DFB9 /* Frameworks */,
 				E59767531F97E5B800083C11 /* mbi-app */,
@@ -341,11 +366,18 @@
 			path = "mbi-appUITests";
 			sourceTree = "<group>";
 		};
+		E5F04512206BE3E300784F1E /* table */ = {
+			isa = PBXGroup;
+			children = (
+				E5F04513206BE40B00784F1E /* PatientDetailTable.swift */,
+				E53CB7D62073F07600312214 /* StaticTableView.swift */,
+			);
+			path = table;
+			sourceTree = "<group>";
+		};
 		E5F7601B1F9E67E800B7DFB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E5BF57C0205964B700CFBF2C /* SwiftCharts.framework */,
-				E5CCDF5120534DA6003B1406 /* SQLite.framework */,
 				E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */,
 				E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */,
 			);
@@ -500,21 +532,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				E58DEA43201BD43700C3FDE4 /* ListPatientView.swift in Sources */,
+				E5F0D2112076735D007D8FE7 /* DefaultCell.swift in Sources */,
 				E58EEC86205185B900FC1F5E /* Segment.swift in Sources */,
+				E5F04516206BE7AB00784F1E /* PatientDetailCell.swift in Sources */,
 				E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */,
 				E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */,
 				E507F685203627360058280A /* SelectMeasureView.swift in Sources */,
 				E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */,
 				E507F67F20360C160058280A /* NewExamView.swift in Sources */,
 				E58EEC80205167E100FC1F5E /* SelectSegmentView.swift in Sources */,
+				E5F04518206BEC6100784F1E /* PatientDetailDataSource.swift in Sources */,
 				E5847CCA205D90DF00C47FD1 /* BIVA.swift in Sources */,
+				E53CB7D72073F07600312214 /* StaticTableView.swift in Sources */,
 				E5233B452037690800F8E92F /* MeasureCell.swift in Sources */,
 				E567B6512020EBA900BEBF21 /* Exam.swift in Sources */,
 				E5330D79205DC53800764D38 /* Impedance.swift in Sources */,
 				E58DEA32201BD04400C3FDE4 /* BTDiscovery.swift in Sources */,
+				E53CB7D92074038D00312214 /* Error.swift in Sources */,
 				E58DEA31201BD04400C3FDE4 /* PatientDataSource.swift in Sources */,
 				E544CD87205346DF007C8292 /* ExamDetailView.swift in Sources */,
 				E58DEA36201BD04400C3FDE4 /* Patient.swift in Sources */,
+				E5F04514206BE40B00784F1E /* PatientDetailTable.swift in Sources */,
 				E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */,
 				E5233B41203761B700F8E92F /* MeasuresDataSource.swift in Sources */,
 				E58DEA35201BD04400C3FDE4 /* NewPatientView.swift in Sources */,
@@ -525,7 +563,9 @@
 				E5E568F7204EEDD5009AC05D /* SelectableCell.swift in Sources */,
 				E58DEA34201BD04400C3FDE4 /* ListPeripheralView.swift in Sources */,
 				E5847CCC205D918A00C47FD1 /* ChartDefaults.swift in Sources */,
+				E5F0D21320767567007D8FE7 /* StaticView.swift in Sources */,
 				E58EEC8A20518BAC00FC1F5E /* SegmentDatasource.swift in Sources */,
+				E5938D3C2065AF9500968489 /* ChartUIView.swift in Sources */,
 				E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */,
 				E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */,
 				E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */,

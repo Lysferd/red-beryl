@@ -15,48 +15,49 @@ class Database {
 
   // MARK: - Properties
   // SQLite3 Connection-related
-  let db: Connection!
-  let db_path: String
+  fileprivate let db: Connection!
+  fileprivate let db_path: String
 
   // Database tables
-  var patients: Table!
-  var exams: Table!
+  fileprivate var patients: Table!
+  fileprivate var exams: Table!
 
   // Database Columns for PATIENT
-  let id = Expression<Int>("id")
-  let record = Expression<String>("record")
-  let first_name = Expression<String>("first_name")
-  let middle_name = Expression<String>("middle_name")
-  let last_name = Expression<String>("last_name")
-  let personal_id = Expression<String>("personal_id")
-  let birth_date = Expression<String>("birth_date")
-  let phone_number = Expression<String>("phone_number")
-  let email = Expression<String>("email")
-  let address = Expression<String>("address")
-  let city = Expression<String>("city")
-  let state = Expression<String>("state")
-  let country = Expression<String>("country")
-  let blood_type = Expression<String>("blood_type")
-  let risk_groups = Expression<String>("risk_groups")               // ?
-  let regular_medication = Expression<String>("regular_medication") // ?
-  let register_date = Expression<Date>("register_date")
-  let update_date = Expression<Date>("update_date")
+  fileprivate let id = Expression<Int>("id")
+  fileprivate let record = Expression<String>("record")
+  fileprivate let first_name = Expression<String>("first_name")
+  fileprivate let middle_name = Expression<String>("middle_name")
+  fileprivate let last_name = Expression<String>("last_name")
+  fileprivate let personal_id = Expression<String>("personal_id")
+  fileprivate let birth_date = Expression<String>("birth_date")
+  fileprivate let phone_number = Expression<String>("phone_number")
+  fileprivate let email = Expression<String>("email")
+  fileprivate let address = Expression<String>("address")
+  fileprivate let city = Expression<String>("city")
+  fileprivate let state = Expression<String>("state")
+  fileprivate let country = Expression<String>("country")
+  fileprivate let blood_type = Expression<String>("blood_type")
+  fileprivate let risk_groups = Expression<String>("risk_groups")               // ?
+  fileprivate let regular_medication = Expression<String>("regular_medication") // ?
+  fileprivate let register_date = Expression<Date>("register_date")
+  fileprivate let update_date = Expression<Date>("update_date")
 
   // Database Columns for EXAM
   //let id = Expression<Int>("id")
-  let patient_id = Expression<Int>("patient_id") // reference back to patient table
-  let segment = Expression<Int>("segment")
-  let height = Expression<Double>("height")
-  let weight = Expression<Double>("weight")
-  let date = Expression<Date>("date")
-  let frequency = Expression<Double>("frequency")
+  fileprivate let patient_id = Expression<Int>("patient_id") // reference back to patient table
+  fileprivate let segment = Expression<Int>("segment")
+  fileprivate let height = Expression<Double>("height")
+  fileprivate let weight = Expression<Double>("weight")
+  fileprivate let date = Expression<Date>("date")
+  fileprivate let frequency = Expression<Double>("frequency")
 
-  let r_values = Expression<String>("r_values")
-  let j_values = Expression<String>("j_values")
+  fileprivate let r_values = Expression<String>("r_values")
+  fileprivate let j_values = Expression<String>("j_values")
 
-  let real = Expression<Double>("real")
-  let imaginary = Expression<Double>("imaginary")
+  fileprivate let real = Expression<Double>("real")
+  fileprivate let imaginary = Expression<Double>("imaginary")
 
+  var requiresUpdate: Bool = false
 
   // MARK: - Object Initialization
   init() {
@@ -98,8 +99,8 @@ class Database {
     }))
   }
 
-  func selectPatient(_ index: Int) -> Patient {
-    var patient: Patient?
+  func selectPatient(_ index: Int) -> Patient? {
+    var patient: Patient? = nil
 
     for row in try! db.prepare(patients.filter(id == index)) {
       patient = Patient(id: row[id],
@@ -123,8 +124,8 @@ class Database {
       )
     }
 
-    guard patient != nil else { fatalError("No patient exists with ID \(index)") }
-    return patient!
+    //guard patient != nil else { fatalError("No patient exists with ID \(index)") }
+    return patient
   }
 
   func selectPatients() -> [Patient] {
@@ -170,7 +171,12 @@ class Database {
 
   func dropPatient(_ patient: Patient) {
     let row = patients.filter(id == patient.row_id)
+    let e = exams.filter(patient_id == id)
+
+    try! db.run(e.delete())
     try! db.run(row.delete())
+
+    requiresUpdate = true
   }
 
   func dropAllPatients() {
@@ -207,7 +213,6 @@ class Database {
           impedances.append(Impedance(real: r, imaginary: j))
         }
       }
-
 
       rows.append(
         Exam(

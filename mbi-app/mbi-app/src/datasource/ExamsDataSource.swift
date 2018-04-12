@@ -35,6 +35,12 @@ class ExamsDataSource: NSObject {
       self.exams.append(exam)
     }
   }
+
+  func checkUpdate() {
+    if dbSharedInstance.requiresUpdate {
+      reload()
+    }
+  }
 }
 
 extension ExamsDataSource: UITableViewDataSource {

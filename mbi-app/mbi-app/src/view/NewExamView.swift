@@ -8,7 +8,12 @@
 
 import UIKit
 
+typealias RawGTXData = (date: String, frequency: Double, impedances: [Impedance])
+typealias RawGETData = (date: String, frequency: Double, impedance: Impedance)
+
 class NewExamView: UITableViewController {
+
+  fileprivate var queue = DispatchQueue.main
 
   @IBOutlet weak var selectedPatientLabel: UILabel!
   @IBOutlet weak var selectedSegmentLabel: UILabel!
@@ -20,9 +25,11 @@ class NewExamView: UITableViewController {
   var exam: Exam?
   var selectedPatient: Patient?
   var selectedSegment: Int?
-  var selectedMeasure: Measure?
+  var selectedMeasure: RawGTXData?
 
   override func viewDidLoad() {
+    NotificationCenter.default.addObserver(self, selector: #selector(updateGTX(_:)), name: BLEUpdateGTX, object: nil)
+
     super.viewDidLoad()
 
     selectedPatientLabel.text = ""
@@ -73,13 +80,14 @@ class NewExamView: UITableViewController {
 
     case is SelectMeasureView:
       let source = sender.source as! SelectMeasureView
-      if let measure = source.selection {
-        selectedMeasure = measure
-        selectedMeasureLabel.text = "1 medição"
+      if let index = source.selection {
+        if let service = btDiscoverySharedInstance.service {
+          service.write("GTX", with: index)
+        }
       }
 
     default:
-      return
+      fatalError("Returning from unknown controller source!")
     }
 
     editingChanged()
@@ -96,6 +104,20 @@ class NewExamView: UITableViewController {
   // MARK: - Private Methods
   private func updateSaveButtonState() {
     saveButton.isEnabled = (selectedPatient != nil && selectedSegment != nil && selectedMeasure != nil && !(heightTextField.text!.isEmpty || weightTextField.text!.isEmpty))
+  }
+
+  @objc func updateGTX(_ notification: Notification) {
+    let info = notification.userInfo as! [String: RawGTXData]
+
+    queue.async {
+      if let measure = info["measure"] {
+        self.selectedMeasure = measure
+        self.selectedMeasureLabel.text = "1 medição"
+
+        // disconnect from mbi
+        btDiscoverySharedInstance.disconnect()
+      }
+    }
   }
 
 }

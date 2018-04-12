@@ -20,7 +20,12 @@ class NewPatientView: UITableViewController {
   @IBOutlet weak var personalIdTextField: UITextField!
   
   var patient: Patient?
-  
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupTextFields()
+  }
+
   // MARK: Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
@@ -51,7 +56,7 @@ class NewPatientView: UITableViewController {
 
   // MARK: - Actions
   @IBAction func cancel(_ sender: UIBarButtonItem) {
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: false, completion: nil)
   }
 
   @IBAction func textFieldEditingChanged(_ sender: UITextField) {
@@ -62,5 +67,26 @@ class NewPatientView: UITableViewController {
   private func updateSaveButtonState() {
     saveButton.isEnabled = !(recordTextField.text!.isEmpty || firstNameTextField.text!.isEmpty)
   }
+}
+
+extension NewPatientView: UITextFieldDelegate {
+
+  fileprivate func setupTextFields() {
+//    recordTextField.delegate = self
+//    recordTextField.tag = 0
+//    firstNameTextField.delegate = self
+//    firstNameTextField.tag = 1
+  }
+
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+      nextField.becomeFirstResponder()
+    } else {
+      textField.resignFirstResponder()
+    }
+
+    return false
+  }
+
 }
 

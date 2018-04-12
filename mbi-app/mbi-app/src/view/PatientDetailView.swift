@@ -8,35 +8,48 @@
 
 import UIKit
 
-class PatientDetailView: UITableViewController {
+class PatientDetailView: UIViewController {
 
-  @IBOutlet weak var recordLabel: UILabel!
-  @IBOutlet weak var firstnameLabel: UILabel!
-  @IBOutlet weak var middlenameLabel: UILabel!
-  @IBOutlet weak var lastnameLabel: UILabel!
+//  @IBOutlet weak var recordLabel: UILabel!
+//  @IBOutlet weak var firstnameLabel: UILabel!
+//  @IBOutlet weak var middlenameLabel: UILabel!
+//  @IBOutlet weak var lastnameLabel: UILabel!
+
+//  @IBOutlet weak var table: PatientDetailTable!
 
   var patient: Patient?
+//  var datasource: PatientDetailDataSource
+
+  required init?(coder aDecoder: NSCoder) {
+//    datasource = PatientDetailDataSource()
+
+    super.init(coder: aDecoder)
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationItem.title = patient?.first_name
-    recordLabel.text = patient?.record
-    firstnameLabel.text = patient?.first_name
-    middlenameLabel.text = patient?.middle_name
-    lastnameLabel.text = patient?.last_name
+//    table.dataSource = datasource
   }
 
   // MARK: Private
   @IBAction func edit(_ sender: UIBarButtonItem) {
-    /*
-    if (tableView.isEditing) {
-      tableView.setEditing(false, animated: true)
-      sender.title = "Done"
-    } else {
-      tableView.setEditing(true, animated: true)
-      sender.title = "Edit"
-    }
-    */
   }
+
+  func dropPatient() {
+    performSegue(withIdentifier: "deletePatientSegue", sender: self)
+    navigationController?.popViewController(animated: true)
+  }
+
+  @IBAction func deleteClicked(_ sender: UIButton) {
+    let title = "Atenção"
+    let message = "A remoção de um paciente também remove todos os exames " +
+    "relacionados ao paciente.\nDeseja apagar o paciente?"
+
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "Apagar", style: .destructive) { (_) in self.dropPatient() })
+    self.present(alert, animated: true, completion: nil)
+  }
+
 }

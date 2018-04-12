@@ -37,6 +37,7 @@ class ListExamView: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
+    datasource.checkUpdate()
     if let index = examsTable.indexPathForSelectedRow {
       examsTable.deselectRow(at: index, animated: true)
     }
