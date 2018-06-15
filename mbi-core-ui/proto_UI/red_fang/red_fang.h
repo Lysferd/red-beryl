@@ -22,7 +22,11 @@ class red_fang
 	private:
 		bool _Get;
 		bool _Req;
+				
 		bool _complex;
+		
+		bool _isBeingUsed;
+		
 		long _freq;
 		int _num;
 	public:
@@ -35,6 +39,7 @@ class red_fang
 		bool serialLeitura(leitura lt, int i);
 		bool getComplex(leitura lt, int n);
 		bool get(int n, bool complex);
+		bool isBeingUsed();
 };
 
 

@@ -11,11 +11,12 @@
 
 red_fang::red_fang()
 {
-	Serial.begin(9600);
+	Serial.begin(19200);
 	Serial.println("Construtor basico red_fang utilizado.");
 	_Get=false;
 	_Req=false;
 	_complex=false;
+	_isBeingUsed=false;
 	_freq = 1010;
 	_num = 0;
 	Serial1.begin(9600);
@@ -24,6 +25,7 @@ red_fang::red_fang()
 
 void red_fang::ler_serial()
 {	
+
 	if(_Get)
 	{
 		get(_num, _complex);
@@ -32,8 +34,11 @@ void red_fang::ler_serial()
 	{
 		static bool done = false;
 		static leitura lt;
+		Serial.println("before reading");
 		if(!done)
 		{
+			Serial.println("Começar leitura");
+			
 			lt = beryl->crystal.lerAD();
 			/*
 			int h = beryl->clock.hora();
@@ -85,6 +90,8 @@ void red_fang::ler_serial()
 			{
 				inf=0;
 				_Req = false;
+				done = false;
+				_isBeingUsed = false;
 			}
 		}
 	}
@@ -109,6 +116,7 @@ void red_fang::ler_serial()
 
 void red_fang::check_string(char str[])
 {
+	_isBeingUsed = true;
 	if(strcmp(str, "VER")==0)
 	{
 		serialEnviar(VERSION);
@@ -161,6 +169,7 @@ void red_fang::check_string(char str[])
 			{
 				Serial.println("ERRO, não foi possivel deletar a leitura.");
 				Serial.print("ERR");
+				_isBeingUsed = false;
 			}
 		}
 		else
@@ -325,6 +334,7 @@ void red_fang::check_string(char str[])
 			else
 			{                                               //se o valor recebido for invalido.
 				Serial1.print("ERR");                             //retorna um erro.
+				_isBeingUsed = false;
 			}
 		}
 		else
@@ -435,6 +445,7 @@ void red_fang::check_string(char str[])
 		Serial.print("PTR='");
 		Serial.print(ptr);
 		Serial.println("'");
+		
 		if(frq>=1000 && frq <=100000)
 		{
 			if(beryl->crystal.configurar(frq))
@@ -446,6 +457,7 @@ void red_fang::check_string(char str[])
 			{
 				Serial.println("Configuração da AD falhou.");
 				Serial1.print("ERR");
+				_isBeingUsed = false;
 			}
 			
 			//beryl->crystal.lerAD();
@@ -471,12 +483,14 @@ void red_fang::check_string(char str[])
 		{
 			Serial.print("Valor de frequencia requerido não esta dentro dos limites validos, retornando ERRO.");
 			Serial1.print("ERR");
+			_isBeingUsed = false;
 		}
     }
 	else
 	{
 		Serial.println("Algo inesperado foi recebido, limpando o serial. Enviando ERRO");
 		Serial1.print("ERR");
+		_isBeingUsed = false;
 		for (int i=0; i<10; i++){
 			Serial1.read();
 			if(Serial1.available()==0){
@@ -496,6 +510,7 @@ void red_fang::serialEnviar(char message[])
 	Serial1.print("E");
     Serial.println("[E] enviado.");
     delay(100);
+	_isBeingUsed = false;
 	//Serial1.flushRX();
 }
 bool red_fang::deletaLeitura(int delPos)
@@ -520,7 +535,10 @@ bool red_fang::deletaLeitura(int delPos)
 		for(int i= 1+ ( (EEPROM.read(0)-1)*sizeof(leitura)) ; i<=(EEPROM.read(0))*sizeof( leitura); i++)
 		{    //logica de apagar o ultimo endereço.
 			EEPROM.write(i,0);
-			Serial.println("Endereço final apagado.");
+			Serial.print("Apagando ");
+			Serial.print(i);
+			Serial.print("/");
+			Serial.println((EEPROM.read(0))*sizeof( leitura));
 		}
 		EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
 		Serial.println("DeletaLeitura concluido.");
@@ -721,6 +739,7 @@ bool red_fang::serialLeitura(leitura lt, int i)
 		default:
 		{
 			Serial.println("SUCESSO.");
+			_isBeingUsed = false;
 			return true;
 			break;
 		}
@@ -934,6 +953,7 @@ bool red_fang::get(int n, bool complex)
 			{
 				_Get = false;
 				inf=0;
+				_isBeingUsed = false;
 				return true;
 			}
 		}
@@ -956,4 +976,9 @@ bool red_fang::get(int n, bool complex)
 			return true;
 		}*/
     }
+}
+
+bool red_fang::isBeingUsed()
+{
+	return _isBeingUsed;
 }

@@ -17,12 +17,35 @@
 red_crystal::red_crystal()
 {
 	Serial.println("Construtor basico red_crystal utilizado.");
+}
+
+void red_crystal::init()
+{
+	Serial.println("Inicializador red_crystal utilizado.");
 	Wire.setClock(400000);  //Definir a velocidade de clock do Wire para conversar com a AD.
 	leitura1 = {1};
 	if(initialConfig()){
 		Serial.println("Configuração inicial da AD5933 concluida.");
 	}
+	else
+		Serial.println("Erro ao configurar a AD5933.");
 }
+
+
+bool red_crystal::reset()
+{
+	if(AD5933::reset())
+	{
+		return true;
+	}
+	else
+	{
+		Serial.println("AD-reset falhou.");
+		return false;
+	}
+}
+
+
 bool red_crystal::initialConfig()
 {
 	if(!AD5933::reset()){

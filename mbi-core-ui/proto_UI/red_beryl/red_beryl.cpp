@@ -9,6 +9,8 @@
 #include <Adafruit_GFX.h>
 #include <leituras.h>
 #include <red_crystal.h>
+#include <red_quartz.h>
+
 #include <EEPROM.h>
 
 #define BAT8_HEIGHT 8 
@@ -56,14 +58,10 @@ static const unsigned char PROGMEM BT2_bmp[] =
 red_beryl::red_beryl()
 {
 	Serial.println("Construtor basico red_beryl utilizado.");
-	
-	Serial.print("tamanho de uma leitura: ");
-	Serial.println(sizeof(leitura));
-	
-	display.begin(SSD1306_SWITCHCAPVCC, 0x3C, false);
+	display.begin(SSD1306_SWITCHCAPVCC, 0x3C, true);
 	Serial.println("display inicializado.");
 	display.clearDisplay();
-	
+	display.display();
 	display.setCursor(display.width()/2-(3*2*6/2),display.height()/2-(1*2*7/2)+2);
 	display.setTextColor(WHITE);
 	display.setTextSize(2);
@@ -72,6 +70,25 @@ red_beryl::red_beryl()
 	display.setCursor(1, 0);
 	display.print("M.A.Engenharia");
 	display.display();
+	delay(1000);
+	
+	Serial.print("tamanho de uma leitura: ");
+	Serial.println(sizeof(leitura));
+	Serial.print("Tamanho da EEPROM:");
+	Serial.println(EEPROM.length());
+	if(EEPROM.read(EEPROM.length()-1)<1 || EEPROM.read(EEPROM.length()-1)>3)
+	{
+		EEPROM.write(EEPROM.length()-1, 1);
+	}
+	_notificationType = EEPROM.read(EEPROM.length()-1);
+	Serial.print("Valor no ultimo endereço:");
+	Serial.println(EEPROM.read(EEPROM.length()-1));
+	Serial.print("status-wire");
+	Serial.print(Wire.available());
+	Serial.println(Wire.read());
+	Serial.print("AD - ");
+	
+	adResetTest();	
 
 	_pinUP = 23;
 	_pinDOWN = 25;
@@ -87,17 +104,46 @@ red_beryl::red_beryl()
 	_down = false;
 	_yes = false;
 	_no = false;
-	
 	BLE = true;
+	persistentNotify = false;
+	busyNotify = false;
 	leitura0 = {0};
 	
 	Serial.print("versão: ");
 	Serial.println(VERSION);
 	//delay(1000);
+	clock.init();
+	crystal.init();
+}
+void red_beryl::adResetTest()
+{
+	while(!(crystal.reset()))
+	{
+		display.fillRect(display.width()/8, display.height()/4, display.width()-2*display.width()/8, display.height()/2, BLACK);
+		display.drawRect(display.width()/8, display.height()/4, display.width()-2*display.width()/8, display.height()/2, WHITE);
+		display.setCursor(display.width()/2-(15*6-1)/2, display.height()/4+(display.height()/4)/2);
+		display.setTextColor(WHITE);
+		display.setTextSize(1);
+		display.print("Aguardando AD");
+		
+		display.display();
+		Serial.print("Waiting");
+		delay(1000);
+		display.print(".");
+		display.display();
+		Serial.print(".");
+		delay(1000);
+		display.print(".");
+		display.display();
+		Serial.print(".");
+		delay(1000);
+		Serial.println(".");
+	}
 }
 
 void red_beryl::checarPin()
 {
+	adResetTest();
 	//Serial.println("checarPin");
 	static bool first=true;
 	if(first){
@@ -215,12 +261,242 @@ void red_beryl::upperBar()    // barra superior.
 	display.setTextSize(1);
 	display.setTextColor(WHITE);
 	display.print((int) temperature);
-	display.print("C");
 	display.write((uint8_t) 247);
-	
+	display.print("C");
+
 	//free(timeStr);
 }
 
+bool red_beryl::notificationTimer(bool inUse)
+{
+	static const long timeLimit = 2000;
+	static long timer = 0;
+	static long lockedTimer = millis();
+	switch(_notificationType)			//1-Persistente 2-Temporizado 3-Desabilitado
+	{
+		case 1:
+		{
+			if(!busyNotify)
+			{
+				if(inUse)
+				{
+					busyNotify=true;
+					if(persistentNotify)
+					{
+						persistentNotify = false;
+					}
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if(inUse)
+				{
+					if(persistentNotify)
+					{
+						lockedTimer = millis();
+						persistentNotify = false;
+					}
+					return true;
+				}
+				else
+				{
+					if(!persistentNotify)
+					{
+						timer = millis();
+						if(!(Serial1.available() > 0) && (timer-lockedTimer)>250)
+						{
+							persistentNotify = true;
+							return true;
+						}
+						else
+						{
+							return true;
+						}
+					}
+					else
+					{
+						checarPin();
+						if(_yes || _no)
+						{
+							persistentNotify = false;
+							busyNotify = false;
+							_yes = false;
+							_no = false;
+							_up = false;
+							_down = false;
+							return false;
+						}
+						else
+						{
+							if(_up || _down)
+							{
+								_up = false;
+								_down = false;
+							}
+							return true;
+						}
+					}
+				}
+			}
+			break;
+		}
+		/*				
+			if(!notify)
+			{
+				if(inUse)
+				{
+					busyNotify = true;
+					notify = true;
+					persistentNotify = false;
+					lockedTimer = millis();
+					timer = lockedTimer;
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{				
+				static bool done = false;
+				if(!inUse)
+				{
+					if(!done)
+					{
+						lockedTimer = millis();
+						persistentNotify = true;
+						done = true;
+					}
+					timer = millis();
+					if( (timer-lockedTimer) > 100 )
+					{
+						checarPin();
+						if( _yes || _no )
+						{
+							notify = false;
+							_yes = false;
+							_no = false;
+							_up = false;
+							_down = false;
+							persistentNotify = false;
+							done = false;
+							return false;
+						}
+						if( _up || _down )
+						{
+							_up = false;
+							_down = false;
+						}
+					}
+				}
+				else
+				{
+					done = false;
+					notify = true;
+					persistentNotify = false;
+					lockedTimer = millis();
+					timer = lockedTimer;
+				}
+				return true;
+			}
+			break;
+		}*/
+		case 2:
+		{
+			if(!busyNotify)
+			{
+				if(inUse)
+				{
+					busyNotify = true;
+					lockedTimer = millis();
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if(!inUse)
+				{
+					timer = millis();
+					if( (timer-lockedTimer) > timeLimit )
+					{
+						busyNotify = false;
+						return false;
+					}
+				}
+				else
+				{
+					lockedTimer = millis();
+					return true;
+				}
+			}
+			break;
+		}
+		case 3:
+		{
+			return false;
+			break;
+		}
+		default:
+		{
+			if(inUse)
+			{
+				busyNotify = true;
+				return true;
+			}
+			else
+			{
+				if(busyNotify)
+				{
+					busyNotify = false;
+				}
+				return false;
+			}
+			break;
+		}
+	}
+}
+
+void red_beryl::notification()
+{
+	if(busyNotify)
+	{
+		if(!persistentNotify)
+		{
+			display.fillRect(20, lineSize+4, display.width()-40, lineSize+4, BLACK);
+			display.drawRect(20, lineSize+4, display.width()-40, lineSize+4, WHITE);
+			display.setCursor(display.width()/2-36, lineSize*2-2 );
+			display.setTextColor(WHITE);
+			display.setTextSize(1);
+			display.print("Sincronizando");
+		}
+		else
+		{
+			display.fillRect(20, lineSize+4, display.width()-40, lineSize+4, BLACK);
+			display.drawRect(20, lineSize+4, display.width()-40, lineSize+4, WHITE);
+			display.setCursor(display.width()/2-36, lineSize*2-2 );
+			display.setTextColor(WHITE);
+			display.setTextSize(1);
+			display.print("Concluido.");
+				
+			display.fillRect(display.width()-19, display.height()-10, 2*6+2, lineSize+2, BLACK);
+			display.drawRect(display.width()-19, display.height()-10, 2*6+2, lineSize+2, WHITE);
+			display.setCursor(display.width()-17, display.height()-10+1 );
+			display.setTextColor(WHITE);
+			display.setTextSize(1);
+			display.print("OK");
+		}
+	}
+}
 void red_beryl::menu()
 {
 	//Serial.println("menu");
@@ -676,6 +952,7 @@ bool red_beryl::menu_sinc()
 bool red_beryl::menu_ajuste()
 {
 	static int choice=1;
+	static char* menu[] = { "0.default", "1- Ajustar Relogio", "2- Ajustar Avisos", "3- Ajustar Historico" };
 	
 	switch(choice)
 	{
@@ -694,12 +971,16 @@ bool red_beryl::menu_ajuste()
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
-				display.println("1- Relogio");    //imprimir opção 1.
+				display.print(menu[1]);    //imprimir opção 1.
 
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
-				display.println("2- APAGAR HISTORICO");   //imprimir opção 2.
+				display.print(menu[2]);   //imprimir opção 2.
 			
+				display.setCursor(3, lineSize*3);
+				display.setTextColor(WHITE);
+				display.print(menu[3]);
+				
 				if(_up)
 				{
 					choice--;
@@ -726,7 +1007,53 @@ bool red_beryl::menu_ajuste()
 		}
 		case 2:
 		{
-			static bool clean = false;
+			display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+			display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+			display.setTextColor(WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+			display.print(menu[1]);    //imprimir opção 1.
+
+			display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
+			display.setTextColor(BLACK,WHITE);    //definir a cor do texto como: branco | não selecionado
+			display.print(menu[2]);   //imprimir opção 2.
+			
+			display.setCursor(3, lineSize*3);
+			display.setTextColor(WHITE);
+			display.print(menu[3]);
+				
+			if(_up)
+			{
+				choice--;
+				_up = false;
+			}
+			if(_down)
+			{
+				choice++;
+				_down = false;
+			}
+			if(_yes)
+			{
+				choice = 21;
+				_yes=false;
+				_no=false;
+			}
+			if(_no)
+			{
+				_no=false;
+				return false;
+			}
+			break;
+		}
+		case 21:
+		{
+			if(!menu_aviso())
+			{
+				choice = 2;
+			}
+			break;
+		}
+		case 3:
+		{
+			/*static bool clean = false;
 			
 			if(clean)
 			{
@@ -796,12 +1123,15 @@ bool red_beryl::menu_ajuste()
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
-				display.println("1- Relogio");    //imprimir opção 1.
+				display.print(menu[1]);    //imprimir opção 1.
 
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
-				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
-				display.println("2- APAGAR HISTORICO");   //imprimir opção 2.
-			
+				display.setTextColor(WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+				display.print(menu[2]);   //imprimir opção 2.
+				
+				display.setCursor(2, lineSize*3);
+				display.setTextColor(BLACK, WHITE);
+				display.print(menu[3]);
 				if(_up)
 				{
 					choice--;
@@ -823,7 +1153,448 @@ bool red_beryl::menu_ajuste()
 					_no=false;
 					return false;
 				}
-			}	
+			}	*/
+			
+			display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+			display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+			display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+			display.print(menu[1]);    //imprimir opção 1.
+
+			display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
+			display.setTextColor(WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
+			display.print(menu[2]);   //imprimir opção 2.
+				
+			display.setCursor(2, lineSize*3);
+			display.setTextColor(BLACK, WHITE);
+			display.print(menu[3]);
+			if(_up)
+			{
+				choice--;
+				_up = false;
+			}
+			if(_down)
+			{
+				choice++;
+				_down = false;
+			}
+			if(_yes)
+			{
+				choice=31;
+				_yes=false;
+				_no=false;
+			}
+			if(_no)
+			{
+				_no=false;
+				return false;
+			}
+			break;
+		}
+		case 31:
+		{
+			if(!menu_historico())
+			{
+				choice = 3;
+			}
+			break;
+		}
+		default:
+		{
+			if(choice<1)
+			{	
+				choice = 3;
+			}
+			if(choice>3)
+			{
+				choice = 1;
+			}
+			break;
+		}
+	}
+	return true;
+}
+
+bool red_beryl::menu_aviso()
+{
+	static char* menu[] = { "0.default", "1- Persistente", "2- Temporizado", "3- Desabilitado" };
+	static int choice = 1;
+	
+	switch(choice)
+	{
+		case 1:
+		{
+			display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+			display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+			display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: branco | não selecionado
+			if(_notificationType==1)
+			{
+				display.print("* ");
+			}
+			display.print(menu[1]);    //imprimir opção 1.
+			
+			
+			display.setCursor(2, lineSize*2);
+			display.setTextColor(WHITE);
+			if(_notificationType==2)
+			{
+				display.print("* ");
+			}
+			display.print(menu[2]);    //imprimir opção 1.
+			
+			
+			display.setCursor(2, lineSize*3);
+			display.setTextColor(WHITE);
+			if(_notificationType==3)
+			{
+				display.print("* ");
+			}
+			display.print(menu[3]);    //imprimir opção 1.
+			
+			
+			if(_up)
+			{
+				choice--;
+				_up = false;
+			}
+			if(_down)
+			{
+				choice++;
+				_down = false;
+			}
+			if(_yes)
+			{
+				if(_notificationType != choice)
+				{
+					_notificationType=choice;
+					EEPROM.write(EEPROM.length()-1, choice);
+				}
+				_yes=false;
+				_no=false;
+			}
+			if(_no)
+			{
+				_no=false;
+				return false;
+			}
+			
+			break;
+		}
+		case 2:
+		{
+			display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+			display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+			display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+			if(_notificationType==1)
+			{
+				display.print("* ");
+			}
+			display.print(menu[1]);    //imprimir opção 1.
+			
+			display.setCursor(2, lineSize*2);
+			display.setTextColor(BLACK, WHITE);
+			if(_notificationType==2)
+			{
+				display.print("* ");
+			}
+			display.print(menu[2]);    //imprimir opção 1.
+			
+			display.setCursor(2, lineSize*3);
+			display.setTextColor(WHITE);
+			if(_notificationType==3)
+			{
+				display.print("* ");
+			}
+			display.print(menu[3]);    //imprimir opção 1.
+			
+			
+			if(_up)
+			{
+				choice--;
+				_up = false;
+			}
+			if(_down)
+			{
+				choice++;
+				_down = false;
+			}
+			if(_yes)
+			{
+				if(_notificationType != choice)
+				{
+					_notificationType=choice;
+					EEPROM.write(EEPROM.length()-1, choice);
+				}
+				_yes=false;
+				_no=false;
+			}
+			if(_no)
+			{
+				_no=false;
+				return false;
+			}
+			
+			break;
+		}
+		case 3:
+		{
+			display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+			display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+			display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+			if(_notificationType==1)
+			{
+				display.print("* ");
+			}
+			display.print(menu[1]);    //imprimir opção 1.
+			
+			display.setCursor(2, lineSize*2);
+			display.setTextColor(WHITE);
+			if(_notificationType==2)
+			{
+				display.print("* ");
+			}
+			display.print(menu[2]);    //imprimir opção 1.
+			
+			display.setCursor(2, lineSize*3);
+			display.setTextColor(BLACK, WHITE);
+			if(_notificationType==3)
+			{
+				display.print("* ");
+			}
+			display.print(menu[3]);    //imprimir opção 1.
+			
+			if(_up)
+			{
+				choice--;
+				_up = false;
+			}
+			if(_down)
+			{
+				choice++;
+				_down = false;
+			}
+			if(_yes)
+			{
+				if(_notificationType != choice)
+				{
+					_notificationType=choice;
+					EEPROM.write(EEPROM.length()-1, choice);
+				}
+				_yes=false;
+				_no=false;
+			}
+			if(_no)
+			{
+				_no=false;
+				return false;
+			}
+			
+			
+			break;
+		}
+		default:
+		{
+			if(choice<1)
+			{	
+				choice = 3;
+			}
+			if(choice>3)
+			{
+				choice = 1;
+			}
+			break;
+		}
+	}
+	return true;
+}
+
+bool red_beryl::menu_historico()
+{
+	static char* menu[] = { "0.default", "1- Limpar Historico", "2- Formatar Historico" };
+	static int choice = 1;
+	
+	switch(choice)
+	{
+		case 1:
+		{
+			static bool clear = false;
+			if(clear)
+			{
+				static bool reseter = false;
+				if(!reseter)
+				{
+					display.setCursor(2, lineSize);
+					display.setTextColor(WHITE);
+					display.println("Limpar Historico?");
+					
+					display.setCursor(display.width()/2, lineSize*2);
+					display.print("N|S");
+					if(_yes)
+					{
+						reseter=true;
+						_yes=false;
+					}
+					if(_no)
+					{
+						reseter=false;
+						_no=false;
+						clear=false;
+					}
+				}
+				else
+				{
+					EEPROM.write(0,0);
+					display.setCursor(display.width()/2-25, display.height()/2-4);    //define a posição do cursor.
+					display.setTextColor(WHITE);    //define a fonte branca.
+					display.print("Concluido!");    //imprime a frase que indica que completou a logica.
+					if(_yes || _no || _up || _down)
+					{    //se qualquer um dos botões for TRUE.
+							
+						reseter=false;    //reseta RESETER.
+						_yes=false;    //reseta YES.
+						_no=false;   //reseta NO.
+						_up=false;   //reseta UP.
+						_down=false;   //reseta DOWN.
+							
+						clear=false;
+							
+						return false;
+					}
+				}
+			}
+			else
+			{
+				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: branco | não selecionado
+				display.print(menu[1]);    //imprimir opção 1.
+				
+				display.setCursor(2, lineSize*2);    //definir a posição do cursor na primeira linha.
+				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+				display.print(menu[2]);    //imprimir opção 1.
+				
+				if(_up)
+				{
+					choice--;
+					_up = false;
+				}
+				if(_down)
+				{
+					choice++;
+					_down = false;
+				}
+				if(_yes)
+				{
+					clear=true;
+					_yes=false;
+					_no=false;
+				}
+				if(_no)
+				{
+					_no=false;
+					return false;
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			static bool wipe = false;
+			if(wipe)
+			{
+				static bool reseter = false;    //declara e inicia como falsa uma 
+				if(!reseter)
+				{   //se o reseter for falso, faz a logica para perguntar se o usuario deseja apagar o historico.
+					display.setCursor(2, lineSize);    //reseta a posição do cursor
+					display.setTextColor(WHITE);    //define as fonte branca.
+					display.println("Formatar historico?");
+        
+					display.setCursor(display.width()/2, lineSize*2);    //define a posição do cursor
+					display.print("N|S");
+					if(_yes)
+					{    //se o botão YES for true.
+						reseter=true;   //define reseter como true para começar a logica de limpar o historico
+						_yes=false;       //reseta YES.
+					}
+					if(_no)
+					{   //se o botão NO for true.
+						
+						reseter=false;    //reseta o reseter por garantia.
+						_no=false;   //reseta NO.
+						wipe = false;
+					}
+				}
+				else
+				{   //se o valor de RESETER for true.
+					static int i=0;   //declara variavel int com valor 0 de modo estatico para percorrer os endereços da EEPROM
+					display.setCursor(display.width()/2-30, display.height()/2-4);    //define posição do cursor
+					display.setTextColor(WHITE);    //define a fonte branca.
+					if(i < EEPROM.length()-1)
+					{    //se i for menor que o tamanho da memoria da EEPROM
+						EEPROM.write(i,0);    //o valor da posição 'i' recebe '0'.
+						Serial.println(i);    //imprime no serial o endereço atual para acomapnhar.
+						int exp = map(i,0,4095,0,100);    //mapeia em uma variavel int de 0 a 100 o espelho do endereço da EEPROM, de forma que o valor da variavel seja a porcentagem da memoria ja percorrida e 'limpa'.
+						display.print("Limpando...");
+						display.setCursor(display.width()/2-10, display.height()/2+4);    //define posição do cursor
+						display.setTextColor(WHITE);    //define a fonte branca.
+						display.print(exp);   //imprime na tela esse valor.
+						display.print("%");   //completa com o simbolo de porcentagem.
+						i++;    //incrementa 'i' para começar no proximo endereço.
+					}
+					else
+					{   //se i for maior que o tamanho da memoria da EEPROM, ou seja, se terminar de limpar a memoria.
+						display.setCursor(display.width()/2-25, display.height()/2-4);    //define a posição do cursor.
+						display.setTextColor(WHITE);    //define a fonte branca.
+						display.print("Concluido!");    //imprime a frase que indica que completou a logica.
+						if(_yes || _no || _up || _down)
+						{    //se qualquer um dos botões for TRUE.
+							
+							reseter=false;    //reseta RESETER.
+							i=0;    //reseta o valor de i;
+							_yes=false;    //reseta YES.
+							_no=false;   //reseta NO.
+							_up=false;   //reseta UP.
+							_down=false;   //reseta DOWN.
+							
+							wipe=false;
+							
+							return false;
+						}
+					}
+				}
+			}
+			else
+			{
+				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
+				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
+				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
+				display.print(menu[1]);    //imprimir opção 1.
+				
+				display.setCursor(2, lineSize*2);    //definir a posição do cursor na primeira linha.
+				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: branco | não selecionado
+				display.print(menu[2]);    //imprimir opção 1.
+				
+				if(_up)
+				{
+					choice--;
+					_up = false;
+				}
+				if(_down)
+				{
+					choice++;
+					_down = false;
+				}
+				if(_yes)
+				{
+					wipe=true;
+					_yes=false;
+					_no=false;
+				}
+				if(_no)
+				{
+					_no=false;
+					return false;
+				}
+			}
 			break;
 		}
 		default:

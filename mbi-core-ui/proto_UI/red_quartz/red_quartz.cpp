@@ -12,6 +12,11 @@ red_quartz::red_quartz()
 {
 	//Wire.begin();
 	Serial.println("Construtor basico red_quartz utilizado.");
+
+}
+void red_quartz::init()
+{
+	Serial.println("Inicializador red_quartz.init utilizado.");
 	bool dummy;
 	_segundo 	= time.getSecond();
 	_minuto 	= time.getMinute();

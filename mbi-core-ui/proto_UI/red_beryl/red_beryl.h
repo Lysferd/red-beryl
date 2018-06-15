@@ -34,11 +34,14 @@ class red_beryl
 		int _pinNO;
 		int _pinBAT;
 		
+		int _notificationType;
 		bool _up;
 		bool _down;
 		bool _yes;
 		bool _no;
 		
+		bool persistentNotify;
+		bool busyNotify;
 		bool BLE;
 	public:
 		
@@ -47,12 +50,19 @@ class red_beryl
 		Adafruit_SSD1306 display;
 		
 		leitura leitura0;
-		red_crystal crystal;
+		
 		red_quartz clock;
+
+		red_crystal crystal;
+		
+		void notification();
+		bool notificationTimer(bool inUse);
 		
 		int getBatteryPct();
 		void upperBar();
 		void checarPin();
+		
+		void adResetTest();
 		
 		void menu();
 		bool menu_leitura();
@@ -62,6 +72,10 @@ class red_beryl
 		bool historico();
 		bool relogio();
 		bool deletaLeitura(int delPos);
+		
+		bool menu_aviso();
+		bool menu_historico();
+		
 		void imprimeEscolha(int i, int l, leitura lt, bool s);
 		void scrollBar(int j);
 };

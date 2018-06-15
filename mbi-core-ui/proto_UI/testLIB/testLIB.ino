@@ -24,6 +24,7 @@ int freeMemory() {
 }
 ///////////////////////////////////
 
+
 void setup() {
   // put your setup code here, to run once:
   
@@ -41,10 +42,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   fang.ler_serial();
   rb->display.clearDisplay();
-  rb->clock.checkTime();
-  rb->checarPin();
+  if(!rb->notificationTimer(fang.isBeingUsed()))
+  {
+    rb->checarPin();
+  }
   rb->menu();
   rb->upperBar();
+  rb->clock.checkTime();
+  rb->notification();
   rb->display.display();
   delay(10);
   //Serial.println(freeMemory());

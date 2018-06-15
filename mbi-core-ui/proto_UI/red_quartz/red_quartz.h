@@ -28,6 +28,8 @@ class red_quartz
 		DS3231 time;
 		red_quartz();
 		
+		void init();
+
 		int segundo();
 		int minuto();
 		int hora();

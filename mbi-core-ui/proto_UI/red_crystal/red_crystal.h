@@ -36,6 +36,10 @@ class red_crystal
 		
 	public:
 		red_crystal();
+		void init();
+		
+		
+		bool reset();
 		bool initialConfig();
 		bool configurar(long f);
 		leitura lerAD();
