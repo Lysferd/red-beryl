@@ -10,7 +10,7 @@ import UIKit
 
 class ListPatientView: UIViewController {
 
-  // MARK: GUI Outlets
+  // MARK: Outlets
   @IBOutlet weak var tableView: UITableView!
 
   // MARK: Properties
@@ -24,34 +24,34 @@ class ListPatientView: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    //tableView.tableFooterView = UIView()
+    tableView.tableFooterView = UIView()
     tableView.dataSource = datasource
     tableView.reloadData()
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    if let index = tableView.indexPathForSelectedRow {
-      tableView.deselectRow(at: index, animated: true)
-    }
-  }
-
   // MARK: - Actions
   @IBAction func unwindToPatientList(sender: UIStoryboardSegue) {
-    if let source = sender.source as? NewPatientView, let patient = source.patient {
-      let newIndexPath = IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)
-      if datasource.append(patient) {
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-      }
-    }
 
-    // DELETE REQUESTED
-    if let source = sender.source as? PatientDetailView, let patient = source.patient {
-      if let id = datasource.drop(patient) {
-        let index = IndexPath(row: id, section: 0)
-        tableView.deleteRows(at: [index], with: .automatic)
+    if let identifier = sender.identifier {
+      switch identifier {
+      case "create":
+        if let source = sender.source as? NewPatientView, let data = source.patient_data {
+          datasource.append(data)
+          tableView.reloadData()
+        }
+
+      case "edit":
+        return
+
+      case "delete":
+        if let source = sender.source as? PatientDetailView,
+          let patient = source.patient {
+          datasource.drop(patient)
+          tableView.reloadData()
+        }
+
+      default:
+        fatalError()
       }
     }
   }
@@ -60,25 +60,13 @@ class ListPatientView: UIViewController {
     super.prepare(for: segue, sender: sender)
 
     if segue.identifier == "showDetailSegue" {
-      if let index = tableView.indexPathForSelectedRow {
-        if let controller = segue.destination as? PatientDetailView {
-          controller.patient = datasource.patients[index.row]
+      if let index = tableView.indexPathForSelectedRow,
+      let controller = segue.destination as? PatientDetailView {
+        let key = datasource.sections[index.section]
+        if let filter = datasource.patients[key] {
+          controller.patient = filter[index.row]
         }
       }
     }
   }
-
-  @IBAction func destroyTable(_ sender: Any) {
-    NSLog("Dropping all rows")
-    dbSharedInstance.dropAllPatients()
-    datasource.reload()
-    tableView.reloadData()
-  }
-
-  @IBAction func refreshTable(_ sender: Any) {
-    NSLog("Reloading rows")
-    datasource.reload()
-    tableView.reloadData()
-  }
-
 }

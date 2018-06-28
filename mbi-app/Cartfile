@@ -1,3 +1,1 @@
-github "stephencelis/SQLite.swift" ~> 0.11.4
 github "i-schuetz/SwiftCharts" ~> 0.6.1
-github "mattt/Surge" ~> 2.0.0

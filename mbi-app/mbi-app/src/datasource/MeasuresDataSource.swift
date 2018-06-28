@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class MeasuresDataSource: NSObject {
 
   fileprivate var measures: [Measure]
+  public var selectedMeasure: IndexPath?
 
-  init(_ measures: [Measure] = []) {
-    self.measures = measures
+  override init() {
+    measures = []
   }
 
-  func count() -> Int {
-    return self.measures.count
+  var count: Int! {
+    get { return self.measures.count }
   }
 
   func append(_ measure: Measure) -> Bool {
@@ -65,7 +67,8 @@ class MeasuresDataSource: NSObject {
 
 }
 
-extension MeasuresDataSource: UITableViewDataSource {
+extension MeasuresDataSource: UITableViewDataSource, UITableViewDelegate {
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return measures.count
   }
@@ -84,6 +87,25 @@ extension MeasuresDataSource: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return "Leituras disponíveis:" // FIXME: translation needed
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    if let cell = tableView.cellForRow(at: indexPath) {
+      if selectedMeasure == indexPath {
+        cell.accessoryType = .none
+        selectedMeasure = nil
+      } else {
+        cell.accessoryType = .checkmark
+        if let index = selectedMeasure,
+          let old_cell = tableView.cellForRow(at: index) {
+          old_cell.accessoryType = .none
+        }
+        selectedMeasure = indexPath
+      }
+    }
+
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 
 }

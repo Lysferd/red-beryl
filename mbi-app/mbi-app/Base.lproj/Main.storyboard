@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="MainTabBarController" customModule="mbi_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -41,7 +41,7 @@
         <scene sceneID="Vw8-Ee-K21">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="pxM-TS-vKd" userLabel="Patients" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Pacientes" image="ic_people_36pt" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Patients" image="ic_people_36pt" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QTN-fm-cGk">
                         <autoresizingMask key="autoresizingMask"/>

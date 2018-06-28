@@ -27,9 +27,11 @@ class SelectSegmentView: UIViewController {
     super.viewDidLoad()
   }
 
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    super.prepare(for: segue, sender: sender)
+  override func viewWillDisappear(_ animated: Bool) {
+    performSegue(withIdentifier: "back", sender: self)
+  }
 
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let index = segmentsTable.indexPathForSelectedRow {
       selection = index.row
     }

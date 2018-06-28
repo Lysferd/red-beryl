@@ -10,6 +10,75 @@
 //  Copyright © 平成30年 M.A. Eng. All rights reserved.
 //
 
+import CoreData
+import UIKit
+import Darwin
+
+extension Exam {
+
+
+  fileprivate var formatter: DateFormatter! {
+    let date_formatter = DateFormatter()
+    date_formatter.dateFormat = "dd/MM/yy"
+    return date_formatter
+  }
+
+  var date_string: String! {
+    return formatter.string(from: self.date!)
+  }
+
+  var gender: Double! {
+    return patient?.gender == "male" ? 1 : 0
+  }
+
+  var birthdate: Date! {
+    if let p = patient, let date = p.birthDate {
+      return formatter.date(from: date)
+    }
+    return Date()
+  }
+
+  var birthyear: Int! {
+    return Calendar.current.component(.year, from: birthdate)
+  }
+
+  var age: Double! {
+    return Double(Calendar.current.component(.year, from: Date()) - birthyear)
+  }
+
+  var impedances_array: [Impedance]! {
+    return impedances?.allObjects as! [Impedance]
+  }
+
+  var resistance: Double! {
+    return 1 / (1.0 * impedances_array[0].module)
+  }
+
+  var tbw: Double! {
+    let p1 = 0.372 * height / resistance
+    let p2 = 3.05 * gender
+    let p3 = 0.142 * weight
+    let p4 = 0.004 * age
+
+    return p1 + p2 + p3 - p4
+  }
+
+  var ffm: Double! {
+    return tbw / 0.73
+  }
+
+  var fm: Double! {
+    return weight - ffm
+  }
+
+  var bodyfat: Double! {
+    return fm * 100 / weight
+  }
+
+}
+
+/*
+
 import Foundation
 
 class Exam {
@@ -28,24 +97,31 @@ class Exam {
   var impedances: [Impedance] // (Real,Imaginary) Double Pairs
 
   // MARK: - Convenience Variables
-  var patient_name: String! {
-    get { return patient()!.full_name() }
-  }
-
-  var date_string: String! {
-    get { return date_format.string(from: date) }
-  }
-
-  var segment_string: String! {
-    get { return Constants.segments[segment] }
-  }
-
-  var impedance_string: String! {
-    get {
-      let real = impedances[0].real / 1e3
-      let imag = -impedances[0].imaginary / 1e3
-      return String(format: "%.3f - j%.3f KΩ", real, imag)
+  var patient: Patient {
+    do {
+      return dbSharedInstance.selectPatient(patient_id)
     }
+    catch {
+      fatalError("Could not find patient with rowid \(patient_id).")
+    }
+  }
+
+  var patient_name: String {
+    return self.patient.full_name
+  }
+
+  var date_string: String {
+    return date_format.string(from: date)
+  }
+
+  var segment_string: String {
+    return Constants.segments[segment]
+  }
+
+  var impedance_string: String {
+    let real = impedances[0].real / 1e3
+    let imag = -impedances[0].imaginary / 1e3
+    return String(format: "%.3f - j%.3f KΩ", real, imag)
   }
 
   var frequency_string: String! {
@@ -96,12 +172,10 @@ class Exam {
     }
   }
 
-  fileprivate func patient() -> Patient? {
-    return dbSharedInstance.selectPatient(patient_id)
-  }
 }
 
 func ==(lhs: Exam, rhs: Exam) -> Bool {
   return false //lhs.patient_id == rhs.patient_id && lhs.row_id == rhs.row_id
 }
 
+*/

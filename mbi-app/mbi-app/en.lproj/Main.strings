@@ -1,0 +1,9 @@
+
+/* Class = "UITabBarItem"; title = "Opções"; ObjectID = "E79-Bh-aTj"; */
+"E79-Bh-aTj.title" = "Options";
+
+/* Class = "UITabBarItem"; title = "Pacientes"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Patients";
+
+/* Class = "UITabBarItem"; title = "Exame"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Exams";

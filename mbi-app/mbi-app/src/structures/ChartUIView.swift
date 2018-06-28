@@ -6,6 +6,7 @@
 //  Copyright © 平成30年 M.A. Eng. All rights reserved.
 //
 
+
 import UIKit
 
 class ChartUIView: UIView {
@@ -25,6 +26,7 @@ class ChartUIView: UIView {
       addSubview(view)
     }
 
+    // draw ellipse
 //    let rect = CGRect(x: bounds.width / 2 - 25,
 //                      y: bounds.height / 2 - 50,
 //                      width: 50,
@@ -38,9 +40,7 @@ class ChartUIView: UIView {
 //    layer.strokeColor = UIColor.red.cgColor
 //    layer.lineWidth = 2.0
 //    self.layer.addSublayer(layer)
-
 //    UIColor.gray.setFill()
-//    ovalPath.fill()
   }
 
 }

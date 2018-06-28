@@ -12,11 +12,11 @@
 struct Measure {
   var date: String
   var frequency: Double
-  var impedance: Impedance
+  var impedance: (real: Double, imaginary: Double)
 
-  init(date: String, frequency: Double, impedance: Impedance) {
+  init(date: String, frequency: Double, impedance: (Double, Double)) {
     self.date = date
     self.frequency = frequency
-    self.impedance = impedance
+    self.impedance = (real: impedance.0, imaginary: impedance.1)
   }
 }

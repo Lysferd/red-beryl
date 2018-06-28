@@ -24,6 +24,8 @@ let BLEUpdateCLK = NSNotification.Name("BLEUpdateCLK")
 
 class BTService: NSObject {
 
+  typealias RawData = (date: String, frequency: Double, impedance: (Double, Double))
+
   // MARK: - Properties
   // Bluetooth properties
   let notification = NotificationCenter.default // aliasing
@@ -64,7 +66,7 @@ class BTService: NSObject {
   // MARK: - Data TX & RX
   func write(_ string: String, with arg: Int? = nil) {
 
-    if !allowTX {
+    guard allowTX else {
       command_queue.append((string, arg))
       return
     }
@@ -85,6 +87,7 @@ class BTService: NSObject {
   // Resend command
   @objc func rewrite() {
     stopTimer()
+    return
     if let (cmd, arg) = command {
       write(cmd, with: arg)
     }
@@ -104,7 +107,7 @@ class BTService: NSObject {
   }
 
   // MARK: - Timers
-  func startTimer(_ delay: Double = 1.0) {
+  func startTimer(_ delay: Double = 2.0) {
     allowTX = false
     txTimer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(rewrite), userInfo: nil, repeats: false)
   }
@@ -133,7 +136,7 @@ class BTService: NSObject {
   }
 
   func postUpdateGetReq(_ data: String) {
-    var measure: RawGETData = (date: "", frequency: 0.0, impedance: Impedance(real: 0.0, imaginary: 0.0))
+    var measure: RawData = (date: "", frequency: 0.0, impedance: (0.0, 0.0))
 
     var data_array = data.split(separator: "|")
     for i in 0..<data_array.count {
@@ -146,7 +149,7 @@ class BTService: NSObject {
       case "R":
         let impedance = data_array[i].split(separator: "J")
         if let real = Double(impedance[0]), let img = Double(impedance[1]) {
-          measure.impedance = Impedance(real: real, imaginary: img)
+          measure.impedance = (real, img)
         }
       default: print("TAG [" + String(tag) + "]\nPARTIAL [" + data + "]")
       }
@@ -172,7 +175,7 @@ class BTService: NSObject {
       case "R":
         let impedance = data_array[i].split(separator: "J")
         if let real = Double(impedance[0]), let img = Double(impedance[1]) {
-          measure.impedances.append(Impedance(real: real, imaginary: img))
+          measure.impedances.append((real: real, imaginary: img))
         }
       default: print("TAG [" + String(tag) + "]\nPARTIAL [" + data + "]")
       }
@@ -190,7 +193,8 @@ class BTService: NSObject {
   }
 
   func postUpdateCLR(_ data: String) {
-    //notification.post(name: BLEUpdateGETREQ, object: self, userInfo: reading)
+    let info = ["clear": data]
+    notification.post(name: BLEUpdateCLR, object: self, userInfo: info)
   }
 
   func postUpdateWIP(_ data: String) {
@@ -237,6 +241,8 @@ extension BTService: CBPeripheralDelegate {
     }
   }
 
+  //
+  // didUpdateValueFor
   func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
     if peripheral != self.peripheral { return }
     if error != nil { return }
@@ -246,7 +252,10 @@ extension BTService: CBPeripheralDelegate {
 
     // Verify if message is chopped:
     if let data = characteristic.value {
-      guard let input = String(bytes: data, encoding: .ascii) else { fatalError("Invalid message!") }
+      guard let input = String(bytes: data, encoding: .ascii) else {
+        fatalError("Invalid message received from MBI device")
+
+      }
       print("Read from device: ", input, " [", data, "]")
 
       // Detect invalid requests:

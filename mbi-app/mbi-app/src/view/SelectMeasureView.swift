@@ -11,94 +11,96 @@ import CoreBluetooth
 
 class SelectMeasureView: UIViewController {
 
+  typealias RawData = (date: String, frequency: Double, impedance: (Double, Double))
+
+  // MARK: Outlets
   @IBOutlet weak var addButton: UIBarButtonItem!
   @IBOutlet weak var refreshButton: UIBarButtonItem!
-  @IBOutlet weak var doneButton: UIBarButtonItem!
   @IBOutlet weak var measuresTable: UITableView!
   @IBOutlet weak var batteryLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet weak var infoLabel: UILabel!
   @IBOutlet weak var progressBar: UIProgressView!
-
   @IBOutlet weak var batteryImage: UIImageView!
   @IBOutlet weak var tmpImage: UIImageView!
 
   // MARK: Properties
-  public var selection: Int?
+  public var selection: IndexPath?
   let datasource: MeasuresDataSource
   var dataDate: String?
   var dataReal: Double?
   var dataImg: Double?
   var dataFreq: Double?
 
-  // BLE Communication
+  // MARK: BLE Communication
   fileprivate var queue = DispatchQueue.main
   fileprivate var partialMessage: String!
   fileprivate var getIndex: Int = 0
   fileprivate var getMax: Int = 0
 
+  // MARK: - Functions
+  // Constructor
   required init?(coder aDecoder: NSCoder) {
     datasource = MeasuresDataSource()
     super.init(coder: aDecoder)
   }
 
+  // AtLoad
   override func viewWillAppear(_ animated: Bool) {
-    _ = btDiscoverySharedInstance
-    btDiscoverySharedInstance.startScanning()
+    // Setup observers //
+    observer(for: BLEUpdateCHK, function: #selector(updateCHK(_:)))
+    observer(for: BLEUpdateGETREQ, function: #selector(updateGETREQ(_:)))
+    observer(for: BLEUpdateBAT, function: #selector(updateBAT(_:)))
+    observer(for: BLEUpdateCLR, function: #selector(updateCLR(_:)))
+    observer(for: BLEUpdateTMP, function: #selector(updateTMP(_:)))
   }
 
   override func viewDidLoad() {
-    NotificationCenter.default.addObserver(self, selector: #selector(connectionChanged(_:)), name: BLEConnected, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateCharacteristic(_:)), name: BLEUpdate, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateCHK(_:)), name: BLEUpdateCHK, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateGETREQ(_:)), name: BLEUpdateGETREQ, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateBAT(_:)), name: BLEUpdateBAT, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateCLR(_:)), name: BLEUpdateCLR, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateWIP(_:)), name: BLEUpdateWIP, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateTMP(_:)), name: BLEUpdateTMP, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(updateCLK(_:)), name: BLEUpdateCLK, object: nil)
-
+    // Setup table //
     measuresTable.tableFooterView = UIView()
     measuresTable.dataSource = datasource
+    measuresTable.delegate = datasource
     measuresTable.reloadData()
 
+    // Setup images //
     batteryImage.image = batteryImage.image?.withRenderingMode(.alwaysTemplate)
     batteryImage.tintColor = UIColor.init(red: 0, green: 122/255, blue: 1, alpha: 1)
-
     tmpImage.image = tmpImage.image?.withRenderingMode(.alwaysTemplate)
     tmpImage.tintColor = UIColor.init(red: 0, green: 122/255, blue: 1, alpha: 1)
+
+    // Check if selection exists //
+    if let selection = self.selection {
+      datasource.selectedMeasure = selection
+    }
+
+    if let service = btDiscoverySharedInstance.service {
+      service.write("BAT")
+      service.write("TMP")
+      service.write("CHK")
+    }
 
     super.viewDidLoad()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
+    // Release observers //
+    releaseObservers()
+
+    performSegue(withIdentifier: "back", sender: self)
+
     datasource.clear()
     measuresTable.reloadData()
-
-    // Do not disconnect in case something has been selected
-    // so that the previous controller can send requests
-    if selection == nil {
-      btDiscoverySharedInstance.disconnect()
-    }
-
-    super.viewWillDisappear(animated)
-  }
-
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    super.prepare(for: segue, sender: sender)
-
-    if let index = measuresTable.indexPathForSelectedRow {
-      selection = index.row
+    if let index = datasource.selectedMeasure {
+      selection = index
     }
   }
 
   private func refreshTable(_ data: Measure) {
     if datasource.append(data) {
-      let index = IndexPath(row: datasource.count() - 1, section: 0)
+      let index = IndexPath(row: datasource.count - 1, section: 0)
       measuresTable.insertRows(at: [index], with: .right)
     }
   }
@@ -115,45 +117,52 @@ class SelectMeasureView: UIViewController {
       infoLabel.text = "Concluído" // FIXME: translation needed
       refreshButton.isEnabled = true
       addButton.isEnabled = true
-      doneButton.isEnabled = true
     }
   }
 
   @IBAction func addMeasure(_ sender: Any) {
+    let title = "Nova medição"
+    let message = "Defina a frequência da medição no intervalo entre 10kHz e 100kHz:"
+
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addTextField { (textField) in
+      textField.placeholder = "Frequência (Hz)"
+      textField.keyboardType = .numberPad
+    }
+
+    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "Continuar", style: .default) {
+      (_) in
+      if let textFields = alert.textFields {
+        if let frequency = textFields[0].text, let num = Int(frequency) {
+          self.sendREQ(num)
+        }
+      }
+    })
+
+    self.present(alert, animated: true, completion: nil)
+  }
+
+  func sendREQ(_ frequency: Int) {
     if let service = btDiscoverySharedInstance.service {
-      service.write("REQ", with: 50000) // FIXME: Frequency MUST BE selectable
+      service.write("REQ", with: frequency)
     }
   }
 
   // MARK: - Notifications
-  @objc func connectionChanged(_ notification: Notification) {
-    let userInfo = notification.userInfo as! [String: Bool]
-    NSLog("Connection Changed")
-
-    queue.async {
-      if let connected = userInfo["connected"], connected == true {
-        if let service = btDiscoverySharedInstance.service {
-          service.write("BAT")
-          service.write("TMP")
-          service.write("CHK")
-        }
-      }
-    }
-  }
-
-  @objc func updateCharacteristic(_ notification: Notification) {
-    //_ = notification.userInfo as! [String: CBCharacteristic]
-    return
-  }
-
   @objc func updateCHK(_ notification: Notification) {
     let info = notification.userInfo as! [String: String]
 
     queue.async {
       if let data = info["data"] {
-        self.infoLabel.text = "Sincronizando \(data) medições..." // FIXME: translation needed
-        guard let number = Int(data), number > 0 else { return }
+        guard let number = Int(data), number > 0 else {
+          self.refreshButton.isEnabled = true
+          self.addButton.isEnabled = true
+          self.infoLabel.text = "Não há medições realizadas"
+          return
+        }
 
+        self.infoLabel.text = "Sincronizando \(data) medições..." // FIXME: translation needed
         self.getMax = number
         self.getIndex = 1
         self.progressBar.setProgress(1.0 / Float(number), animated: true)
@@ -163,13 +172,12 @@ class SelectMeasureView: UIViewController {
             service.write("GET", with: i)
           }
         }
-
       }
     }
   }
 
   @objc func updateGETREQ(_ notification: Notification) {
-    let info = notification.userInfo as! [String: RawGETData]
+    let info = notification.userInfo as! [String: RawData]
 
     queue.async {
       if let measure = info["measure"] {
@@ -222,22 +230,18 @@ class SelectMeasureView: UIViewController {
     return
   }
 
-  @objc func updateWIP(_ notification: Notification) {
-    return
-  }
-
   @objc func updateTMP(_ notification: Notification) {
     let info = notification.userInfo as! [String: String]
 
     queue.async {
       if let temperature = info["temperature"] {
-        self.temperatureLabel.text = temperature + "ºC"
+        self.temperatureLabel.text = temperature + "°C"
       }
     }
   }
 
-  @objc func updateCLK(_ notification: Notification) {
-    return
-  }
+//  @objc func updateCLK(_ notification: Notification) {
+//    return
+//  }
 
 }

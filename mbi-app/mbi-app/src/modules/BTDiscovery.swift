@@ -11,8 +11,6 @@ import CoreBluetooth
 
 // MARK: Shared Instance
 let btDiscoverySharedInstance = BTDiscovery()
-//let btQueueSharedInstance = DispatchQueue(label: "eng.moritzalmeida")
-//let btCentralSharedInstance = CBCentralManager(delegate: btDiscoverySharedInstance, queue: btQueueSharedInstance)
 
 // MARK: Notifications
 let BLEScanning = NSNotification.Name("BLEScanning")

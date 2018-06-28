@@ -10,26 +10,15 @@ import UIKit
 
 class PatientDetailCell: UITableViewCell {
 
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var subtitleLabel: UILabel!
+  @IBOutlet fileprivate weak var valueLabel: UILabel!
+  @IBOutlet fileprivate weak var titleLabel: UILabel!
+
+  var value: String? {
+    didSet { valueLabel.text = value }
+  }
 
   var title: String? {
     didSet { titleLabel.text = title }
   }
-
-  var subtitle: String? {
-    didSet { subtitleLabel.text = subtitle }
-  }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 
 }

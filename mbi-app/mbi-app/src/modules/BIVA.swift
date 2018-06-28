@@ -19,15 +19,13 @@ class BIVA {
   let chartSettings = ChartDefaults.chartSettingsWithPanZoom
 
   init(view: UIView, exam: Exam) {
-
-    let model: [Impedance] = exam.corrected_impedances
-    //print(model)
+    let model: [Impedance] = exam.impedances_array
 
     // Define axis' layers
-    let xRange = model[0].real * 2
-    let xStep = xRange / 4
-    let yRange = model[0].imaginary * 2
-    let yStep = yRange / 4
+    let xRange = model[0].creal * 2.0
+    let xStep = xRange / 4.0
+    let yRange = model[0].cimaginary * 2.0
+    let yStep = yRange / 4.0
 
     let xValues = stride(from: 0, through: xRange, by: xStep).map {ChartAxisValueInt(Int($0), labelSettings: labelSettings)}
     let yValues = stride(from: 0, through: yRange, by: yStep).map {ChartAxisValueInt(Int($0), labelSettings: labelSettings)}
@@ -63,7 +61,7 @@ class BIVA {
     let tapSettings = ChartPointsTapSettings()
 
     for impedance in model {
-      let chartPoint = ChartPoint(x: ChartAxisValueDouble(impedance.real), y: ChartAxisValueDouble(impedance.imaginary))
+      let chartPoint = ChartPoint(x: ChartAxisValueDouble(impedance.creal), y: ChartAxisValueDouble(impedance.cimaginary))
       chartPoints.append(chartPoint)
     }
 

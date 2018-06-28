@@ -1,0 +1,84 @@
+
+/* Class = "UILabel"; text = "State"; ObjectID = "4qP-h0-3hm"; */
+"4qP-h0-3hm.text" = "State";
+
+/* Class = "UITableViewSection"; headerTitle = "Dados do Paciente"; ObjectID = "5OU-Sd-kvz"; */
+"5OU-Sd-kvz.headerTitle" = "Dados do Paciente";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "61c-01-lfQ"; */
+"61c-01-lfQ.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Medições"; ObjectID = "Cit-Ng-PG8"; */
+"Cit-Ng-PG8.title" = "Medições";
+
+/* Class = "UILabel"; text = "Frequency"; ObjectID = "DMf-da-C7j"; */
+"DMf-da-C7j.text" = "Frequency";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "Iw5-0O-tLT"; */
+"Iw5-0O-tLT.text" = "Date";
+
+/* Class = "UILabel"; text = "Battery"; ObjectID = "K3D-dJ-ht3"; */
+"K3D-dJ-ht3.text" = "Battery";
+
+/* Class = "UINavigationItem"; title = "Detalhes do Exame"; ObjectID = "MS2-Fc-4eX"; */
+"MS2-Fc-4eX.title" = "Detalhes do Exame";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "OJc-eF-6nz"; */
+"OJc-eF-6nz.title" = "Cancel";
+
+/* Class = "UILabel"; text = "Real"; ObjectID = "Oi4-nw-Fu7"; */
+"Oi4-nw-Fu7.text" = "Real";
+
+/* Class = "UILabel"; text = "Imaginary"; ObjectID = "Qq7-AD-hRW"; */
+"Qq7-AD-hRW.text" = "Imaginary";
+
+/* Class = "UILabel"; text = "Definir segmento"; ObjectID = "Rvh-ve-pWE"; */
+"Rvh-ve-pWE.text" = "Definir segmento";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "SWU-tC-9t1"; */
+"SWU-tC-9t1.text" = "Date";
+
+/* Class = "UILabel"; text = "Sincronizar medição"; ObjectID = "T4A-x0-2BR"; */
+"T4A-x0-2BR.text" = "Sincronizar medição";
+
+/* Class = "UINavigationItem"; title = "Segmentos"; ObjectID = "UKY-nC-hcb"; */
+"UKY-nC-hcb.title" = "Segmentos";
+
+/* Class = "UIViewController"; title = "Sincronização"; ObjectID = "YQP-vL-hCm"; */
+"YQP-vL-hCm.title" = "Sincronização";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "hAP-7G-Aaq"; */
+"hAP-7G-Aaq.text" = "Name";
+
+/* Class = "UITableViewSection"; footerTitle = "Realizar sincronização de medição de bioimpedância com medidor MBI."; ObjectID = "k5W-mn-7sP"; */
+"k5W-mn-7sP.footerTitle" = "Realizar sincronização de medição de bioimpedância com medidor MBI.";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "lAU-lp-1SO"; */
+"lAU-lp-1SO.text" = "Name";
+
+/* Class = "UINavigationItem"; title = "Pacientes"; ObjectID = "pdM-DZ-oKT"; */
+"pdM-DZ-oKT.title" = "Pacientes";
+
+/* Class = "UITextField"; placeholder = "Altura (obrigatório)"; ObjectID = "pon-ow-a9a"; */
+"pon-ow-a9a.placeholder" = "Altura (obrigatório)";
+
+/* Class = "UINavigationItem"; title = "Novo Exame"; ObjectID = "sUo-oc-D4A"; */
+"sUo-oc-D4A.title" = "Novo Exame";
+
+/* Class = "UILabel"; text = "Escolher paciente"; ObjectID = "suw-Ay-rvY"; */
+"suw-Ay-rvY.text" = "Escolher paciente";
+
+/* Class = "UINavigationItem"; title = "Exames"; ObjectID = "vQb-Wu-NMc"; */
+"vQb-Wu-NMc.title" = "Exames";
+
+/* Class = "UILabel"; text = "{"; ObjectID = "w9h-AZ-S93"; */
+"w9h-AZ-S93.text" = "{";
+
+/* Class = "UILabel"; text = "Temperature"; ObjectID = "woD-ne-MjP"; */
+"woD-ne-MjP.text" = "Temperature";
+
+/* Class = "UITextField"; placeholder = "Peso"; ObjectID = "xZS-0i-raZ"; */
+"xZS-0i-raZ.placeholder" = "Peso";
+
+/* Class = "UILabel"; text = "Segment - Frequency"; ObjectID = "zyP-mQ-aja"; */
+"zyP-mQ-aja.text" = "Segment - Frequency";

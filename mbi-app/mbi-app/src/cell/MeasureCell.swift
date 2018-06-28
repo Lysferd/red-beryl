@@ -15,11 +15,6 @@ class MeasureCell: UITableViewCell {
   @IBOutlet weak var realLabel: UILabel!
   @IBOutlet weak var imaginaryLabel: UILabel!
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    selectionStyle = .none
-  }
-
   var date: String? {
     didSet { dateLabel.text = date }
   }
@@ -45,25 +40,6 @@ class MeasureCell: UITableViewCell {
       if let text = imaginary {
         imaginaryLabel.text = "-j\(-text)"
       }
-    }
-  }
-
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
-
-//    self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-//    UIView.animate(withDuration: 0.4) {
-//      self.transform = CGAffineTransform.identity
-//    }
-  }
-
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-
-    if selected {
-      accessoryType = .checkmark
-    } else {
-      accessoryType = .none
     }
   }
 

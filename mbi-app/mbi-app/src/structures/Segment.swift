@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum Segment {
+  case left_side
+  case right_side
+  case whole_body
+}
+
 struct Constants {
   static let segments: [String] = [
     "Lado Direito", "Lado Esquerdo"

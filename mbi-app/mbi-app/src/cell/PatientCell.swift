@@ -11,10 +11,9 @@ import UIKit
 class PatientCell: UITableViewCell {
   
   // MARK: Properties
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var listCell: UIView!
-
-  var name: String? {
+  @IBOutlet fileprivate weak var nameLabel: UILabel!
+  
+  var name: String! {
     didSet { nameLabel.text = name }
   }
 

@@ -1,0 +1,150 @@
+
+/* Class = "UILabel"; text = "Country"; ObjectID = "0dU-TX-Wiu"; */
+"0dU-TX-Wiu.text" = "Country";
+
+/* Class = "UILabel"; text = "E-mail"; ObjectID = "3FG-hF-Twq"; */
+"3FG-hF-Twq.text" = "E-mail";
+
+/* Class = "UILabel"; text = "Medications"; ObjectID = "4jJ-yu-BRw"; */
+"4jJ-yu-BRw.text" = "Medications";
+
+/* Class = "UITextField"; placeholder = "Josef"; ObjectID = "5lT-HA-SpV"; */
+"5lT-HA-SpV.placeholder" = "Josef";
+
+/* Class = "UILabel"; text = "Medical Record"; ObjectID = "6FW-Op-Fwf"; */
+"6FW-Op-Fwf.text" = "Medical Record";
+
+/* Class = "UITextField"; placeholder = "095 3563-8296"; ObjectID = "6jC-DE-cqo"; */
+"6jC-DE-cqo.placeholder" = "095 3563-8296";
+
+/* Class = "UINavigationItem"; title = "Country List"; ObjectID = "7vC-Er-fAT"; */
+"7vC-Er-fAT.title" = "Country List";
+
+/* Class = "UILabel"; text = "City"; ObjectID = "97I-96-f7h"; */
+"97I-96-f7h.text" = "City";
+
+/* Class = "UITabBarItem"; title = "Pacientes"; ObjectID = "AnS-EA-CZx"; */
+"AnS-EA-CZx.title" = "Patients";
+
+/* Class = "UILabel"; text = "Gender"; ObjectID = "BSZ-d2-pBY"; */
+"BSZ-d2-pBY.text" = "Gender";
+
+/* Class = "UILabel"; text = "Last name"; ObjectID = "ElR-cT-Ekx"; */
+"ElR-cT-Ekx.text" = "Last name";
+
+/* Class = "UITextField"; placeholder = "email@server.com"; ObjectID = "G0w-XS-ZqG"; */
+"G0w-XS-ZqG.placeholder" = "email@server.com";
+
+/* Class = "UITextField"; placeholder = "St. Somewhere, 215A"; ObjectID = "G86-Za-gWX"; */
+"G86-Za-gWX.placeholder" = "St. Somewhere, 215A";
+
+/* Class = "UINavigationItem"; title = "Medication List"; ObjectID = "GPi-ek-nZ7"; */
+"GPi-ek-nZ7.title" = "Medication List";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "INJ-k6-dJe"; */
+"INJ-k6-dJe.text" = "Address";
+
+/* Class = "UILabel"; text = "value"; ObjectID = "Jfw-iK-zdV"; */
+"Jfw-iK-zdV.text" = "value";
+
+/* Class = "UILabel"; text = "Ethnicity"; ObjectID = "JhL-Nz-TGY"; */
+"JhL-Nz-TGY.text" = "Ethnicity";
+
+/* Class = "UILabel"; text = "Birthdate"; ObjectID = "Mpa-vl-hPw"; */
+"Mpa-vl-hPw.text" = "Birthdate";
+
+/* Class = "UILabel"; text = "Middle name"; ObjectID = "N5l-v4-fEf"; */
+"N5l-v4-fEf.text" = "Middle name";
+
+/* Class = "UITextField"; placeholder = "Schrödinger"; ObjectID = "NcD-Jo-98D"; */
+"NcD-Jo-98D.placeholder" = "Schrödinger";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Nve-XG-UYG"; */
+"Nve-XG-UYG.text" = "Title";
+
+/* Class = "UILabel"; text = "State"; ObjectID = "P7V-Qe-wHE"; */
+"P7V-Qe-wHE.text" = "State";
+
+/* Class = "UILabel"; text = "Personal ID"; ObjectID = "UA0-jq-Nvd"; */
+"UA0-jq-Nvd.text" = "Personal ID";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "VQd-qr-rDH"; */
+"VQd-qr-rDH.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Erdberg"; ObjectID = "WVH-id-tgU"; */
+"WVH-id-tgU.placeholder" = "Erdberg";
+
+/* Class = "UITextField"; placeholder = "AB-"; ObjectID = "WcA-bQ-wDa"; */
+"WcA-bQ-wDa.placeholder" = "AB-";
+
+/* Class = "UITextField"; placeholder = "87.563.574-1"; ObjectID = "Wzg-Hg-bHv"; */
+"Wzg-Hg-bHv.placeholder" = "87.563.574-1";
+
+/* Class = "UINavigationItem"; title = "Risk Groups List"; ObjectID = "ZUH-gn-TuD"; */
+"ZUH-gn-TuD.title" = "Risk Groups List";
+
+/* Class = "UITextField"; placeholder = "09/03/98"; ObjectID = "ZaV-Wd-fWm"; */
+"ZaV-Wd-fWm.placeholder" = "09/03/98";
+
+/* Class = "UILabel"; text = "Bloodtype"; ObjectID = "aXM-R4-KrH"; */
+"aXM-R4-KrH.text" = "Bloodtype";
+
+/* Class = "UILabel"; text = "title"; ObjectID = "bWX-QE-0TP"; */
+"bWX-QE-0TP.text" = "title";
+
+/* Class = "UITextField"; placeholder = "Erwin (*)"; ObjectID = "cBF-jV-b8d"; */
+"cBF-jV-b8d.placeholder" = "Erwin (*)";
+
+/* Class = "UILabel"; text = "Choose"; ObjectID = "ccw-EL-oQC"; */
+"ccw-EL-oQC.text" = "Choose";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "cri-cB-TfI"; */
+"cri-cB-TfI.text" = "Title";
+
+/* Class = "UILabel"; text = "First name"; ObjectID = "eMx-AI-c3j"; */
+"eMx-AI-c3j.text" = "First name";
+
+/* Class = "UITableViewSection"; headerTitle = "Personal Information"; ObjectID = "fO5-Rw-4PD"; */
+"fO5-Rw-4PD.headerTitle" = "Personal Information";
+
+/* Class = "UILabel"; text = "Choose"; ObjectID = "gkx-Gn-BS2"; */
+"gkx-Gn-BS2.text" = "Choose";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "hRT-iH-uwR"; */
+"hRT-iH-uwR.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "99211 (*)"; ObjectID = "hkX-bk-Zcd"; */
+"hkX-bk-Zcd.placeholder" = "99211 (*)";
+
+/* Class = "UINavigationItem"; title = "Pacientes"; ObjectID = "hlz-vQ-Hig"; */
+"hlz-vQ-Hig.title" = "Pacientes";
+
+/* Class = "UILabel"; text = "Risk Groups"; ObjectID = "kI0-xh-NJb"; */
+"kI0-xh-NJb.text" = "Risk Groups";
+
+/* Class = "UITextField"; placeholder = "Male"; ObjectID = "kqI-3p-mG1"; */
+"kqI-3p-mG1.placeholder" = "Male";
+
+/* Class = "UITableViewController"; title = "Country List"; ObjectID = "lqk-6I-odI"; */
+"lqk-6I-odI.title" = "Country List";
+
+/* Class = "UITableViewSection"; headerTitle = "Medical Information"; ObjectID = "m6k-Oa-O7p"; */
+"m6k-Oa-O7p.headerTitle" = "Medical Information";
+
+/* Class = "UITextField"; placeholder = "Caucasian"; ObjectID = "mxZ-hQ-Scr"; */
+"mxZ-hQ-Scr.placeholder" = "Caucasian";
+
+/* Class = "UINavigationItem"; title = "Detalhes"; ObjectID = "qyp-1t-2Fp"; */
+"qyp-1t-2Fp.title" = "Details";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "tAQ-KM-2Ab"; */
+"tAQ-KM-2Ab.text" = "Phone";
+
+/* Class = "UINavigationItem"; title = "New Patient"; ObjectID = "uqI-iR-chX"; */
+"uqI-iR-chX.title" = "New Patient";
+
+/* Class = "UITextField"; placeholder = "Vienna"; ObjectID = "xpG-d5-NXk"; */
+"xpG-d5-NXk.placeholder" = "Vienna";
+
+/* Class = "UILabel"; text = "Choose"; ObjectID = "xwH-Ng-5TH"; */
+"xwH-Ng-5TH.text" = "Choose";

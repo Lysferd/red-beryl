@@ -8,26 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		E507F67F20360C160058280A /* NewExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507F67E20360C160058280A /* NewExamView.swift */; };
-		E507F68120360CC00058280A /* ExamsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507F68020360CC00058280A /* ExamsTab.storyboard */; };
-		E507F68320360CCB0058280A /* PatientsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507F68220360CCB0058280A /* PatientsTab.storyboard */; };
 		E507F685203627360058280A /* SelectMeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507F684203627360058280A /* SelectMeasureView.swift */; };
 		E5233B41203761B700F8E92F /* MeasuresDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B40203761B700F8E92F /* MeasuresDataSource.swift */; };
 		E5233B432037620B00F8E92F /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B422037620B00F8E92F /* Measure.swift */; };
 		E5233B452037690800F8E92F /* MeasureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5233B442037690800F8E92F /* MeasureCell.swift */; };
+		E52F892920ADD0BE0001BE17 /* SelectRiskGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F892820ADD0BE0001BE17 /* SelectRiskGroupsView.swift */; };
 		E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */; };
+		E53166D3209A313200F4CDF7 /* SelectCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53166D2209A313200F4CDF7 /* SelectCountryView.swift */; };
+		E53166D6209B4E8800F4CDF7 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53166D4209B4E8800F4CDF7 /* BasicCell.swift */; };
+		E53166D7209B4E8800F4CDF7 /* BasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E53166D5209B4E8800F4CDF7 /* BasicCell.xib */; };
 		E5330D79205DC53800764D38 /* Impedance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5330D78205DC53800764D38 /* Impedance.swift */; };
-		E53B1690207833000043E838 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53B168F207833000043E838 /* SwiftCharts.framework */; };
-		E53B1691207833000043E838 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E53B168F207833000043E838 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E53CB7D72073F07600312214 /* StaticTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CB7D62073F07600312214 /* StaticTableView.swift */; };
 		E53CB7D92074038D00312214 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CB7D82074038D00312214 /* Error.swift */; };
 		E544CD87205346DF007C8292 /* ExamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544CD86205346DF007C8292 /* ExamDetailView.swift */; };
-		E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5491BA8202A318E006796A0 /* ExamCell.swift */; };
 		E551FB6D2032299F002BA130 /* SettingsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E551FB6C2032299F002BA130 /* SettingsTab.storyboard */; };
-		E5558F54207CEFA100A0BA72 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5558F53207CEFA000A0BA72 /* SQLite.framework */; };
-		E5558F55207CEFA100A0BA72 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5558F53207CEFA000A0BA72 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E567B64F2020EB7800BEBF21 /* ListExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B64E2020EB7800BEBF21 /* ListExamView.swift */; };
 		E567B6512020EBA900BEBF21 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6502020EBA900BEBF21 /* Exam.swift */; };
 		E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */; };
+		E57FBA3920CB356600150808 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57FBA3820CB356600150808 /* NSObject.swift */; };
 		E5847CCA205D90DF00C47FD1 /* BIVA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5847CC9205D90DF00C47FD1 /* BIVA.swift */; };
 		E5847CCC205D918A00C47FD1 /* ChartDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5847CCB205D918A00C47FD1 /* ChartDefaults.swift */; };
 		E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */; };
@@ -46,8 +43,9 @@
 		E58EEC86205185B900FC1F5E /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC85205185B900FC1F5E /* Segment.swift */; };
 		E58EEC88205189C200FC1F5E /* SegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC87205189C200FC1F5E /* SegmentCell.swift */; };
 		E58EEC8A20518BAC00FC1F5E /* SegmentDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */; };
+		E592D90B20E51174006F758D /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E592D90A20E51174006F758D /* SwiftCharts.framework */; };
+		E592D90C20E51174006F758D /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E592D90A20E51174006F758D /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E5938D3C2065AF9500968489 /* ChartUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5938D3B2065AF9500968489 /* ChartUIView.swift */; };
-		E596B5742046FA1300CEC9C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B5732046FA1300CEC9C6 /* Database.swift */; };
 		E596B5762047453E00CEC9C6 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E596B5752047453E00CEC9C6 /* Cartfile */; };
 		E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */; };
 		E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767541F97E5B800083C11 /* AppDelegate.swift */; };
@@ -56,12 +54,20 @@
 		E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */; };
 		E597676C1F97E5B800083C11 /* mbi_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E597676B1F97E5B800083C11 /* mbi_appTests.swift */; };
 		E59767771F97E5B800083C11 /* mbi_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59767761F97E5B800083C11 /* mbi_appUITests.swift */; };
-		E5E568F7204EEDD5009AC05D /* SelectableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E568F6204EEDD5009AC05D /* SelectableCell.swift */; };
-		E5F04514206BE40B00784F1E /* PatientDetailTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04513206BE40B00784F1E /* PatientDetailTable.swift */; };
+		E5A18C772090CEDA004CE5A7 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A18C752090CEDA004CE5A7 /* ActionCell.swift */; };
+		E5A18C782090CEDA004CE5A7 /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5A18C762090CEDA004CE5A7 /* ActionCell.xib */; };
+		E5A50C9020B451CB00A0CB18 /* SelectMedicationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A50C8F20B451CB00A0CB18 /* SelectMedicationsView.swift */; };
+		E5A5A08B208AA16700C3160D /* ExamsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5A5A08D208AA16700C3160D /* ExamsTab.storyboard */; };
+		E5A5A08E208AA16E00C3160D /* PatientsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5A5A090208AA16E00C3160D /* PatientsTab.storyboard */; };
+		E5A5A0A0208AA39300C3160D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5A5A0A2208AA39300C3160D /* Localizable.strings */; };
+		E5A600C220864C7600F4C6B3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5A600C020864C7600F4C6B3 /* Model.xcdatamodeld */; };
+		E5C699BB20AB3F5200DC4368 /* GenderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C699BA20AB3F5200DC4368 /* GenderPicker.swift */; };
+		E5C699BD20AB4D3600DC4368 /* EthnicityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C699BC20AB4D3600DC4368 /* EthnicityPicker.swift */; };
+		E5C699BF20AC5C0D00DC4368 /* BloodtypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C699BE20AC5C0D00DC4368 /* BloodtypePicker.swift */; };
+		E5E50AD82090E37700CCF71D /* ExamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E50AD62090E37700CCF71D /* ExamCell.swift */; };
+		E5E50AD92090E37700CCF71D /* ExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5E50AD72090E37700CCF71D /* ExamCell.xib */; };
+		E5E50ADD2092297300CCF71D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E50ADC2092297200CCF71D /* MainTabBarController.swift */; };
 		E5F04516206BE7AB00784F1E /* PatientDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */; };
-		E5F04518206BEC6100784F1E /* PatientDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04517206BEC6100784F1E /* PatientDetailDataSource.swift */; };
-		E5F0D2112076735D007D8FE7 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2102076735D007D8FE7 /* DefaultCell.swift */; };
-		E5F0D21320767567007D8FE7 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D21220767567007D8FE7 /* StaticView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,14 +88,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E596B57A2047479800CEC9C6 /* Embed Frameworks */ = {
+		E592D90D20E51174006F758D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E5558F55207CEFA100A0BA72 /* SQLite.framework in Embed Frameworks */,
-				E53B1691207833000043E838 /* SwiftCharts.framework in Embed Frameworks */,
+				E592D90C20E51174006F758D /* SwiftCharts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,26 +103,24 @@
 
 /* Begin PBXFileReference section */
 		E507F67E20360C160058280A /* NewExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewExamView.swift; path = "mbi-app/src/view/NewExamView.swift"; sourceTree = SOURCE_ROOT; };
-		E507F68020360CC00058280A /* ExamsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExamsTab.storyboard; sourceTree = "<group>"; };
-		E507F68220360CCB0058280A /* PatientsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientsTab.storyboard; sourceTree = "<group>"; };
 		E507F684203627360058280A /* SelectMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMeasureView.swift; sourceTree = "<group>"; };
 		E5233B40203761B700F8E92F /* MeasuresDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuresDataSource.swift; sourceTree = "<group>"; };
 		E5233B422037620B00F8E92F /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		E5233B442037690800F8E92F /* MeasureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureCell.swift; sourceTree = "<group>"; };
+		E52F892820ADD0BE0001BE17 /* SelectRiskGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRiskGroupsView.swift; sourceTree = "<group>"; };
 		E52F9769201F9E0E00EFF5BE /* mbi-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mbi-app.entitlements"; sourceTree = "<group>"; };
-		E52F976A201F9E4E00EFF5BE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E53166D2209A313200F4CDF7 /* SelectCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryView.swift; sourceTree = "<group>"; };
+		E53166D4209B4E8800F4CDF7 /* BasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
+		E53166D5209B4E8800F4CDF7 /* BasicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicCell.xib; sourceTree = "<group>"; };
 		E5330D78205DC53800764D38 /* Impedance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Impedance.swift; sourceTree = "<group>"; };
-		E53B168F207833000043E838 /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCharts.framework; path = Carthage/Build/iOS/SwiftCharts.framework; sourceTree = "<group>"; };
-		E53CB7D62073F07600312214 /* StaticTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableView.swift; sourceTree = "<group>"; };
 		E53CB7D82074038D00312214 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		E544CD86205346DF007C8292 /* ExamDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamDetailView.swift; sourceTree = "<group>"; };
-		E5491BA8202A318E006796A0 /* ExamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCell.swift; sourceTree = "<group>"; };
 		E551FB6C2032299F002BA130 /* SettingsTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTab.storyboard; sourceTree = "<group>"; };
-		E5558F53207CEFA000A0BA72 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		E567B64E2020EB7800BEBF21 /* ListExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExamView.swift; sourceTree = "<group>"; };
 		E567B6502020EBA900BEBF21 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamsDataSource.swift; sourceTree = "<group>"; };
+		E57FBA3820CB356600150808 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		E5847CC9205D90DF00C47FD1 /* BIVA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIVA.swift; sourceTree = "<group>"; };
 		E5847CCB205D918A00C47FD1 /* ChartDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDefaults.swift; sourceTree = "<group>"; };
 		E58DEA1F201BD04300C3FDE4 /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
@@ -136,8 +139,8 @@
 		E58EEC85205185B900FC1F5E /* Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
 		E58EEC87205189C200FC1F5E /* SegmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCell.swift; sourceTree = "<group>"; };
 		E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentDatasource.swift; sourceTree = "<group>"; };
+		E592D90A20E51174006F758D /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCharts.framework; path = Carthage/Build/iOS/SwiftCharts.framework; sourceTree = "<group>"; };
 		E5938D3B2065AF9500968489 /* ChartUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUIView.swift; sourceTree = "<group>"; };
-		E596B5732046FA1300CEC9C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		E596B5752047453E00CEC9C6 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPatientView.swift; sourceTree = "<group>"; };
 		E59767511F97E5B800083C11 /* mbi-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mbi-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,12 +155,34 @@
 		E59767721F97E5B800083C11 /* mbi-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mbi-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59767761F97E5B800083C11 /* mbi_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mbi_appUITests.swift; sourceTree = "<group>"; };
 		E59767781F97E5B800083C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5E568F6204EEDD5009AC05D /* SelectableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableCell.swift; sourceTree = "<group>"; };
-		E5F04513206BE40B00784F1E /* PatientDetailTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailTable.swift; sourceTree = "<group>"; };
+		E5A18C752090CEDA004CE5A7 /* ActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		E5A18C762090CEDA004CE5A7 /* ActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionCell.xib; sourceTree = "<group>"; };
+		E5A2427320B8C09A00045356 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PatientsTab.strings"; sourceTree = "<group>"; };
+		E5A2427520B8C0A100045356 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PatientsTab.strings; sourceTree = "<group>"; };
+		E5A2427720B8C0A800045356 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PatientsTab.strings; sourceTree = "<group>"; };
+		E5A50C8F20B451CB00A0CB18 /* SelectMedicationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMedicationsView.swift; sourceTree = "<group>"; };
+		E5A5A08C208AA16700C3160D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExamsTab.storyboard; sourceTree = "<group>"; };
+		E5A5A08F208AA16E00C3160D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PatientsTab.storyboard; sourceTree = "<group>"; };
+		E5A5A094208AA18700C3160D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		E5A5A095208AA18700C3160D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		E5A5A096208AA18800C3160D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ExamsTab.strings"; sourceTree = "<group>"; };
+		E5A5A098208AA19E00C3160D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E5A5A099208AA19E00C3160D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		E5A5A09A208AA19E00C3160D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ExamsTab.strings; sourceTree = "<group>"; };
+		E5A5A09C208AA1A500C3160D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E5A5A09D208AA1A600C3160D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		E5A5A09E208AA1A600C3160D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ExamsTab.strings; sourceTree = "<group>"; };
+		E5A5A0A1208AA39300C3160D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5A5A0A3208AA39500C3160D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		E5A5A0A4208AA39700C3160D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5A600C120864C7600F4C6B3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E5C699BA20AB3F5200DC4368 /* GenderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenderPicker.swift; path = "mbi-app/src/datasource/GenderPicker.swift"; sourceTree = SOURCE_ROOT; };
+		E5C699BC20AB4D3600DC4368 /* EthnicityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthnicityPicker.swift; sourceTree = "<group>"; };
+		E5C699BE20AC5C0D00DC4368 /* BloodtypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodtypePicker.swift; sourceTree = "<group>"; };
+		E5E50AD62090E37700CCF71D /* ExamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCell.swift; sourceTree = "<group>"; };
+		E5E50AD72090E37700CCF71D /* ExamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamCell.xib; sourceTree = "<group>"; };
+		E5E50ADC2092297200CCF71D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailCell.swift; sourceTree = "<group>"; };
-		E5F04517206BEC6100784F1E /* PatientDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailDataSource.swift; sourceTree = "<group>"; };
-		E5F0D2102076735D007D8FE7 /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
-		E5F0D21220767567007D8FE7 /* StaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticView.swift; sourceTree = "<group>"; };
 		E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -167,8 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E52F976C201F9F1600EFF5BE /* CoreBluetooth.framework in Frameworks */,
-				E53B1690207833000043E838 /* SwiftCharts.framework in Frameworks */,
-				E5558F54207CEFA100A0BA72 /* SQLite.framework in Frameworks */,
+				E592D90B20E51174006F758D /* SwiftCharts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,14 +213,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E57FBA3720CB354500150808 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E57FBA3820CB356600150808 /* NSObject.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		E58DEA3B201BD05500C3FDE4 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E57FBA3720CB354500150808 /* extensions */,
 				E58DEA3E201BD07500C3FDE4 /* cell */,
 				E58DEA40201BD08400C3FDE4 /* datasource */,
 				E58DEA3C201BD05900C3FDE4 /* modules */,
 				E58DEA3D201BD06600C3FDE4 /* structures */,
-				E5F04512206BE3E300784F1E /* table */,
 				E58DEA41201BD09100C3FDE4 /* view */,
 			);
 			path = src;
@@ -207,7 +239,6 @@
 			children = (
 				E58DEA24201BD04300C3FDE4 /* BTDiscovery.swift */,
 				E58DEA29201BD04300C3FDE4 /* BTService.swift */,
-				E596B5732046FA1300CEC9C6 /* Database.swift */,
 				E5847CC9205D90DF00C47FD1 /* BIVA.swift */,
 			);
 			path = modules;
@@ -234,12 +265,15 @@
 			children = (
 				E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */,
 				E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */,
-				E5491BA8202A318E006796A0 /* ExamCell.swift */,
+				E5E50AD62090E37700CCF71D /* ExamCell.swift */,
+				E5E50AD72090E37700CCF71D /* ExamCell.xib */,
 				E5233B442037690800F8E92F /* MeasureCell.swift */,
 				E58DEA2C201BD04300C3FDE4 /* PatientCell.swift */,
 				E58EEC87205189C200FC1F5E /* SegmentCell.swift */,
-				E5E568F6204EEDD5009AC05D /* SelectableCell.swift */,
-				E5F0D2102076735D007D8FE7 /* DefaultCell.swift */,
+				E5A18C752090CEDA004CE5A7 /* ActionCell.swift */,
+				E5A18C762090CEDA004CE5A7 /* ActionCell.xib */,
+				E53166D4209B4E8800F4CDF7 /* BasicCell.swift */,
+				E53166D5209B4E8800F4CDF7 /* BasicCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -247,12 +281,14 @@
 		E58DEA40201BD08400C3FDE4 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
-				E5F04517206BEC6100784F1E /* PatientDetailDataSource.swift */,
 				E58EEC8920518BAC00FC1F5E /* SegmentDatasource.swift */,
 				E58DEA20201BD04300C3FDE4 /* DevicesDataSource.swift */,
 				E567B6522020EDC300BEBF21 /* ExamsDataSource.swift */,
 				E5233B40203761B700F8E92F /* MeasuresDataSource.swift */,
 				E58DEA23201BD04300C3FDE4 /* PatientDataSource.swift */,
+				E5C699BA20AB3F5200DC4368 /* GenderPicker.swift */,
+				E5C699BE20AC5C0D00DC4368 /* BloodtypePicker.swift */,
+				E5C699BC20AB4D3600DC4368 /* EthnicityPicker.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -260,11 +296,11 @@
 		E58DEA41201BD09100C3FDE4 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E5E50ADC2092297200CCF71D /* MainTabBarController.swift */,
 				E58EEC8220516A3B00FC1F5E /* Creation */,
 				E58EEC8320516A4400FC1F5E /* Detailing */,
 				E58EEC812051698400FC1F5E /* Listing */,
 				E58EEC8420516A4A00FC1F5E /* Selecting */,
-				E5F0D21220767567007D8FE7 /* StaticView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -300,6 +336,9 @@
 		E58EEC8420516A4A00FC1F5E /* Selecting */ = {
 			isa = PBXGroup;
 			children = (
+				E53166D2209A313200F4CDF7 /* SelectCountryView.swift */,
+				E52F892820ADD0BE0001BE17 /* SelectRiskGroupsView.swift */,
+				E5A50C8F20B451CB00A0CB18 /* SelectMedicationsView.swift */,
 				E507F684203627360058280A /* SelectMeasureView.swift */,
 				E596B57B20475EC300CEC9C6 /* SelectPatientView.swift */,
 				E58EEC7F205167E100FC1F5E /* SelectSegmentView.swift */,
@@ -310,9 +349,7 @@
 		E59767481F97E5B800083C11 = {
 			isa = PBXGroup;
 			children = (
-				E5558F53207CEFA000A0BA72 /* SQLite.framework */,
-				E53B168F207833000043E838 /* SwiftCharts.framework */,
-				E596B5752047453E00CEC9C6 /* Cartfile */,
+				E592D90A20E51174006F758D /* SwiftCharts.framework */,
 				E5F7601B1F9E67E800B7DFB9 /* Frameworks */,
 				E59767531F97E5B800083C11 /* mbi-app */,
 				E597676A1F97E5B800083C11 /* mbi-appTests */,
@@ -338,11 +375,13 @@
 				E58DEA3B201BD05500C3FDE4 /* src */,
 				E59767621F97E5B800083C11 /* Info.plist */,
 				E59767541F97E5B800083C11 /* AppDelegate.swift */,
+				E5A600C020864C7600F4C6B3 /* Model.xcdatamodeld */,
 				E597675D1F97E5B800083C11 /* Assets.xcassets */,
 				E597675F1F97E5B800083C11 /* LaunchScreen.storyboard */,
 				E597675A1F97E5B800083C11 /* Main.storyboard */,
-				E507F68020360CC00058280A /* ExamsTab.storyboard */,
-				E507F68220360CCB0058280A /* PatientsTab.storyboard */,
+				E5A5A08D208AA16700C3160D /* ExamsTab.storyboard */,
+				E5A5A090208AA16E00C3160D /* PatientsTab.storyboard */,
+				E5A5A0A2208AA39300C3160D /* Localizable.strings */,
 				E551FB6C2032299F002BA130 /* SettingsTab.storyboard */,
 			);
 			path = "mbi-app";
@@ -366,18 +405,10 @@
 			path = "mbi-appUITests";
 			sourceTree = "<group>";
 		};
-		E5F04512206BE3E300784F1E /* table */ = {
-			isa = PBXGroup;
-			children = (
-				E5F04513206BE40B00784F1E /* PatientDetailTable.swift */,
-				E53CB7D62073F07600312214 /* StaticTableView.swift */,
-			);
-			path = table;
-			sourceTree = "<group>";
-		};
 		E5F7601B1F9E67E800B7DFB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E596B5752047453E00CEC9C6 /* Cartfile */,
 				E52F976B201F9F1600EFF5BE /* CoreBluetooth.framework */,
 				E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */,
 			);
@@ -394,7 +425,7 @@
 				E597674D1F97E5B800083C11 /* Sources */,
 				E597674E1F97E5B800083C11 /* Frameworks */,
 				E597674F1F97E5B800083C11 /* Resources */,
-				E596B57A2047479800CEC9C6 /* Embed Frameworks */,
+				E592D90D20E51174006F758D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -480,8 +511,10 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"pt-BR",
+				ja,
+				en,
 			);
 			mainGroup = E59767481F97E5B800083C11;
 			productRefGroup = E59767521F97E5B800083C11 /* Products */;
@@ -501,12 +534,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E596B5762047453E00CEC9C6 /* Cartfile in Resources */,
+				E53166D7209B4E8800F4CDF7 /* BasicCell.xib in Resources */,
 				E551FB6D2032299F002BA130 /* SettingsTab.storyboard in Resources */,
 				E59767611F97E5B800083C11 /* LaunchScreen.storyboard in Resources */,
 				E597675E1F97E5B800083C11 /* Assets.xcassets in Resources */,
 				E597675C1F97E5B800083C11 /* Main.storyboard in Resources */,
-				E507F68120360CC00058280A /* ExamsTab.storyboard in Resources */,
-				E507F68320360CCB0058280A /* PatientsTab.storyboard in Resources */,
+				E5A5A0A0208AA39300C3160D /* Localizable.strings in Resources */,
+				E5A5A08B208AA16700C3160D /* ExamsTab.storyboard in Resources */,
+				E5A5A08E208AA16E00C3160D /* PatientsTab.storyboard in Resources */,
+				E5E50AD92090E37700CCF71D /* ExamCell.xib in Resources */,
+				E5A18C782090CEDA004CE5A7 /* ActionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +569,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E58DEA43201BD43700C3FDE4 /* ListPatientView.swift in Sources */,
-				E5F0D2112076735D007D8FE7 /* DefaultCell.swift in Sources */,
+				E5A18C772090CEDA004CE5A7 /* ActionCell.swift in Sources */,
+				E5E50ADD2092297300CCF71D /* MainTabBarController.swift in Sources */,
 				E58EEC86205185B900FC1F5E /* Segment.swift in Sources */,
 				E5F04516206BE7AB00784F1E /* PatientDetailCell.swift in Sources */,
 				E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */,
@@ -541,37 +579,40 @@
 				E59767551F97E5B800083C11 /* AppDelegate.swift in Sources */,
 				E507F67F20360C160058280A /* NewExamView.swift in Sources */,
 				E58EEC80205167E100FC1F5E /* SelectSegmentView.swift in Sources */,
-				E5F04518206BEC6100784F1E /* PatientDetailDataSource.swift in Sources */,
 				E5847CCA205D90DF00C47FD1 /* BIVA.swift in Sources */,
-				E53CB7D72073F07600312214 /* StaticTableView.swift in Sources */,
+				E57FBA3920CB356600150808 /* NSObject.swift in Sources */,
 				E5233B452037690800F8E92F /* MeasureCell.swift in Sources */,
+				E5A50C9020B451CB00A0CB18 /* SelectMedicationsView.swift in Sources */,
 				E567B6512020EBA900BEBF21 /* Exam.swift in Sources */,
 				E5330D79205DC53800764D38 /* Impedance.swift in Sources */,
 				E58DEA32201BD04400C3FDE4 /* BTDiscovery.swift in Sources */,
 				E53CB7D92074038D00312214 /* Error.swift in Sources */,
 				E58DEA31201BD04400C3FDE4 /* PatientDataSource.swift in Sources */,
+				E53166D3209A313200F4CDF7 /* SelectCountryView.swift in Sources */,
 				E544CD87205346DF007C8292 /* ExamDetailView.swift in Sources */,
 				E58DEA36201BD04400C3FDE4 /* Patient.swift in Sources */,
-				E5F04514206BE40B00784F1E /* PatientDetailTable.swift in Sources */,
 				E567B6532020EDC300BEBF21 /* ExamsDataSource.swift in Sources */,
 				E5233B41203761B700F8E92F /* MeasuresDataSource.swift in Sources */,
 				E58DEA35201BD04400C3FDE4 /* NewPatientView.swift in Sources */,
+				E5C699BB20AB3F5200DC4368 /* GenderPicker.swift in Sources */,
 				E58DEA33201BD04400C3FDE4 /* DeviceCell.swift in Sources */,
 				E58DEA30201BD04400C3FDE4 /* Device.swift in Sources */,
-				E5491BA9202A318F006796A0 /* ExamCell.swift in Sources */,
+				E5C699BD20AB4D3600DC4368 /* EthnicityPicker.swift in Sources */,
+				E5A600C220864C7600F4C6B3 /* Model.xcdatamodeld in Sources */,
 				E58EEC88205189C200FC1F5E /* SegmentCell.swift in Sources */,
-				E5E568F7204EEDD5009AC05D /* SelectableCell.swift in Sources */,
 				E58DEA34201BD04400C3FDE4 /* ListPeripheralView.swift in Sources */,
 				E5847CCC205D918A00C47FD1 /* ChartDefaults.swift in Sources */,
-				E5F0D21320767567007D8FE7 /* StaticView.swift in Sources */,
 				E58EEC8A20518BAC00FC1F5E /* SegmentDatasource.swift in Sources */,
 				E5938D3C2065AF9500968489 /* ChartUIView.swift in Sources */,
 				E596B57C20475EC300CEC9C6 /* SelectPatientView.swift in Sources */,
+				E52F892920ADD0BE0001BE17 /* SelectRiskGroupsView.swift in Sources */,
 				E58DEA37201BD04400C3FDE4 /* BTService.swift in Sources */,
+				E5C699BF20AC5C0D00DC4368 /* BloodtypePicker.swift in Sources */,
 				E58DEA2D201BD04400C3FDE4 /* PatientDetailView.swift in Sources */,
+				E5E50AD82090E37700CCF71D /* ExamCell.swift in Sources */,
 				E5233B432037620B00F8E92F /* Measure.swift in Sources */,
+				E53166D6209B4E8800F4CDF7 /* BasicCell.swift in Sources */,
 				E567B64F2020EB7800BEBF21 /* ListExamView.swift in Sources */,
-				E596B5742046FA1300CEC9C6 /* Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,7 +652,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				E597675B1F97E5B800083C11 /* Base */,
-				E52F976A201F9E4E00EFF5BE /* pt-BR */,
+				E5A5A095208AA18700C3160D /* pt-BR */,
+				E5A5A099208AA19E00C3160D /* en */,
+				E5A5A09D208AA1A600C3160D /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -620,8 +663,43 @@
 			isa = PBXVariantGroup;
 			children = (
 				E59767601F97E5B800083C11 /* Base */,
+				E5A5A094208AA18700C3160D /* pt-BR */,
+				E5A5A098208AA19E00C3160D /* en */,
+				E5A5A09C208AA1A500C3160D /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E5A5A08D208AA16700C3160D /* ExamsTab.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5A5A08C208AA16700C3160D /* Base */,
+				E5A5A096208AA18800C3160D /* pt-BR */,
+				E5A5A09A208AA19E00C3160D /* en */,
+				E5A5A09E208AA1A600C3160D /* ja */,
+			);
+			name = ExamsTab.storyboard;
+			sourceTree = "<group>";
+		};
+		E5A5A090208AA16E00C3160D /* PatientsTab.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5A5A08F208AA16E00C3160D /* Base */,
+				E5A2427320B8C09A00045356 /* pt-BR */,
+				E5A2427520B8C0A100045356 /* ja */,
+				E5A2427720B8C0A800045356 /* en */,
+			);
+			name = PatientsTab.storyboard;
+			sourceTree = "<group>";
+		};
+		E5A5A0A2208AA39300C3160D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5A5A0A1208AA39300C3160D /* en */,
+				E5A5A0A3208AA39500C3160D /* pt-BR */,
+				E5A5A0A4208AA39700C3160D /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -886,6 +964,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E5A600C020864C7600F4C6B3 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E5A600C120864C7600F4C6B3 /* Model.xcdatamodel */,
+			);
+			currentVersion = E5A600C120864C7600F4C6B3 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E59767491F97E5B800083C11 /* Project object */;
 }

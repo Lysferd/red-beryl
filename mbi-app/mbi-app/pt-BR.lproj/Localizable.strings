@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  mbi-app
+
+  Created by 埜原菽也 on H30/04/20.
+  Copyright © 平成30年 M.A. Eng. All rights reserved.
+*/
+
+"record" = "Prontuário";
+"firstName" = "Nome";
+"middleName" = "Nome do meio";
+"lastName" = "Sobrenome";
+"personalId" = "CPF";
+"phoneNumber" = "Telefone";
+"email" = "Email";
+"address" = "Endereço";
+"city" = "Cidade";
+"state" = "Estado";
+"country" = "País";
+"birthDate" = "Data de nascimento";
+"gender" = "Gênero";
+"bloodType" = "Tipo sanguíneo";
+"ethnicity" = "Grupo étnico";
+"riskGroups" = "Grupos de risco";
+"regularMedications" = "Medicação controlada";
+
+"personalInformation" = "Informações Pessoais";
+"medicalInformation" = "Informações Médicas";
+"lastExams" = "Últimos Exames";
+"advancedOptions" = "Ações Avançadas";

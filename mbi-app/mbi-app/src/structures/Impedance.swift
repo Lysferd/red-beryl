@@ -10,24 +10,32 @@
 
 import Darwin
 import UIKit
+import CoreData
 
-struct Impedance {
-
-  var real: Double
-  var imaginary: Double
-
-  // MARK: - Convenience Variables
+extension Impedance {
   var module: Double! {
-    get { return sqrt(pow2(real) + pow2(imaginary)) }
+    return sqrt(pow2(real) + pow2(imaginary))
   }
 
   var phase: Double! {
-    get { return atan(imaginary / real) }
+    return atan(imaginary / real)
   }
 
+  var creal: Double! {
+    return real / height
+  }
+
+  var cimaginary: Double! {
+    return imaginary / height
+  }
+
+  var height: Double! {
+    guard let e = exam else { return 1.0 }
+    return e.height
+  }
+
+  // Convenience:
   fileprivate func pow2(_ x: Double) -> Double {
     return pow(x, 2)
   }
-
 }
-

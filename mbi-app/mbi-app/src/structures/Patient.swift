@@ -6,57 +6,161 @@
 //  Copyright © 平成29年 M.A. Eng. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
-class Patient {
-  var row_id: Int
-  var record: String
-  var first_name: String
-  var middle_name: String
-  var last_name: String
-  var personal_id: String
-  var birth_date: String
-  var phone_number: String
-  var email: String
-  var address: String
-  var city: String
-  var state: String
-  var country: String
+extension Patient {
 
-  var blood_type: String
-  var risk_groups: String
-  var regular_medication: String
-
-  var register_date: Date
-  var update_date: Date
-
-  init(id: Int = 0, record: String, first_name: String, middle_name: String, last_name: String, personal_id: String, birth_date: String, phone_number: String, email: String, address: String, city: String, state: String, country: String, blood_type: String, risk_groups: String, regular_medication: String, register_date: Date, update_date: Date) {
-    self.row_id = id
-    self.record = record
-    self.first_name = first_name
-    self.middle_name = middle_name
-    self.last_name = last_name
-    self.personal_id = personal_id
-    self.birth_date = birth_date
-    self.phone_number = phone_number
-    self.email = email
-    self.address = address
-    self.city = city
-    self.state = state
-    self.country = country
-    self.blood_type = blood_type
-    self.risk_groups = risk_groups
-    self.regular_medication = regular_medication
-    self.register_date = register_date
-    self.update_date = update_date
+  enum Section: Int {
+    case personal, medical, exams, actions, count
   }
 
-  func full_name() -> String {
-    return "\(first_name) \(middle_name) \(last_name)"
+  struct Action {
+    var caption: String
+    var color: UIColor
   }
 
-}
+  //
+  // * Ordered Array of Keys
+  //
+  var ordered_keys: Dictionary<Section, [Any]> {
+    return [
+      .personal: [
+        "record",
+        "firstName",
+        "middleName",
+        "lastName",
+        "personalId",
+        "phoneNumber",
+        "email",
+        "address",
+        "city",
+        "state",
+        "country"
+      ],
 
-func ==(lhs: Patient, rhs: Patient) -> Bool {
-  return lhs.record == rhs.record
+      .medical: [
+        "birthDate",
+        "gender",
+        "bloodType",
+        "ethnicity",
+        "riskGroups",
+        "regularMedications"
+      ],
+
+      .exams: [
+        Array(self.exams!)
+      ],
+
+      .actions: [
+        Action(caption: "deletePatient", color: UIColor.red)
+      ]
+    ]
+  }
+
+  //
+  // * Unordered Array of Keys
+  //
+  var keys: [String] {
+    return Array(self.entity.attributesByName.keys)
+  }
+
+  //
+  // * Unordered Array of Values
+  //
+  var values: [NSAttributeDescription] {
+    return Array(self.entity.attributesByName.values)
+  }
+
+  //
+  // * Get Key/Value Pairs
+  // bonus flavor: data["fullName"] = fullname
+  //
+  var pairs: Dictionary<String, Any> {
+    return self.dictionaryWithValues(forKeys: self.keys)
+  }
+
+  //
+  // * Helper Variables
+  //
+  var fullname: String {
+    var name: String = ""
+    if let first  = self.firstName  { name = first }
+    if let middle = self.middleName { name += " " + middle }
+    if let last   = self.lastName   { name += " " + last }
+    return name
+  }
+
+  var section_count: Int {
+    return Section.count.rawValue
+  }
+
+  //
+  // * Helper Methods
+  //
+  func title(forSection section: Int) -> String {
+    var key = ""
+    switch Section(rawValue: section) {
+    case .some(.personal):
+      key = "personalInformation"
+    case .some(.medical):
+      key = "medicalInformation"
+    case .some(.exams):
+      key = "lastExams"
+    case .some(.actions):
+      key = "advancedOptions"
+    default:
+      break
+    }
+
+    return NSLocalizedString(key, comment: key)
+  }
+
+  func rows(forSection section: Int) -> [Any] {
+    guard section < section_count else { fatalError() }
+
+    if let s = Section(rawValue: section), let d = ordered_keys[s] {
+      return d
+    }
+
+    return [] // return empty array for failproofness
+  }
+
+  func rowCount(forSection section: Int) -> Int {
+    return rows(forSection: section).count
+  }
+
+  //
+  // * Fill Data into Cell
+  // Overloaded functions sensible to Cell context.
+  func populateData(forCell cell: inout PatientDetailCell, atRow row: Int, inSection section: Int) {
+    if let key = rows(forSection: section)[row] as? String {
+      cell.title = NSLocalizedString(key, comment: key)
+      if let value = pairs[key] as? String {
+        cell.value = value
+      }
+    }
+  }
+
+  func populateData(forCell cell: inout ExamCell, atRow row: Int, inSectio section: Int) {
+    if let set = self.exams, let exams = Array(set) as? [Exam] {
+      if exams.isEmpty {
+        cell.name = "No Exams"
+      } else {
+        cell.name = exams[row].segment
+        cell.date = exams[row].date_string
+        cell.reading = "\(exams[row].height) x \(exams[row].weight)"
+      }
+    }
+  }
+
+  func populateData(forCell cell: inout ActionCell, atRow row: Int, inSection section: Int) {
+    if let actions_array = ordered_keys[.actions] as? [Action] {
+      let i18n_caption = NSLocalizedString(actions_array[row].caption,
+                                           comment: actions_array[row].caption)
+      cell.caption = i18n_caption
+      cell.color = actions_array[row].color
+    }
+  }
+
 }

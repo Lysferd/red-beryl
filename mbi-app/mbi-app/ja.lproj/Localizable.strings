@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  mbi-app
+
+  Created by 埜原菽也 on H30/04/20.
+  Copyright © 平成30年 M.A. Eng. All rights reserved.
+*/
+
+"record" = "医療記録";
+"firstName" = "名前";
+"middleName" = "ミドルネーム";
+"lastName" = "名字";
+"personalId" = "個人I.D.";
+"phoneNumber" = "電話番号";
+"email" = "Eメール";
+"address" = "住所";
+"city" = "市";
+"state" = "州";
+"country" = "国";
+"birthDate" = "生年月日";
+"gender" = "性別";
+"bloodType" = "血液型";
+"ethnicity" = "民族";
+"riskGroups" = "疾病リスク";
+"regularMedications" = "常用薬剤";
+
+
+"personalInformation" = "個人情報";
+"medicalInformation" = "医療情報";
+"lastExams" = "診察履歴";
+
+"advancedOptions" = "その他";
+"deletePatient" = "患者削除";
+
+"pickOption" = "一つを選んでください";
+"male" = "男性";
+"female" = "女性";
+
+"asian" = "アジア系";
+"black" = "黒人";
+"caucasian" = "白人";
+"indigenous" = "先住民";
+"mixedRace" = "混血人";
