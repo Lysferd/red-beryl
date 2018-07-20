@@ -39,7 +39,7 @@ void red_fang::ler_serial()
 		{
 			Serial.println("Começar leitura");
 			
-			lt = beryl->crystal.lerAD();
+			lt = beryl->crystal.lerAD(beryl->getPoint());
 			/*
 			int h = beryl->clock.hora();
 			int	m = beryl->clock.minuto();
@@ -55,9 +55,20 @@ void red_fang::ler_serial()
 			lt.ano = beryl->clock.ano();
 						
 			Serial.println("Leitura concluida.");
-			EEPROM.put( ( ( EEPROM.read(0)*sizeof(leitura) )+1)  , lt);  //salva a nova leitura na EEPROM.
-			Serial.println("Salvo na EEPROM.");
-			EEPROM.write(0 , ( EEPROM.read(0)+1 ));    //o valor da posição '0' recebe 'i'.
+			if((EEPROM.length()-2)-(EEPROM.read(0)*sizeof(leitura))>=sizeof(leitura))
+			{
+				EEPROM.put( ( ( EEPROM.read(0)*sizeof(leitura) )+1)  , lt);  //salva a nova leitura na EEPROM.
+				Serial.println("Salvo na EEPROM.");
+				EEPROM.write(0 , ( EEPROM.read(0)+1 ));    //o valor da posição '0' recebe 'i'.
+			}
+			else
+			{
+				int limit = ((EEPROM.length()-3)/sizeof(leitura));
+				Serial.println("EEPROM cheia, subtituindo endereços endereço");
+				EEPROM.put( ( ((EEPROM.read(0)-limit)*sizeof(leitura) )+1) , lt);
+				EEPROM.write(0 , ( EEPROM.read(0)+1 ));
+			}
+			
 			done=true;
 		}
 		else
@@ -748,7 +759,7 @@ bool red_fang::serialLeitura(leitura lt, int i)
 
 bool red_fang::getComplex(leitura lt, int n)
 {
-	char string[30], filler[30];
+	char string[60], filler[30];
 	switch(n)
 	{
 		case 0:
@@ -811,7 +822,7 @@ bool red_fang::getComplex(leitura lt, int n)
 		}
 		case 2:				//imaginario
 		{
-			strcpy (string, "J");
+			strcpy (string, ":");
 			dtostrf(lt.imag, 2, 2, &string[strlen(string)]);
 			//serialEnviar(string);
 			Serial1.print(string);
@@ -826,9 +837,10 @@ bool red_fang::getComplex(leitura lt, int n)
 				strcpy (string, "|");
 				strcat (string, "R");
 				dtostrf(lt.arrayR[x], 2, 2, &string[strlen(string)]);
-				strcat (string, "J");
+				strcat (string, ":");
 				dtostrf(lt.arrayJ[x], 2, 2, &string[strlen(string)]);
 				//serialEnviar(string);
+				Serial.println(string);
 				Serial1.print(string);
 				x++;
 				return false;
@@ -847,11 +859,37 @@ bool red_fang::getComplex(leitura lt, int n)
 			int x = snprintf(filler, 30, "%lu", lt.freq);   //PODE NÃO FUNCIONAR! filler recebe os caracteres traduzidos do valor frequencia.
 			strcat( string, filler);    //filler(frequencia) adicionado a string.
 			//serialEnviar(string);   //chama a função serialEnviar.
-			strcat ( string, "E");
+			strcat ( string, "E");		//trocar isso para o proximo caso quando tudo estiver pronto.
 			Serial1.print(string);
 			return false;
 			break;
 		}
+		
+		/*case 5:
+		{
+			static int x = 0;
+			if(x<11)
+			{
+				Serial.print("gain[");
+				Serial.print(x);
+				Serial.print("]=");
+				Serial.println(lt.arrayG[x]);
+				strcpy (string, "G");
+				dtostrf(lt.arrayG[x], 2, 15, &string[strlen(string)]);
+				Serial.println(string);
+				Serial1.print(string);
+				x++;
+				return false;
+			}
+			else
+			{
+				Serial.println("Pronto");
+				x=0;
+				return true;
+			}
+			break;
+		}*/
+		
 		default:{
 			Serial.println("SUCESSO.");
 			return true;

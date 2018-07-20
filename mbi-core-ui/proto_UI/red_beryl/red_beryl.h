@@ -35,6 +35,7 @@ class red_beryl
 		int _pinBAT;
 		
 		int _notificationType;
+		int _pointGain;
 		bool _up;
 		bool _down;
 		bool _yes;
@@ -43,6 +44,7 @@ class red_beryl
 		bool persistentNotify;
 		bool busyNotify;
 		bool BLE;
+		
 	public:
 		
 		red_beryl();
@@ -73,6 +75,9 @@ class red_beryl
 		bool relogio();
 		bool deletaLeitura(int delPos);
 		
+		int getPoint();
+		
+		bool menu_point();
 		bool menu_aviso();
 		bool menu_historico();
 		
