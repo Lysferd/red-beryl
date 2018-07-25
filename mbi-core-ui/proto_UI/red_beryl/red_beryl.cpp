@@ -104,6 +104,8 @@ red_beryl::red_beryl()
 	_pinYES = 24;
 	_pinNO = 22;
 	_pinBAT = A15;
+	
+	
 	pinMode(_pinUP, INPUT);
 	pinMode(_pinDOWN, INPUT);
 	pinMode(_pinYES, INPUT);
@@ -970,7 +972,7 @@ bool red_beryl::menu_sinc()
 bool red_beryl::menu_ajuste()
 {
 	static int choice=1, select=1;
-	static char* menu[] = { "0.default", "1- Ajustar Relogio", "2- Ajustar Avisos", "3- Ajustar Historico", "4-Ajustar Ganho" };
+	static char* menu[] = { "0.default", "1- Ajustar Relogio", "2- Ajustar Avisos", "3- Ajustar Historico", "4-Ajustar Ganho", "5-Ajuster Range" };
 	
 	switch(choice)
 	{
@@ -1118,7 +1120,43 @@ bool red_beryl::menu_ajuste()
 		}
 		case 3:
 		{
-			if(select==2)
+			if(select==1)
+			{
+				display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);								// Definir o tamanho do texto.
+				display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				
+				display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
+				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[4]);								// Imprimir a opção 4 do menu.
+				
+				display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
+				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[5]);								// Imprimir a opção 5 do menu.
+				if(_up)												// Se UP for ativo.
+				{
+					choice--;										// Escolha anterior.
+					_up = false;									// Desativa UP.
+				}
+				if(_down)											// Se DOWN for ativo.
+				{
+					choice++;										// Proxima escolha.
+					select++;										// Proximo seletor.
+					_down = false;									// Desativa DOWN.
+				}
+				if(_yes)											// Se YES for ativo.
+				{
+					choice=31;										// Muda escolha para o menu 41.
+					_yes=false;										// Desativa YES.
+					_no=false;										// Desativa NO.
+				}
+				if(_no)												// Se NO for ativo.
+				{
+					_no=false;										// Desativa NO.
+					return false;									// Retorna negativo e desativa o menu de ajuste.
+				}
+			} else if(select==2)
 			{
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
@@ -1307,7 +1345,45 @@ bool red_beryl::menu_ajuste()
 		}
 		case 4:
 		{
-			if(select==3)
+			if(select==2)
+			{
+				display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);								// Definir o tamanho do texto.
+				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				
+				display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
+				display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[4]);								// Imprimir a opção 4 do menu.
+				
+				display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
+				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[5]);								// Imprimir a opção 5 do menu.
+				if(_up)												// Se UP for ativo.
+				{
+					choice--;										// Escolha anterior.
+					select--;										// Seletor anterior.
+					_up = false;									// Desativa UP.
+				}
+				if(_down)											// Se DOWN for ativo.
+				{
+					choice++;										// Proxima escolha.
+					select++;										// Proximo seletor.
+					_down = false;									// Desativa DOWN.
+				}
+				if(_yes)											// Se YES for ativo.
+				{
+					choice=41;										// Muda escolha para o menu 41.
+					_yes=false;										// Desativa YES.
+					_no=false;										// Desativa NO.
+				}
+				if(_no)												// Se NO for ativo.
+				{
+					_no=false;										// Desativa NO.
+					return false;									// Retorna negativo e desativa o menu de ajuste.
+				}
+			
+			} else if(select==3)
 			{
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
@@ -1355,10 +1431,448 @@ bool red_beryl::menu_ajuste()
 			}
 			break;
 		}
+		case 5:
+		{
+			if(select==3)
+			{
+				display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);								// Definir o tamanho do texto.
+				display.setTextColor(WHITE);						// Definir a cor do texto(branco = não selecionado).
+				display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				
+				display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
+				display.setTextColor(WHITE);						// Definir a cor do texto(branco = não selecionado).
+				display.print(menu[4]);								// Imprimir a opção 4 do menu.
+				
+				display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
+				display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[5]);								// Imprimir a opção 5 do menu.
+				
+				if(_up)
+				{
+					choice--;
+					select--;
+					_up = false;
+				}
+				if(_down)
+				{
+					choice++;
+					_down = false;
+				}
+				if(_yes)
+				{
+					choice = 51;
+					_yes = false;
+					_no = false;
+				}
+				if(_no)
+				{
+					_no = false;
+					return false;
+				}
+			}
+			break;
+		}
+		case 51:
+		{
+			if(!menu_range())
+			{
+				choice = 5;
+			}
+			break;
+		}
 		default:
 		{
 			if(choice<1)
 			{	
+				choice = 5;
+				select = 3;
+			}
+			if(choice>5)
+			{
+				choice = 1;
+				select = 1;
+			}
+			break;
+		}
+	}
+	return true;
+}
+
+bool red_beryl::menu_range()
+{
+	static char* menu[] = { "  ", "Range 1", "Range 2", "Range 3", "Range 4"};
+	static int choice = 1, select = 1;
+	switch(choice)
+	{
+		case 1:
+		{
+			display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
+			display.setTextSize(1);								// Definir o tamanho do texto.
+			display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
+			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+			if(crystal.getRange() == 1)							// Se o range for 1.
+			{
+				display.print("*");								// Imprime o asterisco para sinalizar.
+			}
+			display.print(menu[1]);								// Imprimir a opção 1 do menu.
+				
+			display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
+			display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+			if(crystal.getRange() == 2)							// Se o range for 2.
+			{
+				display.print("*");								// Imprime o asterisco para sinalizar.
+			}
+			display.print(menu[2]);								// Imprimir a opção 2 do menu.
+				
+			display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
+			display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+			if(crystal.getRange() == 3)							// Se o range for 3.
+			{
+				display.print("*");								// Imprime o asterisco para sinalizar.
+			}
+			display.print(menu[3]);								// Imprimir a opção 3 do menu.
+			
+			if(_up)												// Se UP for ativo.
+			{
+				choice--;										// Escolha anterior.
+				_up = false;									// Desativa UP.
+			}
+			if(_down)											// Se DOWN for ativo.
+			{
+				choice++;										// Proxima escolha.
+				select++;										// Proximo seletor.
+				_down = false;									// Desativa DOWN.
+			}
+			if(_yes)											// Se YES for ativo.
+			{
+				if(crystal.getRange() != choice)				// Se o Range for diferente da escolha.
+				{
+					crystal.setRange(choice);					// Settar o Range na escolha.
+					Serial.print("Range ");						//
+					Serial.print(choice);						// Imprimir no Serial a escolha para debug.
+					Serial.println(" selecionado.");			//
+				}
+				_yes=false;										// Desativa YES.
+				_no=false;										// Desativa NO.
+			}
+			if(_no)												// Se NO for ativo.
+			{
+				_no=false;										// Desativa NO.
+				return false;									// Retorna negativo para desativar esse menu.
+			}
+			break;												// switch-case break.
+		}
+		case 2:
+		{
+			if(select == 1)
+			{
+				display.setCursor(2, lineSize);					// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);							// Definir o tamanho do texto.
+				display.setTextColor(BLACK, WHITE);				// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 2)						// Se o range for 2.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[2]);							// Imprimir a opção 2 do menu.
+					
+				display.setCursor(2, lineSize*2);				// Definir a posição do cursor na segunda linha.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 3)						// Se o range for 3.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[3]);							// Imprimir a opção 3 do menu.
+					
+				display.setCursor(2, lineSize*3);				// Definir a posição do cursor na terceira linha.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 4)						// Se o range for 4.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[4]);							// Imprimir a opção 4 do menu.
+				
+				if(_up)											// Se UP for ativo.
+				{
+					choice--;									// Escolha anterior.
+					_up = false;								// Desativa UP.
+				}
+				if(_down)										// Se DOWN for ativo.
+				{
+					choice++;									// Proxima escolha.
+					select++;									// Proximo seletor.
+					_down = false;								// Desativa DOWN.
+				}
+				if(_yes)										// Se YES for ativo.
+				{
+					if(crystal.getRange() != choice)			// Se o Range for diferente da escolha.
+					{
+						crystal.setRange(choice);				// Settar o Range na escolha.
+						Serial.print("Range ");					//
+						Serial.print(choice);					// Imprimir no Serial a escolha para debug.
+						Serial.println(" selecionado.");		//
+					}
+					_yes=false;									// Desativa YES.
+					_no=false;									// Desativa NO.
+				}
+				if(_no)											// Se NO for ativo.
+				{
+					_no=false;									// Desativa NO.
+					return false;								// Retorna negativo para desativar esse menu.
+				}
+			} else if(select == 2)
+			{
+				display.setCursor(2, lineSize);					// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);							// Definir o tamanho do texto.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 1)						// Se o range for 1.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[1]);							// Imprimir a opção 1 do menu.
+					
+				display.setCursor(2, lineSize*2);				// Definir a posição do cursor na segunda linha.
+				display.setTextColor(BLACK, WHITE);				// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 2)						// Se o range for 2.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[2]);							// Imprimir a opção 2 do menu.
+					
+				display.setCursor(2, lineSize*3);				// Definir a posição do cursor na terceira linha.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 3)						// Se o range for 3.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[3]);							// Imprimir a opção 3 do menu.
+				
+				if(_up)											// Se UP for ativo.
+				{
+					choice--;									// Escolha anterior.
+					select--;									// Seletor anterior.
+					_up = false;								// Desativa UP.
+				}
+				if(_down)										// Se DOWN for ativo.
+				{
+					choice++;									// Proxima escolha.
+					select++;									// Proximo seletor.
+					_down = false;								// Desativa DOWN.
+				}
+				if(_yes)										// Se YES for ativo.
+				{
+					if(crystal.getRange() != choice)			// Se o Range for diferente da escolha.
+					{
+						crystal.setRange(choice);				// Settar o Range na escolha.
+						Serial.print("Range ");					//
+						Serial.print(choice);					// Imprimir no Serial a escolha para debug.
+						Serial.println(" selecionado.");		//
+					}
+					_yes=false;									// Desativa YES.
+					_no=false;									// Desativa NO.
+				}
+				if(_no)											// Se NO for ativo.
+				{
+					_no=false;									// Desativa NO.
+					return false;								// Retorna negativo para desativar esse menu.
+				}
+			}
+			break;												// switch-case break.
+		}
+		case 3:
+		{
+			if(select == 2)
+			{
+				display.setCursor(2, lineSize);					// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);							// Definir o tamanho do texto.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 2)						// Se o range for 2.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[2]);							// Imprimir a opção 2 do menu.
+					
+				display.setCursor(2, lineSize*2);				// Definir a posição do cursor na segunda linha.
+				display.setTextColor(BLACK, WHITE);				// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 3)						// Se o range for 3.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[3]);							// Imprimir a opção 3 do menu.
+					
+				display.setCursor(2, lineSize*3);				// Definir a posição do cursor na terceira linha.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 4)						// Se o range for 4.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[4]);							// Imprimir a opção 4 do menu.
+				
+				if(_up)											// Se UP for ativo.
+				{
+					choice--;									// Escolha anterior.
+					select--;									// Seletor anterior.
+					_up = false;								// Desativa UP.
+				}
+				if(_down)										// Se DOWN for ativo.
+				{
+					choice++;									// Proxima escolha.
+					select++;									// Proximo seletor.
+					_down = false;								// Desativa DOWN.
+				}
+				if(_yes)										// Se YES for ativo.
+				{
+					if(crystal.getRange() != choice)			// Se o Range for diferente da escolha.
+					{
+						crystal.setRange(choice);				// Settar o Range na escolha.
+						Serial.print("Range ");					//
+						Serial.print(choice);					// Imprimir no Serial a escolha para debug.
+						Serial.println(" selecionado.");		//
+					}
+					_yes=false;									// Desativa YES.
+					_no=false;									// Desativa NO.
+				}
+				if(_no)											// Se NO for ativo.
+				{
+					_no=false;									// Desativa NO.
+					return false;								// Retorna negativo para desativar esse menu.
+				}
+			} else if(select == 3)
+			{
+				display.setCursor(2, lineSize);					// Definir a posição do cursor na primeira linha.
+				display.setTextSize(1);							// Definir o tamanho do texto.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 1)						// Se o range for 1.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[1]);							// Imprimir a opção 1 do menu.
+					
+				display.setCursor(2, lineSize*2);				// Definir a posição do cursor na segunda linha.
+				display.setTextColor(WHITE);					// Definir a cor do texto(Branco = não selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 2)						// Se o range for 2.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[2]);							// Imprimir a opção 2 do menu.
+					
+				display.setCursor(2, lineSize*3);				// Definir a posição do cursor na terceira linha.
+				display.setTextColor(BLACK, WHITE);				// Definir a cor do texto(Preto no Branco = selecionado).
+				display.print(menu[0]);							// Imprimir espaço vazio do menu.
+				if(crystal.getRange() == 3)						// Se o range for 3.
+				{
+					display.print("*");							// Imprime o asterisco para sinalizar.
+				}
+				display.print(menu[3]);							// Imprimir a opção 3 do menu.
+				
+				if(_up)											// Se UP for ativo.
+				{
+					choice--;									// Escolha anterior.
+					select--;									// Seletor anterior.
+					_up = false;								// Desativa UP.
+				}
+				if(_down)										// Se DOWN for ativo.
+				{
+					choice++;									// Proxima escolha.
+					_down = false;								// Desativa DOWN.
+				}
+				if(_yes)										// Se YES for ativo.
+				{
+					if(crystal.getRange() != choice)			// Se o Range for diferente da escolha.
+					{
+						crystal.setRange(choice);				// Settar o Range na escolha.
+						Serial.print("Range ");					//
+						Serial.print(choice);					// Imprimir no Serial a escolha para debug.
+						Serial.println(" selecionado.");		//
+					}
+					_yes=false;									// Desativa YES.
+					_no=false;									// Desativa NO.
+				}
+				if(_no)											// Se NO for ativo.
+				{
+					_no=false;									// Desativa NO.
+					return false;								// Retorna negativo para desativar esse menu.
+				}
+			}
+			break;												// switch-case break.
+		}
+		case 4:
+		{
+			display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
+			display.setTextSize(1);								// Definir o tamanho do texto.
+			display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+			if(crystal.getRange() == 2)							// Se o range for 2.
+			{
+				display.print("*");								// Imprime o asterisco para sinalizar.
+			}
+			display.print(menu[2]);								// Imprimir a opção 2 do menu.
+				
+			display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
+			display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
+			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+			if(crystal.getRange() == 3)							// Se o range for 3.
+			{
+				display.print("*");								// Imprime o asterisco para sinalizar.
+			}
+			display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				
+			display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
+			display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
+			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+			if(crystal.getRange() == 4)							// Se o range for 4.
+			{
+				display.print("*");								// Imprime o asterisco para sinalizar.
+			}
+			display.print(menu[4]);								// Imprimir a opção 4 do menu.
+			
+			if(_up)												// Se UP for ativo.
+			{
+				choice--;										// Escolha anterior.
+				select--;										// Seletor anterior.
+				_up = false;									// Desativa UP.
+			}
+			if(_down)											// Se DOWN for ativo.
+			{
+				choice++;										// Proxima escolha.
+				_down = false;									// Desativa DOWN.
+			}
+			if(_yes)											// Se YES for ativo.
+			{
+				if(crystal.getRange() != choice)				// Se o Range for diferente da escolha.
+				{
+					crystal.setRange(choice);					// Settar o Range na escolha.
+					Serial.print("Range ");						//
+					Serial.print(choice);						// Imprimir no Serial a escolha para debug.
+					Serial.println(" selecionado.");			//
+				}
+				_yes=false;										// Desativa YES.
+				_no=false;										// Desativa NO.
+			}
+			if(_no)												// Se NO for ativo.
+			{
+				_no=false;										// Desativa NO.
+				return false;									// Retorna negativo para desativar esse menu.
+			}
+			break;												// switch-case break.
+		}
+		default:
+		{
+			if(choice<1)
+			{
 				choice = 4;
 				select = 3;
 			}

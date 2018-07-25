@@ -86,8 +86,15 @@
 #define CTRL_RESET              (0b00010000)
 #define CTRL_CLOCK_EXTERNAL     (0b00001000)
 #define CTRL_CLOCK_INTERNAL     (0b00000000)
+
 #define CTRL_PGA_GAIN_X1        (0b00000001)
 #define CTRL_PGA_GAIN_X5        (0b00000000)
+
+#define CTRL_RANGE_1			(0b00000000)
+#define CTRL_RANGE_2			(0b00000010)
+#define CTRL_RANGE_3			(0b00000100)
+#define CTRL_RANGE_4			(0b00000110)
+
 // Status register options
 #define STATUS_TEMP_VALID       (0x01)
 #define STATUS_DATA_VALID       (0x02)
@@ -124,7 +131,7 @@ class AD5933 {
 
         // Excitation range configuration
         //bool setRange(byte, int); // not implemented - not used yet
-
+		static bool setRange(byte range);
         // Read registers
         static byte readRegister(byte);
         static byte readStatusRegister(void);

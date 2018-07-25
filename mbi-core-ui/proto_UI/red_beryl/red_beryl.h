@@ -77,6 +77,7 @@ class red_beryl
 		
 		int getPoint();
 		
+		bool menu_range();
 		bool menu_point();
 		bool menu_aviso();
 		bool menu_historico();

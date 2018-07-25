@@ -281,6 +281,45 @@ bool AD5933::setNumberIncrements(unsigned int num) {
  * @param gain The gain factor to select. Use constants or 1/5.
  * @return Success or failure
  */
+ 
+ 
+ 
+ 
+bool AD5933::setRange(byte range) {
+	// Get the current value of the control register
+	byte val;
+	if (!getByte(CTRL_REG1, &val))
+		return false;
+	
+	// Clear out bits 1 and 2(D9, D10)
+	val &= 0xF9;
+	
+	//Determine what range was selected
+	if(range == CTRL_RANGE_1 || range == 1) {
+		Serial.println("Range 1 selecionado.");
+		val |= CTRL_RANGE_1;
+		return sendByte(CTRL_REG1, val);
+	} else if (range == CTRL_RANGE_2 || range == 2) {
+		Serial.println("Range 2 selecionado.");
+		val |= CTRL_RANGE_2;
+		return sendByte(CTRL_REG1, val);
+	} else if (range == CTRL_RANGE_3 || range == 3) {
+		Serial.println("Range 3 selecionado.");
+		val |= CTRL_RANGE_3;
+		return sendByte(CTRL_REG1, val);
+	} else if (range == CTRL_RANGE_4 || range == 4) {
+		Serial.println("Range 4 selecionado.");
+		val |= CTRL_RANGE_4;
+		return sendByte(CTRL_REG1, val);
+	} else {
+		return false;
+	}
+}
+ 
+ 
+ 
+ 
+ 
 bool AD5933::setPGAGain(byte gain) {
     // Get the current value of the control register
     byte val;
@@ -472,15 +511,31 @@ bool AD5933::calibrate(float gain[], double phase[], int ref, int n) {
 
     // For each point in the sweep, calculate the gain factor and phase
     for (int i = 0; i < n; i++) {
-        gain[i] = (float)(1.0/ref)/sqrt(pow(real[i], 2) + pow(imag[i], 2));
+		
+		long tempMag = pow(real[i], 2.0) + pow(imag[i], 2.0);
+		long tempSqr = sqrt(tempMag);
+		float tempGain = 1.0/ref/tempSqr;
+		
+		Serial.print(tempMag);
+		Serial.print("|");
+		Serial.print(tempSqr);
+		Serial.print("|");
+		Serial.println(tempGain, 15);
+		
+        //gain[i] = (float) ((1.0/ref)/(sqrt(pow(real[i], 2) + pow(imag[i], 2))));
+		gain[i] = tempGain;
 		
 		double ph = (double) imag[i]/real[i];
-		ph = atan(ph);
-		Serial.print("ph=");
-		Serial.println(ph);
 		
+		Serial.print("G=");
+		Serial.println(gain[i], 15);
+		
+		Serial.print("Phase(Rad)=");
+		Serial.println(ph);
+		ph = atan(ph);
 		phase[i] = ph;
         // TODO: phase
+		/*
 		Serial.print("cgain");
 		Serial.println(gain[i], 15);
 		Serial.print("r=");
@@ -495,8 +550,9 @@ bool AD5933::calibrate(float gain[], double phase[], int ref, int n) {
 		float y = 1.0/1000.0;
 		z = float(float(1.0)/d);
 		Serial.println(z, 15);
-		Serial.print("phase=");
-		Serial.println(phase[i]);
+		*/
+		Serial.print("Phase(Degrees)=");
+		Serial.println(phase[i] * 180 / PI);
     }
 
     delete [] real;

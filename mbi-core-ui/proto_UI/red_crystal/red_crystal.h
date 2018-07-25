@@ -19,7 +19,7 @@
 #define START_FREQ  (50000) 				// frequencia inicial padrão.
 #define FREQ_INCR   (START_FREQ/100) 		// incremento de frequencia padrão.
 #define NUM_INCR    (10)  					// numero padrão de incrementos.
-#define REF_RESIST  (10000) 				// valor de referencia de resistor.
+#define REF_RESIST  (996.50) 				// valor de referencia de resistor.
 #define CAL_VAL		(1000)					// diferença entre os valores de calibração inicial
 #define NUM_CAL		((100000-5000)/CAL_VAL)	// numero de valores de calibração.
 
@@ -40,6 +40,8 @@ class red_crystal
 		double arrayR[11], arrayJ[11];
 		long _freq;
 		
+		int _range;
+		int _pinD7;
 	public:
 		red_crystal();
 		void init();
@@ -50,6 +52,9 @@ class red_crystal
 		bool configurar(long f);
 		leitura lerAD(int point);
 		double temperatura();
+		
+		bool setRange(int range);
+		int getRange();
 };
 
 #endif
