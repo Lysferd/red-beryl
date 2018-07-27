@@ -525,32 +525,16 @@ bool AD5933::calibrate(float gain[], double phase[], int ref, int n) {
         //gain[i] = (float) ((1.0/ref)/(sqrt(pow(real[i], 2) + pow(imag[i], 2))));
 		gain[i] = tempGain;
 		
-		double ph = (double) imag[i]/real[i];
-		
 		Serial.print("G=");
 		Serial.println(gain[i], 15);
 		
+		double ph = atan2(imag[i], real[i]);
+		//ph = atan(ph);
+		
 		Serial.print("Phase(Rad)=");
 		Serial.println(ph);
-		ph = atan(ph);
 		phase[i] = ph;
-        // TODO: phase
-		/*
-		Serial.print("cgain");
-		Serial.println(gain[i], 15);
-		Serial.print("r=");
-		Serial.println(pow(real[i],2));
-		Serial.print("i=");
-		Serial.println(pow(imag[i],2));
-		Serial.print("sqrt=");
-		Serial.println(sqrt(pow(real[i],2) + pow(imag[i],2)));
-		Serial.print("d=");
-		float d=(ref*(sqrt(pow(real[i],2)+pow(imag[i],2))));
-		float z;
-		float y = 1.0/1000.0;
-		z = float(float(1.0)/d);
-		Serial.println(z, 15);
-		*/
+
 		Serial.print("Phase(Degrees)=");
 		Serial.println(phase[i] * 180 / PI);
     }

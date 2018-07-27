@@ -170,8 +170,6 @@ bool red_crystal::configurar(long f)
 		return false;
 	}
 	
-	
-	
 	return true;
 }
 
@@ -206,26 +204,20 @@ leitura red_crystal::lerAD(int point)
 		float tempImp = magnitude*gain[i];
 		double impedance = 1.0/tempImp;
 		
-		//double magnitude = double(sqrt(pow(real, 2) + pow(imag, 2)));
-		//double impedance = double(1.0/(magnitude*gain[i]));
-		double ph = (double) imag/real;
-		//double phc = (double) atan(ph)-calibP[cal];
+		double ph = atan2(imag, real);
 		
 		Serial.print("imag/real=phase == ");
 		Serial.print(imag);
 		Serial.print("/");
 		Serial.print(real);
 		Serial.print("=");
-		Serial.println(ph);
+		Serial.println((double) imag/real);
 	
-		ph = atan(ph);
-		Serial.println(ph * 180/PI);
-		Serial.print("phase:");
-		Serial.println(phase[i]);
-		ph = ph-phase[i];
 		Serial.print(ph);
-		Serial.print("/");
+		Serial.print(":");
 		Serial.println(ph * 180/PI);
+		
+		ph -= phase[i];
 		Serial.print("M=");
 		Serial.println(magnitude);
 		Serial.print("|Z|=");
@@ -238,8 +230,6 @@ leitura red_crystal::lerAD(int point)
 		Serial.print("R=");
 		double r = (double) impedance * cos(ph);
 		Serial.print(r);
-
-		
 		
 		Serial.print("|I=");
 		double j = (double) impedance * sin(ph);

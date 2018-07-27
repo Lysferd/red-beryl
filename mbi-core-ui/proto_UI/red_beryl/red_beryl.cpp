@@ -2416,7 +2416,7 @@ bool red_beryl::historico()
 	static int i = 0;   //declara a variavel i referente aos numeros do historico(+1), por padrão usaremos apenas 10 valores, mas como o arduino Mega oferece muito mais espaço é possivel liberar mais espaço para salvar as leituras.
 	static int l = 1;   //declara a variavel l referente as linhas do historico, estou testando seu uso para um menu mais dinamico e inteligente.
     static bool detalhar = false;   //declara a variavel bool detalhar que define se os detalhes de uma leitura escolhida deverão ser mostrados ou não.
-	int limit = ((EEPROM.length()-3)/sizeof(leitura));
+	static int limit = ((EEPROM.length()-3)/sizeof(leitura))-1;
 		if(EEPROM.read(0)!=0)
 		{    //primeiro testa se tem algo no historico para apresentar.
 			if(i>limit)
@@ -2520,7 +2520,14 @@ bool red_beryl::historico()
 					}
 					else if(EEPROM.read(0)>1)
 					{    //se i for 0 e haver mais de uma leitura na EEPROM
-						i=EEPROM.read(0)-1;   //i recebe o valor equivalente a ultima leitura valida.
+						if((EEPROM.read(0)-1)>limit)
+						{
+							i=limit;
+						}
+						else
+						{
+							i=EEPROM.read(0)-1;   //i recebe o valor equivalente a ultima leitura valida.
+						}
 						if(EEPROM.read(0)>2)
 						{   //se tiver mais de duas leituras validas
 							l=3;    //seleciona a terceira linha para quando retornar ao menu anterior
@@ -2535,7 +2542,7 @@ bool red_beryl::historico()
 				}
 				if(_down)
 				{   //se DOWN for true.
-					if(i!=EEPROM.read(0)-1)
+					if(i!=EEPROM.read(0)-1 && i!=limit)
 					{    //se i não estiver na ultima posição valida a partir da EEPROM.
 						i++;    //i+1
 						if(l!=3)
@@ -2567,10 +2574,10 @@ bool red_beryl::historico()
 					if(!ler)
 					{   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
 						EEPROM.get(((i*sizeof(leitura))+1), L1);   //L1 recebe o valor salvo no historico referente a posição i;
-						if((i+1)<EEPROM.read(0))
+						if((i+1)<EEPROM.read(0) && (i+1)<=limit)
 						{    //se o proximo valor ainda estiver dentro do limite de leituras validas.
 							EEPROM.get((((i+1)*sizeof(leitura))+1), L2);   //L2 recebe o valor salvo no historico referente a posição i+1.
-							if((i+2)<EEPROM.read(0))
+							if((i+2)<EEPROM.read(0) && (i+2)<=limit)
 							{    //se o proximo valor ainda estiver dentro do limite de leituras validas.
 								EEPROM.get((((i+2)*sizeof(leitura))+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+2.
 							}
@@ -2578,10 +2585,10 @@ bool red_beryl::historico()
 						ler=true;   //ler recebe true.
 					}
 					imprimeEscolha( i+1, l, L1, true);
-					if((i+1)<EEPROM.read(0))
+					if((i+1)<EEPROM.read(0) && (i+1)<=limit)
 					{   //se o proximo valor ainda estiver dentro do limite de leituras validas.
 						imprimeEscolha( i+2, l+1, L2, false);
-						if((i+2)<EEPROM.read(0))
+						if((i+2)<EEPROM.read(0) && (i+2)<=limit)
 						{   //se o proximo valor ainda estiver dentro do limite de leituras validas.
 							imprimeEscolha( i+3, l+2, L3, false);
 						}
@@ -2599,7 +2606,7 @@ bool red_beryl::historico()
 						{   //se a variavel ler for false: ou seja, se os valores de leitura não tiverem sido recebidos ainda.
 							EEPROM.get((((i-1)*sizeof(leitura))+1), L1);   //L1 recebe o valor salvo no historico referente a posição i-1;
 							EEPROM.get((((i)*sizeof(leitura))+1), L2);   //L2 recebe o valor salvo no historico referente a posição i.
-							if((i+1)<EEPROM.read(0))
+							if((i+1)<EEPROM.read(0) && (i+1)<=limit)
 							{    //se o proximo valor ainda estiver dentro do limite de leituras validas.
 								EEPROM.get((((i+1)*sizeof(leitura))+1), L3);   //L3 recebe o valor salvo no historico referente a posição i+1.
 							}
@@ -2609,7 +2616,7 @@ bool red_beryl::historico()
 						//final da logica das opções na linha 1 para quando a linha 2 estiver selecionada, a proxima parte conta com a linha 2.
 						imprimeEscolha( i+1, l, L2, true);          
 						//final da logica das opções na linha 2 quando selecionada, a proxima parte conta com a linha 3, usando 'if' para verificar se ela deve existir.
-						if(EEPROM.read(0)>i+1)
+						if((i+1)<EEPROM.read(0) && (i+1)<=limit)
 						{   //se o numero de leituras for maior que i+1(ou seja, se i=1(primeira linha 0), a terceira linha seria(i+1)=2, nesse caso, tivermos 3 leituras EEPROM.read(0)=[3]>[2]
 							//portanto, nesse caso a terceira linha existe.
 							imprimeEscolha( i+2, l+1, L3, false);
@@ -2648,7 +2655,12 @@ bool red_beryl::historico()
 						}
 						else if(EEPROM.read(0)>1)
 						{    //se i for 0 e houver mais de uma leitura salva no historico.
-							i=EEPROM.read(0)-1;   //i recebe o valor da ultima posição valida do historico.
+							if((EEPROM.read(0)-1)>limit)
+							{
+								i=limit;
+							}
+							else
+								i=EEPROM.read(0)-1;   //i recebe o valor da ultima posição valida do historico.
 							if(i>1)
 							{      //se i for maior que 1.
 								l=3;    //seleciona a terceira linha.
@@ -2671,7 +2683,7 @@ bool red_beryl::historico()
 				{   //se DOWN for true.
 					if(l==3)
 					{   //se a linha 3 estiver selecionada.
-						if(i==EEPROM.read(0)-1)
+						if(i==EEPROM.read(0)-1 || i>=limit)
 						{    //se i for igual a ultima leitura possivel.
 							i=0;    //volta a primeira leitura.
 							l=1;    //seleciona a primeira linha.
@@ -2683,12 +2695,12 @@ bool red_beryl::historico()
 					}
 					else 
 					{    //se a linha 1 ou 2 estiver selecionada.
-						if(!(i==EEPROM.read(0)-1))
+						if(!(i==EEPROM.read(0)-1 || i==limit))
 						{    //se i NÃO for igual a ultima leitura possivel.
 							i++;  //incremente o valor de i.
 							l++;    //incrementa o valor l(indo para a segunda ou terceira linha).
 						}
-						else 
+						else
 						{    //se i for igual a ultima leitura possivel.
 							i=0;    //volta a primeira leitura.
 							l=1;    //seleciona a primeira linha.
@@ -3216,19 +3228,34 @@ bool red_beryl::deletaLeitura(int delPos)
 	else
 	{   //se o numero recebido estiver dentro do numero de leituras possiveis
 		leitura lTemp;    //inicializa uma leitura temporaria para receber o valor de leitura do proximo valor e substituir no valor atual.
-		for(int i=delPos;i<EEPROM.read(0);i++)
+		int limit = ((EEPROM.length()-3)/sizeof(leitura));
+		
+		for(int i=delPos;(i<EEPROM.read(0) && i<limit);i++)
 		{   //EEPROM.get((22*i)+1,leituraTemp);    //leituraTemp recebe a leitura da EEPROM.
                                               //EEPROM.put( ((EEPROM.read(0)*22)+1)  , leitura0);   //salva a nova leitura na EEPROM.
 			EEPROM.get( 1+ (sizeof(leitura)*(i+1)) ,lTemp );   //lTemp recebe o valor da proxima leitura.
 			EEPROM.put( 1+ (sizeof(leitura)*i), lTemp );       //endereço EEPROM selecionado atual[i] recebe lTemp.
 			Serial.print("Posição ");Serial.print(i);Serial.print(" substituida por leitura na posição ");Serial.println(i+1);
 		}
-		for(int i=1+(EEPROM.read(0)*sizeof(leitura)); i<=(EEPROM.read(0)+1)*sizeof(leitura); i++)
-		{    //logica de apagar o ultimo endereço.
-			EEPROM.write(i,0);
-			Serial.println("Endereço final apagado.");
+		if(EEPROM.read(0)<=limit)
+		{
+			for(int i=1+(EEPROM.read(0)*sizeof(leitura)); i<=(EEPROM.read(0)+1)*sizeof(leitura); i++)
+			{    //logica de apagar o ultimo endereço.
+				EEPROM.write(i,0);
+				Serial.println("Endereço final apagado.");
+			}
+			EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
 		}
-		EEPROM.write(0, EEPROM.read(0)-1);    //diminui o valor do endereço 0 da EEPROM.
+		else
+		{
+			for(int i=1+(limit*sizeof(leitura)); i<=(limit)*sizeof(leitura); i++)
+			{
+				EEPROM.write(i,0);
+				Serial.println("Endereço final apagado, alterando valor total.");
+			}
+			EEPROM.write(0, limit-1);    //diminui o valor do endereço 0 da EEPROM.
+		}
+		
 		Serial.println("DeletaLeitura concluido.");
 		return true;
 	}

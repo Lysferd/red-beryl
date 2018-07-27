@@ -35,7 +35,7 @@ class red_crystal
 		double calibP[NUM_CAL+1];		// vetor double para conter os valores de phase iniciais.
 		float calibG[NUM_CAL+1];		// vetor float para conter os valores de ganho iniciais.
 		
-		double phase[NUM_INCR+1];  // vetor int para conter o valor de fase.
+		double phase[NUM_INCR+1];  // vetor double para conter o valor de fase.
 		double medReal, medImag; //variaveis int para receber os valores médios dos vetores.
 		double arrayR[11], arrayJ[11];
 		long _freq;

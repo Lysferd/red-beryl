@@ -34,7 +34,9 @@ void red_fang::ler_serial()
 	{
 		static bool done = false;
 		static leitura lt;
+		static int limit = ((EEPROM.length()-3)/sizeof(leitura));
 		Serial.println("before reading");
+		
 		if(!done)
 		{
 			Serial.println("Começar leitura");
@@ -55,6 +57,33 @@ void red_fang::ler_serial()
 			lt.ano = beryl->clock.ano();
 						
 			Serial.println("Leitura concluida.");
+			
+			if(EEPROM.read(0)>=limit)												// Se o numero de leitura for superior ao limite de memoria.
+			{
+				int tempPos=EEPROM.read(0)-limit;									// Cria uma variavel temporaria que recebe o valor de posição.
+				if(tempPos>=limit)
+				{
+					tempPos-=limit;
+				}
+				EEPROM.put((tempPos*sizeof(leitura))+1, lt);
+				Serial.print("Sobreescreveu na posição ");
+				Serial.print(tempPos+1);
+				Serial.println(".");
+				if(EEPROM.read(0)>=limit*2)
+				{
+					EEPROM.write(0, limit);
+				}
+				else
+					EEPROM.write(0, EEPROM.read(0)+1);
+			}
+			else
+			{
+				EEPROM.put( ( ( EEPROM.read(0)*sizeof(leitura) )+1)  , lt);  		//salva a nova leitura na EEPROM.
+				Serial.println("Salvo na EEPROM ");
+				Serial.print(EEPROM.read(0)+1);
+				EEPROM.write(0 , ( EEPROM.read(0)+1 ));    							//o valor da posição '0' recebe 'i'.
+			}
+			/*
 			if((EEPROM.length()-2)-(EEPROM.read(0)*sizeof(leitura))>=sizeof(leitura))
 			{
 				EEPROM.put( ( ( EEPROM.read(0)*sizeof(leitura) )+1)  , lt);  //salva a nova leitura na EEPROM.
@@ -68,7 +97,7 @@ void red_fang::ler_serial()
 				EEPROM.put( ( ((EEPROM.read(0)-limit)*sizeof(leitura) )+1) , lt);
 				EEPROM.write(0 , ( EEPROM.read(0)+1 ));
 			}
-			
+			*/
 			done=true;
 		}
 		else
@@ -136,9 +165,16 @@ void red_fang::check_string(char str[])
 	}
 	else if(strcmp(str, "CHK")==0)
 	{
+		int limit = ((EEPROM.length()-3)/sizeof(leitura));
 		char num[4];
-		itoa (EEPROM.read(0),num, 10);
-		
+		if(EEPROM.read(0)<limit)
+		{
+			itoa (EEPROM.read(0),num, 10);
+		}
+		else
+		{
+			itoa ( limit, num, 10);
+		}
 		serialEnviar(num);
 	}
 	else if(strcmp(str, "BAT")==0)		//Se o comando recebido for BAT, retorna o valor da bateria.
