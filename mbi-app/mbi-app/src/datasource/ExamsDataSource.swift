@@ -26,6 +26,10 @@ class ExamsDataSource: NSObject {
     do {
       if let fetch = try context.fetch(request) as? [Exam] {
         exams = fetch
+
+        if let impedances = fetch.first?.impedances?.allObjects as? [Impedance] {
+          print(impedances)
+        }
       }
     } catch {
       fatalError(error.localizedDescription)

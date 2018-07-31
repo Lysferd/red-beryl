@@ -77,7 +77,7 @@ class BTService: NSObject {
 
     if let characteristic = self.characteristic {
       if let data = tx.data(using: .ascii) {
-        print("Write to device: ", tx, " [", data, "]")
+//        print("Write to device: ", tx, " [", data, "]")
         self.peripheral?.writeValue(data, for: characteristic, type: .withoutResponse)
         startTimer()
       }
@@ -87,10 +87,10 @@ class BTService: NSObject {
   // Resend command
   @objc func rewrite() {
     stopTimer()
-    return
-    if let (cmd, arg) = command {
-      write(cmd, with: arg)
-    }
+
+//    if let (cmd, arg) = command {
+//      write(cmd, with: arg)
+//    }
   }
 
   @available(*, deprecated: 1.0, message: "BLE data reading is now handled by CBCentralManager")
@@ -173,7 +173,7 @@ class BTService: NSObject {
       case "F":
         if let frequency = Double(data_array[i]) { measure.frequency = frequency }
       case "R":
-        let impedance = data_array[i].split(separator: "J")
+        let impedance = data_array[i].split(separator: ":")
         if let real = Double(impedance[0]), let img = Double(impedance[1]) {
           measure.impedances.append((real: real, imaginary: img))
         }
@@ -181,7 +181,7 @@ class BTService: NSObject {
       }
     }
 
-    print(measure)
+//    print(measure)
 
     let info = ["measure": measure]
     notification.post(name: BLEUpdateGTX, object: self, userInfo: info)
@@ -256,7 +256,7 @@ extension BTService: CBPeripheralDelegate {
         fatalError("Invalid message received from MBI device")
 
       }
-      print("Read from device: ", input, " [", data, "]")
+//      print("Read from device: ", input, " [", data, "]")
 
       // Detect invalid requests:
       if input == "ERR" { command = nil }
@@ -269,7 +269,7 @@ extension BTService: CBPeripheralDelegate {
       // Unwrap message
       // Removes S from the beginning, E from the end
       var message = partial
-      print(message)
+//      print(message)
       message.removeFirst()
       message.removeLast()
 

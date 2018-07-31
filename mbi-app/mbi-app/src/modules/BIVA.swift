@@ -10,6 +10,7 @@
 
 import Foundation
 import SwiftCharts
+import CoreGraphics
 
 class BIVA {
 
@@ -23,19 +24,19 @@ class BIVA {
 
     // Define axis' layers
     let xRange = model[0].creal * 2.0
-    let xStep = xRange / 4.0
+    let xStep = xRange / 12.0
     let yRange = model[0].cimaginary * 2.0
-    let yStep = yRange / 4.0
+    let yStep = yRange / 6.0
 
     let xValues = stride(from: 0, through: xRange, by: xStep).map {ChartAxisValueInt(Int($0), labelSettings: labelSettings)}
     let yValues = stride(from: 0, through: yRange, by: yStep).map {ChartAxisValueInt(Int($0), labelSettings: labelSettings)}
 
-    let xAxisTitleLabel = ChartAxisLabel(text: "R/H (Ω/m)", settings: labelSettings)
-    let yAxisTitleLabel = ChartAxisLabel(text: "Xc/H (Ω/m)", settings: labelSettings.defaultVertical())
+    let xAxisTitleLabel = ChartAxisLabel(text: "R/H (Ω/cm)", settings: labelSettings)
+    let yAxisTitleLabel = ChartAxisLabel(text: "Xc/H (Ω/cm)", settings: labelSettings.defaultVertical())
     let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: xAxisTitleLabel)
     let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: yAxisTitleLabel)
 
-    let chartFrame = CGRect(x: 0, y: 0, width: view.bounds.width - 24, height: view.bounds.height - 12)
+    let chartFrame = CGRect(x: 0, y: 0, width: view.bounds.width - 8, height: view.bounds.height - 8)
     let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
     let xAxisLayer = coordsSpace.xAxisLayer
     let yAxisLayer = coordsSpace.yAxisLayer

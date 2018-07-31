@@ -58,18 +58,39 @@ extension Patient {
     ]
   }
 
+  // * Flat array of ordered keys
+  var flat_keys: [String] {
+    return ["record",
+            "firstName",
+            "middleName",
+            "lastName",
+            "personalId",
+            "phoneNumber",
+            "email",
+            "address",
+            "city",
+            "state",
+            "country",
+            "birthDate",
+            "gender",
+            "bloodType",
+            "ethnicity",
+            "riskGroups",
+            "regularMedications"]
+  }
+
   //
   // * Unordered Array of Keys
   //
   var keys: [String] {
-    return Array(self.entity.attributesByName.keys)
+    return Array(entity.attributesByName.keys)
   }
 
   //
   // * Unordered Array of Values
   //
   var values: [NSAttributeDescription] {
-    return Array(self.entity.attributesByName.values)
+    return Array(entity.attributesByName.values)
   }
 
   //
@@ -77,7 +98,11 @@ extension Patient {
   // bonus flavor: data["fullName"] = fullname
   //
   var pairs: Dictionary<String, Any> {
-    return self.dictionaryWithValues(forKeys: self.keys)
+    return dictionaryWithValues(forKeys: keys)
+  }
+
+  var ordered_pairs: Dictionary<String, Any> {
+    return dictionaryWithValues(forKeys: flat_keys)
   }
 
   //
@@ -133,7 +158,7 @@ extension Patient {
   //
   // * Fill Data into Cell
   // Overloaded functions sensible to Cell context.
-  func populateData(forCell cell: inout PatientDetailCell, atRow row: Int, inSection section: Int) {
+  func populateData(forCell cell: inout DetailCell, atRow row: Int, inSection section: Int) {
     if let key = rows(forSection: section)[row] as? String {
       cell.title = NSLocalizedString(key, comment: key)
       if let value = pairs[key] as? String {

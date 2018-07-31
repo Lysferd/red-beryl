@@ -78,6 +78,10 @@ class NewExamView: UITableViewController {
       data["patient"] = patient
     }
 
+    if let frequency = selectedMeasure?.frequency {
+      data["frequency"] = frequency
+    }
+
     if let impedances = selectedMeasure?.impedances {
       data["impedances"] = impedances
     }

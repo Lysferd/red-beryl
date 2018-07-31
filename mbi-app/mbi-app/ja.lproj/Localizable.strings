@@ -31,13 +31,23 @@
 
 "advancedOptions" = "その他";
 "deletePatient" = "患者削除";
+"editingPatient" = "患者編集";
 
 "pickOption" = "一つを選んでください";
 "male" = "男性";
 "female" = "女性";
 
-"asian" = "アジア系";
+"asian" = "東洋系";
 "black" = "黒人";
 "caucasian" = "白人";
 "indigenous" = "先住民";
 "mixedRace" = "混血人";
+
+"patient" = "患者";
+"date" = "日付";
+"height" = "丈";
+"weight" = "体重";
+"tbw" = "体内総水分量";
+"ffm" = "除脂肪量";
+"fm" = "脂肪量";
+"bm" = "体脂肪率";

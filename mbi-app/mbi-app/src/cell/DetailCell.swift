@@ -1,5 +1,5 @@
 //
-//  PatientDetailCell.swift
+//  DetailCell.swift
 //  mbi-app
 //
 //  Created by 埜原菽也 on H30/03/28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PatientDetailCell: UITableViewCell {
+class DetailCell: UITableViewCell {
 
   @IBOutlet fileprivate weak var valueLabel: UILabel!
   @IBOutlet fileprivate weak var titleLabel: UILabel!

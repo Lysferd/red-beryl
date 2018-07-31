@@ -18,12 +18,10 @@ class ExamDetailView: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     detailTable.dataSource = self
-    detailTable.register(UINib(nibName: "BasicCell", bundle: nil), forCellReuseIdentifier: "BasicCell")
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     chartView.setData(exam)
   }
 
@@ -34,23 +32,49 @@ extension ExamDetailView: UITableViewDataSource {
     return 8
   }
 
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell") as! BasicCell
-
-    switch indexPath.row {
-    case 0: cell.label = "Patient: \(exam.patient?.fullname ?? "Unknown")"
-    case 1: cell.label = "Date: \(exam.date_string!)"
-    case 2: cell.label = "Height: \(exam.height) cm"
-    case 3: cell.label = "Weight: \(exam.weight) kg"
-    case 4: cell.label = "TBW: \(exam.tbw!)"
-    case 5: cell.label = "FFM: \(exam.ffm!)"
-    case 6: cell.label = "FM: \(exam.fm!)"
-    case 7: cell.label = "BodyFat%: \(exam.bodyfat!)"
-    default: cell.label = "default"
-    }
-
-    return cell
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return "Patient Data"
   }
 
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell") as! DetailCell
+
+    var title: String
+    var value: String
+
+    switch indexPath.row {
+      case 0:
+        title = NSLocalizedString("patient", comment: "patient")
+        value = exam.patient?.fullname ?? "?Name?"
+      case 1:
+        title = NSLocalizedString("date", comment: "date")
+        value = exam.date_string
+      case 2:
+        title = NSLocalizedString("height", comment: "height")
+        value = String(format: "%.2f cm", exam.height)
+      case 3:
+        title = NSLocalizedString("weight", comment: "weight")
+        value = String(format: "%.2f kg", exam.weight)
+      case 4:
+        title = NSLocalizedString("tbw", comment: "tbw")
+        value = String(format: "%.3f kg", exam.tbw)
+      case 5:
+        title = NSLocalizedString("ffm", comment: "ffm")
+        value = String(format: "%.3f kg", exam.ffm)
+      case 6:
+        title = NSLocalizedString("fm", comment: "fm")
+        value = String(format: "%.3f kg", exam.fm)
+      case 7:
+        title = NSLocalizedString("bm", comment: "bm")
+        value = String(format: "%.3f %%", exam.bodyfat)
+      default:
+        title = "default"
+        value = "nothing"
+    }
+
+    cell.title = title
+    cell.value = value
+    return cell
+  }
 
 }

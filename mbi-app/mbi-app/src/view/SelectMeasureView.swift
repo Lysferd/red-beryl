@@ -6,6 +6,40 @@
 //  Copyright © 平成30年 M.A. Eng. All rights reserved.
 //
 
+/*
+BLE COMMANDS
+
+ VER
+  Retrieves board firmware version
+
+ CHK
+  Retrieves number of measured data
+
+ GET[n]
+  Retrieves simplified measure data
+
+ REQ[f]
+  Requests new measure and retrieves it
+
+ GTX[n]
+  Retrieves complete measure data
+
+ CLR[n]
+  Clears specific measure data (purge data pointer)
+
+ WIP
+  Wipes board measure data (overwrite with zeroes)
+
+ TMP
+  Retrieves board temperature
+
+ CLK
+  Retrieves board clock
+
+ BAT
+  Retrieves board battery
+*/
+
 import UIKit
 import CoreBluetooth
 
@@ -31,6 +65,8 @@ class SelectMeasureView: UIViewController {
   var dataReal: Double?
   var dataImg: Double?
   var dataFreq: Double?
+
+  var sweeping = false
 
   // MARK: BLE Communication
   fileprivate var queue = DispatchQueue.main
@@ -135,7 +171,9 @@ class SelectMeasureView: UIViewController {
       (_) in
       if let textFields = alert.textFields {
         if let frequency = textFields[0].text, let num = Int(frequency) {
-          self.sendREQ(num)
+          if num >= 5_000 && num <= 100_000 {
+            self.sendREQ(num)
+          }
         }
       }
     })
@@ -148,6 +186,24 @@ class SelectMeasureView: UIViewController {
       service.write("REQ", with: frequency)
     }
   }
+
+  @IBAction func clean(_ sender: UIBarButtonItem) {
+    if let service = btDiscoverySharedInstance.service {
+      service.write("CLR")
+    }
+  }
+
+  @IBAction func sweep(_ sender: UIBarButtonItem) {
+    guard !sweeping else { return }
+    sweeping = true
+
+    if let service = btDiscoverySharedInstance.service {
+      for frequency in stride(from: 1e3, through: 1e5, by: 1e3) {
+        service.write("REQ", with: Int(frequency))
+      }
+    }
+  }
+
 
   // MARK: - Notifications
   @objc func updateCHK(_ notification: Notification) {

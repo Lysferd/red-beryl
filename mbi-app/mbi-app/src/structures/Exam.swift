@@ -51,11 +51,11 @@ extension Exam {
   }
 
   var resistance: Double! {
-    return 1 / (1.0 * impedances_array[0].module)
+    return impedances_array[0].cimpedance
   }
 
   var tbw: Double! {
-    let p1 = 0.372 * height / resistance
+    let p1 = 0.372 * height * resistance
     let p2 = 3.05 * gender
     let p3 = 0.142 * weight
     let p4 = 0.004 * age

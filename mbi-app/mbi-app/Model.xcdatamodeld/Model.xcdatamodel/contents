@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Exam" representedClassName="Exam" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="frequency" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="height" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="segment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="impedances" toMany="YES" deletionRule="Nullify" destinationEntity="Impedance" inverseName="exam" inverseEntity="Impedance" syncable="YES"/>
+        <relationship name="impedances" toMany="YES" deletionRule="Cascade" destinationEntity="Impedance" inverseName="exam" inverseEntity="Impedance" syncable="YES"/>
         <relationship name="patient" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="exams" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <entity name="Impedance" representedClassName="Impedance" syncable="YES" codeGenerationType="class">
-        <attribute name="frequency" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imaginary" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="real" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="exam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exam" inverseName="impedances" inverseEntity="Exam" syncable="YES"/>
@@ -35,8 +35,8 @@
         <relationship name="exams" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Exam" inverseName="patient" inverseEntity="Exam" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Exam" positionX="-126" positionY="-81" width="128" height="133"/>
-        <element name="Impedance" positionX="63" positionY="-81" width="128" height="103"/>
+        <element name="Exam" positionX="-126" positionY="-81" width="128" height="148"/>
+        <element name="Impedance" positionX="63" positionY="-81" width="128" height="88"/>
         <element name="Patient" positionX="-315" positionY="-81" width="128" height="313"/>
     </elements>
 </model>

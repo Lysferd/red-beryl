@@ -24,14 +24,22 @@ class PatientDetailView: UITableViewController {
     tableView.register(UINib(nibName: "ActionCell", bundle: nil), forCellReuseIdentifier: "ActionCell")
   }
 
-  //
-  // MARK: Private
-  //
-  @IBAction func edit(_ sender: UIBarButtonItem) {
-    // do smh
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    
+    if segue.identifier == "editPatientSegue" {
+      if let nav = segue.destination as? UINavigationController {
+        if let controller = nav.topViewController as? NewPatientView {
+          controller.patient_data = patient.ordered_pairs
+          controller.title = NSLocalizedString("editingPatient", comment: "editingPatient")
+        }
+      }
+    }
   }
 
   //
+  // MARK: Private
+
   // * Warn user prior to discarding data
   //
   @IBAction func deleteClicked(_ sender: UIButton) {
@@ -73,7 +81,7 @@ class PatientDetailView: UITableViewController {
   }
 
   //
-  // * Fill Cell
+  // * Fill Cells
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let row = indexPath.row
@@ -81,7 +89,7 @@ class PatientDetailView: UITableViewController {
 
     switch indexPath.section {
     case Patient.Section.personal.rawValue, Patient.Section.medical.rawValue:
-      var cell = tableView.dequeueReusableCell(withIdentifier: "PatientDetailCell") as! PatientDetailCell
+      var cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell") as! DetailCell
       patient.populateData(forCell: &cell, atRow: row, inSection: section)
       return cell
 

@@ -83,6 +83,13 @@ class NewPatientView: UITableViewController {
   // * Setup form fields.
   fileprivate func setupTextFields() {
 
+    if let data = patient_data {
+      for (index, value) in data.values.enumerated() {
+        if index > 9 { break }
+        textFields[index].text = value as! String
+      }
+    }
+
     // Setup TextFields
     for (index, field) in textFields.enumerated() {
       field.delegate = self
@@ -90,6 +97,7 @@ class NewPatientView: UITableViewController {
       field.inputAccessoryView = keyboardToolbar
       field.returnKeyType = .next
     }
+
     textFields.last?.returnKeyType = .done
 
     // Setup PickerViews/PickerFields

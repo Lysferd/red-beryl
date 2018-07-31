@@ -29,6 +29,10 @@ extension Impedance {
     return imaginary / height
   }
 
+  var cimpedance: Double! {
+    return module * 1.0
+  }
+
   var height: Double! {
     guard let e = exam else { return 1.0 }
     return e.height

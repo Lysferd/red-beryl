@@ -67,7 +67,7 @@
 		E5E50AD82090E37700CCF71D /* ExamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E50AD62090E37700CCF71D /* ExamCell.swift */; };
 		E5E50AD92090E37700CCF71D /* ExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5E50AD72090E37700CCF71D /* ExamCell.xib */; };
 		E5E50ADD2092297300CCF71D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E50ADC2092297200CCF71D /* MainTabBarController.swift */; };
-		E5F04516206BE7AB00784F1E /* PatientDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */; };
+		E5F04516206BE7AB00784F1E /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F04515206BE7AB00784F1E /* DetailCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,7 +182,7 @@
 		E5E50AD62090E37700CCF71D /* ExamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCell.swift; sourceTree = "<group>"; };
 		E5E50AD72090E37700CCF71D /* ExamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamCell.xib; sourceTree = "<group>"; };
 		E5E50ADC2092297200CCF71D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailCell.swift; sourceTree = "<group>"; };
+		E5F04515206BE7AB00784F1E /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		E5F7601C1F9E67E900B7DFB9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -263,7 +263,7 @@
 		E58DEA3E201BD07500C3FDE4 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				E5F04515206BE7AB00784F1E /* PatientDetailCell.swift */,
+				E5F04515206BE7AB00784F1E /* DetailCell.swift */,
 				E58DEA25201BD04300C3FDE4 /* DeviceCell.swift */,
 				E5E50AD62090E37700CCF71D /* ExamCell.swift */,
 				E5E50AD72090E37700CCF71D /* ExamCell.xib */,
@@ -572,7 +572,7 @@
 				E5A18C772090CEDA004CE5A7 /* ActionCell.swift in Sources */,
 				E5E50ADD2092297300CCF71D /* MainTabBarController.swift in Sources */,
 				E58EEC86205185B900FC1F5E /* Segment.swift in Sources */,
-				E5F04516206BE7AB00784F1E /* PatientDetailCell.swift in Sources */,
+				E5F04516206BE7AB00784F1E /* DetailCell.swift in Sources */,
 				E58DEA2E201BD04400C3FDE4 /* DevicesDataSource.swift in Sources */,
 				E58DEA3A201BD04400C3FDE4 /* PatientCell.swift in Sources */,
 				E507F685203627360058280A /* SelectMeasureView.swift in Sources */,

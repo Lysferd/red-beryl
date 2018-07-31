@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -113,14 +114,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DKO-Ej-wyk">
-                                <rect key="frame" x="0.0" y="409" width="375" height="258"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DKO-Ej-wyk">
+                                <rect key="frame" x="0.0" y="322" width="375" height="345"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="258" id="REm-XM-hbM"/>
-                                </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="7Ga-KE-ZUt" detailTextLabel="UTN-Pg-nmk" style="IBUITableViewCellStyleSubtitle" id="dE3-c9-75d">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" textLabel="7Ga-KE-ZUt" detailTextLabel="UTN-Pg-nmk" style="IBUITableViewCellStyleSubtitle" id="dE3-c9-75d" customClass="DetailCell" customModule="mbi_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dE3-c9-75d" id="OCb-bt-Ct2">
@@ -143,27 +141,34 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="UTN-Pg-nmk" id="PjL-8z-zbK"/>
+                                            <outlet property="valueLabel" destination="7Ga-KE-ZUt" id="Nz2-cN-jAm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xRY-IZ-4Dr" customClass="ChartUIView" customModule="mbi_app" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="116" width="375" height="285"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="IzK-tT-n1n"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="top" secondItem="xRY-IZ-4Dr" secondAttribute="bottom" constant="8" symbolic="YES" id="4Qw-dW-9E4"/>
-                            <constraint firstItem="xRY-IZ-4Dr" firstAttribute="trailing" secondItem="DKO-Ej-wyk" secondAttribute="trailing" id="4U4-Sb-hgT"/>
-                            <constraint firstItem="xRY-IZ-4Dr" firstAttribute="top" secondItem="x5i-Lw-Ao3" secondAttribute="top" id="EHI-w6-B5q"/>
-                            <constraint firstAttribute="trailing" secondItem="DKO-Ej-wyk" secondAttribute="trailing" id="OXM-2v-DmK"/>
-                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="bottom" secondItem="x5i-Lw-Ao3" secondAttribute="bottom" id="b8X-bt-esG"/>
-                            <constraint firstItem="xRY-IZ-4Dr" firstAttribute="leading" secondItem="DKO-Ej-wyk" secondAttribute="leading" id="u7S-WO-2aT"/>
-                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="leading" secondItem="98S-Nu-eY3" secondAttribute="leading" id="yMJ-Hh-Y7M"/>
+                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="top" secondItem="xRY-IZ-4Dr" secondAttribute="bottom" id="3GH-9w-Ujf"/>
+                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="leading" secondItem="x5i-Lw-Ao3" secondAttribute="leading" id="5u1-2c-l8d"/>
+                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="bottom" secondItem="x5i-Lw-Ao3" secondAttribute="bottom" id="A4K-Pu-uT9"/>
+                            <constraint firstItem="xRY-IZ-4Dr" firstAttribute="leading" secondItem="x5i-Lw-Ao3" secondAttribute="leading" id="CWP-IB-jcm"/>
+                            <constraint firstItem="DKO-Ej-wyk" firstAttribute="trailing" secondItem="x5i-Lw-Ao3" secondAttribute="trailing" id="VNQ-xr-sRi"/>
+                            <constraint firstItem="xRY-IZ-4Dr" firstAttribute="trailing" secondItem="x5i-Lw-Ao3" secondAttribute="trailing" id="okH-JC-qIE"/>
+                            <constraint firstItem="xRY-IZ-4Dr" firstAttribute="top" secondItem="x5i-Lw-Ao3" secondAttribute="top" constant="8" id="rKG-8y-GUz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x5i-Lw-Ao3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Exam Details" id="fpO-vu-Ssh"/>
+                    <navigationItem key="navigationItem" title="Exam Details" largeTitleDisplayMode="never" id="fpO-vu-Ssh"/>
                     <connections>
                         <outlet property="chartView" destination="xRY-IZ-4Dr" id="0Cm-r8-4wv"/>
                         <outlet property="detailTable" destination="DKO-Ej-wyk" id="Icx-Dp-JVN"/>
@@ -653,7 +658,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yto-HY-MgH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Medições" id="Cit-Ng-PG8"/>
+                    <navigationItem key="navigationItem" title="Medições" id="Cit-Ng-PG8">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="play" id="qTk-hK-ayG">
+                                <connections>
+                                    <action selector="sweep:" destination="YQP-vL-hCm" id="SEg-Im-uNA"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="eaZ-H2-59A">
+                                <connections>
+                                    <action selector="clean:" destination="YQP-vL-hCm" id="YAa-1w-fwq"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="zqk-TX-3gj" id="4kd-Io-IY0"/>
                         <outlet property="batteryImage" destination="LlY-S6-2K7" id="eqQ-Lf-Dco"/>
