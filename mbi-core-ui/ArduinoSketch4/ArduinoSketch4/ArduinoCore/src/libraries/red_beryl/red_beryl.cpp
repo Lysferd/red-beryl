@@ -488,21 +488,27 @@ void red_beryl::notification()
 	{
 		if(!persistentNotify)
 		{
+			/*
 			display.fillRect(20, lineSize+4, display.width()-40, lineSize+4, BLACK);
 			display.drawRect(20, lineSize+4, display.width()-40, lineSize+4, WHITE);
 			display.setCursor(display.width()/2-36, lineSize*2-2 );
 			display.setTextColor(WHITE);
 			display.setTextSize(1);
 			display.print("Sincronizando");
+			*/
+			warning("Sincronizando");
 		}
 		else
 		{
+			/*
 			display.fillRect(20, lineSize+4, display.width()-40, lineSize+4, BLACK);
 			display.drawRect(20, lineSize+4, display.width()-40, lineSize+4, WHITE);
 			display.setCursor(display.width()/2-36, lineSize*2-2 );
 			display.setTextColor(WHITE);
 			display.setTextSize(1);
 			display.print("Concluido.");
+			*/
+			warning("Concluido.");
 				
 			display.fillRect(display.width()-19, display.height()-10, 2*6+2, lineSize+2, BLACK);
 			display.drawRect(display.width()-19, display.height()-10, 2*6+2, lineSize+2, WHITE);
@@ -550,17 +556,26 @@ void red_beryl::menu()
 		case 1:			//Leituras
 		{
 			display.fillRect(1, lineSize, display.width()-5, lineSize, WHITE);  //desenha um quadrado em volta da opção 1 selecionada
+			/*
 			display.setCursor(2, lineSize);   		 							//define a posição do cursor
 			display.setTextColor(BLACK);    									//define a cor do texto como preto.
 			display.print(menu[1]);    											//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[1], 1, true);
       
+			/*
 			display.setCursor(2, lineSize*2);   								//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[2]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[2], 2, false);
       
+			/*
 			display.setCursor(2, lineSize*3);  									//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca.
 			display.println(menu[3]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[3], 3, false);
 
 			if(_yes){
 				choice=11;
@@ -569,18 +584,27 @@ void red_beryl::menu()
 		}
 		case 2:			//Sincronização(bluetooth)
 		{
+			/*
 			display.setCursor(2, lineSize);   									//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[1]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[1], 1, false);
 			
+			/*
 			display.fillRect(1, lineSize*2, display.width()-5, lineSize, WHITE);//desenha um quadrado em volta da opção 1 selecionada
 			display.setCursor(2, lineSize*2);   		 						//define a posição do cursor
 			display.setTextColor(BLACK);    									//define a cor do texto como preto.
 			display.print(menu[2]);    											//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[2], 2, true);
 			
+			/*
 			display.setCursor(2, lineSize*3);   								//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[3]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[3], 3, false);
 			
 			if(_yes){
 				choice=21;
@@ -589,18 +613,27 @@ void red_beryl::menu()
 		}
 		case 3:			//Ajustes(opções)
 		{
+			/*
 			display.setCursor(2, lineSize);   									//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[1]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[1], 1, false);
 			
+			/*
 			display.setCursor(2, lineSize*2);   								//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[2]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[2], 2, false);
 			
 			display.fillRect(1, lineSize*3, display.width()-5, lineSize, WHITE);//desenha um quadrado em volta da opção 1 selecionada
+			/*
 			display.setCursor(2, lineSize*3);   		 						//define a posição do cursor
 			display.setTextColor(BLACK);    									//define a cor do texto como preto.
 			display.print(menu[3]);    											//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[3], 3, true);
 			
 			if(_yes){
 				choice=31;
@@ -796,6 +829,11 @@ bool red_beryl::menu_leitura()
 					while(!crystal.configurar(frequencia)){
 						Serial.println("Configurando...");
 					}
+					
+					warning("Realizando", "leitura.");
+					upperBar();
+					display.display();
+					
 					if(!crystal.lerAD(getPoint(), leitura0))
 					{
 						_yes = false;
@@ -896,13 +934,19 @@ bool red_beryl::menu_leitura()
 		case 1:			//Opção Nova leitura
 		{
 			display.fillRect(1, lineSize, display.width()-5, lineSize, WHITE);  //desenha um quadrado em volta da opção 1 selecionada
+			/*
 			display.setCursor(2, lineSize);   		 							//define a posição do cursor
 			display.setTextColor(BLACK);    									//define a cor do texto como preto.
 			display.print(menu[1]);    											//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[1], 1, true);
 			
+			/*
 			display.setCursor(2, lineSize*2);   								//define a posição do cursor para a proxima linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[2]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[2], 2, false);
 			
 			if(_yes){
 				choice=11;
@@ -918,14 +962,20 @@ bool red_beryl::menu_leitura()
 		}
 		case 2:			//Opção Historico
 		{
+			/*
 			display.setCursor(2, lineSize);   									//define a posição do cursor para a primeira linha
 			display.setTextColor(WHITE);    									//define a cor do texto como branca
 			display.println(menu[1]);    										//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[1], 1, false);
 			
 			display.fillRect(1, lineSize*2, display.width()-5, lineSize, WHITE);//desenha um quadrado em volta da opção 1 selecionada
+			/*
 			display.setCursor(2, lineSize*2);   		 						//define a posição do cursor
 			display.setTextColor(BLACK);    									//define a cor do texto como preto.
 			display.print(menu[2]);    											//imprime a string previamente inicializada.
+			*/
+			menuOption(menu[2], 2, true);
 			
 			if(_yes){
 				choice=21;
@@ -1031,18 +1081,27 @@ bool red_beryl::menu_ajuste()
 			}
 			else
 			{
+				/*
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
 				display.print(menu[1]);    //imprimir opção 1.
+				*/
+				menuOption(menu[1], 1, true);
 
+				/*
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
 				display.print(menu[2]);   //imprimir opção 2.
+				*/
+				menuOption(menu[2], 2, false);
 			
+				/*
 				display.setCursor(3, lineSize*3);
 				display.setTextColor(WHITE);
 				display.print(menu[3]);
+				*/
+				menuOption(menu[3], 3, false);
 				
 				if(_up)
 				{
@@ -1076,18 +1135,27 @@ bool red_beryl::menu_ajuste()
 		{
 			if(select==1)
 			{
+				/*
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
 				display.print(menu[2]);    //imprimir opção 1.
+				*/
+				menuOption(menu[2], 1, true);
 
+				/*
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
 				display.print(menu[3]);   //imprimir opção 2.
+				*/
+				menuOption(menu[3], 2, false);
 				
+				/*
 				display.setCursor(3, lineSize*3);
 				display.setTextColor(WHITE);
 				display.print(menu[4]);
+				*/
+				menuOption(menu[4], 3, false);
 			
 				if(_up)
 				{
@@ -1096,8 +1164,8 @@ bool red_beryl::menu_ajuste()
 				}
 				if(_down)
 				{
-					choice++;
 					select++;
+					choice++;
 					_down = false;
 				}
 				if(_yes)
@@ -1112,20 +1180,29 @@ bool red_beryl::menu_ajuste()
 				return false;
 				}
 			}
-			if(select==2)
+			else if(select==2)
 			{
+				/*
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
 				display.print(menu[1]);    //imprimir opção 1.
-
+				*/
+				menuOption(menu[1], 1, false);
+				
+				/*
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(BLACK,WHITE);    //definir a cor do texto como: branco | não selecionado
 				display.print(menu[2]);   //imprimir opção 2.
+				*/
+				menuOption(menu[2], 2, true);
 				
+				/*
 				display.setCursor(3, lineSize*3);
 				display.setTextColor(WHITE);
 				display.print(menu[3]);
+				*/
+				menuOption(menu[3], 3, false);
 			
 				if(_up)
 				{
@@ -1165,18 +1242,27 @@ bool red_beryl::menu_ajuste()
 		{
 			if(select==1)
 			{
+				/*
 				display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
 				display.setTextSize(1);								// Definir o tamanho do texto.
 				display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
 				display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				*/
+				menuOption(menu[3], 1, true);
 				
+				/*
 				display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
 				display.print(menu[4]);								// Imprimir a opção 4 do menu.
+				*/
+				menuOption(menu[4], 2, false);
 				
+				/*
 				display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
 				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
 				display.print(menu[5]);								// Imprimir a opção 5 do menu.
+				*/
+				menuOption(menu[5], 3, false);
 				if(_up)												// Se UP for ativo.
 				{
 					choice--;										// Escolha anterior.
@@ -1201,18 +1287,28 @@ bool red_beryl::menu_ajuste()
 				}
 			} else if(select==2)
 			{
+				/*
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
 				display.print(menu[2]);    //imprimir opção 1.
+				*/
+				menuOption(menu[2], 1, false);
 
+				/*
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(BLACK, WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
 				display.print(menu[3]);   //imprimir opção 2.
+				*/
+				menuOption(menu[3], 2, true);
 					
+				/*
 				display.setCursor(2, lineSize*3);
 				display.setTextColor(WHITE);
 				display.print(menu[4]);
+				*/
+				menuOption(menu[4], 3, false);
+				
 				if(_up)
 				{
 					choice--;
@@ -1341,18 +1437,27 @@ bool red_beryl::menu_ajuste()
 					}
 				}	*/
 				
+				/*
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
 				display.print(menu[1]);    //imprimir opção 1.
+				*/
+				menuOption(menu[1], 1, false);
 
+				/*
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
 				display.print(menu[2]);   //imprimir opção 2.
+				*/
+				menuOption(menu[2], 2, false);
 					
+				/*
 				display.setCursor(2, lineSize*3);
 				display.setTextColor(BLACK, WHITE);
 				display.print(menu[3]);
+				*/
+				menuOption(menu[3], 3, true);
 				if(_up)
 				{
 					choice--;
@@ -1390,18 +1495,27 @@ bool red_beryl::menu_ajuste()
 		{
 			if(select==2)
 			{
+				/*
 				display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
 				display.setTextSize(1);								// Definir o tamanho do texto.
 				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
 				display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				*/
+				menuOption(menu[3], 1, false);
 				
+				/*
 				display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
 				display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
 				display.print(menu[4]);								// Imprimir a opção 4 do menu.
+				*/
+				menuOption(menu[4], 2, true);
 				
+				/*
 				display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
 				display.setTextColor(WHITE);						// Definir a cor do texto(Branco = não selecionado).
 				display.print(menu[5]);								// Imprimir a opção 5 do menu.
+				*/
+				menuOption(menu[5], 3, false);
 				if(_up)												// Se UP for ativo.
 				{
 					choice--;										// Escolha anterior.
@@ -1428,18 +1542,27 @@ bool red_beryl::menu_ajuste()
 			
 			} else if(select==3)
 			{
+				/*
 				display.setCursor(2, lineSize);    //definir a posição do cursor na primeira linha.
 				display.setTextSize(1);   //definir o tamanho do texto(por garantia)
 				display.setTextColor(WHITE);    //definir a cor do texto como: branco | não selecionado
 				display.print(menu[2]);    //imprimir opção 1.
+				*/
+				menuOption(menu[2], 1, false);
 
+				/*
 				display.setCursor(2, lineSize*2);    //definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);    //definir a cor do texto como: preto com fundo branco | selecionado
 				display.print(menu[3]);   //imprimir opção 2.
+				*/
+				menuOption(menu[3], 2, false);
 
+				/*
 				display.setCursor(2, lineSize*3);
 				display.setTextColor(BLACK, WHITE);
 				display.print(menu[4]);
+				*/
+				menuOption(menu[4], 3, true);
 				
 				if(_up)
 				{
@@ -1478,18 +1601,27 @@ bool red_beryl::menu_ajuste()
 		{
 			if(select==3)
 			{
+				/*
 				display.setCursor(2, lineSize);						// Definir a posição do cursor na primeira linha.
 				display.setTextSize(1);								// Definir o tamanho do texto.
 				display.setTextColor(WHITE);						// Definir a cor do texto(branco = não selecionado).
 				display.print(menu[3]);								// Imprimir a opção 3 do menu.
+				*/
+				menuOption(menu[3], 1, false);
 				
+				/*
 				display.setCursor(2, lineSize*2);					// Definir a posição do cursor na segunda linha.
 				display.setTextColor(WHITE);						// Definir a cor do texto(branco = não selecionado).
 				display.print(menu[4]);								// Imprimir a opção 4 do menu.
+				*/
+				menuOption(menu[4], 2, false);
 				
+				/*
 				display.setCursor(2, lineSize*3);					// Definir a posição do cursor na terceira linha.
 				display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
 				display.print(menu[5]);								// Imprimir a opção 5 do menu.
+				*/
+				menuOption(menu[5], 3, true);
 				
 				if(_up)
 				{
@@ -1554,6 +1686,7 @@ bool red_beryl::menu_range()
 			display.setTextSize(1);								// Definir o tamanho do texto.
 			display.setTextColor(BLACK, WHITE);					// Definir a cor do texto(Preto no Branco = selecionado).
 			display.print(menu[0]);								// Imprimir espaço vazio do menu.
+		
 			if(crystal.getRange() == 1)							// Se o range for 1.
 			{
 				display.print("*");								// Imprime o asterisco para sinalizar.
@@ -2513,12 +2646,15 @@ bool red_beryl::historico()
 
 				if(perguntaDelete)
 				{
+					/*
 					display.fillRect(20, lineSize+4, display.width()-40, lineSize+4, BLACK);
 					display.drawRect(20, lineSize+4, display.width()-40, lineSize+4, WHITE);
 					display.setCursor(display.width()/2-36, lineSize*2-2 );
 					display.setTextColor(WHITE);
 					display.setTextSize(1);
 					display.print("Deletar? N/S");
+					*/
+					warning("Deletar? N/S");
 					if(_up)
 					{
 						_up=false;
@@ -3402,4 +3538,18 @@ void red_beryl::warning(const char *s, const char *s2)
 		display.setTextSize(1);
 		display.print("Ocupado");
 	}
+}
+
+void red_beryl::menuOption(const char *s, int pos, bool ch)
+{
+	display.setCursor(2, lineSize*pos);
+	if(ch)
+	{
+		display.setTextColor(BLACK, WHITE);
+	}
+	else
+	{
+		display.setTextColor(WHITE);
+	}
+	display.print(s);
 }

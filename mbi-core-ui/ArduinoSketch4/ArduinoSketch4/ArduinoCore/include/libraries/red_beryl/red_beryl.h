@@ -87,6 +87,7 @@ class red_beryl
 		
 		void warning(const char *s);
 		void warning(const char *s, const char *s2);
+		void menuOption(const char *s, int pos, bool ch);
 };
 
 #endif
