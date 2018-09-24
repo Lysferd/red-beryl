@@ -169,10 +169,8 @@ bool red_crystal::configurar(long f)
 		Serial.println("ERRO: SetPGAGain falhou!");
 		return false;
 	}
-	
 	return true;
 }
-
 
 bool red_crystal::lerAD(int point, leitura &l)
 {
@@ -184,7 +182,6 @@ bool red_crystal::lerAD(int point, leitura &l)
 		Serial.print("Falhou em inicializar SWEEP.");
 		return false;
 	}
-	
 	long cfreq=_freq*0.95;
 	long inc = _freq/100;
 	medReal=0;
@@ -264,8 +261,6 @@ bool red_crystal::lerAD(int point, leitura &l)
 			gain[i] = firstP + (i*dif);
 		}
 		Serial.println("Modo 2point.");
-		
-		//Serial.println("Modo 2-point desabilitado, 1-point utilizado.");
 	}
 	else
 	{
@@ -286,8 +281,6 @@ bool red_crystal::lerAD(int point, leitura &l)
 	leitura leiTemp = {_freq, medReal, medImag };
 	memcpy(leiTemp.arrayR, arrayR, sizeof leiTemp.arrayR);
 	memcpy(leiTemp.arrayJ, arrayJ, sizeof leiTemp.arrayJ);
-
-	//Serial.print("EEPROM address 0:");Serial.println(EEPROM.read(0));
 	
 	// Set AD5933 power mode to standby when finished
 	if (!AD5933::setPowerMode(POWER_STANDBY)){

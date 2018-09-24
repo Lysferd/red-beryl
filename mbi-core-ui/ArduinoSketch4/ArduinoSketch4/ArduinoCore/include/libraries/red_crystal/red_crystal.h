@@ -46,7 +46,6 @@ class red_crystal
 		red_crystal();
 		void init();
 		
-		
 		bool reset();
 		bool initialConfig();
 		bool configurar(long f);

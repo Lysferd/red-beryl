@@ -1133,7 +1133,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0xcda2
+.text           0x00000000     0xcdbc
  *(.vectors)
  .vectors       0x00000000       0xe4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6/crtatmega2560.o
                 0x00000000                __vector_default
@@ -1520,646 +1520,646 @@ END GROUP
                 0x0000519e      0xada C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
                 0x0000519e                _ZN9red_beryl9historicoEv
  .text._ZN9red_beryl12menu_leituraEv
-                0x00005c78      0x894 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00005c78      0x8ae C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
                 0x00005c78                _ZN9red_beryl12menu_leituraEv
  .text._ZN9red_beryl4menuEv
-                0x0000650c      0x216 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
-                0x0000650c                _ZN9red_beryl4menuEv
+                0x00006526      0x216 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00006526                _ZN9red_beryl4menuEv
  .text._ZN11red_crystalC2Ev
-                0x00006722        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x00006722                _ZN11red_crystalC2Ev
-                0x00006722                _ZN11red_crystalC1Ev
+                0x0000673c        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x0000673c                _ZN11red_crystalC2Ev
+                0x0000673c                _ZN11red_crystalC1Ev
  .text._ZN11red_crystal5resetEv
-                0x0000672e       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x0000672e                _ZN11red_crystal5resetEv
+                0x00006748       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00006748                _ZN11red_crystal5resetEv
  .text._ZN11red_crystal13initialConfigEv
-                0x0000674c       0xe2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x0000674c                _ZN11red_crystal13initialConfigEv
+                0x00006766       0xe2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00006766                _ZN11red_crystal13initialConfigEv
  .text._ZN11red_crystal4initEv
-                0x0000682e       0x94 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x0000682e                _ZN11red_crystal4initEv
+                0x00006848       0x94 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00006848                _ZN11red_crystal4initEv
  .text._ZN11red_crystal10configurarEl
-                0x000068c2      0x218 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x000068c2                _ZN11red_crystal10configurarEl
+                0x000068dc      0x218 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x000068dc                _ZN11red_crystal10configurarEl
  .text._ZN11red_crystal5lerADEiR8leituras
-                0x00006ada      0x74a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x00006ada                _ZN11red_crystal5lerADEiR8leituras
+                0x00006af4      0x74a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00006af4                _ZN11red_crystal5lerADEiR8leituras
  .text._ZN11red_crystal11temperaturaEv
-                0x00007224        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x00007224                _ZN11red_crystal11temperaturaEv
+                0x0000723e        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x0000723e                _ZN11red_crystal11temperaturaEv
  .text._ZN11red_crystal8setRangeEi
-                0x00007228       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x00007228                _ZN11red_crystal8setRangeEi
+                0x00007242       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00007242                _ZN11red_crystal8setRangeEi
  .text._ZN11red_crystal8getRangeEv
-                0x00007246        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
-                0x00007246                _ZN11red_crystal8getRangeEv
+                0x00007260        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00007260                _ZN11red_crystal8getRangeEv
  .text._ZN11EEPROMClass5writeEih.isra.1
-                0x00007252        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x0000726c        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .text._ZN11EEPROMClass4readEi.isra.0.constprop.5
-                0x00007256        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007270        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .text._ZN11EEPROMClass3getI8leiturasEERT_iS3_.isra.4
-                0x0000725e       0x4c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007278       0x4c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .text._ZN11EEPROMClass3putI8leiturasEERKT_iS4_.isra.3
-                0x000072aa       0x56 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x000072c4       0x56 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .text._ZN8red_fangC2Ev
-                0x00007300       0x5e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x00007300                _ZN8red_fangC2Ev
-                0x00007300                _ZN8red_fangC1Ev
+                0x0000731a       0x5e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x0000731a                _ZN8red_fangC2Ev
+                0x0000731a                _ZN8red_fangC1Ev
  .text._ZN8red_fang12serialEnviarEPc
-                0x0000735e       0x82 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x0000735e                _ZN8red_fang12serialEnviarEPc
+                0x00007378       0x82 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007378                _ZN8red_fang12serialEnviarEPc
  .text._ZN8red_fang13deletaLeituraEi
-                0x000073e0      0x17e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x000073e0                _ZN8red_fang13deletaLeituraEi
+                0x000073fa      0x17e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x000073fa                _ZN8red_fang13deletaLeituraEi
  .text._ZN8red_fang13serialLeituraE8leiturasi
-                0x0000755e      0x306 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x0000755e                _ZN8red_fang13serialLeituraE8leiturasi
+                0x00007578      0x306 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007578                _ZN8red_fang13serialLeituraE8leiturasi
  .text._ZN8red_fang10getComplexE8leiturasi
-                0x00007864      0x3da C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x00007864                _ZN8red_fang10getComplexE8leiturasi
+                0x0000787e      0x3da C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x0000787e                _ZN8red_fang10getComplexE8leiturasi
  .text._ZN8red_fang3getEib
-                0x00007c3e      0x2d6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x00007c3e                _ZN8red_fang3getEib
+                0x00007c58      0x2d6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007c58                _ZN8red_fang3getEib
  .text._ZN8red_fang11isBeingUsedEv
-                0x00007f14        0x6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x00007f14                _ZN8red_fang11isBeingUsedEv
+                0x00007f2e        0x6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007f2e                _ZN8red_fang11isBeingUsedEv
  .text._ZN8red_fang12check_stringEPc
-                0x00007f1a      0xa84 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x00007f1a                _ZN8red_fang12check_stringEPc
+                0x00007f34      0xa84 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00007f34                _ZN8red_fang12check_stringEPc
  .text._ZN8red_fang10ler_serialEv
-                0x0000899e      0x34c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
-                0x0000899e                _ZN8red_fang10ler_serialEv
+                0x000089b8      0x34c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x000089b8                _ZN8red_fang10ler_serialEv
  .text._ZN10red_quartzC2Ev
-                0x00008cea       0x12 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008cea                _ZN10red_quartzC2Ev
-                0x00008cea                _ZN10red_quartzC1Ev
+                0x00008d04       0x12 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008d04                _ZN10red_quartzC2Ev
+                0x00008d04                _ZN10red_quartzC1Ev
  .text._ZN10red_quartz4initEv
-                0x00008cfc       0x9a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008cfc                _ZN10red_quartz4initEv
+                0x00008d16       0x9a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008d16                _ZN10red_quartz4initEv
  .text._ZN10red_quartz6minutoEv
-                0x00008d96        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008d96                _ZN10red_quartz6minutoEv
+                0x00008db0        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008db0                _ZN10red_quartz6minutoEv
  .text._ZN10red_quartz4horaEv
-                0x00008d9e        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008d9e                _ZN10red_quartz4horaEv
+                0x00008db8        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008db8                _ZN10red_quartz4horaEv
  .text._ZN10red_quartz3diaEv
-                0x00008da6        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008da6                _ZN10red_quartz3diaEv
+                0x00008dc0        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008dc0                _ZN10red_quartz3diaEv
  .text._ZN10red_quartz3mesEv
-                0x00008dae        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008dae                _ZN10red_quartz3mesEv
+                0x00008dc8        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008dc8                _ZN10red_quartz3mesEv
  .text._ZN10red_quartz3anoEv
-                0x00008db6        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008db6                _ZN10red_quartz3anoEv
+                0x00008dd0        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008dd0                _ZN10red_quartz3anoEv
  .text._ZN10red_quartz9data_horaEb
-                0x00008dbe      0x1ba C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008dbe                _ZN10red_quartz9data_horaEb
+                0x00008dd8      0x1ba C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008dd8                _ZN10red_quartz9data_horaEb
  .text._ZN10red_quartz9checkTimeEv
-                0x00008f78       0x8e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00008f78                _ZN10red_quartz9checkTimeEv
+                0x00008f92       0x8e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00008f92                _ZN10red_quartz9checkTimeEv
  .text._ZN10red_quartz11set_segundoEi
-                0x00009006       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00009006                _ZN10red_quartz11set_segundoEi
+                0x00009020       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009020                _ZN10red_quartz11set_segundoEi
  .text._ZN10red_quartz10set_minutoEi
-                0x0000901a       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x0000901a                _ZN10red_quartz10set_minutoEi
+                0x00009034       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009034                _ZN10red_quartz10set_minutoEi
  .text._ZN10red_quartz8set_horaEi
-                0x0000902e       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x0000902e                _ZN10red_quartz8set_horaEi
+                0x00009048       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009048                _ZN10red_quartz8set_horaEi
  .text._ZN10red_quartz7set_mesEi
-                0x00009042       0x1a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00009042                _ZN10red_quartz7set_mesEi
+                0x0000905c       0x1a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x0000905c                _ZN10red_quartz7set_mesEi
  .text._ZN10red_quartz7set_anoEi
-                0x0000905c       0x12 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x0000905c                _ZN10red_quartz7set_anoEi
+                0x00009076       0x12 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009076                _ZN10red_quartz7set_anoEi
  .text._ZN10red_quartz13testa_segundoEi
-                0x0000906e        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x0000906e                _ZN10red_quartz13testa_segundoEi
+                0x00009088        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009088                _ZN10red_quartz13testa_segundoEi
  .text._ZN10red_quartz12testa_minutoEi
-                0x0000907a        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x0000907a                _ZN10red_quartz12testa_minutoEi
+                0x00009094        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009094                _ZN10red_quartz12testa_minutoEi
  .text._ZN10red_quartz10testa_horaEi
-                0x00009086        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00009086                _ZN10red_quartz10testa_horaEi
+                0x000090a0        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x000090a0                _ZN10red_quartz10testa_horaEi
  .text._ZN10red_quartz9testa_diaEii
-                0x00009092       0x30 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x00009092                _ZN10red_quartz9testa_diaEii
+                0x000090ac       0x30 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x000090ac                _ZN10red_quartz9testa_diaEii
  .text._ZN10red_quartz7set_diaEii
-                0x000090c2       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x000090c2                _ZN10red_quartz7set_diaEii
+                0x000090dc       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x000090dc                _ZN10red_quartz7set_diaEii
  .text._ZN10red_quartz9testa_mesEi
-                0x000090ec       0x10 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x000090ec                _ZN10red_quartz9testa_mesEi
+                0x00009106       0x10 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009106                _ZN10red_quartz9testa_mesEi
  .text._ZN10red_quartz9testa_anoEi
-                0x000090fc        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
-                0x000090fc                _ZN10red_quartz9testa_anoEi
+                0x00009116        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00009116                _ZN10red_quartz9testa_anoEi
  .text._ZN8SPIClass5beginEv
-                0x00009108       0x64 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
-                0x00009108                _ZN8SPIClass5beginEv
+                0x00009122       0x64 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+                0x00009122                _ZN8SPIClass5beginEv
  .text._ZN7TwoWire9availableEv
-                0x0000916c       0x10 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000916c                _ZN7TwoWire9availableEv
+                0x00009186       0x10 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00009186                _ZN7TwoWire9availableEv
  .text._ZN7TwoWire4readEv
-                0x0000917c       0x28 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000917c                _ZN7TwoWire4readEv
+                0x00009196       0x28 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00009196                _ZN7TwoWire4readEv
  .text._ZN7TwoWire4peekEv
-                0x000091a4       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000091a4                _ZN7TwoWire4peekEv
+                0x000091be       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000091be                _ZN7TwoWire4peekEv
  .text._ZN7TwoWire5flushEv
-                0x000091c2        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000091c2                _ZN7TwoWire5flushEv
+                0x000091dc        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000091dc                _ZN7TwoWire5flushEv
  .text._ZN7TwoWire5writeEPKhj
-                0x000091c4       0x5a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000091c4                _ZN7TwoWire5writeEPKhj
+                0x000091de       0x5a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000091de                _ZN7TwoWire5writeEPKhj
  .text._ZN7TwoWire5writeEh
-                0x0000921e       0x5e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000921e                _ZN7TwoWire5writeEh
+                0x00009238       0x5e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00009238                _ZN7TwoWire5writeEh
  .text._ZN7TwoWireC2Ev
-                0x0000927c       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000927c                _ZN7TwoWireC1Ev
-                0x0000927c                _ZN7TwoWireC2Ev
+                0x00009296       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00009296                _ZN7TwoWireC1Ev
+                0x00009296                _ZN7TwoWireC2Ev
  .text._ZN7TwoWire5beginEv
-                0x0000929c       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000929c                _ZN7TwoWire5beginEv
+                0x000092b6       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000092b6                _ZN7TwoWire5beginEv
  .text._ZN7TwoWire8setClockEm
-                0x000092b0        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000092b0                _ZN7TwoWire8setClockEm
+                0x000092ca        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000092ca                _ZN7TwoWire8setClockEm
  .text._ZN7TwoWire17beginTransmissionEh
-                0x000092b8       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000092b8                _ZN7TwoWire17beginTransmissionEh
+                0x000092d2       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000092d2                _ZN7TwoWire17beginTransmissionEh
  .text._ZN7TwoWire17beginTransmissionEi
-                0x000092cc        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000092cc                _ZN7TwoWire17beginTransmissionEi
+                0x000092e6        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000092e6                _ZN7TwoWire17beginTransmissionEi
  .text._ZN7TwoWire15endTransmissionEh
-                0x000092ce       0x26 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000092ce                _ZN7TwoWire15endTransmissionEh
+                0x000092e8       0x26 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000092e8                _ZN7TwoWire15endTransmissionEh
  .text._ZN7TwoWire11requestFromEhhmhh
-                0x000092f4       0xa4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000092f4                _ZN7TwoWire11requestFromEhhmhh
+                0x0000930e       0xa4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x0000930e                _ZN7TwoWire11requestFromEhhmhh
  .text._ZN7TwoWire11requestFromEhhh
-                0x00009398       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00009398                _ZN7TwoWire11requestFromEhhh
+                0x000093b2       0x1e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000093b2                _ZN7TwoWire11requestFromEhhh
  .text._ZN7TwoWire11requestFromEii
-                0x000093b6        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000093b6                _ZN7TwoWire11requestFromEii
+                0x000093d0        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000093d0                _ZN7TwoWire11requestFromEii
  .text._ZN7TwoWire15endTransmissionEv
-                0x000093ba        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000093ba                _ZN7TwoWire15endTransmissionEv
+                0x000093d4        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000093d4                _ZN7TwoWire15endTransmissionEv
  .text.startup._GLOBAL__sub_I__ZN7TwoWire8rxBufferE
-                0x000093be        0x6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000093d8        0x6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
  .text.__cxa_pure_virtual
-                0x000093c4        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
-                0x000093c4                __cxa_pure_virtual
+                0x000093de        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
+                0x000093de                __cxa_pure_virtual
  .text.__vector_36
-                0x000093c8       0x6c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
-                0x000093c8                __vector_36
+                0x000093e2       0x6c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+                0x000093e2                __vector_36
  .text.__vector_37
-                0x00009434       0x54 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
-                0x00009434                __vector_37
+                0x0000944e       0x54 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+                0x0000944e                __vector_37
  .text._Z17Serial1_availablev
-                0x00009488       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
-                0x00009488                _Z17Serial1_availablev
+                0x000094a2       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+                0x000094a2                _Z17Serial1_availablev
  .text.startup._GLOBAL__sub_I___vector_36
-                0x0000949c       0x5a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
- .text.__empty  0x000094f6        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
-                0x000094f6                yield
+                0x000094b6       0x5a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+ .text.__empty  0x00009510        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+                0x00009510                yield
  .text.analogRead
-                0x000094f8       0x4a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
-                0x000094f8                analogRead
+                0x00009512       0x4a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
+                0x00009512                analogRead
  .text.turnOffPWM
-                0x00009542       0xac C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .text.pinMode  0x000095ee       0x78 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
-                0x000095ee                pinMode
+                0x0000955c       0xac C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .text.pinMode  0x00009608       0x78 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+                0x00009608                pinMode
  .text.digitalWrite
-                0x00009666       0x5c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
-                0x00009666                digitalWrite
+                0x00009680       0x5c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+                0x00009680                digitalWrite
  .text.digitalRead
-                0x000096c2       0x50 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
-                0x000096c2                digitalRead
+                0x000096dc       0x50 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+                0x000096dc                digitalRead
  .text._Z3maplllll
-                0x00009712       0x82 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
-                0x00009712                _Z3maplllll
+                0x0000972c       0x82 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
+                0x0000972c                _Z3maplllll
  .text._ZN12Adafruit_GFX9writeLineEiiiij
-                0x00009794      0x162 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009794                _ZN12Adafruit_GFX9writeLineEiiiij
+                0x000097ae      0x162 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x000097ae                _ZN12Adafruit_GFX9writeLineEiiiij
  .text._ZN12Adafruit_GFX10writePixelEiij
-                0x000098f6        0xe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x000098f6                _ZN12Adafruit_GFX10writePixelEiij
+                0x00009910        0xe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009910                _ZN12Adafruit_GFX10writePixelEiij
  .text._ZN12Adafruit_GFX14writeFastVLineEiiij
-                0x00009904       0x18 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009904                _ZN12Adafruit_GFX14writeFastVLineEiiij
+                0x0000991e       0x18 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000991e                _ZN12Adafruit_GFX14writeFastVLineEiiij
  .text._ZN12Adafruit_GFX14writeFastHLineEiiij
-                0x0000991c       0x18 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000991c                _ZN12Adafruit_GFX14writeFastHLineEiiij
+                0x00009936       0x18 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009936                _ZN12Adafruit_GFX14writeFastHLineEiiij
  .text._ZN12Adafruit_GFX13writeFillRectEiiiij
-                0x00009934       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009934                _ZN12Adafruit_GFX13writeFillRectEiiiij
+                0x0000994e       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000994e                _ZN12Adafruit_GFX13writeFillRectEiiiij
  .text._ZN12Adafruit_GFX8endWriteEv
-                0x00009954        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009954                _ZN12Adafruit_GFX10startWriteEv
-                0x00009954                _ZN12Adafruit_GFX8endWriteEv
+                0x0000996e        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000996e                _ZN12Adafruit_GFX10startWriteEv
+                0x0000996e                _ZN12Adafruit_GFX8endWriteEv
  .text._ZN12Adafruit_GFX13drawFastVLineEiiij
-                0x00009956       0x72 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009956                _ZN12Adafruit_GFX13drawFastVLineEiiij
+                0x00009970       0x72 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009970                _ZN12Adafruit_GFX13drawFastVLineEiiij
  .text._ZN12Adafruit_GFX13drawFastHLineEiiij
-                0x000099c8       0x72 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x000099c8                _ZN12Adafruit_GFX13drawFastHLineEiiij
+                0x000099e2       0x72 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x000099e2                _ZN12Adafruit_GFX13drawFastHLineEiiij
  .text._ZN12Adafruit_GFX8fillRectEiiiij
-                0x00009a3a       0x8a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009a3a                _ZN12Adafruit_GFX8fillRectEiiiij
+                0x00009a54       0x8a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009a54                _ZN12Adafruit_GFX8fillRectEiiiij
  .text._ZN12Adafruit_GFX10fillScreenEj
-                0x00009ac4       0x3a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009ac4                _ZN12Adafruit_GFX10fillScreenEj
+                0x00009ade       0x3a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009ade                _ZN12Adafruit_GFX10fillScreenEj
  .text._ZN12Adafruit_GFX8drawLineEiiiij
-                0x00009afe       0xda C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009afe                _ZN12Adafruit_GFX8drawLineEiiiij
+                0x00009b18       0xda C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009b18                _ZN12Adafruit_GFX8drawLineEiiiij
  .text._ZN12Adafruit_GFX8drawRectEiiiij
-                0x00009bd8       0xbe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009bd8                _ZN12Adafruit_GFX8drawRectEiiiij
+                0x00009bf2       0xbe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009bf2                _ZN12Adafruit_GFX8drawRectEiiiij
  .text._ZN12Adafruit_GFX13invertDisplayEb
-                0x00009c96        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009c96                _ZN12Adafruit_GFX13invertDisplayEb
+                0x00009cb0        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009cb0                _ZN12Adafruit_GFX13invertDisplayEb
  .text._ZN12Adafruit_GFX11setRotationEh
-                0x00009c98       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009c98                _ZN12Adafruit_GFX11setRotationEh
+                0x00009cb2       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009cb2                _ZN12Adafruit_GFX11setRotationEh
  .text._ZN12Adafruit_GFXC2Eii
-                0x00009cc2       0x42 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009cc2                _ZN12Adafruit_GFXC2Eii
-                0x00009cc2                _ZN12Adafruit_GFXC1Eii
+                0x00009cdc       0x42 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009cdc                _ZN12Adafruit_GFXC2Eii
+                0x00009cdc                _ZN12Adafruit_GFXC1Eii
  .text._ZN12Adafruit_GFX10drawBitmapEiiPKhiij
-                0x00009d04      0x13c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009d04                _ZN12Adafruit_GFX10drawBitmapEiiPKhiij
+                0x00009d1e      0x13c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009d1e                _ZN12Adafruit_GFX10drawBitmapEiiPKhiij
  .text._ZN12Adafruit_GFX8drawCharEiihjjh
-                0x00009e40      0x434 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00009e40                _ZN12Adafruit_GFX8drawCharEiihjjh
+                0x00009e5a      0x434 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x00009e5a                _ZN12Adafruit_GFX8drawCharEiihjjh
  .text._ZN12Adafruit_GFX5writeEh
-                0x0000a274      0x1a8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a274                _ZN12Adafruit_GFX5writeEh
+                0x0000a28e      0x1a8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a28e                _ZN12Adafruit_GFX5writeEh
  .text._ZN12Adafruit_GFX9setCursorEii
-                0x0000a41c        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a41c                _ZN12Adafruit_GFX9setCursorEii
+                0x0000a436        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a436                _ZN12Adafruit_GFX9setCursorEii
  .text._ZN12Adafruit_GFX11setTextSizeEh
-                0x0000a428        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a428                _ZN12Adafruit_GFX11setTextSizeEh
+                0x0000a442        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a442                _ZN12Adafruit_GFX11setTextSizeEh
  .text._ZN12Adafruit_GFX12setTextColorEj
-                0x0000a434        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a434                _ZN12Adafruit_GFX12setTextColorEj
+                0x0000a44e        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a44e                _ZN12Adafruit_GFX12setTextColorEj
  .text._ZN12Adafruit_GFX12setTextColorEjj
-                0x0000a440        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a440                _ZN12Adafruit_GFX12setTextColorEjj
+                0x0000a45a        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a45a                _ZN12Adafruit_GFX12setTextColorEjj
  .text._ZNK12Adafruit_GFX11getRotationEv
-                0x0000a44c        0x6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a44c                _ZNK12Adafruit_GFX11getRotationEv
+                0x0000a466        0x6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a466                _ZNK12Adafruit_GFX11getRotationEv
  .text._ZNK12Adafruit_GFX5widthEv
-                0x0000a452        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a452                _ZNK12Adafruit_GFX5widthEv
+                0x0000a46c        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a46c                _ZNK12Adafruit_GFX5widthEv
  .text._ZNK12Adafruit_GFX6heightEv
-                0x0000a45a        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x0000a45a                _ZNK12Adafruit_GFX6heightEv
+                0x0000a474        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0000a474                _ZNK12Adafruit_GFX6heightEv
  .text._ZN6AD59338sendByteEhh
-                0x0000a462       0x3e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a462                _ZN6AD59338sendByteEhh
+                0x0000a47c       0x3e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a47c                _ZN6AD59338sendByteEhh
  .text._ZN6AD593314setClockSourceEh
-                0x0000a4a0       0x16 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a4a0                _ZN6AD593314setClockSourceEh
+                0x0000a4ba       0x16 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a4ba                _ZN6AD593314setClockSourceEh
  .text._ZN6AD593317setStartFrequencyEm
-                0x0000a4b6       0x70 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a4b6                _ZN6AD593317setStartFrequencyEm
+                0x0000a4d0       0x70 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a4d0                _ZN6AD593317setStartFrequencyEm
  .text._ZN6AD593321setIncrementFrequencyEm
-                0x0000a526       0x78 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a526                _ZN6AD593321setIncrementFrequencyEm
+                0x0000a540       0x78 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a540                _ZN6AD593321setIncrementFrequencyEm
  .text._ZN6AD593319setNumberIncrementsEj
-                0x0000a59e       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a59e                _ZN6AD593319setNumberIncrementsEj
+                0x0000a5b8       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a5b8                _ZN6AD593319setNumberIncrementsEj
  .text._ZN6AD593316setInternalClockEb
-                0x0000a5c8        0xe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a5c8                _ZN6AD593316setInternalClockEb
+                0x0000a5e2        0xe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a5e2                _ZN6AD593316setInternalClockEb
  .text._ZN6AD59337getByteEhPh
-                0x0000a5d6       0x76 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a5d6                _ZN6AD59337getByteEhPh
+                0x0000a5f0       0x76 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a5f0                _ZN6AD59337getByteEhPh
  .text._ZN6AD593314setControlModeEh
-                0x0000a64c       0x36 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a64c                _ZN6AD593314setControlModeEh
+                0x0000a666       0x36 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a666                _ZN6AD593314setControlModeEh
  .text._ZN6AD593312setPowerModeEh
-                0x0000a682       0x1a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a682                _ZN6AD593312setPowerModeEh
+                0x0000a69c       0x1a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a69c                _ZN6AD593312setPowerModeEh
  .text._ZN6AD59335resetEv
-                0x0000a69c       0x2e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a69c                _ZN6AD59335resetEv
+                0x0000a6b6       0x2e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a6b6                _ZN6AD59335resetEv
  .text._ZN6AD59338setRangeEh
-                0x0000a6ca       0x8e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a6ca                _ZN6AD59338setRangeEh
+                0x0000a6e4       0x8e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a6e4                _ZN6AD59338setRangeEh
  .text._ZN6AD593310setPGAGainEh
-                0x0000a758       0x46 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a758                _ZN6AD593310setPGAGainEh
+                0x0000a772       0x46 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a772                _ZN6AD593310setPGAGainEh
  .text._ZN6AD593312readRegisterEh
-                0x0000a79e       0x24 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a79e                _ZN6AD593312readRegisterEh
+                0x0000a7b8       0x24 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a7b8                _ZN6AD593312readRegisterEh
  .text._ZN6AD593318readStatusRegisterEv
-                0x0000a7c2        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a7c2                _ZN6AD593318readStatusRegisterEv
+                0x0000a7dc        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a7dc                _ZN6AD593318readStatusRegisterEv
  .text._ZN6AD593314getTemperatureEv
-                0x0000a7c6       0x74 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a7c6                _ZN6AD593314getTemperatureEv
+                0x0000a7e0       0x74 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a7e0                _ZN6AD593314getTemperatureEv
  .text._ZN6AD593314getComplexDataEPiS0_
-                0x0000a83a       0xdc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a83a                _ZN6AD593314getComplexDataEPiS0_
+                0x0000a854       0xdc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a854                _ZN6AD593314getComplexDataEPiS0_
  .text._ZN6AD593314frequencySweepEPiS0_i
-                0x0000a916       0x8a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a916                _ZN6AD593314frequencySweepEPiS0_i
+                0x0000a930       0x8a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a930                _ZN6AD593314frequencySweepEPiS0_i
  .text._ZN6AD59339calibrateEPfPdii
-                0x0000a9a0      0x2de C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
-                0x0000a9a0                _ZN6AD59339calibrateEPfPdii
+                0x0000a9ba      0x2de C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x0000a9ba                _ZN6AD59339calibrateEPfPdii
  .text._ZN7TwoWire5writeEi
-                0x0000ac7e        0xe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000ac7e                _ZN7TwoWire5writeEi
+                0x0000ac98        0xe C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000ac98                _ZN7TwoWire5writeEi
  .text._ZN6DS3231C2Ev
-                0x0000ac8c        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000ac8c                _ZN6DS3231C1Ev
-                0x0000ac8c                _ZN6DS3231C2Ev
+                0x0000aca6        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000aca6                _ZN6DS3231C1Ev
+                0x0000aca6                _ZN6DS3231C2Ev
  .text._ZN6DS32319getSecondEv
-                0x0000ac8e       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000ac8e                _ZN6DS32319getSecondEv
+                0x0000aca8       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000aca8                _ZN6DS32319getSecondEv
  .text._ZN6DS32319getMinuteEv
-                0x0000acd6       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000acd6                _ZN6DS32319getMinuteEv
+                0x0000acf0       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000acf0                _ZN6DS32319getMinuteEv
  .text._ZN6DS32317getHourERbS0_
-                0x0000ad1e       0x92 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000ad1e                _ZN6DS32317getHourERbS0_
+                0x0000ad38       0x92 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000ad38                _ZN6DS32317getHourERbS0_
  .text._ZN6DS32317getDateEv
-                0x0000adb0       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000adb0                _ZN6DS32317getDateEv
+                0x0000adca       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000adca                _ZN6DS32317getDateEv
  .text._ZN6DS32318getMonthERb
-                0x0000adf8       0x62 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000adf8                _ZN6DS32318getMonthERb
+                0x0000ae12       0x62 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000ae12                _ZN6DS32318getMonthERb
  .text._ZN6DS32317getYearEv
-                0x0000ae5a       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000ae5a                _ZN6DS32317getYearEv
+                0x0000ae74       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000ae74                _ZN6DS32317getYearEv
  .text._ZN6DS323115readControlByteEb
-                0x0000aea2       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000aea2                _ZN6DS323115readControlByteEb
+                0x0000aebc       0x48 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000aebc                _ZN6DS323115readControlByteEb
  .text._ZN6DS32319setMinuteEh
-                0x0000aeea       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000aeea                _ZN6DS32319setMinuteEh
+                0x0000af04       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000af04                _ZN6DS32319setMinuteEh
  .text._ZN6DS32317setHourEh
-                0x0000af26       0xa6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000af26                _ZN6DS32317setHourEh
+                0x0000af40       0xa6 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000af40                _ZN6DS32317setHourEh
  .text._ZN6DS32317setDateEh
-                0x0000afcc       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000afcc                _ZN6DS32317setDateEh
+                0x0000afe6       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000afe6                _ZN6DS32317setDateEh
  .text._ZN6DS32318setMonthEh
-                0x0000b008       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000b008                _ZN6DS32318setMonthEh
+                0x0000b022       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000b022                _ZN6DS32318setMonthEh
  .text._ZN6DS32317setYearEh
-                0x0000b044       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000b044                _ZN6DS32317setYearEh
+                0x0000b05e       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000b05e                _ZN6DS32317setYearEh
  .text._ZN6DS323116writeControlByteEhb
-                0x0000b080       0x3e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000b080                _ZN6DS323116writeControlByteEhb
+                0x0000b09a       0x3e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000b09a                _ZN6DS323116writeControlByteEhb
  .text._ZN6DS32319setSecondEh
-                0x0000b0be       0x56 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
-                0x0000b0be                _ZN6DS32319setSecondEh
+                0x0000b0d8       0x56 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+                0x0000b0d8                _ZN6DS32319setSecondEh
  .text.twi_init
-                0x0000b114       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b114                twi_init
+                0x0000b12e       0x3c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b12e                twi_init
  .text.twi_setFrequency
-                0x0000b150       0x26 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b150                twi_setFrequency
+                0x0000b16a       0x26 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b16a                twi_setFrequency
  .text.twi_readFrom
-                0x0000b176       0x90 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b176                twi_readFrom
+                0x0000b190       0x90 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b190                twi_readFrom
  .text.twi_writeTo
-                0x0000b206       0xac C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b206                twi_writeTo
+                0x0000b220       0xac C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b220                twi_writeTo
  .text.twi_transmit
-                0x0000b2b2       0x50 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b2b2                twi_transmit
+                0x0000b2cc       0x50 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b2cc                twi_transmit
  .text.twi_stop
-                0x0000b302       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b302                twi_stop
+                0x0000b31c       0x14 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b31c                twi_stop
  .text.twi_releaseBus
-                0x0000b316        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b316                twi_releaseBus
+                0x0000b330        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b330                twi_releaseBus
  .text.__vector_39
-                0x0000b322      0x25c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x0000b322                __vector_39
+                0x0000b33c      0x25c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x0000b33c                __vector_39
  .text.avr-libc.fplib
-                0x0000b57e        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
-                0x0000b57e                __subsf3
-                0x0000b580                __addsf3
+                0x0000b598        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
+                0x0000b598                __subsf3
+                0x0000b59a                __addsf3
  .text.avr-libc.fplib
-                0x0000b588       0xc0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3x.o)
-                0x0000b5a2                __addsf3x
+                0x0000b5a2       0xc0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3x.o)
+                0x0000b5bc                __addsf3x
  .text.avr-libc.fplib
-                0x0000b648       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(atan2.o)
-                0x0000b666                atan2
+                0x0000b662       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(atan2.o)
+                0x0000b680                atan2
  .text.avr-libc.fplib
-                0x0000b6bc       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(atan.o)
-                0x0000b6bc                atan
+                0x0000b6d6       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(atan.o)
+                0x0000b6d6                atan
  .text.avr-libc.fplib
-                0x0000b70c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
-                0x0000b70c                __nesf2
-                0x0000b70c                __eqsf2
-                0x0000b70c                __cmpsf2
-                0x0000b70c                __ltsf2
-                0x0000b70c                __lesf2
+                0x0000b726        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
+                0x0000b726                __nesf2
+                0x0000b726                __eqsf2
+                0x0000b726                __cmpsf2
+                0x0000b726                __ltsf2
+                0x0000b726                __lesf2
  .text.avr-libc.fplib
-                0x0000b714        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(cos.o)
-                0x0000b714                cos
+                0x0000b72e        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(cos.o)
+                0x0000b72e                cos
  .text.avr-libc.fplib
-                0x0000b71a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3.o)
-                0x0000b71a                __divsf3
+                0x0000b734        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3.o)
+                0x0000b734                __divsf3
  .text.avr-libc.fplib
-                0x0000b71e       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3x.o)
-                0x0000b734                __divsf3x
-                0x0000b738                __divsf3_pse
+                0x0000b738       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3x.o)
+                0x0000b74e                __divsf3x
+                0x0000b752                __divsf3_pse
  .text.avr-libc.fplib
-                0x0000b7ea        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixsfsi.o)
-                0x0000b7ea                __fixsfsi
+                0x0000b804        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixsfsi.o)
+                0x0000b804                __fixsfsi
  .text.avr-libc.fplib
-                0x0000b7f4       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
-                0x0000b7f4                __fixunssfsi
+                0x0000b80e       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
+                0x0000b80e                __fixunssfsi
  .text.avr-libc.fplib
-                0x0000b84c       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(floatsisf.o)
-                0x0000b84c                __floatunsisf
-                0x0000b850                __floatsisf
+                0x0000b866       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(floatsisf.o)
+                0x0000b866                __floatunsisf
+                0x0000b86a                __floatsisf
  .text.avr-libc.fplib
-                0x0000b8c6       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
-                0x0000b8c6                __fp_cmp
+                0x0000b8e0       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
+                0x0000b8e0                __fp_cmp
  .text.avr-libc.fplib
-                0x0000b90e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_inf.o)
-                0x0000b90e                __fp_inf
+                0x0000b928        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_inf.o)
+                0x0000b928                __fp_inf
  .text.avr-libc.fplib
-                0x0000b91a        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_nan.o)
-                0x0000b91a                __fp_nan
+                0x0000b934        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_nan.o)
+                0x0000b934                __fp_nan
  .text.avr-libc.fplib
-                0x0000b920       0x4a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_powser.o)
-                0x0000b920                __fp_powser
+                0x0000b93a       0x4a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_powser.o)
+                0x0000b93a                __fp_powser
  .text.avr-libc.fplib
-                0x0000b96a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
-                0x0000b96a                __fp_pscA
+                0x0000b984        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
+                0x0000b984                __fp_pscA
  .text.avr-libc.fplib
-                0x0000b978        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
-                0x0000b978                __fp_pscB
+                0x0000b992        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
+                0x0000b992                __fp_pscB
  .text.avr-libc.fplib
-                0x0000b986       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_rempio2.o)
-                0x0000b988                __fp_rempio2
+                0x0000b9a0       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_rempio2.o)
+                0x0000b9a2                __fp_rempio2
  .text.avr-libc.fplib
-                0x0000b9d6       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_round.o)
-                0x0000b9d6                __fp_round
+                0x0000b9f0       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_round.o)
+                0x0000b9f0                __fp_round
  .text.avr-libc.fplib
-                0x0000b9f8       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_sinus.o)
-                0x0000b9f8                __fp_sinus
+                0x0000ba12       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_sinus.o)
+                0x0000ba12                __fp_sinus
  .text.avr-libc.fplib
-                0x0000ba1a       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_split3.o)
-                0x0000ba1a                __fp_split3
-                0x0000ba2a                __fp_splitA
+                0x0000ba34       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_split3.o)
+                0x0000ba34                __fp_split3
+                0x0000ba44                __fp_splitA
  .text.avr-libc.fplib
-                0x0000ba5e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_zero.o)
-                0x0000ba5e                __fp_zero
-                0x0000ba60                __fp_szero
+                0x0000ba78        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_zero.o)
+                0x0000ba78                __fp_zero
+                0x0000ba7a                __fp_szero
  .text.avr-libc.fplib
-                0x0000ba6c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(gesf2.o)
-                0x0000ba6c                __gesf2
-                0x0000ba6c                __gtsf2
+                0x0000ba86        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(gesf2.o)
+                0x0000ba86                __gesf2
+                0x0000ba86                __gtsf2
  .text.avr-libc.fplib
-                0x0000ba74        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(inverse.o)
-                0x0000ba74                inverse
+                0x0000ba8e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(inverse.o)
+                0x0000ba8e                inverse
  .text.avr-libc.fplib
-                0x0000ba82        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3.o)
-                0x0000ba82                __mulsf3
+                0x0000ba9c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3.o)
+                0x0000ba9c                __mulsf3
  .text.avr-libc.fplib
-                0x0000ba86       0xc2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
-                0x0000ba9a                __mulsf3x
-                0x0000ba9e                __mulsf3_pse
+                0x0000baa0       0xc2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
+                0x0000bab4                __mulsf3x
+                0x0000bab8                __mulsf3_pse
  .text.avr-libc.fplib
-                0x0000bb48        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(sin.o)
-                0x0000bb48                sin
+                0x0000bb62        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(sin.o)
+                0x0000bb62                sin
  .text.avr-libc.fplib
-                0x0000bb54       0x84 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(sqrt.o)
-                0x0000bb5c                sqrtf
-                0x0000bb5c                sqrt
+                0x0000bb6e       0x84 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(sqrt.o)
+                0x0000bb76                sqrtf
+                0x0000bb76                sqrt
  .text.avr-libc.fplib
-                0x0000bbd8        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(square.o)
-                0x0000bbd8                square
+                0x0000bbf2        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(square.o)
+                0x0000bbf2                square
  .text.avr-libc.fplib
-                0x0000bbde        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(unordsf2.o)
-                0x0000bbde                __unordsf2
+                0x0000bbf8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(unordsf2.o)
+                0x0000bbf8                __unordsf2
  .text.avr-libc.fplib
-                0x0000bbe6       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_mpack.o)
-                0x0000bbe6                __fp_mpack
-                0x0000bbea                __fp_mpack_finite
+                0x0000bc00       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_mpack.o)
+                0x0000bc00                __fp_mpack
+                0x0000bc04                __fp_mpack_finite
  .text.avr-libc.fplib
-                0x0000bc02        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_norm2.o)
-                0x0000bc02                __fp_norm2
+                0x0000bc1c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_norm2.o)
+                0x0000bc1c                __fp_norm2
  .text.avr-libc.fplib
-                0x0000bc10       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_powsodd.o)
-                0x0000bc10                __fp_powsodd
+                0x0000bc2a       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_powsodd.o)
+                0x0000bc2a                __fp_powsodd
  .text.libgcc.mul
-                0x0000bc32       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_mulsi3.o)
-                0x0000bc32                __mulsi3
+                0x0000bc4c       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_mulsi3.o)
+                0x0000bc4c                __mulsi3
  .text.libgcc.div
-                0x0000bc50       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodqi4.o)
-                0x0000bc50                __udivmodqi4
+                0x0000bc6a       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodqi4.o)
+                0x0000bc6a                __udivmodqi4
  .text.libgcc.div
-                0x0000bc68       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
-                0x0000bc68                _div
-                0x0000bc68                __divmodhi4
+                0x0000bc82       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
+                0x0000bc82                _div
+                0x0000bc82                __divmodhi4
  .text.libgcc.div
-                0x0000bc8e       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
-                0x0000bc8e                __udivmodsi4
+                0x0000bca8       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
+                0x0000bca8                __udivmodsi4
  .text.libgcc.div
-                0x0000bcd2       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodsi4.o)
-                0x0000bcd2                __divmodsi4
+                0x0000bcec       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodsi4.o)
+                0x0000bcec                __divmodsi4
  .text.libgcc.div
-                0x0000bcfa       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_negsi2.o)
-                0x0000bcfa                __negsi2
- .text.libgcc   0x0000bd0a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_tablejump2.o)
-                0x0000bd0a                __tablejump2__
+                0x0000bd14       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_negsi2.o)
+                0x0000bd14                __negsi2
+ .text.libgcc   0x0000bd24       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_tablejump2.o)
+                0x0000bd24                __tablejump2__
  .text.libgcc.mul
-                0x0000bd1a       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_umulhisi3.o)
-                0x0000bd1a                __umulhisi3
+                0x0000bd34       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_umulhisi3.o)
+                0x0000bd34                __umulhisi3
  .text.libgcc.mul
-                0x0000bd38       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_muluhisi3.o)
-                0x0000bd38                __muluhisi3
+                0x0000bd52       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_muluhisi3.o)
+                0x0000bd52                __muluhisi3
  .text.libgcc.div
-                0x0000bd4c       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
-                0x0000bd4c                __udivmodhi4
+                0x0000bd66       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
+                0x0000bd66                __udivmodhi4
  .text.avr-libc
-                0x0000bd74       0x3e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(dtostrf.o)
-                0x0000bd74                dtostrf
+                0x0000bd8e       0x3e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(dtostrf.o)
+                0x0000bd8e                dtostrf
  .text.avr-libc
-                0x0000bdb2      0x242 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
-                0x0000bdb2                malloc
-                0x0000bee2                free
+                0x0000bdcc      0x242 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
+                0x0000bdcc                malloc
+                0x0000befc                free
  .text.avr-libc
-                0x0000bff4      0x256 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strtol.o)
-                0x0000bff4                strtol
+                0x0000c00e      0x256 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strtol.o)
+                0x0000c00e                strtol
  .text.avr-libc
-                0x0000c24a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(abort.o)
-                0x0000c24a                abort
+                0x0000c264        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(abort.o)
+                0x0000c264                abort
  .text.avr-libc
-                0x0000c252       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(isspace.o)
-                0x0000c252                isspace
+                0x0000c26c       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(isspace.o)
+                0x0000c26c                isspace
  .text.avr-libc
-                0x0000c262       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
-                0x0000c262                strcat
+                0x0000c27c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
+                0x0000c27c                strcat
  .text.avr-libc
-                0x0000c278       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcmp.o)
-                0x0000c278                strcmp
+                0x0000c292       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcmp.o)
+                0x0000c292                strcmp
  .text.avr-libc
-                0x0000c28a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcpy.o)
-                0x0000c28a                strcpy
+                0x0000c2a4        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcpy.o)
+                0x0000c2a4                strcpy
  .text.avr-libc
-                0x0000c298       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(itoa_ncheck.o)
-                0x0000c298                __itoa_ncheck
+                0x0000c2b2       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(itoa_ncheck.o)
+                0x0000c2b2                __itoa_ncheck
  .text.avr-libc
-                0x0000c2ac       0x32 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(utoa_ncheck.o)
-                0x0000c2ac                __utoa_ncheck
-                0x0000c2ae                __utoa_common
+                0x0000c2c6       0x32 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(utoa_ncheck.o)
+                0x0000c2c6                __utoa_ncheck
+                0x0000c2c8                __utoa_common
  .text.avr-libc
-                0x0000c2de       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(snprintf.o)
-                0x0000c2de                snprintf
+                0x0000c2f8       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(snprintf.o)
+                0x0000c2f8                snprintf
  .text.avr-libc
-                0x0000c356      0x3fa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(vfprintf_std.o)
-                0x0000c356                vfprintf
+                0x0000c370      0x3fa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(vfprintf_std.o)
+                0x0000c370                vfprintf
  .text.avr-libc
-                0x0000c750      0x2ec c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
-                0x0000c750                dtoa_prf
+                0x0000c76a      0x2ec c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
+                0x0000c76a                dtoa_prf
  .text.avr-libc
-                0x0000ca3c      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
-                0x0000ca3c                __ftoa_engine
+                0x0000ca56      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
+                0x0000ca56                __ftoa_engine
  .text.avr-libc
-                0x0000cbec        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(cty_isfalse.o)
-                0x0000cbec                __ctype_isfalse
-                0x0000cbf0                __ctype_istrue
+                0x0000cc06        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(cty_isfalse.o)
+                0x0000cc06                __ctype_isfalse
+                0x0000cc0a                __ctype_istrue
  .text.avr-libc
-                0x0000cbf2       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen_P.o)
-                0x0000cbf2                strnlen_P
+                0x0000cc0c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen_P.o)
+                0x0000cc0c                strnlen_P
  .text.avr-libc
-                0x0000cc08       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen.o)
-                0x0000cc08                strnlen
+                0x0000cc22       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen.o)
+                0x0000cc22                strnlen
  .text.avr-libc
-                0x0000cc1e       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strrev.o)
-                0x0000cc1e                strrev
+                0x0000cc38       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strrev.o)
+                0x0000cc38                strrev
  .text.avr-libc
-                0x0000cc3e       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(fputc.o)
-                0x0000cc3e                fputc
+                0x0000cc58       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(fputc.o)
+                0x0000cc58                fputc
  .text.avr-libc
-                0x0000ccb6       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
-                0x0000ccb6                __ultoa_invert
+                0x0000ccd0       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
+                0x0000ccd0                __ultoa_invert
  .text.avr-libc
-                0x0000cd72       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
-                0x0000cd72                eeprom_read_byte
+                0x0000cd8c       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
+                0x0000cd8c                eeprom_read_byte
  .text.avr-libc
-                0x0000cd82       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
-                0x0000cd82                eeprom_write_byte
-                0x0000cd84                eeprom_write_r18
-                0x0000cd9e                . = ALIGN (0x2)
+                0x0000cd9c       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
+                0x0000cd9c                eeprom_write_byte
+                0x0000cd9e                eeprom_write_r18
+                0x0000cdb8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000cd9e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
-                0x0000cd9e                _exit
-                0x0000cd9e                exit
+ .fini9         0x0000cdb8        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+                0x0000cdb8                _exit
+                0x0000cdb8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -2178,11 +2178,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000cd9e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+ .fini0         0x0000cdb8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000cda2                _etext = .
+                0x0000cdbc                _etext = .
 
-.data           0x00800200      0xea4 load address 0x0000cda2
+.data           0x00800200      0xeb2 load address 0x0000cdbc
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
@@ -2241,237 +2241,238 @@ END GROUP
                 0x0080046b       0x2c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_SSD1306.o)
                 0x0080046b                _ZTV16Adafruit_SSD1306
  .rodata.str1.1
-                0x00800497      0x485 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
-                                0x4ae (size before relaxing)
+                0x00800497      0x492 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                                0x4c7 (size before relaxing)
  .rodata.str1.1
-                0x0080091c      0x27d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+                0x00800929      0x27d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
                                 0x286 (size before relaxing)
  .rodata.str1.1
-                0x00800b99      0x402 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00800ba6      0x402 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
                                 0x52a (size before relaxing)
  .rodata.str1.1
-                0x00800f9b       0x51 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+                0x00800fa8       0x51 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
                                  0x59 (size before relaxing)
  .rodata._ZTV7TwoWire
-                0x00800fec       0x12 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00800fec                _ZTV7TwoWire
+                0x00800ff9       0x12 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00800ff9                _ZTV7TwoWire
  .rodata._ZTV12Adafruit_GFX
-                0x00800ffe       0x2c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
-                0x00800ffe                _ZTV12Adafruit_GFX
+                0x0080100b       0x2c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+                0x0080100b                _ZTV12Adafruit_GFX
  .rodata.str1.1
-                0x0080102a       0x7a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+                0x00801037       0x7a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
                                  0x7f (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008010a4                . = ALIGN (0x2)
-                0x008010a4                _edata = .
-                0x008010a4                PROVIDE (__data_end, .)
+                0x008010b2                . = ALIGN (0x2)
+ *fill*         0x008010b1        0x1 
+                0x008010b2                _edata = .
+                0x008010b2                PROVIDE (__data_end, .)
 
-.bss            0x008010a4      0x535
-                0x008010a4                PROVIDE (__bss_start, .)
+.bss            0x008010b2      0x535
+                0x008010b2                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.fang      0x008010a4        0xc Sketch.o
-                0x008010a4                fang
- .bss.rb        0x008010b0        0x2 Sketch.o
-                0x008010b0                rb
- .bss.Serial    0x008010b2       0x9d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x008010b2                Serial
+ .bss.fang      0x008010b2        0xc Sketch.o
+                0x008010b2                fang
+ .bss.rb        0x008010be        0x2 Sketch.o
+                0x008010be                rb
+ .bss.Serial    0x008010c0       0x9d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x008010c0                Serial
  .bss.timer0_fract
-                0x0080114f        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x0080115d        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
  .bss.timer0_millis
-                0x00801150        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x00801150                timer0_millis
+                0x0080115e        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x0080115e                timer0_millis
  .bss.timer0_overflow_count
-                0x00801154        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x00801154                timer0_overflow_count
+                0x00801162        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x00801162                timer0_overflow_count
  .bss._ZZN9red_beryl7relogioEvE5track
-                0x00801158        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl7relogioEvE8tempTemp
-                0x0080115a        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl7relogioEvE5tempY
-                0x0080115e        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl7relogioEvE6tempMn
-                0x00801160        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl7relogioEvE5tempD
-                0x00801162        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl7relogioEvE5tempM
-                0x00801164        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl7relogioEvE5tempH
                 0x00801166        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl7relogioEvE8tempTemp
+                0x00801168        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl7relogioEvE5tempY
+                0x0080116c        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl7relogioEvE6tempMn
+                0x0080116e        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl7relogioEvE5tempD
+                0x00801170        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl7relogioEvE5tempM
+                0x00801172        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl7relogioEvE5tempH
+                0x00801174        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl7relogioEvE5doing
-                0x00801168        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801176        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE2L3
-                0x00801169       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801177       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE2L2
-                0x008011d7       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x008011e5       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE2L1
-                0x00801245       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801253       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE3ler
-                0x008012b3        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x008012c1        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE14perguntaDelete
-                0x008012b4        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x008012c2        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE11leituraTemp
-                0x008012b5       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x008012c3       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE7recebeu
-                0x00801323        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801331        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9historicoEvE8detalhar
-                0x00801324        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl9historicoEvE1i
-                0x00801325        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl9historicoEvE5limit
-                0x00801327        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl14menu_historicoEvE1i
-                0x00801329        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl14menu_historicoEvE7reseter_0
-                0x0080132b        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl14menu_historicoEvE4wipe
-                0x0080132c        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl14menu_historicoEvE7reseter
-                0x0080132d        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl14menu_historicoEvE5clear
-                0x0080132e        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl11menu_ajusteEvE3rel
-                0x0080132f        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl12menu_leituraEvE5limit
-                0x00801330        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl12menu_leituraEvE4done
                 0x00801332        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl9historicoEvE1i
+                0x00801333        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl9historicoEvE5limit
+                0x00801335        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl14menu_historicoEvE1i
+                0x00801337        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl14menu_historicoEvE7reseter_0
+                0x00801339        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl14menu_historicoEvE4wipe
+                0x0080133a        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl14menu_historicoEvE7reseter
+                0x0080133b        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl14menu_historicoEvE5clear
+                0x0080133c        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl11menu_ajusteEvE3rel
+                0x0080133d        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl12menu_leituraEvE5limit
+                0x0080133e        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl12menu_leituraEvE4done
+                0x00801340        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl17notificationTimerEbE5timer
-                0x00801333        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl17notificationTimerEbE11lockedTimer
-                0x00801337        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl8upperBarEvE7timeStr
-                0x0080133b        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl8upperBarEvE8tempMill
-                0x0080133d        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl8upperBarEvE9tempMill2
                 0x00801341        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .bss._ZZN9red_beryl8upperBarEvE4mill
+ .bss._ZZN9red_beryl17notificationTimerEbE11lockedTimer
                 0x00801345        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl8upperBarEvE7timeStr
+                0x00801349        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl8upperBarEvE8tempMill
+                0x0080134b        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl8upperBarEvE9tempMill2
+                0x0080134f        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .bss._ZZN9red_beryl8upperBarEvE4mill
+                0x00801353        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl8upperBarEvE11temperature
-                0x00801349        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801357        0x4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl8upperBarEvE3pwr
-                0x0080134d        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x0080135b        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl8upperBarEvE3pct
-                0x0080134f        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x0080135d        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN9red_beryl9checarPinEvE10tempButton
-                0x00801351        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x0080135f        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZGVZN9red_beryl9historicoEvE5limit
-                0x00801353        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801361        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZGVZN9red_beryl12menu_leituraEvE5limit
-                0x0080135b        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801369        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZGVZN9red_beryl17notificationTimerEbE11lockedTimer
-                0x00801363        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801371        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZGVZN9red_beryl8upperBarEvE11temperature
-                0x0080136b        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801379        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZGVZN9red_beryl8upperBarEvE3pwr
-                0x00801373        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801381        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZGVZN9red_beryl8upperBarEvE3pct
-                0x0080137b        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+                0x00801389        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .bss._ZZN8red_fang3getEibE3inf
-                0x00801383        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801391        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang3getEibE2lt
-                0x00801385       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801393       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang3getEibE1z
-                0x008013f3        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801401        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang10getComplexE8leiturasiE1x
-                0x008013f5        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801403        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang10ler_serialEvE3inf
-                0x008013f7        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801405        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang10ler_serialEvE2lt
-                0x008013f9       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801407       0x6e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang10ler_serialEvE4done
-                0x00801467        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801475        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZZN8red_fang10ler_serialEvE5limit
-                0x00801468        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801476        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZGVZN8red_fang10ler_serialEvE5limit
-                0x0080146a        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+                0x00801478        0x8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
  .bss._ZN8SPIClass13interruptSaveE
-                0x00801472        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
-                0x00801472                _ZN8SPIClass13interruptSaveE
+                0x00801480        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+                0x00801480                _ZN8SPIClass13interruptSaveE
  .bss._ZN8SPIClass13interruptMaskE
-                0x00801473        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
-                0x00801473                _ZN8SPIClass13interruptMaskE
+                0x00801481        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+                0x00801481                _ZN8SPIClass13interruptMaskE
  .bss._ZN8SPIClass13interruptModeE
-                0x00801474        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
-                0x00801474                _ZN8SPIClass13interruptModeE
+                0x00801482        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+                0x00801482                _ZN8SPIClass13interruptModeE
  .bss._ZN8SPIClass11initializedE
-                0x00801475        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
-                0x00801475                _ZN8SPIClass11initializedE
- .bss.Wire      0x00801476        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00801476                Wire
+                0x00801483        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+                0x00801483                _ZN8SPIClass11initializedE
+ .bss.Wire      0x00801484        0xc C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00801484                Wire
  .bss._ZN7TwoWire12transmittingE
-                0x00801482        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00801482                _ZN7TwoWire12transmittingE
+                0x00801490        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00801490                _ZN7TwoWire12transmittingE
  .bss._ZN7TwoWire14txBufferLengthE
-                0x00801483        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00801483                _ZN7TwoWire14txBufferLengthE
+                0x00801491        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00801491                _ZN7TwoWire14txBufferLengthE
  .bss._ZN7TwoWire13txBufferIndexE
-                0x00801484        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00801484                _ZN7TwoWire13txBufferIndexE
+                0x00801492        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00801492                _ZN7TwoWire13txBufferIndexE
  .bss._ZN7TwoWire8txBufferE
-                0x00801485       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00801485                _ZN7TwoWire8txBufferE
+                0x00801493       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00801493                _ZN7TwoWire8txBufferE
  .bss._ZN7TwoWire9txAddressE
-                0x008014a5        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x008014a5                _ZN7TwoWire9txAddressE
+                0x008014b3        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x008014b3                _ZN7TwoWire9txAddressE
  .bss._ZN7TwoWire14rxBufferLengthE
-                0x008014a6        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x008014a6                _ZN7TwoWire14rxBufferLengthE
+                0x008014b4        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x008014b4                _ZN7TwoWire14rxBufferLengthE
  .bss._ZN7TwoWire13rxBufferIndexE
-                0x008014a7        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x008014a7                _ZN7TwoWire13rxBufferIndexE
+                0x008014b5        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x008014b5                _ZN7TwoWire13rxBufferIndexE
  .bss._ZN7TwoWire8rxBufferE
-                0x008014a8       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x008014a8                _ZN7TwoWire8rxBufferE
- .bss.Serial1   0x008014c8       0x9d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
-                0x008014c8                Serial1
+                0x008014b6       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x008014b6                _ZN7TwoWire8rxBufferE
+ .bss.Serial1   0x008014d6       0x9d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+                0x008014d6                Serial1
  .bss.twi_error
-                0x00801565        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00801573        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_rxBufferIndex
-                0x00801566        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00801574        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_rxBuffer
-                0x00801567       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00801575       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_txBufferLength
-                0x00801587        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00801595        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_txBufferIndex
-                0x00801588        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00801596        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_txBuffer
-                0x00801589       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00801597       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_masterBufferLength
-                0x008015a9        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015b7        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_masterBufferIndex
-                0x008015aa        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015b8        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_masterBuffer
-                0x008015ab       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015b9       0x20 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_onSlaveReceive
-                0x008015cb        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015d9        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_onSlaveTransmit
-                0x008015cd        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015db        0x2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_inRepStart
-                0x008015cf        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015dd        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_sendStop
-                0x008015d0        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015de        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_slarw
-                0x008015d1        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015df        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  .bss.twi_state
-                0x008015d2        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x008015e0        0x1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  *(COMMON)
- COMMON         0x008015d3        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
-                0x008015d3                __brkval
-                0x008015d5                __flp
- COMMON         0x008015d7        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(errno.o)
-                0x008015d7                errno
-                0x008015d9                PROVIDE (__bss_end, .)
-                0x0000cda2                __data_load_start = LOADADDR (.data)
-                0x0000dc46                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008015e1        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
+                0x008015e1                __brkval
+                0x008015e3                __flp
+ COMMON         0x008015e5        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(errno.o)
+                0x008015e5                errno
+                0x008015e7                PROVIDE (__bss_end, .)
+                0x0000cdbc                __data_load_start = LOADADDR (.data)
+                0x0000dc6e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008015d9        0x0
+.noinit         0x008015e7        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008015d9                _end = .
-                0x008015d9                PROVIDE (__heap_start, .)
+                0x008015e7                _end = .
+                0x008015e7                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -2625,7 +2626,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x2c4b3
+.debug_info     0x00000000    0x2c510
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_info    0x00000bbc     0x1ec7 Sketch.o
@@ -2636,26 +2637,26 @@ END GROUP
  .debug_info    0x0000692b     0x295d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Print.o)
  .debug_info    0x00009288      0x329 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
  .debug_info    0x000095b1     0x23c7 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_SSD1306.o)
- .debug_info    0x0000b978     0x84b5 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .debug_info    0x00013e2d     0x1432 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
- .debug_info    0x0001525f     0x4e55 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
- .debug_info    0x0001a0b4     0x189d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
- .debug_info    0x0001b951      0x6cd C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
- .debug_info    0x0001c01e     0x27b4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .debug_info    0x0001e7d2       0x76 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
- .debug_info    0x0001e848     0x1b74 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
- .debug_info    0x000203bc       0x3e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
- .debug_info    0x000203fa      0x2cd C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_info    0x000206c7      0x63a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_info    0x00020d01      0x230 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
- .debug_info    0x00020f31     0x7317 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
- .debug_info    0x00028248     0x155b C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
- .debug_info    0x000297a3     0x257a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
- .debug_info    0x0002bd1d      0x662 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
- .debug_info    0x0002c37f       0x9a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
- .debug_info    0x0002c419       0x9a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
+ .debug_info    0x0000b978     0x851c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .debug_info    0x00013e94     0x1431 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+ .debug_info    0x000152c5     0x4e4c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+ .debug_info    0x0001a111     0x189d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+ .debug_info    0x0001b9ae      0x6cd C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+ .debug_info    0x0001c07b     0x27b4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .debug_info    0x0001e82f       0x76 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
+ .debug_info    0x0001e8a5     0x1b74 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+ .debug_info    0x00020419       0x3e C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_info    0x00020457      0x2cd C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_info    0x00020724      0x63a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_info    0x00020d5e      0x230 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
+ .debug_info    0x00020f8e     0x7317 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+ .debug_info    0x000282a5     0x155b C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+ .debug_info    0x00029800     0x257a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+ .debug_info    0x0002bd7a      0x662 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+ .debug_info    0x0002c3dc       0x9a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
+ .debug_info    0x0002c476       0x9a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
 
-.debug_abbrev   0x00000000     0x58c3
+.debug_abbrev   0x00000000     0x58b4
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_abbrev  0x00000b1a      0x3f3 Sketch.o
@@ -2668,52 +2669,52 @@ END GROUP
  .debug_abbrev  0x00001ec8      0x58a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_SSD1306.o)
  .debug_abbrev  0x00002452      0x5c3 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
  .debug_abbrev  0x00002a15      0x3d8 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
- .debug_abbrev  0x00002ded      0x5b0 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
- .debug_abbrev  0x0000339d      0x375 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
- .debug_abbrev  0x00003712      0x283 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
- .debug_abbrev  0x00003995      0x581 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .debug_abbrev  0x00003f16       0x6d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
- .debug_abbrev  0x00003f83      0x3ce C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
- .debug_abbrev  0x00004351       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
- .debug_abbrev  0x0000437b      0x17a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_abbrev  0x000044f5      0x15a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_abbrev  0x0000464f      0x12b C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
- .debug_abbrev  0x0000477a      0x60c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
- .debug_abbrev  0x00004d86      0x44b C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
- .debug_abbrev  0x000051d1      0x46a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
- .debug_abbrev  0x0000563b      0x260 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
- .debug_abbrev  0x0000589b       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
- .debug_abbrev  0x000058af       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
+ .debug_abbrev  0x00002ded      0x5a1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+ .debug_abbrev  0x0000338e      0x375 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+ .debug_abbrev  0x00003703      0x283 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+ .debug_abbrev  0x00003986      0x581 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .debug_abbrev  0x00003f07       0x6d C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
+ .debug_abbrev  0x00003f74      0x3ce C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+ .debug_abbrev  0x00004342       0x2a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_abbrev  0x0000436c      0x17a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_abbrev  0x000044e6      0x15a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_abbrev  0x00004640      0x12b C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
+ .debug_abbrev  0x0000476b      0x60c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+ .debug_abbrev  0x00004d77      0x44b C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+ .debug_abbrev  0x000051c2      0x46a C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+ .debug_abbrev  0x0000562c      0x260 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+ .debug_abbrev  0x0000588c       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
+ .debug_abbrev  0x000058a0       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
 
-.debug_line     0x00000000     0xb6a4
+.debug_line     0x00000000     0xb6b4
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1f9 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_line    0x000001f9      0x499 Sketch.o
- .debug_line    0x00000692      0x489 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial.o)
- .debug_line    0x00000b1b      0x288 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_line    0x00000da3      0x161 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(main.o)
- .debug_line    0x00000f04      0x12f C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(new.o)
- .debug_line    0x00001033      0x681 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Print.o)
- .debug_line    0x000016b4      0x2cb C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
- .debug_line    0x0000197f      0xc29 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_SSD1306.o)
- .debug_line    0x000025a8     0x27c3 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
- .debug_line    0x00004d6b      0x69c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
- .debug_line    0x00005407     0x10af C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
- .debug_line    0x000064b6      0x5cd C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
- .debug_line    0x00006a83      0x2eb C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
- .debug_line    0x00006d6e      0x5ec C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .debug_line    0x0000735a       0xa9 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
- .debug_line    0x00007403      0x288 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
- .debug_line    0x0000768b       0x41 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
- .debug_line    0x000076cc      0x2c4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_line    0x00007990      0x284 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_line    0x00007c14      0x143 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
- .debug_line    0x00007d57     0x1deb C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
- .debug_line    0x00009b42      0x8d2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
- .debug_line    0x0000a414      0xc87 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
- .debug_line    0x0000b09b      0x4f1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
- .debug_line    0x0000b58c       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
- .debug_line    0x0000b606       0x9e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
+ .debug_line    0x000001f9      0x498 Sketch.o
+ .debug_line    0x00000691      0x489 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_line    0x00000b1a      0x288 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_line    0x00000da2      0x161 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(main.o)
+ .debug_line    0x00000f03      0x12f C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(new.o)
+ .debug_line    0x00001032      0x681 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Print.o)
+ .debug_line    0x000016b3      0x2cb C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+ .debug_line    0x0000197e      0xc29 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_SSD1306.o)
+ .debug_line    0x000025a7     0x27d3 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_beryl.o)
+ .debug_line    0x00004d7a      0x69c C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_crystal.o)
+ .debug_line    0x00005416     0x10b0 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_fang.o)
+ .debug_line    0x000064c6      0x5cd C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(red_quartz.o)
+ .debug_line    0x00006a93      0x2eb C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(SPI.o)
+ .debug_line    0x00006d7e      0x5ec C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .debug_line    0x0000736a       0xa9 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(abi.o)
+ .debug_line    0x00007413      0x288 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(HardwareSerial1.o)
+ .debug_line    0x0000769b       0x41 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_line    0x000076dc      0x2c4 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_line    0x000079a0      0x284 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_line    0x00007c24      0x143 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(WMath.o)
+ .debug_line    0x00007d67     0x1deb C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(Adafruit_GFX.o)
+ .debug_line    0x00009b52      0x8d2 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(AD5933.o)
+ .debug_line    0x0000a424      0xc87 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(DS3231.o)
+ .debug_line    0x0000b0ab      0x4f1 C:\Users\Vitor\Documents\Atmel Studio\7.0\ArduinoSketch4\ArduinoSketch4\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+ .debug_line    0x0000b59c       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eerd_byte.o)
+ .debug_line    0x0000b616       0x9e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.2.272/gcc/dev/atmega2560/avr6\libatmega2560.a(eewr_byte.o)
 
 .debug_frame    0x00000000     0x389c
  *(.debug_frame)

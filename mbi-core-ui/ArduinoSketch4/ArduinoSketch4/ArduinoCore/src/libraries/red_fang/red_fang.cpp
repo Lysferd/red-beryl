@@ -25,7 +25,6 @@ red_fang::red_fang()
 
 void red_fang::ler_serial()
 {	
-
 	if(_Get)
 	{
 		get(_num, _complex);
@@ -40,7 +39,6 @@ void red_fang::ler_serial()
 		if(!done)
 		{
 			Serial.println("Começar leitura");
-			
 			if(!beryl->crystal.lerAD(beryl->getPoint(), lt))
 			{
 				Serial.println("Falha na leitura");
@@ -50,15 +48,6 @@ void red_fang::ler_serial()
 			} 
 			else
 			{
-	
-				/*
-				int h = beryl->clock.hora();
-				int	m = beryl->clock.minuto();
-				int d = beryl->clock.dia();
-				int mn = beryl->clock.mes();
-				int a = beryl->clock.ano();
-				*/
-				
 				lt.hora = beryl->clock.hora();
 				lt.minuto = beryl->clock.minuto();
 				lt.dia = beryl->clock.dia();
@@ -92,21 +81,6 @@ void red_fang::ler_serial()
 					Serial.print(EEPROM.read(0)+1);
 					EEPROM.write(0 , ( EEPROM.read(0)+1 ));    							//o valor da posição '0' recebe 'i'.
 				}
-				/*
-				if((EEPROM.length()-2)-(EEPROM.read(0)*sizeof(leitura))>=sizeof(leitura))
-				{
-					EEPROM.put( ( ( EEPROM.read(0)*sizeof(leitura) )+1)  , lt);  //salva a nova leitura na EEPROM.
-					Serial.println("Salvo na EEPROM.");
-					EEPROM.write(0 , ( EEPROM.read(0)+1 ));    //o valor da posição '0' recebe 'i'.
-				}
-				else
-				{
-					int limit = ((EEPROM.length()-3)/sizeof(leitura));
-					Serial.println("EEPROM cheia, subtituindo endereços endereço");
-					EEPROM.put( ( ((EEPROM.read(0)-limit)*sizeof(leitura) )+1) , lt);
-					EEPROM.write(0 , ( EEPROM.read(0)+1 ));
-				}
-				*/
 				done=true;
 			}
 		}

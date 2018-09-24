@@ -32,7 +32,6 @@ int freeMemory() {
   return __brkval ? &top - __brkval : &top - __malloc_heap_start;
 #endif  // __arm__
 }
-///////////////////////////////////
 
 
 void setup() {
@@ -42,14 +41,11 @@ void setup() {
   Wire.begin();
   
   rb = new red_beryl();
-  fang.beryl = rb;
-  //fang.check_string("BAT");
-  
+  fang.beryl = rb;  
   Serial.println("Iniciou! Atmel Studio!!!");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   fang.ler_serial();
   rb->display.clearDisplay();
   if(!rb->notificationTimer(fang.isBeingUsed()))
@@ -62,7 +58,6 @@ void loop() {
   rb->notification();
   rb->display.display();
   delay(10);
-  //Serial.println(freeMemory());
 }
 
 

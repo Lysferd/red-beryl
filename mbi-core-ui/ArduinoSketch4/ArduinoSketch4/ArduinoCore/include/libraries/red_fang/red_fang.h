@@ -21,12 +21,9 @@ class red_fang
 {
 	private:
 		bool _Get;
-		bool _Req;
-				
+		bool _Req;	
 		bool _complex;
-		
 		bool _isBeingUsed;
-		
 		long _freq;
 		int _num;
 	public:
